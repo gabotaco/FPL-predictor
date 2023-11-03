@@ -1,7 +1,7 @@
 const fs = require("fs/promises");
 
 const TEAMS = ["ARS", "AVL", "BOU", "BRE", "BHA", "BUR", "CHE", "CRY", "EVE", "FUL", "LIV", "LUT", "MCI", "MUN", "NEW", "NFO", "SHU", "TOT", "WHU", "WOL"];
-const CURRENT_GAME_WEEK = 10;
+const CURRENT_GAME_WEEK = 11;
 const CURRENT_SEASON_BEGINNING_ROUND = 273;
 const SEASON_LENGTH = 36;
 const CURRENT_SEASON = "2023-24";

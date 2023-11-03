@@ -4,97 +4,97 @@ const neuralNetwork = require("./neuralNetwork")
 const gameInformation = require("./game_information");
 const datasetMaker = require('./makeDataset');
 
-const TEAM_WORTH = 97.2 + 3.2;
-const freeTransfers = 2;
+const TEAM_WORTH = 98 + 2.5;
+const freeTransfers = 1;
 const PREDICT_BY_WEEKS = 5;
 const previousTeam = [
     "Mark Flekken Flekken", "André Onana Onana", // GKP
     "Micky van de Ven Van de Ven", "Pau Torres Pau", "Thiago Emiliano da Silva T.Silva", "Axel Disasi Disasi", "Kieran Trippier Trippier", // DEF
-    "Jarrod Bowen Bowen", "Morgan Gibbs-White Gibbs-White", "Raheem Sterling Sterling", "Dejan Kulusevski Kulusevski", "Moussa Diaby Diaby", // MID
+    "Jarrod Bowen Bowen", "Bryan Mbeumo Mbeumo", "Raheem Sterling Sterling", "Dejan Kulusevski Kulusevski", "Moussa Diaby Diaby", // MID
     "Erling Haaland Haaland", "Ollie Watkins Watkins", "Matheus Santos Carneiro Da Cunha Cunha" // FWD
 ];
 const processAllPlayers = false;
 const buggedPlayers = [];
-const RATIOS = { // Last calibrated 10/26/2023
+const RATIOS = { // Last calibrated 11/3/2023
     "ARS": {
-        "ARIMA": 0.451545234262846,
-        "LSTM": 0.428357260073197
+        "ARIMA": 0.404851335401092,
+        "LSTM": 0.525301001041839
     },
     "AVL": {
-        "ARIMA": 0.552701202630342,
-        "LSTM": 0.550631115289244
+        "ARIMA": 0.5337763005735,
+        "LSTM": 0.63092183256713
     },
     "BOU": {
-        "ARIMA": 0.344417344520579,
-        "LSTM": 0.336785354765711
+        "ARIMA": 0.352149478728991,
+        "LSTM": 0.330868435074501
     },
     "BRE": {
-        "ARIMA": 0.554909941474556,
-        "LSTM": 0.569861354608904
+        "ARIMA": 0.571241693994131,
+        "LSTM": 0.558363654595077
     },
     "BHA": {
-        "ARIMA": 0.449186454018497,
-        "LSTM": 0.469534696573657
+        "ARIMA": 0.424913067402086,
+        "LSTM": 0.450075436015669
     },
     "BUR": {
         "ARIMA": 0,
         "LSTM": 0
     },
     "CHE": {
-        "ARIMA": 0.538036386015151,
-        "LSTM": 0.480280123799665
+        "ARIMA": 0.507895290177915,
+        "LSTM": 0.492871785839962
     },
     "CRY": {
-        "ARIMA": 0.551053480708866,
-        "LSTM": 0.485606212836427
+        "ARIMA": 0.574974240382309,
+        "LSTM": 0.566227644681761
     },
     "EVE": {
-        "ARIMA": 0.45385676171936,
-        "LSTM": 0.432442685857298
+        "ARIMA": 0.468615312139941,
+        "LSTM": 0.416914909636597
     },
     "FUL": {
-        "ARIMA": 0.480811272310951,
-        "LSTM": 0.393630554196992
+        "ARIMA": 0.482225008877753,
+        "LSTM": 0.430430126850038
     },
     "LIV": {
-        "ARIMA": 0.44652955619295,
-        "LSTM": 0.416499260066055
+        "ARIMA": 0.429553002172322,
+        "LSTM": 0.399987703545445
     },
     "LUT": {
         "ARIMA": 0,
         "LSTM": 0
     },
     "MCI": {
-        "ARIMA": 0.387213192301701,
-        "LSTM": 0.322800279929932
+        "ARIMA": 0.457856934139545,
+        "LSTM": 0.330420706259275
     },
     "MUN": {
-        "ARIMA": 0.32750071257945,
-        "LSTM": 0.329711169104903
+        "ARIMA": 0.37534796936456,
+        "LSTM": 0.360941791703677
     },
     "NEW": {
-        "ARIMA": 0.520001575258516,
-        "LSTM": 0.398896595641724
+        "ARIMA": 0.543621565881507,
+        "LSTM": 0.506358470258735
     },
     "NFO": {
-        "ARIMA": 0.457982864643449,
-        "LSTM": 0.394694998361326
+        "ARIMA": 0.468615193456151,
+        "LSTM": 0.416990653875408
     },
     "SHU": {
-        "ARIMA": 0,
-        "LSTM": 0
+        "ARIMA": 0.297006784854757,
+        "LSTM": 0.719080832832509
     },
     "TOT": {
-        "ARIMA": 0.55531974481879,
-        "LSTM": 0.511211253601715
+        "ARIMA": 0.568016430213264,
+        "LSTM": 0.492146224023965
     },
     "WHU": {
-        "ARIMA": 0.451855538594391,
-        "LSTM": 0.517609285484624
+        "ARIMA": 0.40475931896671,
+        "LSTM": 0.504227911786362
     },
     "WOL": {
-        "ARIMA": 0.548737649806623,
-        "LSTM": 0.575798966120245
+        "ARIMA": 0.647722802726038,
+        "LSTM": 0.737413821601548
     }
 }
 const HIDDEN_COLUMNS = ["GKP", "DEF", "MID", "FWD", ...gameInformation.TEAMS, "ID", "ARIMA", "LSTM"];
