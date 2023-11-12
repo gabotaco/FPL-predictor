@@ -24,7 +24,7 @@ function getTeams() {
 }
 
 function getPreviousThenCurrentPlayers() {
-    fs.readFile(`./data/${gameInformation.PREVIOUS_SEASON}/players_raw.csv`, 'utf8', function (err, data) {
+    fs.readFile(`../Fantasy-Premier-League/data/${gameInformation.PREVIOUS_SEASON}/players_raw.csv`, 'utf8', function (err, data) {
         const previousPlayers = [];
 
         if (err) throw err;
@@ -47,7 +47,7 @@ function getPreviousThenCurrentPlayers() {
 }
 
 function getCurrentPlayers(previousPlayers) {
-    fs.readFile(`./data/${gameInformation.CURRENT_SEASON}/players_raw.csv`, 'utf8', function (err, data) {
+    fs.readFile(`../Fantasy-Premier-League/data/${gameInformation.CURRENT_SEASON}/players_raw.csv`, 'utf8', function (err, data) {
         if (err) throw err;
         const rows = data.split(/\r?\n/)
         const header = rows[0].split(",")
@@ -92,7 +92,7 @@ function getCurrentPlayers(previousPlayers) {
 }
 
 function getPoints(year) {
-    fs.readFile(`./data/${year}/player_idlist.csv`, 'utf8', function (err, data) {
+    fs.readFile(`../Fantasy-Premier-League/data/${year}/player_idlist.csv`, 'utf8', function (err, data) {
         if (err) throw err;
         const rows = data.split(/\r?\n/)
         const header = rows[0].split(",")
@@ -110,7 +110,7 @@ function getPoints(year) {
             }
         });
 
-        fs.readFile(`./data/${year}/fixtures.csv`, 'utf8', function (err, data) {
+        fs.readFile(`../Fantasy-Premier-League/data/${year}/fixtures.csv`, 'utf8', function (err, data) {
             if (err) throw err;
             const rows = data.split(/\r?\n/)
             const header = rows[0].split(",");
@@ -129,7 +129,7 @@ function getPoints(year) {
                 }
             })
     
-            fs.readdir(`./data/${year}/gws/`, function (err, gws) {
+            fs.readdir(`../Fantasy-Premier-League/data/${year}/gws/`, function (err, gws) {
                 if (err) throw err;
                 gws.sort((a, b) => {
                     return parseInt(a.replace("gw", "")) - parseInt(b.replace("gw", ""))
@@ -198,7 +198,7 @@ function getPoints(year) {
                     return;
                 }
  
-                fs.readFile(`./data/${year}/gws/${gw}`, 'utf8', function (err, data) {
+                fs.readFile(`../Fantasy-Premier-League/data/${year}/gws/${gw}`, 'utf8', function (err, data) {
                     if (err) throw err;
                     const rows = data.split(/\r?\n/)
                     const header = rows[0].split(",")

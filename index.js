@@ -128,7 +128,7 @@ function init() {
 function getPredictBy() {
     gameInformation.getTeamInformation().then(newTeams => {
         console.log('newTeams', newTeams)
-        fs.readFile(`./data/${gameInformation.CURRENT_SEASON}/fixtures.csv`, 'utf8', function (err, data) {
+        fs.readFile(`../Fantasy-Premier-League/data/${gameInformation.CURRENT_SEASON}/fixtures.csv`, 'utf8', function (err, data) {
             if (err) throw err;
             let rows = data.split(/\r?\n/)
             const header = rows[0].split(",");

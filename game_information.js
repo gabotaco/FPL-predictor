@@ -18,7 +18,7 @@ const POSITIONS = {
 
 function getTeamInformation() {
     const teams = {};
-    return fs.readFile(`./data/${CURRENT_SEASON}/teams.csv`, 'utf8').then(data => {
+    return fs.readFile(`../Fantasy-Premier-League/data/${CURRENT_SEASON}/teams.csv`, 'utf8').then(data => {
         const rows = data.split(/\r?\n/)
         const header = rows[0].split(",")
         const idIndex = header.indexOf("id")
