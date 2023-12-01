@@ -1,6 +1,7 @@
 from xlsxwriter.workbook import Workbook
+from tqdm import tqdm
 
-from ai import do_arima, do_lstm, MAX_DIFF, RETRY_POINT
+from ai import do_arima, do_lstm, MAX_DIFF
 from dataset import get_dataset
 from game_information import TEAMS, CURRENT_SEASON_BEGINNING_ROUND, CURRENT_GAME_WEEK, SEASON_LENGTH, MIN_GAMES, \
     MIN_SEASON_PPG, MIN_SEASON_GAME_PERCENTAGE, CURRENT_SEASON
@@ -37,19 +38,10 @@ def get_basic_players_teams():
 
 def get_player_predictions():
     global players
-    done = 0
-    total = 0
-    for team in TEAMS:
-        total += len(players[team])
 
-    for team in TEAMS:
-        for index, player_data in enumerate(players[team]):
-            print(player_data['id'], player_data['name'])
-            done += 1
-
+    for team in tqdm(TEAMS, desc="Teams", bar_format="{l_bar}{bar}| {remaining}"):
+        for index, player_data in enumerate(tqdm(players[team], desc=f"{team} players", bar_format="{l_bar}{bar}| {remaining}")):
             if player_data['id'] in BUGGED_PLAYERS:
-                print("Bugged")
-                print(f"{(done / total) * 100}% done")
                 continue
 
             points_sum = 0
@@ -78,8 +70,6 @@ def get_player_predictions():
                     total_games - CALIBRATE_BY < MIN_GAMES or points_sum < MIN_SEASON_PPG * num_games or num_games < (
                     SEASON_LENGTH if CURRENT_GAME_WEEK == 1 else CURRENT_GAME_WEEK - 1) * MIN_SEASON_GAME_PERCENTAGE or
                     total_games < 2):
-                print("Not min requirements")
-                print(f"{(done / total) * 100}% done")
                 continue
 
             pred_by = {'games': [], 'next': 0}
@@ -94,8 +84,6 @@ def get_player_predictions():
                 actual_points += gw['points']
 
             if actual_points < CALIBRATE_BY * MIN_SEASON_PPG:
-                print("Has not performed well enough recently")
-                print(f"{(done / total) * 100}% done")
                 continue
 
             if points_sum <= 0 or len(gws) <= CALIBRATE_BY:
@@ -112,7 +100,6 @@ def get_player_predictions():
             players[team][index] = {'name': player_data['name'], 'arima': arima, 'lstm': lstm,
                                     'actual_points': actual_points}
 
-            print(f"{(done / total) * 100}% done")
 
         players[team] = [player for player in players[team] if
                          'arima' in player and 'lstm' in player and 'name' in player and 'actual_points' in player]

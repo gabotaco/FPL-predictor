@@ -1,18 +1,19 @@
 import csv
 import json
 
+from tqdm import tqdm
 from xlsxwriter.workbook import Workbook
 
+from ai import MAX_DIFF, do_arima, do_lstm
 from dataset import get_dataset
 from game_information import TEAMS, get_team_info, CURRENT_SEASON, CURRENT_GAME_WEEK, CURRENT_SEASON_BEGINNING_ROUND, \
     SEASON_LENGTH, MIN_GAMES, MIN_SEASON_PPG, MIN_SEASON_GAME_PERCENTAGE
-from ai import MAX_DIFF, do_arima, do_lstm
 
-TEAM_WORTH = 98 + 2.5
+TEAM_WORTH = 99.3 + 1.6
 FREE_TRANSFERS = 1
-CURRENT_TEAM = {"Mark Flekken Flekken", "André Onana Onana",  # GKP
-                "Micky van de Ven Van de Ven", "Pau Torres Pau", "Thiago Emiliano da Silva T.Silva",
-                "Axel Disasi Disasi", "Kieran Trippier Trippier",  # DEF
+CURRENT_TEAM = {"Guglielmo Vicario Vicario", "André Onana Onana",  # GKP
+                "Kristoffer Ajer Ajer", "Thiago Emiliano da Silva T.Silva", "Pau Torres Pau",
+                "Kieran Trippier Trippier", "Axel Disasi Disasi",  # DEF
                 "Jarrod Bowen Bowen", "Bryan Mbeumo Mbeumo", "Raheem Sterling Sterling", "Dejan Kulusevski Kulusevski",
                 "Moussa Diaby Diaby",  # MID
                 "Erling Haaland Haaland", "Ollie Watkins Watkins", "Matheus Santos Carneiro Da Cunha Cunha"  # FWD
@@ -22,25 +23,26 @@ PROCESS_ALL_PLAYERS = False
 BUGGED_PLAYERS = []
 
 PREDICT_BY_WEEKS = 5
-RATIOS = {  # Last calibrated 11/3/2023
-    'ARS': {'ARIMA': 0.404851335401092, 'LSTM': 0.525301001041839},
-    'AVL': {'ARIMA': 0.5337763005735, 'LSTM': 0.63092183256713},
-    'BOU': {'ARIMA': 0.352149478728991, 'LSTM': 0.330868435074501},
-    'BRE': {'ARIMA': 0.571241693994131, 'LSTM': 0.558363654595077},
-    'BHA': {'ARIMA': 0.424913067402086, 'LSTM': 0.450075436015669}, 'BUR': {'ARIMA': 0, 'LSTM': 0},
-    'CHE': {'ARIMA': 0.507895290177915, 'LSTM': 0.492871785839962},
-    'CRY': {'ARIMA': 0.574974240382309, 'LSTM': 0.566227644681761},
-    'EVE': {'ARIMA': 0.468615312139941, 'LSTM': 0.416914909636597},
-    'FUL': {'ARIMA': 0.482225008877753, 'LSTM': 0.430430126850038},
-    'LIV': {'ARIMA': 0.429553002172322, 'LSTM': 0.399987703545445}, 'LUT': {'ARIMA': 0, 'LSTM': 0},
-    'MCI': {'ARIMA': 0.457856934139545, 'LSTM': 0.330420706259275},
-    'MUN': {'ARIMA': 0.37534796936456, 'LSTM': 0.360941791703677},
-    'NEW': {'ARIMA': 0.543621565881507, 'LSTM': 0.506358470258735},
-    'NFO': {'ARIMA': 0.468615193456151, 'LSTM': 0.416990653875408},
-    'SHU': {'ARIMA': 0.297006784854757, 'LSTM': 0.719080832832509},
-    'TOT': {'ARIMA': 0.568016430213264, 'LSTM': 0.492146224023965},
-    'WHU': {'ARIMA': 0.40475931896671, 'LSTM': 0.504227911786362},
-    'WOL': {'ARIMA': 0.647722802726038, 'LSTM': 0.737413821601548}}
+RATIOS = {  # Last calibrated 11/23/2023
+    'ARS': {'ARIMA': 0.55859717908025, 'LSTM': 0.532510803861309},
+    'AVL': {'ARIMA': 0.651503123831074, 'LSTM': 0.606026116411823},
+    'BOU': {'ARIMA': 0.528303063519265, 'LSTM': 0.5550028132429},
+    'BRE': {'ARIMA': 0.544470486143777, 'LSTM': 0.53347366130494},
+    'BHA': {'ARIMA': 0.476910454728733, 'LSTM': 0.43876466120224},
+    'BUR': {'ARIMA': 0.515117345458893, 'LSTM': 0.551415701255462},
+    'CHE': {'ARIMA': 0.577745377722721, 'LSTM': 0.712958063351299},
+    'CRY': {'ARIMA': 0.559561270862415, 'LSTM': 0.58724187481046},
+    'EVE': {'ARIMA': 0.503157963432004, 'LSTM': 0.540608113345392},
+    'FUL': {'ARIMA': 0.493528478746919, 'LSTM': 0.481902385814875},
+    'LIV': {'ARIMA': 0.525911259448434, 'LSTM': 0.461578330645146}, 'LUT': {'ARIMA': 0, 'LSTM': 0},
+    'MCI': {'ARIMA': 0.595374224366106, 'LSTM': 0.547604989073178},
+    'MUN': {'ARIMA': 0.496927851399858, 'LSTM': 0.493602517089123},
+    'NEW': {'ARIMA': 0.582823963276639, 'LSTM': 0.561471250064429},
+    'NFO': {'ARIMA': 0.526764805589554, 'LSTM': 0.509994837614835},
+    'SHU': {'ARIMA': 0.466216334157834, 'LSTM': 0.560965772932689},
+    'TOT': {'ARIMA': 0.587186473971934, 'LSTM': 0.572495934651172},
+    'WHU': {'ARIMA': 0.514994129516095, 'LSTM': 0.51493024033821},
+    'WOL': {'ARIMA': 0.719508735867531, 'LSTM': 0.757331980293413}}
 
 HIDDEN_COLUMNS = ['GKP', 'DEF', 'MID', 'FWD', *TEAMS, 'ID', 'ARIMA', 'LSTM']
 
@@ -66,13 +68,13 @@ def init():
 
 def get_predict_by():
     teams = get_team_info()
-    print(teams)
 
     with open(f"../Fantasy-Premier-League/data/{CURRENT_SEASON}/fixtures.csv") as fixtures_file:
         fixture_reader = csv.DictReader(fixtures_file)
 
         fixture_reader = [fixture for fixture in fixture_reader if
-                          fixture['event'] != '' and CURRENT_GAME_WEEK <= float(fixture['event']) <= CURRENT_GAME_WEEK + PREDICT_BY_WEEKS - 1]
+                          fixture['event'] != '' and CURRENT_GAME_WEEK <= float(
+                              fixture['event']) <= CURRENT_GAME_WEEK + PREDICT_BY_WEEKS - 1]
 
         for fixture in fixture_reader:
             predict_by[teams[int(fixture['team_h'])]['short_name']]['games'].append(int(fixture['team_h_difficulty']))
@@ -86,16 +88,8 @@ def get_predict_by():
 
 
 def make_training_set():
-    done = 0
-    total = len(points_data_set.keys())
-
-    for _, player_data in points_data_set.items():
-        print(player_data['id'], player_data['name'])
-        done += 1
-
+    for _, player_data in tqdm(points_data_set.items()):
         if player_data['id'] in deleted_members or player_data['id'] in BUGGED_PLAYERS:
-            print("Deleted")
-            print(f"{(done / total) * 100}% done")
             continue
 
         ts = []
@@ -121,9 +115,9 @@ def make_training_set():
 
         if not PROCESS_ALL_PLAYERS and (
                 total_games < MIN_GAMES or season_sum < MIN_SEASON_PPG * num_games or num_games < (
-                SEASON_LENGTH if CURRENT_GAME_WEEK == 1 else CURRENT_GAME_WEEK - 1) * MIN_SEASON_GAME_PERCENTAGE or len(predict_by[player_data['team']]['games']) < 1 or total_games < 2) and not f"{player_data['first_name']} {player_data['last_name']} {player_data['name']}" in CURRENT_TEAM:
-            print("Not min requirements")
-            print(f"{(done / total) * 100}% done")
+                SEASON_LENGTH if CURRENT_GAME_WEEK == 1 else CURRENT_GAME_WEEK - 1) * MIN_SEASON_GAME_PERCENTAGE or len(
+            predict_by[player_data['team']][
+                'games']) < 1 or total_games < 2) and not f"{player_data['first_name']} {player_data['last_name']} {player_data['name']}" in CURRENT_TEAM:
             continue
 
         if season_sum <= 0 or len(predict_by[player_data['team']]['games']) == 0:
@@ -134,16 +128,10 @@ def make_training_set():
                 arima = do_arima(ts, predict_by[player_data['team']])
                 lstm = do_lstm(player_data, predict_by[player_data['team']])
             except:
-                print("FAILED")
-                print(f"{(done / total) * 100}% done")
-
                 BUGGED_PLAYERS.append(player_data['id'])
                 continue
 
         if arima[0] != 0 and lstm[0] != 0 and (arima[0] / lstm[0] > MAX_DIFF or lstm[0] / arima[0] > MAX_DIFF):
-            print("ARIMA and LSTM is too different")
-            print(f"{(done / total) * 100}% done")
-
             BUGGED_PLAYERS.append(player_data['id'])
             continue
 
@@ -171,8 +159,6 @@ def make_training_set():
 
         if not found:
             raise Exception(f"Couldn't find {player_data.id}")
-
-        print(f"{(done / total) * 100}% done")
 
     with open(f"./predictedData/{CURRENT_SEASON}/predictedData{CURRENT_GAME_WEEK}.json", 'w') as dataset_file:
         json.dump(master_data_set, dataset_file, ensure_ascii=False, indent=4)
@@ -247,7 +233,8 @@ def make_prediction_file():
 
     columns = list(map(lambda x: {'header': x}, master_data_set[0]))
 
-    sheet.add_table(f"A1:{ALPHABET[len(master_data_set[0]) - 1]}{len(master_data_set)}", {'data': data, 'columns': columns})
+    sheet.add_table(f"A1:{ALPHABET[len(master_data_set[0]) - 1]}{len(master_data_set)}",
+                    {'data': data, 'columns': columns})
 
     for column_name in HIDDEN_COLUMNS:
         hidden_column_index = master_data_set[0].index(column_name)

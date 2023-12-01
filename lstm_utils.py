@@ -45,5 +45,5 @@ class LimitTrainingTime(Callback):
 
     def on_train_batch_end(self, batch, logs):
         now = time.time()
-        if now - self.start_time > self.max_time_s:
+        if now - self.start_time >= self.max_time_s:
             self.model.stop_training = True
