@@ -39,7 +39,7 @@ def do_arima(ts, pred_by):
     if has_same_num is not False:
         return [has_same_num, has_same_num]
 
-    arima = auto_arima(ts, seasonal=False)
+    arima = auto_arima(ts, seasonal=False, error_action="ignore")
     pred = arima.predict(len(pred_by['games']))
 
     overall = sum(pred)
