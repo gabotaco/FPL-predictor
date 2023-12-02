@@ -11,12 +11,12 @@ from game_information import TEAMS, get_team_info, CURRENT_SEASON, CURRENT_GAME_
 
 TEAM_WORTH = 99.5 + 1.6
 FREE_TRANSFERS = 2
-CURRENT_TEAM = {"Guglielmo Vicario Vicario", "André Onana Onana",  # GKP
+CURRENT_TEAM = {"Guglielmo Vicario Vicario", "Nick Pope Pope",  # GKP
                 "Kristoffer Ajer Ajer", "Thiago Emiliano da Silva T.Silva", "Pau Torres Pau",
                 "Kieran Trippier Trippier", "Axel Disasi Disasi",  # DEF
                 "Jarrod Bowen Bowen", "Bryan Mbeumo Mbeumo", "Raheem Sterling Sterling", "Dejan Kulusevski Kulusevski",
                 "Moussa Diaby Diaby",  # MID
-                "Erling Haaland Haaland", "Ollie Watkins Watkins", "Matheus Santos Carneiro Da Cunha Cunha"  # FWD
+                "Erling Haaland Haaland", "Gabriel Fernando de Jesus G.Jesus", "Matheus Santos Carneiro Da Cunha Cunha"  # FWD
                 }
 
 PROCESS_ALL_PLAYERS = False
