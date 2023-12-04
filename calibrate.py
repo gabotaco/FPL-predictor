@@ -90,8 +90,12 @@ def get_player_predictions():
                 arima = 0
                 lstm = 0
             else:
-                arima = do_arima(list(map(lambda x: x['points'], gws[:-CALIBRATE_BY])), pred_by)[0]
-                lstm = do_lstm(training_player_data, pred_by)[0]
+                try:
+                    arima = do_arima(list(map(lambda x: x['points'], gws[:-CALIBRATE_BY])), pred_by)[0]
+                    lstm = do_lstm(training_player_data, pred_by)[0]
+                except:
+                    arima = 0
+                    lstm = 0
 
                 if arima != 0 and lstm != 0 and (arima / lstm > MAX_DIFF or lstm / arima > MAX_DIFF):
                     arima = 0
