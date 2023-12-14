@@ -39,8 +39,11 @@ def do_arima(ts, pred_by):
     if has_same_num is not False:
         return [has_same_num, has_same_num]
 
-    arima = auto_arima(ts, seasonal=False, error_action="ignore")
-    pred = arima.predict(len(pred_by['games']))
+    try:
+        arima = auto_arima(ts, seasonal=False, error_action="ignore")
+        pred = arima.predict(len(pred_by['games']))
+    except:
+        pred = [RETRY_POINT] * len(pred_by['games'])
 
     overall = sum(pred)
     next_points = sum(pred[:pred_by['next']])
@@ -119,23 +122,26 @@ def do_lstm(player_data, pred_by):
             n_neurons = 64
             n_neurons_last_layer = 128
 
-    es = EarlyStopping(monitor='val_loss', min_delta=0.005, mode="min", patience=5)
-    lt = LimitTrainingTime(10)
-    model = make_model(1, amount_of_features, n_neurons=n_neurons, n_hidden_layers=n_hidden_layers,
-                       n_neurons_last_layer=n_neurons_last_layer)
-    model.compile(optimizer="adam", loss='mse')
-    model.fit(x=train_X, y=train_y, validation_data=(val_X, val_y), epochs=1000, verbose=0, callbacks=[es, lt])
-    predictions = []
-    for game in pred_by['games']:
-        if len(predictions) == 0:
-            next_points = train_X[-1][0][0]
-        else:
-            next_points = predictions[-1]
+    try:
+        es = EarlyStopping(monitor='val_loss', min_delta=0.005, mode="min", patience=5)
+        lt = LimitTrainingTime(10)
+        model = make_model(1, amount_of_features, n_neurons=n_neurons, n_hidden_layers=n_hidden_layers,
+                           n_neurons_last_layer=n_neurons_last_layer)
+        model.compile(optimizer="adam", loss='mse')
+        model.fit(x=train_X, y=train_y, validation_data=(val_X, val_y), epochs=1000, verbose=0, callbacks=[es, lt])
+        predictions = []
+        for game in pred_by['games']:
+            if len(predictions) == 0:
+                next_points = train_X[-1][0][0]
+            else:
+                next_points = predictions[-1]
 
-        prediction = model.predict(np.array([[[next_points, game]]]), verbose=0)[0][0]
-        predictions.append(prediction)
+            prediction = model.predict(np.array([[[next_points, game]]]), verbose=0)[0][0]
+            predictions.append(prediction)
 
-    predictions = (np.array(predictions) * train_std) + train_mean
+        predictions = (np.array(predictions) * train_std) + train_mean
+    except:
+        predictions = [RETRY_POINT] * len(pred_by['games'])
 
     overall = sum(predictions)
     next_points = sum(predictions[:pred_by['next']])
