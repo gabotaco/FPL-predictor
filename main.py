@@ -1,16 +1,17 @@
 import csv
 import json
+import os
 
 from tqdm import tqdm
 from xlsxwriter.workbook import Workbook
 
 from ai import MAX_DIFF, do_arima, do_lstm
-from dataset import get_dataset
+from dataset import get_dataset, master_data_set as header
 from game_information import TEAMS, get_team_info, CURRENT_SEASON, CURRENT_GAME_WEEK, CURRENT_SEASON_BEGINNING_ROUND, \
-    SEASON_LENGTH, MIN_GAMES, MIN_SEASON_PPG, MIN_SEASON_GAME_PERCENTAGE
+    SEASON_LENGTH, MIN_GAMES, MIN_SEASON_PPG, MIN_SEASON_GAME_PERCENTAGE, TEAM_WORTH, FREE_TRANSFERS, \
+    PREDICT_BY_WEEKS, TRANSFER_COST
+from team_maker import make_team
 
-TEAM_WORTH = 100.9 + 0.7
-FREE_TRANSFERS = 2
 CURRENT_TEAM = {"Guglielmo Vicario Vicario", "Norberto Murara Neto Neto",  # GKP
                 "William Saliba Saliba", "Thiago Emiliano da Silva T.Silva", "Pau Torres Pau",
                 "Trent Alexander-Arnold Alexander-Arnold", "Axel Disasi Disasi",  # DEF
@@ -19,6 +20,14 @@ CURRENT_TEAM = {"Guglielmo Vicario Vicario", "Norberto Murara Neto Neto",  # GKP
                 "Erling Haaland Haaland", "Gabriel Fernando de Jesus G.Jesus", "Matheus Santos Carneiro Da Cunha Cunha"
                 # FWD
                 }
+
+INJURIES = {
+    "Raheem Sterling Sterling": (PREDICT_BY_WEEKS - 1)/PREDICT_BY_WEEKS,
+    "Erling Haaland Haaland": 0.5,
+    "Pau Torres Pau": 0.5,
+    "Serge Aurier Aurier": 0.5
+}
+
 RATIOS = {  # Last calibrated 12/25/2023
     'ARS': {'ARIMA': 0.50553623655838, 'LSTM': 0.454345051004099},
     'AVL': {'ARIMA': 0.564641648682363, 'LSTM': 0.527483353195708},
@@ -43,9 +52,13 @@ RATIOS = {  # Last calibrated 12/25/2023
 
 PROCESS_ALL_PLAYERS = False
 BUGGED_PLAYERS = []
-PREDICT_BY_WEEKS = 5
 HIDDEN_COLUMNS = ['GKP', 'DEF', 'MID', 'FWD', *TEAMS, 'ID', 'ARIMA', 'LSTM']
 ALPHABET = [*"ABCDEFGHIJKLMNOPQRSTUVWXYZ"]
+ID = header[0].index('ID')
+PP = header[0].index('PP')
+HEALTH = header[0].index('Health')
+NEXT = header[0].index('NEXT')
+SELECTED = header[0].index('Selected')
 
 master_data_set = []
 deleted_members = []
@@ -88,6 +101,19 @@ def get_predict_by():
 
 
 def make_training_set():
+    global master_data_set
+
+    filename = f"./predictedData/{CURRENT_SEASON}/predictedData{CURRENT_GAME_WEEK}.json"
+    if os.path.exists(filename):
+        with open(filename, 'r') as file:
+            master_data_set = json.load(file)
+
+        print("Loaded predictions from file")
+        make_prediction_file()
+        return
+
+    found_previous = 0
+
     for _, player_data in tqdm(points_data_set.items()):
         if player_data['id'] in deleted_members or player_data['id'] in BUGGED_PLAYERS:
             continue
@@ -96,6 +122,8 @@ def make_training_set():
         season_sum = 0
         num_games = 0
         total_games = 0
+
+        player_name = f"{player_data['first_name']} {player_data['last_name']} {player_data['name']}"
 
         for dataset, data in player_data.items():
             if not dataset.startswith('GW'):
@@ -117,7 +145,7 @@ def make_training_set():
                 total_games < MIN_GAMES or season_sum < MIN_SEASON_PPG * num_games or num_games < (
                 SEASON_LENGTH if CURRENT_GAME_WEEK == 1 else CURRENT_GAME_WEEK - 1) * MIN_SEASON_GAME_PERCENTAGE or len(
             predict_by[player_data['team']][
-                'games']) < 1 or total_games < 2) and not f"{player_data['first_name']} {player_data['last_name']} {player_data['name']}" in CURRENT_TEAM:
+                'games']) < 1 or total_games < 2) and player_name not in CURRENT_TEAM:
             continue
 
         if season_sum <= 0 or len(predict_by[player_data['team']]['games']) == 0:
@@ -147,12 +175,20 @@ def make_training_set():
 
         found = False
         for master in master_data_set:
-            if master[master_data_set[0].index('ID')] == player_data['id']:
+            if master[ID] == player_data['id']:
                 master.append(arima[0])
                 master.append(lstm[0])
                 master.append(p)
                 master.append(next_p)
-                master.append(0)
+                if player_name in INJURIES:
+                    master.append(INJURIES[player_name])
+                else:
+                    master.append(1)
+                if player_name in CURRENT_TEAM:
+                    master.append(1)
+                    found_previous += 1
+                else:
+                    master.append(0)
                 master.append(0)
                 found = True
                 break
@@ -160,15 +196,20 @@ def make_training_set():
         if not found:
             raise Exception(f"Couldn't find {player_data.id}")
 
-    with open(f"./predictedData/{CURRENT_SEASON}/predictedData{CURRENT_GAME_WEEK}.json", 'w') as dataset_file:
+    with open(filename, 'w') as dataset_file:
         json.dump(master_data_set, dataset_file, ensure_ascii=False, indent=4)
         print("Wrote Predicted Data")
+
+    if found_previous == 15:
+        print("Found all previous players!")
+    else:
+        print(f"Found only {found_previous} out of 15 previous players")
 
     make_prediction_file()
 
 
 def make_prediction_file():
-    global points_data_set
+    global points_data_set, master_data_set
 
     workbook = Workbook(f"./Predictions/{CURRENT_SEASON}/Week {CURRENT_GAME_WEEK}.xlsx")
     sheet = workbook.add_worksheet()
@@ -176,7 +217,7 @@ def make_prediction_file():
     column_index = len(master_data_set[0]) + 1
     row_index = 1
 
-    sheet.write_row(row_index, column_index, ["Total Points", "=SUMPRODUCT(Table1[Selected], Table1[PPG])", "MAX"])
+    sheet.write_row(row_index, column_index, ["Total Points", "=SUMPRODUCT(Table1[Selected], Table1[PP])", "MAX"])
 
     row_index += 2
 
@@ -209,7 +250,7 @@ def make_prediction_file():
     row_index += 2
 
     sheet.write_row(row_index, column_index, ["Cost",
-                                              f"=(({ALPHABET[column_index + 1]}{row_index - 2}-{ALPHABET[column_index + 1]}{row_index - 1})+ABS(({ALPHABET[column_index + 1]}{row_index - 2}-{ALPHABET[column_index + 1]}{row_index - 1})))/2*4"])
+                                              f"=(({ALPHABET[column_index + 1]}{row_index - 2}-{ALPHABET[column_index + 1]}{row_index - 1})+ABS(({ALPHABET[column_index + 1]}{row_index - 2}-{ALPHABET[column_index + 1]}{row_index - 1})))/2*{TRANSFER_COST}"])
 
     row_index += 2
 
@@ -222,28 +263,32 @@ def make_prediction_file():
         sheet.write_row(row_index, column_index, [team_name, f"=SUMPRODUCT(Table1[Selected],Table1[{team_name}])", 3])
         row_index += 1
 
-    found_previous = 0
-
     data = [player for player in master_data_set[1:] if len(player) == len(master_data_set[0])]
 
+    best_team = make_team(data)
+
+    found_selected = 0
     for player in data:
-        if f"{player[master_data_set[0].index('First Name')]} {player[master_data_set[0].index('Surname')]} {player[master_data_set[0].index('Web Name')]}" in CURRENT_TEAM:
-            player[master_data_set[0].index('PREV')] = 1
-            found_previous += 1
+        player[PP] = f"={player[PP]}*{player[HEALTH]}"
+        player[NEXT] = f"={player[NEXT]}*{player[HEALTH]}"
+
+        if player in best_team:
+            player[SELECTED] = 1
+            found_selected += 1
+
+    if found_selected == 15:
+        print("Found all selected players!")
+    else:
+        print(f"Found only {found_selected} out of 15 selected players")
 
     columns = list(map(lambda x: {'header': x}, master_data_set[0]))
 
-    sheet.add_table(f"A1:{ALPHABET[len(master_data_set[0]) - 1]}{len(master_data_set)}",
+    sheet.add_table(f"A1:{ALPHABET[len(master_data_set[0]) - 1]}{len(data) + 1}",
                     {'data': data, 'columns': columns})
 
     for column_name in HIDDEN_COLUMNS:
         hidden_column_index = master_data_set[0].index(column_name)
         sheet.set_column(hidden_column_index, hidden_column_index, None, None, {'hidden': 1})
-
-    if found_previous == 15:
-        print("Found all previous players!")
-    else:
-        print(f"Found only {found_previous} out of 15 previous players")
 
     for bugged_player in BUGGED_PLAYERS:
         print("Did not include player with id", bugged_player)

@@ -13,7 +13,7 @@ teams = {}
 points_data_set = {}
 master_data_set = [
     ["First Name", "Surname", "Web Name", "Position", "GKP", "DEF", "MID", "FWD", "Team", *TEAMS, "Cost", "ID", "ARIMA",
-     "LSTM", "PPG", "NEXT", "PREV", "Selected"]]
+     "LSTM", "PP", "NEXT", "Health", "PREV", "Selected"]]
 
 
 def get_teams():

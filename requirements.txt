@@ -2,3 +2,5 @@ numpy~=1.25.2
 pmdarima~=2.0.4
 tensorflow~=2.15.0
 XlsxWriter~=3.1.9
+tqdm~=4.66.1
+gekko~=1.0.6
