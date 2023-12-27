@@ -1,3 +1,6 @@
+import json
+import os
+
 from xlsxwriter.workbook import Workbook
 from tqdm import tqdm
 
@@ -12,6 +15,7 @@ CALIBRATE_BY = 10
 BUGGED_PLAYERS = []
 
 HEADERS = ["Name", "ARIMAPP", "LSTMPP", "PP", "AP", "DIFF"]
+HIDDEN_COLUMNS = ["ARIMAPP", "LSTMPP"]
 ALPHABET = [*"ABCDEFGHIJKLMNOPQRSTUVWXYZ"]
 
 PROCESS_ALL_PLAYERS = False
@@ -39,6 +43,15 @@ def get_basic_players_teams():
 
 def get_player_predictions():
     global players
+
+    filename = f"./calibrationData/{CURRENT_SEASON}/calibrationData{CURRENT_GAME_WEEK}.json"
+    if os.path.exists(filename):
+        with open(filename, 'r') as file:
+            players = json.load(file)
+
+        print("Loaded calibrations from file")
+        create_calibration_file()
+        return
 
     for team in tqdm(TEAMS, desc="Teams", bar_format="{l_bar}{bar}| {remaining}"):
         for index, player_data in enumerate(
@@ -70,8 +83,7 @@ def get_player_predictions():
 
             if not PROCESS_ALL_PLAYERS and (
                     total_games - CALIBRATE_BY < MIN_GAMES or points_sum < MIN_SEASON_PPG * num_games or num_games < (
-                    SEASON_LENGTH if CURRENT_GAME_WEEK == 1 else CURRENT_GAME_WEEK - 1) * MIN_SEASON_GAME_PERCENTAGE or
-                    total_games < 2):
+                    SEASON_LENGTH if CURRENT_GAME_WEEK == 1 else CURRENT_GAME_WEEK - 1) * MIN_SEASON_GAME_PERCENTAGE):
                 continue
 
             pred_by = {'games': [], 'next': 0}
@@ -88,13 +100,13 @@ def get_player_predictions():
             if actual_points < CALIBRATE_BY * MIN_SEASON_PPG:
                 continue
 
-            if points_sum <= 0 or len(gws) <= CALIBRATE_BY:
+            if actual_points <= 0 or len(gws[:-CALIBRATE_BY]) <= CALIBRATE_BY:
                 arima = 0
                 lstm = 0
             else:
                 try:
-                    arima = do_arima(list(map(lambda x: x['points'], gws[:-CALIBRATE_BY])), pred_by)[0]
-                    lstm = do_lstm(training_player_data, pred_by)[0]
+                    arima, _ = do_arima(list(map(lambda x: x['points'], gws[:-CALIBRATE_BY])), pred_by)
+                    lstm, _ = do_lstm(training_player_data, pred_by)
                 except:
                     arima = 0
                     lstm = 0
@@ -109,6 +121,10 @@ def get_player_predictions():
         players[team] = [player for player in players[team] if
                          'arima' in player and 'lstm' in player and 'name' in player and 'actual_points' in player]
 
+    with open(filename, 'w') as dataset_file:
+        json.dump(players, dataset_file, ensure_ascii=False, indent=4)
+        print("Wrote players data")
+
     create_calibration_file()
 
 
@@ -116,7 +132,7 @@ def create_calibration_file():
     workbook = Workbook(f"./Calibrations/{CURRENT_SEASON}/Week {CURRENT_GAME_WEEK}.xlsx")
 
     for team in TEAMS:
-        players[team] = [player for player in players[team] if player['arima'] != 0 and player['lstm'] != 0]
+        players[team] = [player for player in players[team] if player['arima'] > 0 and player['lstm'] > 0]
 
         if len(players[team]) == 0:
             print(f"Could not find any players for {team}")
@@ -151,6 +167,10 @@ def create_calibration_file():
         sheet.conditional_format('I7', {"type": "3_color_scale", "min_color": "#00FF00", "mid_color": "#FFFF00",
                                         "max_color": "#FF0000", "min_value": 0, "mid_value": 1, "max_value": 2,
                                         "min_type": "num", "mid_type": "num", "max_type": "num"})
+
+        for column_name in HIDDEN_COLUMNS:
+            hidden_column_index = HEADERS.index(column_name)
+            sheet.set_column(hidden_column_index, hidden_column_index, None, None, {'hidden': 1})
 
     workbook.close()
 

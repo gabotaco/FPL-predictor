@@ -149,17 +149,18 @@ def make_training_set():
             continue
 
         if season_sum <= 0 or len(predict_by[player_data['team']]['games']) == 0:
-            arima = [0, 0]
-            lstm = [0, 0]
+            arima_overall, arima_next = 0, 0
+            lstm_overall, lstm_next = 0, 0
         else:
             try:
-                arima = do_arima(ts, predict_by[player_data['team']])
-                lstm = do_lstm(player_data, predict_by[player_data['team']])
+                arima_overall, arima_next = do_arima(ts, predict_by[player_data['team']])
+                lstm_overall, lstm_next = do_lstm(player_data, predict_by[player_data['team']])
             except:
                 BUGGED_PLAYERS.append(player_data['id'])
                 continue
 
-        if arima[0] != 0 and lstm[0] != 0 and (arima[0] / lstm[0] > MAX_DIFF or lstm[0] / arima[0] > MAX_DIFF):
+        if arima_overall != 0 and lstm_overall != 0 and (arima_overall / lstm_overall > MAX_DIFF or
+                                                         lstm_overall / arima_overall > MAX_DIFF):
             BUGGED_PLAYERS.append(player_data['id'])
             continue
 
@@ -170,14 +171,14 @@ def make_training_set():
             arima_ratio = RATIOS[player_data['team']]['ARIMA']
             lstm_ratio = RATIOS[player_data['team']]['LSTM']
 
-            p = (arima[0] * arima_ratio) + (lstm[0] * lstm_ratio)
-            next_p = (arima[1] * arima_ratio) + (lstm[1] * lstm_ratio)
+            p = (arima_overall * arima_ratio) + (lstm_overall * lstm_ratio)
+            next_p = (arima_next * arima_ratio) + (lstm_next * lstm_ratio)
 
         found = False
         for master in master_data_set:
             if master[ID] == player_data['id']:
-                master.append(arima[0])
-                master.append(lstm[0])
+                master.append(arima_overall)
+                master.append(lstm_overall)
                 master.append(p)
                 master.append(next_p)
                 if player_name in INJURIES:

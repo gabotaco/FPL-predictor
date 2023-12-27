@@ -1,0 +1,1407 @@
+{
+    "ARS": [
+        {
+            "name": "Rice",
+            "position": "MID",
+            "arima": 28.062216190846815,
+            "lstm": 27.98611111111111,
+            "actual_points": 38
+        },
+        {
+            "name": "G.Jesus",
+            "position": "FWD",
+            "arima": 40.83916083916082,
+            "lstm": 38.469762057102784,
+            "actual_points": 38
+        },
+        {
+            "name": "Zinchenko",
+            "position": "DEF",
+            "arima": 32.8421052631579,
+            "lstm": 30.723684210526308,
+            "actual_points": 45
+        },
+        {
+            "name": "Saka",
+            "position": "MID",
+            "arima": 58.39476241884384,
+            "lstm": 39.637847337079315,
+            "actual_points": 45
+        },
+        {
+            "name": "Trossard",
+            "position": "MID",
+            "arima": 38.05302471333959,
+            "lstm": 41.769019480409035,
+            "actual_points": 30
+        },
+        {
+            "name": "Havertz",
+            "position": "MID",
+            "arima": 32.12765957446808,
+            "lstm": 30.666666666666668,
+            "actual_points": 31
+        },
+        {
+            "name": "Ødegaard",
+            "position": "MID",
+            "arima": 53.798230061853076,
+            "lstm": 44.09307295263852,
+            "actual_points": 54
+        },
+        {
+            "name": "Raya",
+            "position": "GKP",
+            "arima": 42.53968253968253,
+            "lstm": 35.18443898325406,
+            "actual_points": 32
+        },
+        {
+            "name": "Tomiyasu",
+            "position": "DEF",
+            "arima": 15.826584510239403,
+            "lstm": 28.382352941176478,
+            "actual_points": 34
+        },
+        {
+            "name": "Saliba",
+            "position": "DEF",
+            "arima": 42.082199552706754,
+            "lstm": 35.19230769230769,
+            "actual_points": 38
+        },
+        {
+            "name": "White",
+            "position": "DEF",
+            "arima": 42.55813953488373,
+            "lstm": 34.411764705882355,
+            "actual_points": 31
+        },
+        {
+            "name": "Martinelli",
+            "position": "MID",
+            "arima": 51.74999999999999,
+            "lstm": 48.960860075903874,
+            "actual_points": 28
+        },
+        {
+            "name": "Nketiah",
+            "position": "FWD",
+            "arima": 25.142857142857135,
+            "lstm": 24.64285714285715,
+            "actual_points": 29
+        },
+        {
+            "name": "Gabriel",
+            "position": "DEF",
+            "arima": 35.95238095238094,
+            "lstm": 33.33333333333333,
+            "actual_points": 40
+        }
+    ],
+    "AVL": [
+        {
+            "name": "Digne",
+            "position": "DEF",
+            "arima": 27.69635602102536,
+            "lstm": 34.60317890981297,
+            "actual_points": 29
+        },
+        {
+            "name": "Tielemans",
+            "position": "MID",
+            "arima": 32.894736842105246,
+            "lstm": 35.594475209804614,
+            "actual_points": 23
+        },
+        {
+            "name": "Douglas Luiz",
+            "position": "MID",
+            "arima": 45.577644334229255,
+            "lstm": 27.053571428571427,
+            "actual_points": 50
+        },
+        {
+            "name": "McGinn",
+            "position": "MID",
+            "arima": 29.580923259775727,
+            "lstm": 29.398148148148152,
+            "actual_points": 44
+        },
+        {
+            "name": "Konsa",
+            "position": "DEF",
+            "arima": 28.461538461538435,
+            "lstm": 28.557692307692303,
+            "actual_points": 30
+        },
+        {
+            "name": "Watkins",
+            "position": "FWD",
+            "arima": 45.04504504504505,
+            "lstm": 41.567953123825795,
+            "actual_points": 51
+        },
+        {
+            "name": "Bailey",
+            "position": "MID",
+            "arima": 28.39285714285715,
+            "lstm": 28.409090909090903,
+            "actual_points": 41
+        },
+        {
+            "name": "Diego Carlos",
+            "position": "DEF",
+            "arima": 0,
+            "lstm": 0,
+            "actual_points": 24
+        },
+        {
+            "name": "Martinez",
+            "position": "GKP",
+            "arima": 34.26119543878426,
+            "lstm": 31.96969696969696,
+            "actual_points": 35
+        },
+        {
+            "name": "Diaby",
+            "position": "MID",
+            "arima": 0,
+            "lstm": 0,
+            "actual_points": 35
+        },
+        {
+            "name": "Pau",
+            "position": "DEF",
+            "arima": 0,
+            "lstm": 0,
+            "actual_points": 39
+        }
+    ],
+    "BOU": [
+        {
+            "name": "Smith",
+            "position": "DEF",
+            "arima": 22.619047619047624,
+            "lstm": 26.641791044776117,
+            "actual_points": 27
+        },
+        {
+            "name": "Billing",
+            "position": "MID",
+            "arima": 26.084392509347015,
+            "lstm": 26.91358024691358,
+            "actual_points": 35
+        },
+        {
+            "name": "L.Cook",
+            "position": "MID",
+            "arima": 17.346999943913357,
+            "lstm": 23.66071428571428,
+            "actual_points": 22
+        },
+        {
+            "name": "Solanke",
+            "position": "FWD",
+            "arima": 39.25163536655279,
+            "lstm": 27.1875,
+            "actual_points": 59
+        },
+        {
+            "name": "Kelly",
+            "position": "DEF",
+            "arima": 23.10344827586206,
+            "lstm": 26.739130434782613,
+            "actual_points": 22
+        },
+        {
+            "name": "Christie",
+            "position": "MID",
+            "arima": 20.263157894736846,
+            "lstm": 24.333333333333332,
+            "actual_points": 25
+        },
+        {
+            "name": "Tavernier",
+            "position": "MID",
+            "arima": 36.28241392416008,
+            "lstm": 33.0,
+            "actual_points": 41
+        },
+        {
+            "name": "Senesi",
+            "position": "DEF",
+            "arima": 22.49924353345199,
+            "lstm": 26.60714285714285,
+            "actual_points": 43
+        },
+        {
+            "name": "Neto",
+            "position": "GKP",
+            "arima": 34.876157456817644,
+            "lstm": 36.415182927003734,
+            "actual_points": 33
+        },
+        {
+            "name": "Semenyo",
+            "position": "FWD",
+            "arima": 21.428571428571427,
+            "lstm": 24.090909090909097,
+            "actual_points": 28
+        },
+        {
+            "name": "Kluivert",
+            "position": "MID",
+            "arima": 0,
+            "lstm": 0,
+            "actual_points": 27
+        },
+        {
+            "name": "Kerkez",
+            "position": "DEF",
+            "arima": 0,
+            "lstm": 0,
+            "actual_points": 21
+        }
+    ],
+    "BRE": [
+        {
+            "name": "Mee",
+            "position": "DEF",
+            "arima": 34.092604828384616,
+            "lstm": 30.124999999999996,
+            "actual_points": 28
+        },
+        {
+            "name": "Maupay",
+            "position": "FWD",
+            "arima": 14.813393120663804,
+            "lstm": 32.21896137413016,
+            "actual_points": 30
+        },
+        {
+            "name": "Nørgaard",
+            "position": "MID",
+            "arima": 30.508474576271176,
+            "lstm": 31.904322046764612,
+            "actual_points": 24
+        },
+        {
+            "name": "Pinnock",
+            "position": "DEF",
+            "arima": 31.69230769230772,
+            "lstm": 29.143218872873412,
+            "actual_points": 33
+        },
+        {
+            "name": "Janelt",
+            "position": "MID",
+            "arima": 26.85714285714284,
+            "lstm": 26.964285714285722,
+            "actual_points": 23
+        },
+        {
+            "name": "Mbeumo",
+            "position": "MID",
+            "arima": 38.79999999999998,
+            "lstm": 33.969388614343075,
+            "actual_points": 52
+        },
+        {
+            "name": "Wissa",
+            "position": "FWD",
+            "arima": 30.778512164030825,
+            "lstm": 28.48214285714285,
+            "actual_points": 27
+        },
+        {
+            "name": "Jensen",
+            "position": "MID",
+            "arima": 33.62228838102918,
+            "lstm": 26.538461538461537,
+            "actual_points": 51
+        },
+        {
+            "name": "Collins",
+            "position": "DEF",
+            "arima": 23.69565217391305,
+            "lstm": 26.944444444444443,
+            "actual_points": 31
+        },
+        {
+            "name": "Hickey",
+            "position": "DEF",
+            "arima": 23.913043478260864,
+            "lstm": 24.166666666666668,
+            "actual_points": 23
+        },
+        {
+            "name": "Flekken",
+            "position": "GKP",
+            "arima": 0,
+            "lstm": 0,
+            "actual_points": 29
+        }
+    ],
+    "BHA": [
+        {
+            "name": "Gross",
+            "position": "MID",
+            "arima": 34.43708609271525,
+            "lstm": 33.10917744955682,
+            "actual_points": 49
+        },
+        {
+            "name": "Welbeck",
+            "position": "FWD",
+            "arima": 30.721649484536076,
+            "lstm": 30.909090909090903,
+            "actual_points": 24
+        },
+        {
+            "name": "João Pedro",
+            "position": "FWD",
+            "arima": 22.368421052631586,
+            "lstm": 24.83333333333334,
+            "actual_points": 29
+        },
+        {
+            "name": "Steele",
+            "position": "GKP",
+            "arima": 0,
+            "lstm": 0,
+            "actual_points": 20
+        },
+        {
+            "name": "Ferguson",
+            "position": "FWD",
+            "arima": 33.04347826086956,
+            "lstm": 28.88888888888889,
+            "actual_points": 25
+        },
+        {
+            "name": "Mitoma",
+            "position": "MID",
+            "arima": 44.57142857142856,
+            "lstm": 42.789720498932546,
+            "actual_points": 23
+        },
+        {
+            "name": "Adingra",
+            "position": "MID",
+            "arima": 0,
+            "lstm": 0,
+            "actual_points": 33
+        }
+    ],
+    "BUR": [
+        {
+            "name": "Taylor",
+            "position": "DEF",
+            "arima": 27.16666666666667,
+            "lstm": 28.22916666666667,
+            "actual_points": 28
+        },
+        {
+            "name": "Rodriguez",
+            "position": "FWD",
+            "arima": 20.43127600100698,
+            "lstm": 25.48611111111111,
+            "actual_points": 30
+        },
+        {
+            "name": "Berge",
+            "position": "MID",
+            "arima": 23.714285714285705,
+            "lstm": 27.321428571428573,
+            "actual_points": 25
+        },
+        {
+            "name": "Brownhill",
+            "position": "MID",
+            "arima": 23.50649350649351,
+            "lstm": 25.57377049180328,
+            "actual_points": 30
+        },
+        {
+            "name": "Koleosho",
+            "position": "MID",
+            "arima": 0,
+            "lstm": 0,
+            "actual_points": 28
+        },
+        {
+            "name": "Trafford",
+            "position": "GKP",
+            "arima": 0,
+            "lstm": 0,
+            "actual_points": 37
+        },
+        {
+            "name": "Amdouni",
+            "position": "FWD",
+            "arima": 0,
+            "lstm": 0,
+            "actual_points": 28
+        },
+        {
+            "name": "Bruun Larsen",
+            "position": "MID",
+            "arima": 0,
+            "lstm": 0,
+            "actual_points": 24
+        }
+    ],
+    "CHE": [
+        {
+            "name": "Sterling",
+            "position": "MID",
+            "arima": 46.54018170888144,
+            "lstm": 58.037854938311845,
+            "actual_points": 36
+        },
+        {
+            "name": "Gallagher",
+            "position": "MID",
+            "arima": 28.284544337454722,
+            "lstm": 28.812500000000007,
+            "actual_points": 34
+        },
+        {
+            "name": "Sanchez",
+            "position": "GKP",
+            "arima": 35.73033707865167,
+            "lstm": 32.66997032610255,
+            "actual_points": 33
+        },
+        {
+            "name": "Palmer",
+            "position": "MID",
+            "arima": 47.32741016978463,
+            "lstm": 18.88888888888889,
+            "actual_points": 53
+        },
+        {
+            "name": "T.Silva",
+            "position": "DEF",
+            "arima": 35.48387096774192,
+            "lstm": 33.603843547565674,
+            "actual_points": 22
+        },
+        {
+            "name": "Colwill",
+            "position": "DEF",
+            "arima": 30.869565217391298,
+            "lstm": 26.38888888888889,
+            "actual_points": 21
+        },
+        {
+            "name": "Mudryk",
+            "position": "MID",
+            "arima": 19.473684210526326,
+            "lstm": 23.333333333333332,
+            "actual_points": 32
+        },
+        {
+            "name": "Enzo",
+            "position": "MID",
+            "arima": 23.181818181818176,
+            "lstm": 26.76470588235294,
+            "actual_points": 33
+        },
+        {
+            "name": "N.Jackson",
+            "position": "FWD",
+            "arima": 0,
+            "lstm": 0,
+            "actual_points": 41
+        },
+        {
+            "name": "Disasi",
+            "position": "DEF",
+            "arima": 0,
+            "lstm": 0,
+            "actual_points": 23
+        }
+    ],
+    "CRY": [
+        {
+            "name": "Schlupp",
+            "position": "MID",
+            "arima": 26.714285714285694,
+            "lstm": 28.48214285714285,
+            "actual_points": 30
+        },
+        {
+            "name": "Ward",
+            "position": "DEF",
+            "arima": 23.067391592793882,
+            "lstm": 27.57731958762886,
+            "actual_points": 20
+        },
+        {
+            "name": "J.Ayew",
+            "position": "MID",
+            "arima": 27.28892331895622,
+            "lstm": 28.6328125,
+            "actual_points": 30
+        },
+        {
+            "name": "Mitchell",
+            "position": "DEF",
+            "arima": 27.272067518623505,
+            "lstm": 28.961038961038955,
+            "actual_points": 28
+        },
+        {
+            "name": "Eze",
+            "position": "MID",
+            "arima": 36.46341463414634,
+            "lstm": 33.069670720202375,
+            "actual_points": 33
+        },
+        {
+            "name": "Johnstone",
+            "position": "GKP",
+            "arima": 36.47058823529412,
+            "lstm": 33.625,
+            "actual_points": 36
+        },
+        {
+            "name": "Mateta",
+            "position": "FWD",
+            "arima": 21.5,
+            "lstm": 24.895833333333332,
+            "actual_points": 28
+        },
+        {
+            "name": "Edouard",
+            "position": "FWD",
+            "arima": 30.151515151515156,
+            "lstm": 28.365384615384613,
+            "actual_points": 27
+        },
+        {
+            "name": "Lerma",
+            "position": "MID",
+            "arima": 27.43589743589745,
+            "lstm": 27.258064516129036,
+            "actual_points": 25
+        }
+    ],
+    "EVE": [
+        {
+            "name": "A.Doucoure",
+            "position": "MID",
+            "arima": 33.40505316077783,
+            "lstm": 30.780692382316456,
+            "actual_points": 49
+        },
+        {
+            "name": "Tarkowski",
+            "position": "DEF",
+            "arima": 27.81019358093244,
+            "lstm": 29.6551724137931,
+            "actual_points": 36
+        },
+        {
+            "name": "Pickford",
+            "position": "GKP",
+            "arima": 34.8333333333333,
+            "lstm": 35.55794793617956,
+            "actual_points": 44
+        },
+        {
+            "name": "Calvert-Lewin",
+            "position": "FWD",
+            "arima": 35.26638682319932,
+            "lstm": 33.97035043070642,
+            "actual_points": 29
+        },
+        {
+            "name": "McNeil",
+            "position": "MID",
+            "arima": 30.894212061933693,
+            "lstm": 29.580301484283495,
+            "actual_points": 43
+        },
+        {
+            "name": "Garner",
+            "position": "MID",
+            "arima": 17.6,
+            "lstm": 21.750000000000004,
+            "actual_points": 28
+        },
+        {
+            "name": "Branthwaite",
+            "position": "DEF",
+            "arima": 15.333333333333332,
+            "lstm": 24.392495297847457,
+            "actual_points": 39
+        },
+        {
+            "name": "Harrison",
+            "position": "MID",
+            "arima": 40.29126213592233,
+            "lstm": 38.045578498132734,
+            "actual_points": 30
+        },
+        {
+            "name": "Mykolenko",
+            "position": "DEF",
+            "arima": 24.347826086956523,
+            "lstm": 27.670546315981614,
+            "actual_points": 57
+        },
+        {
+            "name": "Onana",
+            "position": "MID",
+            "arima": 23.41683889336905,
+            "lstm": 26.785714285714278,
+            "actual_points": 27
+        }
+    ],
+    "FUL": [
+        {
+            "name": "Raúl",
+            "position": "FWD",
+            "arima": 19.313404073153503,
+            "lstm": 42.69082031527838,
+            "actual_points": 35
+        },
+        {
+            "name": "Cairney",
+            "position": "MID",
+            "arima": 20.389610389610386,
+            "lstm": 24.508196721311474,
+            "actual_points": 31
+        },
+        {
+            "name": "Iwobi",
+            "position": "MID",
+            "arima": 26.602564102564084,
+            "lstm": 27.580645161290324,
+            "actual_points": 41
+        },
+        {
+            "name": "Diop",
+            "position": "DEF",
+            "arima": 26.495726495726487,
+            "lstm": 26.77419354838709,
+            "actual_points": 25
+        },
+        {
+            "name": "Leno",
+            "position": "GKP",
+            "arima": 37.335262574254834,
+            "lstm": 32.857142857142854,
+            "actual_points": 32
+        },
+        {
+            "name": "Ream",
+            "position": "DEF",
+            "arima": 23.67647058823529,
+            "lstm": 25.555555555555557,
+            "actual_points": 22
+        },
+        {
+            "name": "Wilson",
+            "position": "MID",
+            "arima": 25.454545454545453,
+            "lstm": 26.634615384615387,
+            "actual_points": 35
+        },
+        {
+            "name": "Castagne",
+            "position": "DEF",
+            "arima": 31.795185569234473,
+            "lstm": 31.11111111111111,
+            "actual_points": 22
+        },
+        {
+            "name": "Robinson",
+            "position": "DEF",
+            "arima": 23.432835820895523,
+            "lstm": 26.509433962264154,
+            "actual_points": 27
+        },
+        {
+            "name": "J.Palhinha",
+            "position": "MID",
+            "arima": 25.263157894736853,
+            "lstm": 25.833333333333332,
+            "actual_points": 27
+        },
+        {
+            "name": "Andreas",
+            "position": "MID",
+            "arima": 37.40238843244595,
+            "lstm": 38.69444768174318,
+            "actual_points": 36
+        },
+        {
+            "name": "De Cordova-Reid",
+            "position": "MID",
+            "arima": 25.749999999999996,
+            "lstm": 26.40625,
+            "actual_points": 23
+        },
+        {
+            "name": "Willian",
+            "position": "MID",
+            "arima": 39.03225806451613,
+            "lstm": 40.8774532749956,
+            "actual_points": 49
+        }
+    ],
+    "LIV": [
+        {
+            "name": "A.Becker",
+            "position": "GKP",
+            "arima": 44.02449177430205,
+            "lstm": 36.707414483115016,
+            "actual_points": 47
+        },
+        {
+            "name": "Salah",
+            "position": "MID",
+            "arima": 68.61111111111106,
+            "lstm": 68.87432330622515,
+            "actual_points": 78
+        },
+        {
+            "name": "Alexander-Arnold",
+            "position": "DEF",
+            "arima": 51.96652208419965,
+            "lstm": 50.368390518716566,
+            "actual_points": 71
+        },
+        {
+            "name": "Virgil",
+            "position": "DEF",
+            "arima": 47.26700172502383,
+            "lstm": 43.07387511355782,
+            "actual_points": 50
+        },
+        {
+            "name": "Mac Allister",
+            "position": "MID",
+            "arima": 28.70778652837077,
+            "lstm": 28.851351351351354,
+            "actual_points": 27
+        },
+        {
+            "name": "Tsimikas",
+            "position": "DEF",
+            "arima": 27.57575757575757,
+            "lstm": 26.92307692307693,
+            "actual_points": 45
+        },
+        {
+            "name": "Konaté",
+            "position": "DEF",
+            "arima": 28.99999999999999,
+            "lstm": 29.58333333333333,
+            "actual_points": 30
+        },
+        {
+            "name": "Luis Díaz",
+            "position": "MID",
+            "arima": 34.24242424242423,
+            "lstm": 36.13596069722307,
+            "actual_points": 27
+        },
+        {
+            "name": "Darwin",
+            "position": "FWD",
+            "arima": 38.52941176470588,
+            "lstm": 34.27225034486212,
+            "actual_points": 31
+        },
+        {
+            "name": "Diogo J.",
+            "position": "MID",
+            "arima": 39.047619047619044,
+            "lstm": 31.875,
+            "actual_points": 31
+        },
+        {
+            "name": "Szoboszlai",
+            "position": "MID",
+            "arima": 0,
+            "lstm": 0,
+            "actual_points": 41
+        },
+        {
+            "name": "Gomez",
+            "position": "DEF",
+            "arima": 0,
+            "lstm": 0,
+            "actual_points": 20
+        }
+    ],
+    "LUT": [
+        {
+            "name": "Barkley",
+            "position": "MID",
+            "arima": 27.725999875001598,
+            "lstm": 30.31491101311744,
+            "actual_points": 27
+        },
+        {
+            "name": "Kaminski",
+            "position": "GKP",
+            "arima": 0,
+            "lstm": 0,
+            "actual_points": 27
+        },
+        {
+            "name": "Adebayo",
+            "position": "FWD",
+            "arima": 0,
+            "lstm": 0,
+            "actual_points": 26
+        },
+        {
+            "name": "Ogbene",
+            "position": "FWD",
+            "arima": 0,
+            "lstm": 0,
+            "actual_points": 26
+        },
+        {
+            "name": "Doughty",
+            "position": "DEF",
+            "arima": 0,
+            "lstm": 0,
+            "actual_points": 27
+        },
+        {
+            "name": "Brown",
+            "position": "FWD",
+            "arima": 0,
+            "lstm": 0,
+            "actual_points": 25
+        }
+    ],
+    "MCI": [
+        {
+            "name": "Ederson M.",
+            "position": "GKP",
+            "arima": 39.89098783531932,
+            "lstm": 34.881405602731455,
+            "actual_points": 21
+        },
+        {
+            "name": "Walker",
+            "position": "DEF",
+            "arima": 38.846153846153825,
+            "lstm": 36.90660268215405,
+            "actual_points": 22
+        },
+        {
+            "name": "Aké",
+            "position": "DEF",
+            "arima": 32.96610169491525,
+            "lstm": 30.106382978723403,
+            "actual_points": 26
+        },
+        {
+            "name": "Foden",
+            "position": "MID",
+            "arima": 48.217828997534795,
+            "lstm": 48.23001114422115,
+            "actual_points": 40
+        },
+        {
+            "name": "Rodrigo",
+            "position": "MID",
+            "arima": 34.27538846089807,
+            "lstm": 29.252336448598125,
+            "actual_points": 24
+        },
+        {
+            "name": "Haaland",
+            "position": "FWD",
+            "arima": 82.34484918807516,
+            "lstm": 79.8606646637447,
+            "actual_points": 67
+        },
+        {
+            "name": "Bernardo",
+            "position": "MID",
+            "arima": 33.999999999999986,
+            "lstm": 34.98178335662796,
+            "actual_points": 47
+        },
+        {
+            "name": "J.Alvarez",
+            "position": "FWD",
+            "arima": 35.83333333333333,
+            "lstm": 29.61359624065932,
+            "actual_points": 36
+        },
+        {
+            "name": "Akanji",
+            "position": "DEF",
+            "arima": 32.06896551724136,
+            "lstm": 29.130434782608702,
+            "actual_points": 27
+        },
+        {
+            "name": "Gvardiol",
+            "position": "DEF",
+            "arima": 0,
+            "lstm": 0,
+            "actual_points": 23
+        }
+    ],
+    "MUN": [
+        {
+            "name": "Eriksen",
+            "position": "MID",
+            "arima": 36.95652173913046,
+            "lstm": 37.395392195672805,
+            "actual_points": 28
+        },
+        {
+            "name": "Maguire",
+            "position": "DEF",
+            "arima": 30.142295937050264,
+            "lstm": 32.76594347188848,
+            "actual_points": 36
+        },
+        {
+            "name": "Rashford",
+            "position": "MID",
+            "arima": 46.00503153728198,
+            "lstm": 45.390245851926416,
+            "actual_points": 22
+        },
+        {
+            "name": "McTominay",
+            "position": "MID",
+            "arima": 24.841269841269817,
+            "lstm": 27.15,
+            "actual_points": 41
+        },
+        {
+            "name": "Lindelof",
+            "position": "DEF",
+            "arima": 29.984571264041023,
+            "lstm": 31.756460359559984,
+            "actual_points": 40
+        },
+        {
+            "name": "Martial",
+            "position": "FWD",
+            "arima": 43.4579439252336,
+            "lstm": 44.24854567494951,
+            "actual_points": 21
+        },
+        {
+            "name": "Evans",
+            "position": "DEF",
+            "arima": 30.847457627118647,
+            "lstm": 31.755319148936177,
+            "actual_points": 30
+        },
+        {
+            "name": "B.Fernandes",
+            "position": "MID",
+            "arima": 44.23256629293575,
+            "lstm": 35.0,
+            "actual_points": 34
+        },
+        {
+            "name": "Dalot",
+            "position": "DEF",
+            "arima": 34.66666666666666,
+            "lstm": 33.84948440719114,
+            "actual_points": 45
+        },
+        {
+            "name": "Garnacho",
+            "position": "MID",
+            "arima": 19.090909090909086,
+            "lstm": 22.647058823529417,
+            "actual_points": 28
+        },
+        {
+            "name": "Onana",
+            "position": "GKP",
+            "arima": 0,
+            "lstm": 0,
+            "actual_points": 46
+        }
+    ],
+    "NEW": [
+        {
+            "name": "Wilson",
+            "position": "FWD",
+            "arima": 45.49999999999998,
+            "lstm": 44.48024009009586,
+            "actual_points": 47
+        },
+        {
+            "name": "Lascelles",
+            "position": "DEF",
+            "arima": 20.074341959349,
+            "lstm": 28.125,
+            "actual_points": 35
+        },
+        {
+            "name": "Trippier",
+            "position": "DEF",
+            "arima": 50.890672058990845,
+            "lstm": 38.99999999999999,
+            "actual_points": 41
+        },
+        {
+            "name": "Schär",
+            "position": "DEF",
+            "arima": 35.540168482403374,
+            "lstm": 30.68627450980393,
+            "actual_points": 30
+        },
+        {
+            "name": "Longstaff",
+            "position": "MID",
+            "arima": 22.631578947368435,
+            "lstm": 25.604395604395606,
+            "actual_points": 33
+        },
+        {
+            "name": "Burn",
+            "position": "DEF",
+            "arima": 28.88000000000002,
+            "lstm": 29.1,
+            "actual_points": 48
+        },
+        {
+            "name": "Joelinton",
+            "position": "MID",
+            "arima": 25.547445255474447,
+            "lstm": 26.19266055045871,
+            "actual_points": 34
+        },
+        {
+            "name": "Pope",
+            "position": "GKP",
+            "arima": 40.74667528007487,
+            "lstm": 35.64814814814816,
+            "actual_points": 47
+        },
+        {
+            "name": "Gordon",
+            "position": "MID",
+            "arima": 26.46351626062554,
+            "lstm": 26.538461538461537,
+            "actual_points": 54
+        },
+        {
+            "name": "Anderson",
+            "position": "MID",
+            "arima": 10.952380948507942,
+            "lstm": 17.5,
+            "actual_points": 26
+        },
+        {
+            "name": "Bruno G.",
+            "position": "MID",
+            "arima": 34.90196078431374,
+            "lstm": 36.16595258686998,
+            "actual_points": 26
+        },
+        {
+            "name": "Almirón",
+            "position": "MID",
+            "arima": 44.46576424315883,
+            "lstm": 38.38766222446415,
+            "actual_points": 31
+        },
+        {
+            "name": "Isak",
+            "position": "FWD",
+            "arima": 47.82608695652173,
+            "lstm": 45.71092127805754,
+            "actual_points": 42
+        }
+    ],
+    "NFO": [
+        {
+            "name": "Wood",
+            "position": "FWD",
+            "arima": 33.20143007975859,
+            "lstm": 33.46153846153846,
+            "actual_points": 35
+        },
+        {
+            "name": "Gibbs-White",
+            "position": "MID",
+            "arima": 33.3914704590111,
+            "lstm": 25.91549295774648,
+            "actual_points": 35
+        },
+        {
+            "name": "Elanga",
+            "position": "MID",
+            "arima": 20.555052088011777,
+            "lstm": 24.705882352941174,
+            "actual_points": 42
+        },
+        {
+            "name": "Mangala",
+            "position": "MID",
+            "arima": 18.484848484848474,
+            "lstm": 23.846153846153843,
+            "actual_points": 24
+        },
+        {
+            "name": "Awoniyi",
+            "position": "FWD",
+            "arima": 38.076923076923066,
+            "lstm": 29.536718696057243,
+            "actual_points": 42
+        },
+        {
+            "name": "Toffolo",
+            "position": "DEF",
+            "arima": 17.499999999999996,
+            "lstm": 21.5625,
+            "actual_points": 29
+        },
+        {
+            "name": "Turner",
+            "position": "GKP",
+            "arima": 0,
+            "lstm": 0,
+            "actual_points": 27
+        }
+    ],
+    "SHU": [
+        {
+            "name": "Norwood",
+            "position": "MID",
+            "arima": 17.936844563309485,
+            "lstm": 26.016949152542377,
+            "actual_points": 22
+        },
+        {
+            "name": "Archer",
+            "position": "FWD",
+            "arima": 18.666666666666668,
+            "lstm": 22.5,
+            "actual_points": 31
+        },
+        {
+            "name": "McAtee",
+            "position": "MID",
+            "arima": 0,
+            "lstm": 0,
+            "actual_points": 28
+        },
+        {
+            "name": "Foderingham",
+            "position": "GKP",
+            "arima": 0,
+            "lstm": 0,
+            "actual_points": 29
+        },
+        {
+            "name": "Hamer",
+            "position": "MID",
+            "arima": 0,
+            "lstm": 0,
+            "actual_points": 24
+        }
+    ],
+    "TOT": [
+        {
+            "name": "Maddison",
+            "position": "MID",
+            "arima": 43.45199193404002,
+            "lstm": 41.84985545787569,
+            "actual_points": 54
+        },
+        {
+            "name": "Richarlison",
+            "position": "MID",
+            "arima": 24.730393523097234,
+            "lstm": 41.023920497967616,
+            "actual_points": 50
+        },
+        {
+            "name": "Romero",
+            "position": "DEF",
+            "arima": 30.78431372549019,
+            "lstm": 28.000000000000004,
+            "actual_points": 33
+        },
+        {
+            "name": "Kulusevski",
+            "position": "MID",
+            "arima": 38.10591703838067,
+            "lstm": 40.311894700939696,
+            "actual_points": 47
+        },
+        {
+            "name": "Johnson",
+            "position": "MID",
+            "arima": 29.523809523809522,
+            "lstm": 29.793254855643724,
+            "actual_points": 36
+        },
+        {
+            "name": "Son",
+            "position": "MID",
+            "arima": 47.441860465116285,
+            "lstm": 35.14705882352941,
+            "actual_points": 68
+        },
+        {
+            "name": "Sarr",
+            "position": "MID",
+            "arima": 19.41176470588235,
+            "lstm": 23.461538461538463,
+            "actual_points": 26
+        },
+        {
+            "name": "Pedro Porro",
+            "position": "DEF",
+            "arima": 40.06981868816861,
+            "lstm": 36.78408412662389,
+            "actual_points": 38
+        },
+        {
+            "name": "Udogie",
+            "position": "DEF",
+            "arima": 0,
+            "lstm": 0,
+            "actual_points": 20
+        },
+        {
+            "name": "Vicario",
+            "position": "GKP",
+            "arima": 0,
+            "lstm": 0,
+            "actual_points": 30
+        }
+    ],
+    "WHU": [
+        {
+            "name": "Antonio",
+            "position": "FWD",
+            "arima": 37.133333333333375,
+            "lstm": 40.056471235028404,
+            "actual_points": 28
+        },
+        {
+            "name": "Ward-Prowse",
+            "position": "MID",
+            "arima": 38.36252643752303,
+            "lstm": 37.55406985210736,
+            "actual_points": 36
+        },
+        {
+            "name": "Zouma",
+            "position": "DEF",
+            "arima": 32.86764705882351,
+            "lstm": 31.11111111111111,
+            "actual_points": 26
+        },
+        {
+            "name": "Emerson",
+            "position": "DEF",
+            "arima": 18.18181818181818,
+            "lstm": 23.636363636363637,
+            "actual_points": 24
+        },
+        {
+            "name": "Bowen",
+            "position": "MID",
+            "arima": 46.63055551140914,
+            "lstm": 35.98039215686275,
+            "actual_points": 54
+        },
+        {
+            "name": "Areola",
+            "position": "GKP",
+            "arima": 32.272727272727266,
+            "lstm": 31.85714285714286,
+            "actual_points": 29
+        },
+        {
+            "name": "L.Paquetá",
+            "position": "MID",
+            "arima": 34.84848484848484,
+            "lstm": 36.19703479976911,
+            "actual_points": 40
+        },
+        {
+            "name": "Coufal",
+            "position": "DEF",
+            "arima": 0,
+            "lstm": 0,
+            "actual_points": 23
+        },
+        {
+            "name": "Souček",
+            "position": "MID",
+            "arima": 0,
+            "lstm": 0,
+            "actual_points": 31
+        },
+        {
+            "name": "Kudus",
+            "position": "MID",
+            "arima": 0,
+            "lstm": 0,
+            "actual_points": 62
+        }
+    ],
+    "WOL": [
+        {
+            "name": "Lemina",
+            "position": "MID",
+            "arima": 19.275428567185095,
+            "lstm": 24.91071428571428,
+            "actual_points": 37
+        },
+        {
+            "name": "José Sá",
+            "position": "GKP",
+            "arima": 41.83898560558877,
+            "lstm": 34.75000000000001,
+            "actual_points": 21
+        },
+        {
+            "name": "Toti",
+            "position": "DEF",
+            "arima": 21.538461538461537,
+            "lstm": 26.000000000000004,
+            "actual_points": 25
+        },
+        {
+            "name": "Hee Chan",
+            "position": "MID",
+            "arima": 52.94407398915305,
+            "lstm": 26.071428571428573,
+            "actual_points": 42
+        },
+        {
+            "name": "Cunha",
+            "position": "FWD",
+            "arima": 24.8,
+            "lstm": 24.750000000000004,
+            "actual_points": 45
+        },
+        {
+            "name": "Sarabia",
+            "position": "MID",
+            "arima": 17.43252271114496,
+            "lstm": 20.500000000000004,
+            "actual_points": 36
+        }
+    ]
+}

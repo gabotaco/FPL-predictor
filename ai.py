@@ -19,7 +19,7 @@ def do_arima(ts, pred_by):
         raise Exception("Too many ARIMA calls")
 
     if len(pred_by['games']) == 0:
-        return [0, 0]
+        return 0, 0
 
     has_non_zero = False
     has_same_num = ts[0]
@@ -34,10 +34,10 @@ def do_arima(ts, pred_by):
             has_same_num = False
 
     if not has_non_zero:
-        return [0, 0]
+        return 0, 0
 
     if has_same_num is not False:
-        return [has_same_num, has_same_num]
+        return has_same_num, has_same_num
 
     try:
         arima = auto_arima(ts, seasonal=False, error_action="ignore")
@@ -53,7 +53,7 @@ def do_arima(ts, pred_by):
         return do_arima(ts, pred_by)
 
     arima_counter = 0
-    return [overall, next_points]
+    return overall, next_points
 
 
 def do_lstm(player_data, pred_by):
@@ -62,7 +62,7 @@ def do_lstm(player_data, pred_by):
         raise Exception("Too many LSTM calls")
 
     if len(pred_by['games']) == 0:
-        return [0, 0]
+        return 0, 0
 
     X = []
     y = []
@@ -151,4 +151,4 @@ def do_lstm(player_data, pred_by):
         return do_lstm(player_data, pred_by)
 
     lstm_counter = 0
-    return [overall, next_points]
+    return overall, next_points
