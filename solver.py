@@ -21,12 +21,11 @@ FWD = header[0].index("FWD")
 HEALTH = header[0].index("Health")
 
 
-def apply_player_health(player):
-    player[PP] *= player[HEALTH]
-    return player
-
-
 def make_team(data):
+    def apply_player_health(player):
+        player[PP] *= player[HEALTH]
+        return player
+
     players = list(map(apply_player_health, data))
 
     m = GEKKO()
@@ -53,4 +52,18 @@ def make_team(data):
 
     m.solve(disp=False)
 
-    return [players[i] for i in range(len(players)) if x[i][0] == 1]
+    return [players[i] for i in range(len(players)) if x[i].value[0] == 1]
+
+
+def make_calibration(players):
+    m = GEKKO()
+    arima = m.Var(value=0)
+    lstm = m.Var(value=0)
+
+    m.Minimize(sum(((players[i]['arima'] * arima)
+                    + (players[i]['lstm'] * lstm)
+                    - players[i]['actual_points']) ** 2 for i in range(len(players))))
+
+    m.solve(disp=False)
+
+    return arima.value[0], lstm.value[0]

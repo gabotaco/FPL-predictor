@@ -10,7 +10,7 @@ from dataset import get_dataset, master_data_set as header
 from game_information import TEAMS, get_team_info, CURRENT_SEASON, CURRENT_GAME_WEEK, CURRENT_SEASON_BEGINNING_ROUND, \
     SEASON_LENGTH, MIN_GAMES, MIN_SEASON_PPG, MIN_SEASON_GAME_PERCENTAGE, TEAM_WORTH, FREE_TRANSFERS, \
     PREDICT_BY_WEEKS, TRANSFER_COST
-from team_maker import make_team
+from solver import make_team
 
 CURRENT_TEAM = {"Guglielmo Vicario Vicario", "Norberto Murara Neto Neto",  # GKP
                 "William Saliba Saliba", "Thiago Emiliano da Silva T.Silva", "Pau Torres Pau",

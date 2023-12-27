@@ -5,6 +5,7 @@ from ai import do_arima, do_lstm, MAX_DIFF
 from dataset import get_dataset
 from game_information import TEAMS, CURRENT_SEASON_BEGINNING_ROUND, CURRENT_GAME_WEEK, SEASON_LENGTH, MIN_GAMES, \
     MIN_SEASON_PPG, MIN_SEASON_GAME_PERCENTAGE, CURRENT_SEASON
+from solver import make_calibration
 
 CALIBRATE_BY = 10
 
@@ -40,7 +41,8 @@ def get_player_predictions():
     global players
 
     for team in tqdm(TEAMS, desc="Teams", bar_format="{l_bar}{bar}| {remaining}"):
-        for index, player_data in enumerate(tqdm(players[team], desc=f"{team} players", bar_format="{l_bar}{bar}| {remaining}")):
+        for index, player_data in enumerate(
+                tqdm(players[team], desc=f"{team} players", bar_format="{l_bar}{bar}| {remaining}")):
             if player_data['id'] in BUGGED_PLAYERS:
                 continue
 
@@ -104,7 +106,6 @@ def get_player_predictions():
             players[team][index] = {'name': player_data['name'], 'arima': arima, 'lstm': lstm,
                                     'actual_points': actual_points}
 
-
         players[team] = [player for player in players[team] if
                          'arima' in player and 'lstm' in player and 'name' in player and 'actual_points' in player]
 
@@ -123,9 +124,11 @@ def create_calibration_file():
 
         sheet = workbook.add_worksheet(team)
 
-        sheet.write_row('H2', ["ARIMA", 0])
-        sheet.write_row('H3', ["LSTM", 0])
-        sheet.write_row('H5', ["OFF", f"=(SUM(Table{team}[PP]-Table{team}[AP]))^2"])
+        arima, lstm = make_calibration(players[team])
+
+        sheet.write_row('H2', ["ARIMA", arima])
+        sheet.write_row('H3', ["LSTM", lstm])
+        sheet.write_row('H5', ["OFF", f"=SUM(ABS(Table{team}[PP]-Table{team}[AP]))"])
         sheet.write_row('H7', ["AVG", f"=AVERAGE(Table{team}[DIFF])/{CALIBRATE_BY}"])
 
         columns = list(map(lambda x: {'header': x}, HEADERS))
