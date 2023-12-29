@@ -13,42 +13,43 @@ from game_information import TEAMS, get_team_info, CURRENT_SEASON, CURRENT_GAME_
 from solver import make_team
 
 CURRENT_TEAM = {"Guglielmo Vicario Vicario", "Norberto Murara Neto Neto",  # GKP
-                "William Saliba Saliba", "Thiago Emiliano da Silva T.Silva", "Pau Torres Pau",
-                "Trent Alexander-Arnold Alexander-Arnold", "Axel Disasi Disasi",  # DEF
-                "Jarrod Bowen Bowen", "Anthony Gordon Gordon", "Raheem Sterling Sterling", "Dejan Kulusevski Kulusevski",
-                "Moussa Diaby Diaby",  # MID
+                "William Saliba Saliba", "Thiago Emiliano da Silva T.Silva", "Vitalii Mykolenko Mykolenko",
+                "Trent Alexander-Arnold Alexander-Arnold", "Virgil van Dijk Virgil",  # DEF
+                "Jarrod Bowen Bowen", "Anthony Gordon Gordon", "Raheem Sterling Sterling",
+                "Dejan Kulusevski Kulusevski", "Cole Palmer Palmer",  # MID
                 "Erling Haaland Haaland", "Gabriel Fernando de Jesus G.Jesus", "Matheus Santos Carneiro Da Cunha Cunha"
                 # FWD
                 }
 
 INJURIES = {
-    "Raheem Sterling Sterling": (PREDICT_BY_WEEKS - 1)/PREDICT_BY_WEEKS,
-    "Erling Haaland Haaland": 0.5,
-    "Pau Torres Pau": 0.5,
-    "Serge Aurier Aurier": 0.5
+    "Serge Aurier Aurier": 0.25,
+    "Kaoru Mitoma Mitoma": 1 / 5,
+    "Anthony Martial Martial": 0.25,
+    "Dejan Kulusevski Kulusevski": 4 / 5,
+    "Erling Haaland Haaland": 4 / 5,
 }
 
-RATIOS = {  # Last calibrated 12/25/2023
-    'ARS': {'ARIMA': 0.50553623655838, 'LSTM': 0.454345051004099},
-    'AVL': {'ARIMA': 0.564641648682363, 'LSTM': 0.527483353195708},
-    'BOU': {'ARIMA': 0.638059753084607, 'LSTM': 0.644833776984598},
-    'BRE': {'ARIMA': 0.566676989047784, 'LSTM': 0.578795017463655},
-    'BHA': {'ARIMA': 0.494772823273238, 'LSTM': 0.474857204009663},
-    'BUR': {'ARIMA': 0.539114207104266, 'LSTM': 0.594334221046895},
-    'CHE': {'ARIMA': 0.532672846260096, 'LSTM': 0.492063759425385},
-    'CRY': {'ARIMA': 0.495909345857948, 'LSTM': 0.501211903709602},
-    'EVE': {'ARIMA': 0.650140579987114, 'LSTM': 0.674000890152615},
-    'FUL': {'ARIMA': 0.51315899132696, 'LSTM': 0.563898749896529},
-    'LIV': {'ARIMA': 0.546434991971343, 'LSTM': 0.511753158173029},
-    'LUT': {'ARIMA': 0.705556634105279, 'LSTM': 0.76230898101798},
-    'MCI': {'ARIMA': 0.46634960088672, 'LSTM': 0.394751272555966},
-    'MUN': {'ARIMA': 0.500722939580096, 'LSTM': 0.501046243826412},
-    'NEW': {'ARIMA': 0.579873687250869, 'LSTM': 0.551905385559895},
-    'NFO': {'ARIMA': 0.639384593553014, 'LSTM': 0.633975523245651},
-    'SHU': {'ARIMA': 0.475989081159247, 'LSTM': 0.601000600735684},
-    'TOT': {'ARIMA': 0.555900713040891, 'LSTM': 0.545324532147467},
-    'WHU': {'ARIMA': 0.539361405541248, 'LSTM': 0.510878217734147},
-    'WOL': {'ARIMA': 0.614508560562473, 'LSTM': 0.523143166742825}}
+RATIOS = {  # Last calibrated 12/29/2023
+    'ARS': {'ARIMA': 0.237530449264455, 'LSTM': 0.690028650213685},
+    'AVL': {'ARIMA': 1.1297162979844, 'LSTM': -0.180558127193597},
+    'BOU': {'ARIMA': 1.27521040745968, 'LSTM': 0.0270238737037217},
+    'BRE': {'ARIMA': 0.00699822610208227, 'LSTM': 1.09081604631274},
+    'BHA': {'ARIMA': -3.31746633610644, 'LSTM': 4.59067398967378},
+    'BUR': {'ARIMA': 1.16040349317007, 'LSTM': -0.0801923610598015},
+    'CHE': {'ARIMA': 1.24503031012731, 'LSTM': -0.356096172339139},
+    'CRY': {'ARIMA': 0.860044663534293, 'LSTM': 0.0535198576282169},
+    'EVE': {'ARIMA': -0.164337201977144, 'LSTM': 1.4147003785559},
+    'FUL': {'ARIMA': 0.461887045187409, 'LSTM': 0.616598348916271},
+    'LIV': {'ARIMA': 1.68781852406853, 'LSTM': -0.746234164074933},
+    'LUT': {'ARIMA': 0, 'LSTM': 0},
+    'MCI': {'ARIMA': 1.58686042253117, 'LSTM': -0.810232557935873},
+    'MUN': {'ARIMA': -3.40606604697671, 'LSTM': 4.46172451858966},
+    'NEW': {'ARIMA': 2.49535898946795, 'LSTM': -1.89638261864024},
+    'NFO': {'ARIMA': 1.03744583433412, 'LSTM': 0.501001644228955},
+    'SHU': {'ARIMA': 1, 'LSTM': 0.67777777778},
+    'TOT': {'ARIMA': -0.0655595252049399, 'LSTM': 1.26620361679897},
+    'WHU': {'ARIMA': 0.0500475252044838, 'LSTM': 1.10336274307635},
+    'WOL': {'ARIMA': 0.499073834182698, 'LSTM': 1.05015959872244}}
 
 PROCESS_ALL_PLAYERS = False
 BUGGED_PLAYERS = []
@@ -58,7 +59,11 @@ ID = header[0].index('ID')
 PP = header[0].index('PP')
 HEALTH = header[0].index('Health')
 NEXT = header[0].index('NEXT')
+PREV = header[0].index('PREV')
 SELECTED = header[0].index('Selected')
+FIRST_NAME = header[0].index('First Name')
+SURNAME = header[0].index('Surname')
+WEB_NAME = header[0].index('Web Name')
 
 master_data_set = []
 deleted_members = []
@@ -109,6 +114,21 @@ def make_training_set():
             master_data_set = json.load(file)
 
         print("Loaded predictions from file")
+
+        for master in master_data_set:
+            if len(master) != len(header[0]) or master == header[0]:
+                continue
+
+            player_name = f"{master[FIRST_NAME]} {master[SURNAME]} {master[WEB_NAME]}"
+            if player_name in INJURIES:
+                master[HEALTH] = INJURIES[player_name]
+            else:
+                master[HEALTH] = 1
+            if player_name in CURRENT_TEAM:
+                master[PREV] = 1
+            else:
+                master[PREV] = 0
+
         make_prediction_file()
         return
 
@@ -145,7 +165,7 @@ def make_training_set():
                 total_games < MIN_GAMES or season_sum < MIN_SEASON_PPG * num_games or num_games < (
                 SEASON_LENGTH if CURRENT_GAME_WEEK == 1 else CURRENT_GAME_WEEK - 1) * MIN_SEASON_GAME_PERCENTAGE or len(
             predict_by[player_data['team']][
-                'games']) < 1 or total_games < 2) and player_name not in CURRENT_TEAM:
+                'games']) < 1 or total_games < 2 or sum(ts[-PREDICT_BY_WEEKS:]) < PREDICT_BY_WEEKS * MIN_SEASON_PPG) and player_name not in CURRENT_TEAM:
             continue
 
         if season_sum <= 0 or len(predict_by[player_data['team']]['games']) == 0:

@@ -60,8 +60,8 @@ def make_calibration(players):
     arima = m.Var(value=0)
     lstm = m.Var(value=0)
 
-    m.Minimize(sum(((players[i]['arima'] * arima)
-                    + (players[i]['lstm'] * lstm)
+    m.Minimize(sum((((players[i]['arima'] * arima)
+                    + (players[i]['lstm'] * lstm))
                     - players[i]['actual_points']) ** 2 for i in range(len(players))))
 
     m.solve(disp=False)
