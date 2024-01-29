@@ -43,7 +43,8 @@ def do_arima(ts, pred_by):
         arima = auto_arima(ts, seasonal=False, error_action="ignore")
         pred = arima.predict(len(pred_by['games']))
     except:
-        pred = [RETRY_POINT] * len(pred_by['games'])
+        arima_counter += 1
+        return do_arima(ts, pred_by)
 
     overall = sum(pred)
     next_points = sum(pred[:pred_by['next']])
@@ -141,7 +142,8 @@ def do_lstm(player_data, pred_by):
 
         predictions = (np.array(predictions) * train_std) + train_mean
     except:
-        predictions = [RETRY_POINT] * len(pred_by['games'])
+        lstm_counter += 1
+        return do_lstm(player_data, pred_by)
 
     overall = sum(predictions)
     next_points = sum(predictions[:pred_by['next']])

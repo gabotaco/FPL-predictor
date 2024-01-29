@@ -17,44 +17,40 @@ CURRENT_TEAM = {"Guglielmo Vicario Vicario", "Norberto Murara Neto Neto",  # GKP
                 "Trent Alexander-Arnold Alexander-Arnold", "Virgil van Dijk Virgil",  # DEF
                 "Jarrod Bowen Bowen", "Anthony Gordon Gordon", "Raheem Sterling Sterling",
                 "Dejan Kulusevski Kulusevski", "Cole Palmer Palmer",  # MID
-                "Erling Haaland Haaland", "Gabriel Fernando de Jesus G.Jesus", "Matheus Santos Carneiro Da Cunha Cunha"
+                "Erling Haaland Haaland", "Dominic Solanke Solanke", "Matheus Santos Carneiro Da Cunha Cunha"
                 # FWD
                 }
 
 INJURIES = {
-    "James Maddison Maddison": 0,
     "Son Heung-min Son": 0,
-    "Anthony Elanga Elanga": 0.75,
-    "Anthony Martial Martial": 0.5,
+    "Anthony Elanga Elanga": 0.5,
+    "Anthony Martial Martial": 0,
     "Kaoru Mitoma Mitoma": 0,
     "Mohamed Salah Salah": 0,
-    "Trent Alexander-Arnold Alexander-Arnold": 0,
-    "Jarrod Bowen Bowen": 0.5,
-    "Gabriel Fernando de Jesus G.Jesus": 0.75,
-    "Erling Haaland Haaland": 0.5
+    "Erling Haaland Haaland": 0.75
 }
 
 RATIOS = {  # Last calibrated 1/11/2024
-    'ARS': {'ARIMA': 0.445881434, 'LSTM': 0.40011006787},
-    'AVL': {'ARIMA': 0.74821745661, 'LSTM': 0.28757002086},
-    'BOU': {'ARIMA': 1.055756355, 'LSTM': 0.35826665379},
-    'BRE': {'ARIMA': 0.49186478397, 'LSTM': 0.61091602161},
-    'BHA': {'ARIMA': -0.53622787597, 'LSTM': 1.4929815334},
-    'BUR': {'ARIMA': 2.6176020575, 'LSTM': -1.3637891218},
-    'CHE': {'ARIMA': 1.4398626758, 'LSTM': -0.39291295655},
-    'CRY': {'ARIMA': 0.23620339078, 'LSTM': 0.73156144816},
-    'EVE': {'ARIMA': -0.13698997612, 'LSTM': 1.3306443888},
-    'FUL': {'ARIMA': -0.1234122571, 'LSTM': 1.2329229543},
-    'LIV': {'ARIMA': 0.59564761993, 'LSTM': 0.40857060676},
-    'LUT': {'ARIMA': 0.59340838634, 'LSTM': 0.62038195761},
-    'MCI': {'ARIMA': 0.57792550973, 'LSTM': 0.4098376575},
-    'MUN': {'ARIMA': -1.5552767022, 'LSTM': 2.4221926577},
-    'NEW': {'ARIMA': 0.44756675524, 'LSTM': 0.59728637609},
-    'NFO': {'ARIMA': 1.6025663455, 'LSTM': -0.11727432567},
-    'SHU': {'ARIMA': 2, 'LSTM': -0.10887337986},
-    'TOT': {'ARIMA': -0.16849249541, 'LSTM': 1.4008001344},
-    'WHU': {'ARIMA': -0.79462426135, 'LSTM': 1.9364468048},
-    'WOL': {'ARIMA': 0.20276413096, 'LSTM': 1.1400037546}}
+    'ARS': {'ARIMA': 0.21826994789, 'LSTM': 0.75153212894},
+    'AVL': {'ARIMA': 0.37692962486, 'LSTM': 0.59977633576},
+    'BOU': {'ARIMA': 1.5779988706, 'LSTM': -0.098174407313},
+    'BRE': {'ARIMA': 0.47915815817, 'LSTM': 0.69827615878},
+    'BHA': {'ARIMA': -0.74124816984, 'LSTM': 1.7379561193},
+    'BUR': {'ARIMA': 2.7293205147, 'LSTM': -1.4661440799},
+    'CHE': {'ARIMA': 1.9449489191, 'LSTM': -0.74969786096},
+    'CRY': {'ARIMA': 0.47512357607, 'LSTM': 0.53722467251},
+    'EVE': {'ARIMA': -1.4541954003, 'LSTM': 2.7063729796},
+    'FUL': {'ARIMA': -0.1490165861, 'LSTM': 1.1361794696},
+    'LIV': {'ARIMA': 0.69318436083, 'LSTM': 0.39497740712},
+    'LUT': {'ARIMA': 0.59658304403, 'LSTM': 0.61632488215},
+    'MCI': {'ARIMA': -0.83559296747, 'LSTM': 1.8898253461},
+    'MUN': {'ARIMA': -2.8845145766, 'LSTM': 3.9875451169},
+    'NEW': {'ARIMA': 0.7268896727, 'LSTM': 0.22059993467},
+    'NFO': {'ARIMA': 1.5839325051, 'LSTM': -0.19647165579},
+    'SHU': {'ARIMA': 0.1995385065, 'LSTM': 0.97393985011},
+    'TOT': {'ARIMA': -0.44831176503, 'LSTM': 1.6838219624},
+    'WHU': {'ARIMA': -0.93476179454, 'LSTM': 2.1053028029},
+    'WOL': {'ARIMA': 0.13512565558, 'LSTM': 1.2625900208}}
 
 PROCESS_ALL_PLAYERS = False
 BUGGED_PLAYERS = []
@@ -72,6 +68,7 @@ WEB_NAME = header[0].index('Web Name')
 
 master_data_set = []
 deleted_members = []
+to_retry = []
 points_data_set = {}
 predict_by = {}
 
@@ -113,6 +110,8 @@ def get_predict_by():
 def make_training_set():
     global master_data_set
 
+    found_previous = 0
+
     filename = f"./predictedData/{CURRENT_SEASON}/predictedData{CURRENT_GAME_WEEK}.json"
     if os.path.exists(filename):
         with open(filename, 'r') as file:
@@ -131,15 +130,18 @@ def make_training_set():
                 master[HEALTH] = 1
             if player_name in CURRENT_TEAM:
                 master[PREV] = 1
+                found_previous += 1
             else:
                 master[PREV] = 0
 
-        make_prediction_file()
-        return
-
-    found_previous = 0
+        if len(to_retry) == 0:
+            make_prediction_file()
+            return
 
     for _, player_data in tqdm(points_data_set.items()):
+        if len(to_retry) > 0 and player_data['id'] not in to_retry:
+            continue
+
         if player_data['id'] in deleted_members or player_data['id'] in BUGGED_PLAYERS:
             continue
 
