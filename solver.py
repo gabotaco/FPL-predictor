@@ -57,8 +57,8 @@ def make_team(data):
 
 def make_calibration(players):
     m = GEKKO()
-    arima = m.Var(value=0)
-    lstm = m.Var(value=0)
+    arima = m.Var(value=0, lb=0)
+    lstm = m.Var(value=0, lb=0)
 
     m.Minimize(sum((((players[i]['arima'] * arima)
                     + (players[i]['lstm'] * lstm))
