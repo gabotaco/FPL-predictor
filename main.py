@@ -13,41 +13,42 @@ from game_information import TEAMS, get_team_info, CURRENT_SEASON, CURRENT_GAME_
 from solver import make_team
 
 CURRENT_TEAM = {"Jason Steele Steele", "Norberto Murara Neto Neto",  # GKP
-                "William Saliba Saliba", "Thiago Emiliano da Silva T.Silva", "Vitalii Mykolenko Mykolenko",
-                "Trent Alexander-Arnold Alexander-Arnold", "Virgil van Dijk Virgil",  # DEF
+                "William Saliba Saliba", "Kyle Walker Walker", "Vitalii Mykolenko Mykolenko",
+                "Alfie Doughty Doughty", "Virgil van Dijk Virgil",  # DEF
                 "Jarrod Bowen Bowen", "Phil Foden Foden", "Raheem Sterling Sterling",
                 "Dejan Kulusevski Kulusevski", "Cole Palmer Palmer",  # MID
-                "Erling Haaland Haaland", "Dominic Solanke Solanke", "Matheus Santos Carneiro Da Cunha Cunha"
+                "Erling Haaland Haaland", "Dominic Solanke Solanke", "Carlton Morris Morris"
                 # FWD
                 }
 
 INJURIES = {
     "Anthony Martial Martial": 0,
-    "Mohamed Salah Salah": 0,
-    "Anthony Gordon Gordon": 0.25,
+    "Trent Alexander-Arnold Alexander-Arnold": 0,
+    "Matheus Santos Carneiro Da Cunha Cunha": 0,
+    "Thiago Emiliano da Silva T.Silva": 0,
 }
 
-RATIOS = {  # Last calibrated 2/9/2024
-    'ARS': {'ARIMA': 0.24488664244, 'LSTM': 0.72800288977},
-    'AVL': {'ARIMA': 0.40743600911, 'LSTM': 0.64289917496},
-    'BOU': {'ARIMA': 1.3157961525, 'LSTM': 0},
-    'BRE': {'ARIMA': 0.086275874947, 'LSTM': 1.0159775342},
-    'BHA': {'ARIMA': 0.00000015074136629, 'LSTM': 1.0012666009},
-    'BUR': {'ARIMA': 0, 'LSTM': 1.2429173784},
-    'CHE': {'ARIMA': 0.52511968092, 'LSTM': 0.29198919544},
-    'CRY': {'ARIMA': 0.83970050181, 'LSTM': 0.25023095319},
-    'EVE': {'ARIMA': 0, 'LSTM': 1.240967324},
-    'FUL': {'ARIMA': 0.0419315656, 'LSTM': 1.0620772791},
-    'LIV': {'ARIMA': 0, 'LSTM': 1.0462229229},
-    'LUT': {'ARIMA': 0, 'LSTM': 1.5206752504},
-    'MCI': {'ARIMA': 0.73000906417, 'LSTM': 0.26974982637},
-    'MUN': {'ARIMA': 0.095641884909, 'LSTM': 0.8220698309},
-    'NEW': {'ARIMA': 0.63607093891, 'LSTM': 0.19110868467},
-    'NFO': {'ARIMA': 0.015599781524, 'LSTM': 1.422378566},
-    'SHU': {'ARIMA': 1.0552136052, 'LSTM': 0.000000091646062457},
-    'TOT': {'ARIMA': 0.0000000013161601916, 'LSTM': 1.191105887},
-    'WHU': {'ARIMA': 0.12941428181, 'LSTM': 0.91823049996},
-    'WOL': {'ARIMA': 0.53879556149, 'LSTM': 0.82745323644}}
+RATIOS = {  # Last calibrated 2/16/2024
+    'ARS': {'ARIMA': 0.24749491537, 'LSTM': 0.83801775537},
+    'AVL': {'ARIMA': 0.51369019174, 'LSTM': 0.50571291205},
+    'BOU': {'ARIMA': 0.31294495154, 'LSTM': 0.92761336479},
+    'BRE': {'ARIMA': 0, 'LSTM': 1.0929005499},
+    'BHA': {'ARIMA': 0.00000051073801145, 'LSTM': 1.0346091872},
+    'BUR': {'ARIMA': 0.32926827918, 'LSTM': 0.76680278391},
+    'CHE': {'ARIMA': 0.91287417585, 'LSTM': 0},
+    'CRY': {'ARIMA': 0.84003107036, 'LSTM': 0.22191544606},
+    'EVE': {'ARIMA': 0.000001014187949, 'LSTM': 1.1682761421},
+    'FUL': {'ARIMA': 0.11885876598, 'LSTM': 1.0305642128},
+    'LIV': {'ARIMA': 0.00000018779959857, 'LSTM': 1.0629362156},
+    'LUT': {'ARIMA': 0.000000017486892762, 'LSTM': 1.5901574551},
+    'MCI': {'ARIMA': 0, 'LSTM': 1.1646998693},
+    'MUN': {'ARIMA': 0.00000010929809352, 'LSTM': 1.0141709756},
+    'NEW': {'ARIMA': 0.19247119562, 'LSTM': 0.70685757973},
+    'NFO': {'ARIMA': 0.000012121839028, 'LSTM': 1.3234763371},
+    'SHU': {'ARIMA': 0, 'LSTM': 1.1484349309},
+    'TOT': {'ARIMA': 0.00000033493701281, 'LSTM': 1.1990987175},
+    'WHU': {'ARIMA': 0.56944457495, 'LSTM': 0.53503408689},
+    'WOL': {'ARIMA': 0.63729371425, 'LSTM': 0.65875299036}}
 
 PROCESS_ALL_PLAYERS = False
 BUGGED_PLAYERS = []
