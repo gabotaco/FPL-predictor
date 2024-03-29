@@ -94,14 +94,10 @@ def do_lstm(player_data, pred_by):
     train_std = np.std(train_X)
 
     train_X = (train_X - train_mean) / train_std
-    train_y = (train_y - train_mean) / train_std
     val_X = (val_X - train_mean) / train_std
-    val_y = (val_y - train_mean) / train_std
 
     train_X = train_X.astype(np.double)
-    train_y = train_y.astype(np.double)
     val_X = val_X.astype(np.double)
-    val_y = val_y.astype(np.double)
 
     amount_of_features = train_X[0].shape[1]
 
@@ -122,6 +118,8 @@ def do_lstm(player_data, pred_by):
             n_hidden_layers = 2
             n_neurons = 64
             n_neurons_last_layer = 128
+        case _:
+            raise "Invalid position"
 
     try:
         es = EarlyStopping(monitor='val_loss', min_delta=0.005, mode="min", patience=5)
@@ -137,10 +135,14 @@ def do_lstm(player_data, pred_by):
             else:
                 next_points = predictions[-1]
 
-            prediction = model.predict(np.array([[[next_points, game]]]), verbose=0)[0][0]
+            standardized_pred = np.array([[[next_points, game]]])
+            standardized_pred = (standardized_pred - train_mean) / train_std
+            standardized_pred = standardized_pred.astype(np.double)
+
+            prediction = model.predict(standardized_pred, verbose=0)[0][0]
             predictions.append(prediction)
 
-        predictions = (np.array(predictions) * train_std) + train_mean
+        predictions = np.array(predictions)
     except:
         lstm_counter += 1
         return do_lstm(player_data, pred_by)
