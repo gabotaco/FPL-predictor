@@ -17,7 +17,7 @@ CURRENT_TEAM = {"David Raya Martin Raya", "José Malheiro de Sá José Sá",  # 
                 "William Saliba Saliba", "Lewis Dunk Dunk", "Max Kilman Kilman",
                 "Alfie Doughty Doughty", "Virgil van Dijk Virgil",
                 # MID
-                "Martin Ødegaard Ødegaard", "Leon Bailey Bailey", "Douglas Luiz Soares de Paulo Douglas Luiz",
+                "Martin Ødegaard Ødegaard", "Leon Bailey Bailey", "Cole Palmer Palmer",
                 "Mohamed Salah Salah", "Dominik Szoboszlai Szoboszlai",
                 # FWD
                 "Ollie Watkins Watkins", "Matheus Santos Carneiro Da Cunha Cunha", "Carlton Morris Morris"
@@ -26,37 +26,35 @@ CURRENT_TEAM = {"David Raya Martin Raya", "José Malheiro de Sá José Sá",  # 
 INJURIES = {
     "Anthony Martial Martial": 0,
     "Trent Alexander-Arnold Alexander-Arnold": 0,
-    "Gabriel Martinelli Silva Martinelli": 0.75,
     "Kyle Walker Walker": 0,
-    "Mohammed Kudus Kudus": 0.75,
-    "Gabriel dos Santos Magalhães Gabriel": 0.75,
-    "Bukayo Saka Saka": 0.75,
     "Alisson Ramses Becker A.Becker": 0,
     "Elijah Adebayo Adebayo": 0,
-    "Hwang Hee-chan Hee Chan": 0
+    "Hwang Hee-chan Hee Chan": 0,
+    "Alfie Doughty Doughty": 0.75,
+    "Ollie Watkins Watkins": 0.75,
 }
 
-RATIOS = {  # Last calibrated 3/29/2024
-    'ARS': {'ARIMA': 1.213077075, 'LSTM': 0},
-    'AVL': {'ARIMA': 1.2258041445, 'LSTM': 0},
-    'BOU': {'ARIMA': 1.0105770392, 'LSTM': 0.038411105327},
-    'BRE': {'ARIMA': 1.0661274484, 'LSTM': 0.017055558354},
-    'BHA': {'ARIMA': 0.84500314116, 'LSTM': 0.56194513209},
-    'BUR': {'ARIMA': 0.97105359054, 'LSTM': 0.00000052997583747},
-    'CHE': {'ARIMA': 0.23606259954, 'LSTM': 0.84293227985},
-    'CRY': {'ARIMA': 1.0663939121, 'LSTM': 0.000000356696374},
-    'EVE': {'ARIMA': 0.47717679658, 'LSTM': 0.49376332174},
-    'FUL': {'ARIMA': 0.0000014566941389, 'LSTM': 0.93356486573},
-    'LIV': {'ARIMA': 0, 'LSTM': 1.1442286389},
-    'LUT': {'ARIMA': 1.6612744473, 'LSTM': 0},
-    'MCI': {'ARIMA': 1.012050439, 'LSTM': 0.000000081663099137},
-    'MUN': {'ARIMA': 1.059761276, 'LSTM': 0.00000024578214133},
-    'NEW': {'ARIMA': 0.00000016455672368, 'LSTM': 1.0953524008},
-    'NFO': {'ARIMA': 0.070528343775, 'LSTM': 1.401388707},
-    'SHU': {'ARIMA': 1.2353290698, 'LSTM': 0},
-    'TOT': {'ARIMA': 0, 'LSTM': 1.1677203476},
-    'WHU': {'ARIMA': 0, 'LSTM': 0.87641804677},
-    'WOL': {'ARIMA': 1.0779203359, 'LSTM': 0.12151303337}}
+RATIOS = {  # Last calibrated 4/1/24
+    'ARS': {'ARIMA': 1.24952277, 'LSTM': 0},
+    'AVL': {'ARIMA': 1.0497116822, 'LSTM': 0},
+    'BOU': {'ARIMA': 0.73212166937, 'LSTM': 0.32333821556},
+    'BRE': {'ARIMA': 0.31500871139, 'LSTM': 0.69303653086},
+    'BHA': {'ARIMA': 1.0365939451, 'LSTM': 0.41151180892},
+    'BUR': {'ARIMA': 0.92036449905, 'LSTM': 0},
+    'CHE': {'ARIMA': 1.0440330531, 'LSTM': 0},
+    'CRY': {'ARIMA': 0.98208809375, 'LSTM': 0},
+    'EVE': {'ARIMA': 0.91329834889, 'LSTM': 0.000000025046935998},
+    'FUL': {'ARIMA': 0.45111345057, 'LSTM': 0.54341820242},
+    'LIV': {'ARIMA': 0.79821689996, 'LSTM': 0.31934712463},
+    'LUT': {'ARIMA': 1.6720666579, 'LSTM': 0},
+    'MCI': {'ARIMA': 0.97524566428, 'LSTM': 0},
+    'MUN': {'ARIMA': 1.1196337109, 'LSTM': 0.000000039613921518},
+    'NEW': {'ARIMA': 0.177091677, 'LSTM': 0.95791349835},
+    'NFO': {'ARIMA': 0.000000040544339725, 'LSTM': 1.6421948031},
+    'SHU': {'ARIMA': 0.13589505939, 'LSTM': 1.1692030086},
+    'TOT': {'ARIMA': 1.0441380022, 'LSTM': 0},
+    'WHU': {'ARIMA': 5.4191537889E-10, 'LSTM': 0.93880870059},
+    'WOL': {'ARIMA': 0.6249387723, 'LSTM': 0.61251402398}}
 
 PROCESS_ALL_PLAYERS = False
 BUGGED_PLAYERS = []
@@ -303,8 +301,8 @@ def make_prediction_file():
 
     found_selected = 0
     for player in data:
-        player[PP] = f"={player[PP]}*{player[HEALTH]}"
-        player[NEXT] = f"={player[NEXT]}*{player[HEALTH]}"
+        player[PP] = f"={player[PP]}*[@Health]"
+        player[NEXT] = f"={player[NEXT]}*[@Health]"
 
         if player in best_team:
             player[SELECTED] = 1
