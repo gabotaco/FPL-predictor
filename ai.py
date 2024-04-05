@@ -123,11 +123,11 @@ def do_lstm(player_data, pred_by):
 
     try:
         es = EarlyStopping(monitor='val_loss', min_delta=0.005, mode="min", patience=5)
-        lt = LimitTrainingTime(10)
+        # lt = LimitTrainingTime(10)
         model = make_model(1, amount_of_features, n_neurons=n_neurons, n_hidden_layers=n_hidden_layers,
                            n_neurons_last_layer=n_neurons_last_layer)
         model.compile(optimizer="adam", loss='mse')
-        model.fit(x=train_X, y=train_y, validation_data=(val_X, val_y), epochs=1000, verbose=0, callbacks=[es, lt])
+        model.fit(x=train_X, y=train_y, validation_data=(val_X, val_y), epochs=1000, verbose=0, callbacks=[es])
         predictions = []
         for game in pred_by['games']:
             if len(predictions) == 0:
