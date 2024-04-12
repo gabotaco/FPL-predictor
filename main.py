@@ -17,7 +17,7 @@ CURRENT_TEAM = {"David Raya Martin Raya", "José Malheiro de Sá José Sá",  # 
                 "William Saliba Saliba", "Lewis Dunk Dunk", "Max Kilman Kilman",
                 "Alfie Doughty Doughty", "Virgil van Dijk Virgil",
                 # MID
-                "Martin Ødegaard Ødegaard", "Phil Foden Foden", "Cole Palmer Palmer",
+                "Bukayo Saka Saka", "Phil Foden Foden", "Cole Palmer Palmer",
                 "Mohamed Salah Salah", "Dominik Szoboszlai Szoboszlai",
                 # FWD
                 "Ollie Watkins Watkins", "Matheus Santos Carneiro Da Cunha Cunha", "Carlton Morris Morris"
@@ -25,35 +25,34 @@ CURRENT_TEAM = {"David Raya Martin Raya", "José Malheiro de Sá José Sá",  # 
 
 INJURIES = {
     "Anthony Martial Martial": 0,
-    "Trent Alexander-Arnold Alexander-Arnold": 0,
-    "Kyle Walker Walker": 0,
-    "Alisson Ramses Becker A.Becker": 0,
+    "Kyle Walker Walker": 0.25,
+    "Alisson Ramses Becker A.Becker": 0.5,
     "Elijah Adebayo Adebayo": 0,
-    "Hwang Hee-chan Hee Chan": 0,
-    "Ollie Watkins Watkins": 0.5,
+    "Phil Foden Foden": 0.75,
+    "Kieran Trippier Trippier": 0
 }
 
-RATIOS = {  # Last calibrated 4/5/24
-    'ARS': {'ARIMA': 0.92358790555, 'LSTM': 0.44111500697},
-    'AVL': {'ARIMA': 1.0216186829, 'LSTM': 0.023444239393},
-    'BOU': {'ARIMA': 0.40771482324, 'LSTM': 0.92311302721},
-    'BRE': {'ARIMA': 1.1252973221, 'LSTM': 0},
-    'BHA': {'ARIMA': 1.1092141402, 'LSTM': 0.33359500325},
-    'BUR': {'ARIMA': 1.0121487823, 'LSTM': 0},
-    'CHE': {'ARIMA': 1.1796110821, 'LSTM': 0},
-    'CRY': {'ARIMA': 1.1125939617, 'LSTM': 0},
-    'EVE': {'ARIMA': 0.0000040988904883, 'LSTM': 0.99402983794},
-    'FUL': {'ARIMA': 0.32836806444, 'LSTM': 0.67676003708},
-    'LIV': {'ARIMA': 0, 'LSTM': 1.0517924539},
-    'LUT': {'ARIMA': 1.6462569216, 'LSTM': 0},
-    'MCI': {'ARIMA': 0.97159830083, 'LSTM': 0},
-    'MUN': {'ARIMA': 0.90480787213, 'LSTM': 0.29900349381},
-    'NEW': {'ARIMA': 0.47167501852, 'LSTM': 0.63608450133},
-    'NFO': {'ARIMA': 0, 'LSTM': 1.6848950587},
-    'SHU': {'ARIMA': 1.2194773378, 'LSTM': 0},
-    'TOT': {'ARIMA': 1.0174664368, 'LSTM': 0.000000038032132675},
-    'WHU': {'ARIMA': 0.20537239569, 'LSTM': 0.67158744152},
-    'WOL': {'ARIMA': 0.74728881015, 'LSTM': 0.36984384089}}
+RATIOS = {  # Last calibrated 4/12/24
+    'ARS': {'ARIMA': 1.3464699502, 'LSTM': 0},
+    'AVL': {'ARIMA': 1.0863137054, 'LSTM': 0},
+    'BOU': {'ARIMA': 0.81435271331, 'LSTM': 0.23771829571},
+    'BRE': {'ARIMA': 0, 'LSTM': 1.0093664121},
+    'BHA': {'ARIMA': 1.3497896203, 'LSTM': 0},
+    'BUR': {'ARIMA': 1.0849539301, 'LSTM': 0},
+    'CHE': {'ARIMA': 1.0348698445, 'LSTM': 0},
+    'CRY': {'ARIMA': 1.1569662233, 'LSTM': 0},
+    'EVE': {'ARIMA': 0.73901283432, 'LSTM': 0.24860576505},
+    'FUL': {'ARIMA': 0.31626250551, 'LSTM': 0.66981532933},
+    'LIV': {'ARIMA': 0.70085256835, 'LSTM': 0.34241113443},
+    'LUT': {'ARIMA': 1.4355863831, 'LSTM': 0},
+    'MCI': {'ARIMA': 0.96373688183, 'LSTM': 0},
+    'MUN': {'ARIMA': 0.58707684025, 'LSTM': 0.65263556511},
+    'NEW': {'ARIMA': 0.28598763201, 'LSTM': 0.99370377297},
+    'NFO': {'ARIMA': 0, 'LSTM': 1.8716262668},
+    'SHU': {'ARIMA': 1.2882597956, 'LSTM': 0},
+    'TOT': {'ARIMA': 1.0329649556, 'LSTM': 0},
+    'WHU': {'ARIMA': 0.90282800161, 'LSTM': 0},
+    'WOL': {'ARIMA': 0.5707126841, 'LSTM': 0.47756716957}}
 
 PROCESS_ALL_PLAYERS = False
 BUGGED_PLAYERS = []
@@ -178,13 +177,23 @@ def make_training_set():
                 'games']) < 1 or total_games < 2 or sum(ts[-PREDICT_BY_WEEKS:]) < PREDICT_BY_WEEKS * MIN_SEASON_PPG) and player_name not in CURRENT_TEAM:
             continue
 
+        arima_ratio = RATIOS[player_data['team']]['ARIMA']
+        lstm_ratio = RATIOS[player_data['team']]['LSTM']
+
         if season_sum <= 0 or len(predict_by[player_data['team']]['games']) == 0:
             arima_overall, arima_next = 0, 0
             lstm_overall, lstm_next = 0, 0
         else:
             try:
-                arima_overall, arima_next = do_arima(ts, predict_by[player_data['team']])
-                lstm_overall, lstm_next = do_lstm(player_data, predict_by[player_data['team']])
+                if arima_ratio > 0:
+                    arima_overall, arima_next = do_arima(ts, predict_by[player_data['team']])
+                else:
+                    arima_overall, arima_next = 0, 0
+
+                if lstm_ratio > 0:
+                    lstm_overall, lstm_next = do_lstm(player_data, predict_by[player_data['team']])
+                else:
+                    lstm_overall, lstm_next = 0, 0
             except:
                 BUGGED_PLAYERS.append(player_data['id'])
                 continue
@@ -198,9 +207,6 @@ def make_training_set():
             p = 0
             next_p = 0
         else:
-            arima_ratio = RATIOS[player_data['team']]['ARIMA']
-            lstm_ratio = RATIOS[player_data['team']]['LSTM']
-
             p = (arima_overall * arima_ratio) + (lstm_overall * lstm_ratio)
             next_p = (arima_next * arima_ratio) + (lstm_next * lstm_ratio)
 
