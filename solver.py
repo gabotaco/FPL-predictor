@@ -28,7 +28,7 @@ def make_team(data):
 
     players = list(map(apply_player_health, data))
 
-    m = GEKKO()
+    m = GEKKO(remote=False)
     m.options.SOLVER = 1
 
     x = [m.Var(lb=0, ub=1, integer=True) for _ in players]
@@ -56,7 +56,7 @@ def make_team(data):
 
 
 def make_calibration(players):
-    m = GEKKO()
+    m = GEKKO(remote=False)
     arima = m.Var(value=0, lb=0)
     lstm = m.Var(value=0, lb=0)
 

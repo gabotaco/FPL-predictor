@@ -1,0 +1,1068 @@
+{
+    "ARS": [
+        {
+            "name": "Rice",
+            "arima": 29.03500559513157,
+            "lstm": 26.32237328694273,
+            "actual_points": 61
+        },
+        {
+            "name": "G.Jesus",
+            "arima": 40.65359477124182,
+            "lstm": 41.91126286161362,
+            "actual_points": 28
+        },
+        {
+            "name": "Zinchenko",
+            "arima": 34.13461538461537,
+            "lstm": 32.377313609779705,
+            "actual_points": 35
+        },
+        {
+            "name": "Saka",
+            "arima": 52.8554668571054,
+            "lstm": 40.735432935355526,
+            "actual_points": 79
+        },
+        {
+            "name": "Trossard",
+            "arima": 39.07834184242537,
+            "lstm": 39.701344763971285,
+            "actual_points": 43
+        },
+        {
+            "name": "Havertz",
+            "arima": 31.759259259259274,
+            "lstm": 33.16053911073135,
+            "actual_points": 87
+        },
+        {
+            "name": "Ødegaard",
+            "arima": 45.445544554455466,
+            "lstm": 46.96633889568332,
+            "actual_points": 69
+        },
+        {
+            "name": "Raya",
+            "arima": 41.16883116883116,
+            "lstm": 39.98962995395265,
+            "actual_points": 46
+        },
+        {
+            "name": "Saliba",
+            "arima": 41.316921611814955,
+            "lstm": 41.807233519212204,
+            "actual_points": 54
+        },
+        {
+            "name": "White",
+            "arima": 38.793103448275865,
+            "lstm": 39.058087940930996,
+            "actual_points": 83
+        },
+        {
+            "name": "Martinelli",
+            "arima": 47.96296296296297,
+            "lstm": 37.38966688120435,
+            "actual_points": 38
+        },
+        {
+            "name": "Gabriel",
+            "arima": 38.76760138367345,
+            "lstm": 33.23571074393728,
+            "actual_points": 51
+        }
+    ],
+    "AVL": [
+        {
+            "name": "Digne",
+            "arima": 26.892872105039803,
+            "lstm": 34.51941257953937,
+            "actual_points": 25
+        },
+        {
+            "name": "Tielemans",
+            "arima": 24.507209524841258,
+            "lstm": 33.393516710385256,
+            "actual_points": 28
+        },
+        {
+            "name": "Douglas Luiz",
+            "arima": 45.96538403359159,
+            "lstm": 23.931842187521056,
+            "actual_points": 44
+        },
+        {
+            "name": "McGinn",
+            "arima": 30.608108108108112,
+            "lstm": 29.05181989625895,
+            "actual_points": 29
+        },
+        {
+            "name": "Konsa",
+            "arima": 28.391608391608393,
+            "lstm": 29.30285211046495,
+            "actual_points": 30
+        },
+        {
+            "name": "Watkins",
+            "arima": 46.587301587301575,
+            "lstm": 37.65032570853584,
+            "actual_points": 71
+        },
+        {
+            "name": "Bailey",
+            "arima": 31.80555555555554,
+            "lstm": 27.923911979356642,
+            "actual_points": 50
+        },
+        {
+            "name": "Martinez",
+            "arima": 35.614035087719316,
+            "lstm": 32.13622380229955,
+            "actual_points": 35
+        },
+        {
+            "name": "Diaby",
+            "arima": 20.145207809521228,
+            "lstm": 23.336382657071074,
+            "actual_points": 40
+        },
+        {
+            "name": "Pau",
+            "arima": 35.82723704560143,
+            "lstm": 35.616218020468814,
+            "actual_points": 23
+        }
+    ],
+    "BOU": [
+        {
+            "name": "Smith",
+            "arima": 23.265306122448973,
+            "lstm": 23.11200155511342,
+            "actual_points": 30
+        },
+        {
+            "name": "L.Cook",
+            "arima": 17.34323272677987,
+            "lstm": 15.43146386943655,
+            "actual_points": 30
+        },
+        {
+            "name": "Solanke",
+            "arima": 50.99511472948028,
+            "lstm": 26.69498900208481,
+            "actual_points": 48
+        },
+        {
+            "name": "Christie",
+            "arima": 21.153846153846146,
+            "lstm": 19.074920051720426,
+            "actual_points": 21
+        },
+        {
+            "name": "Tavernier",
+            "arima": 38.205128205128204,
+            "lstm": 39.83608951962216,
+            "actual_points": 23
+        },
+        {
+            "name": "Senesi",
+            "arima": 28.474757289452373,
+            "lstm": 20.39239055734071,
+            "actual_points": 28
+        },
+        {
+            "name": "Neto",
+            "arima": 36.7631394664378,
+            "lstm": 36.39222833996521,
+            "actual_points": 30
+        },
+        {
+            "name": "Semenyo",
+            "arima": 24.444444444444443,
+            "lstm": 23.258337666048988,
+            "actual_points": 48
+        },
+        {
+            "name": "Zabarnyi",
+            "arima": 19.629629629629633,
+            "lstm": 18.26656079272403,
+            "actual_points": 34
+        },
+        {
+            "name": "Kluivert",
+            "arima": 19.795901740556126,
+            "lstm": 34.63488583558585,
+            "actual_points": 43
+        },
+        {
+            "name": "Kerkez",
+            "arima": 20.000000000000004,
+            "lstm": 8.872658819629962,
+            "actual_points": 23
+        }
+    ],
+    "BRE": [
+        {
+            "name": "Nørgaard",
+            "arima": 29.56521739130434,
+            "lstm": 35.582440714439294,
+            "actual_points": 23
+        },
+        {
+            "name": "Pinnock",
+            "arima": 32.32876712328768,
+            "lstm": 31.915173315638533,
+            "actual_points": 21
+        },
+        {
+            "name": "Janelt",
+            "arima": 25.930830974303163,
+            "lstm": 28.30606129723516,
+            "actual_points": 20
+        },
+        {
+            "name": "Mbeumo",
+            "arima": 40.493827160493844,
+            "lstm": 32.82041756255989,
+            "actual_points": 37
+        },
+        {
+            "name": "Ajer",
+            "arima": 28.72340425531914,
+            "lstm": 25.240409843771324,
+            "actual_points": 34
+        },
+        {
+            "name": "Wissa",
+            "arima": 30.142579437177936,
+            "lstm": 37.69916427819922,
+            "actual_points": 42
+        },
+        {
+            "name": "Jensen",
+            "arima": 33.50316047666124,
+            "lstm": 23.508136741759536,
+            "actual_points": 22
+        },
+        {
+            "name": "Roerslev",
+            "arima": 18.96551724137932,
+            "lstm": 18.30405520037397,
+            "actual_points": 34
+        },
+        {
+            "name": "Collins",
+            "arima": 24.516129032258053,
+            "lstm": 18.768155115512872,
+            "actual_points": 21
+        },
+        {
+            "name": "Lewis-Potter",
+            "arima": 18.73860622428394,
+            "lstm": 21.311953803698874,
+            "actual_points": 26
+        },
+        {
+            "name": "Flekken",
+            "arima": 30.319466775986225,
+            "lstm": 30.70742951998928,
+            "actual_points": 35
+        }
+    ],
+    "BHA": [
+        {
+            "name": "Dunk",
+            "arima": 31.173184357541928,
+            "lstm": 30.28023463399688,
+            "actual_points": 41
+        },
+        {
+            "name": "Gross",
+            "arima": 41.82488862821259,
+            "lstm": 31.324827110120207,
+            "actual_points": 45
+        },
+        {
+            "name": "Welbeck",
+            "arima": 29.893218725329696,
+            "lstm": 32.733302303793806,
+            "actual_points": 30
+        },
+        {
+            "name": "João Pedro",
+            "arima": 23.829787234042538,
+            "lstm": 20.944876489575147,
+            "actual_points": 39
+        },
+        {
+            "name": "Van Hecke",
+            "arima": 17.339363008044597,
+            "lstm": 11.996956945761875,
+            "actual_points": 24
+        },
+        {
+            "name": "Buonanotte",
+            "arima": 20.434782608695652,
+            "lstm": 23.195626378219615,
+            "actual_points": 25
+        },
+        {
+            "name": "Adingra",
+            "arima": 30.41055369639959,
+            "lstm": 33.39282793388368,
+            "actual_points": 32
+        }
+    ],
+    "BUR": [
+        {
+            "name": "Brownhill",
+            "arima": 23.701617403603766,
+            "lstm": 21.27833952744243,
+            "actual_points": 22
+        },
+        {
+            "name": "O'Shea",
+            "arima": 15.11111111111111,
+            "lstm": 11.766699821191715,
+            "actual_points": 24
+        },
+        {
+            "name": "Bruun Larsen",
+            "arima": 18.23529411764706,
+            "lstm": 15.341995975871829,
+            "actual_points": 37
+        },
+        {
+            "name": "Odobert",
+            "arima": 32.666666666666664,
+            "lstm": 40.29440737455592,
+            "actual_points": 26
+        }
+    ],
+    "CHE": [
+        {
+            "name": "Sterling",
+            "arima": 43.66596899316071,
+            "lstm": 55.14843727643286,
+            "actual_points": 27
+        },
+        {
+            "name": "Gallagher",
+            "arima": 28.11210101121217,
+            "lstm": 28.668512550597356,
+            "actual_points": 44
+        },
+        {
+            "name": "Palmer",
+            "arima": 0,
+            "lstm": 0,
+            "actual_points": 106
+        },
+        {
+            "name": "T.Silva",
+            "arima": 33.94366197183099,
+            "lstm": 32.98077525072553,
+            "actual_points": 35
+        },
+        {
+            "name": "Colwill",
+            "arima": 28.275862068965512,
+            "lstm": 15.91602057387595,
+            "actual_points": 23
+        },
+        {
+            "name": "Mudryk",
+            "arima": 23.793103448275858,
+            "lstm": 25.557313109672037,
+            "actual_points": 33
+        },
+        {
+            "name": "Enzo",
+            "arima": 25.588235294117645,
+            "lstm": 23.39885865887581,
+            "actual_points": 30
+        },
+        {
+            "name": "N.Jackson",
+            "arima": 34.73684210526316,
+            "lstm": 31.488134884636498,
+            "actual_points": 43
+        }
+    ],
+    "CRY": [
+        {
+            "name": "Hughes",
+            "arima": 18.014070546638326,
+            "lstm": 19.79707053255564,
+            "actual_points": 24
+        },
+        {
+            "name": "J.Ayew",
+            "arima": 27.657142857142848,
+            "lstm": 25.70874244168333,
+            "actual_points": 40
+        },
+        {
+            "name": "Mitchell",
+            "arima": 30.874892184742407,
+            "lstm": 27.669683896367257,
+            "actual_points": 34
+        },
+        {
+            "name": "Eze",
+            "arima": 35.91397849462365,
+            "lstm": 29.969182428344634,
+            "actual_points": 56
+        },
+        {
+            "name": "Andersen",
+            "arima": 28.184537256526003,
+            "lstm": 30.003449450714132,
+            "actual_points": 30
+        },
+        {
+            "name": "Mateta",
+            "arima": 22.799999999999997,
+            "lstm": 20.68600892108235,
+            "actual_points": 54
+        },
+        {
+            "name": "Lerma",
+            "arima": 26.226415094339618,
+            "lstm": 27.588426760134187,
+            "actual_points": 24
+        }
+    ],
+    "EVE": [
+        {
+            "name": "A.Doucoure",
+            "arima": 32.317073170731724,
+            "lstm": 24.37869686908882,
+            "actual_points": 22
+        },
+        {
+            "name": "Pickford",
+            "arima": 35.692307692307644,
+            "lstm": 36.96920004104659,
+            "actual_points": 34
+        },
+        {
+            "name": "Calvert-Lewin",
+            "arima": 33.812254332942636,
+            "lstm": 37.418136066914975,
+            "actual_points": 36
+        },
+        {
+            "name": "McNeil",
+            "arima": 31.564245810055894,
+            "lstm": 26.507662541901556,
+            "actual_points": 33
+        },
+        {
+            "name": "Garner",
+            "arima": 20.2802870830519,
+            "lstm": 25.150194660136446,
+            "actual_points": 22
+        },
+        {
+            "name": "Branthwaite",
+            "arima": 30.609827515728757,
+            "lstm": 26.39672414554768,
+            "actual_points": 37
+        },
+        {
+            "name": "Harrison",
+            "arima": 39.3162393162393,
+            "lstm": 38.69978682005695,
+            "actual_points": 25
+        },
+        {
+            "name": "Onana",
+            "arima": 24.042567411115225,
+            "lstm": 22.16951157028945,
+            "actual_points": 20
+        }
+    ],
+    "FUL": [
+        {
+            "name": "Raúl",
+            "arima": 18.77642940644225,
+            "lstm": 44.25652843186501,
+            "actual_points": 35
+        },
+        {
+            "name": "Iwobi",
+            "arima": 27.38095238095237,
+            "lstm": 26.596351001731126,
+            "actual_points": 40
+        },
+        {
+            "name": "Leno",
+            "arima": 36.36494420800017,
+            "lstm": 32.34912901615902,
+            "actual_points": 36
+        },
+        {
+            "name": "Wilson",
+            "arima": 26.0759493670886,
+            "lstm": 22.141385049733984,
+            "actual_points": 23
+        },
+        {
+            "name": "Castagne",
+            "arima": 29.671963761330147,
+            "lstm": 32.819456987653425,
+            "actual_points": 41
+        },
+        {
+            "name": "Robinson",
+            "arima": 24.337349397590355,
+            "lstm": 23.61753530592492,
+            "actual_points": 36
+        },
+        {
+            "name": "J.Palhinha",
+            "arima": 25.192307692307697,
+            "lstm": 28.171677564874297,
+            "actual_points": 29
+        },
+        {
+            "name": "Andreas",
+            "arima": 35.357142857142875,
+            "lstm": 36.971651489508744,
+            "actual_points": 43
+        },
+        {
+            "name": "De Cordova-Reid",
+            "arima": 25.484908059166777,
+            "lstm": 32.66901042532324,
+            "actual_points": 32
+        },
+        {
+            "name": "Willian",
+            "arima": 41.039352168124466,
+            "lstm": 39.46585262989781,
+            "actual_points": 22
+        },
+        {
+            "name": "Bassey",
+            "arima": 14.666666666666668,
+            "lstm": 11.152419009348082,
+            "actual_points": 36
+        }
+    ],
+    "LIV": [
+        {
+            "name": "A.Becker",
+            "arima": 44.30620118552622,
+            "lstm": 39.641642513169415,
+            "actual_points": 33
+        },
+        {
+            "name": "Salah",
+            "arima": 69.10052910052913,
+            "lstm": 68.87081475099158,
+            "actual_points": 58
+        },
+        {
+            "name": "Alexander-Arnold",
+            "arima": 54.27297181013735,
+            "lstm": 50.45256358341126,
+            "actual_points": 34
+        },
+        {
+            "name": "Virgil",
+            "arima": 47.70186335403722,
+            "lstm": 47.48440991236497,
+            "actual_points": 25
+        },
+        {
+            "name": "Elliott",
+            "arima": 18.44827586206897,
+            "lstm": 16.30963311217617,
+            "actual_points": 34
+        },
+        {
+            "name": "Jones",
+            "arima": 21.549295774647884,
+            "lstm": 19.29697174421024,
+            "actual_points": 23
+        },
+        {
+            "name": "Mac Allister",
+            "arima": 28.30188679245285,
+            "lstm": 30.52419711056086,
+            "actual_points": 49
+        },
+        {
+            "name": "Konaté",
+            "arima": 29.487179487179493,
+            "lstm": 25.361419099697326,
+            "actual_points": 23
+        },
+        {
+            "name": "Luis Díaz",
+            "arima": 34.04255319148935,
+            "lstm": 41.18458550343834,
+            "actual_points": 52
+        },
+        {
+            "name": "Darwin",
+            "arima": 39.166666666666686,
+            "lstm": 39.151221965961874,
+            "actual_points": 37
+        },
+        {
+            "name": "Diogo J.",
+            "arima": 37.333333333333336,
+            "lstm": 47.55689165439409,
+            "actual_points": 67
+        },
+        {
+            "name": "Gakpo",
+            "arima": 32.63157894736843,
+            "lstm": 30.644175509260176,
+            "actual_points": 26
+        },
+        {
+            "name": "Szoboszlai",
+            "arima": 38.88888888888888,
+            "lstm": 33.734988307387184,
+            "actual_points": 24
+        },
+        {
+            "name": "Gomez",
+            "arima": 22.94117647058823,
+            "lstm": 22.09762355195493,
+            "actual_points": 30
+        }
+    ],
+    "LUT": [
+        {
+            "name": "Barkley",
+            "arima": 34.55568016910136,
+            "lstm": 26.590231647271953,
+            "actual_points": 31
+        },
+        {
+            "name": "Chong",
+            "arima": 13.636363636363633,
+            "lstm": 15.863068621495163,
+            "actual_points": 39
+        },
+        {
+            "name": "Ogbene",
+            "arima": 21.333333333333332,
+            "lstm": 12.837978298476381,
+            "actual_points": 37
+        },
+        {
+            "name": "Morris",
+            "arima": 46.59147630000848,
+            "lstm": 32.58362154908291,
+            "actual_points": 35
+        }
+    ],
+    "MCI": [
+        {
+            "name": "Ederson M.",
+            "arima": 39.20212765957445,
+            "lstm": 39.26842003465999,
+            "actual_points": 37
+        },
+        {
+            "name": "Walker",
+            "arima": 37.841726618704996,
+            "lstm": 41.49065376680423,
+            "actual_points": 41
+        },
+        {
+            "name": "Aké",
+            "arima": 32.76923076923075,
+            "lstm": 28.22603513260377,
+            "actual_points": 35
+        },
+        {
+            "name": "Foden",
+            "arima": 48.92506588444306,
+            "lstm": 40.852482671297835,
+            "actual_points": 99
+        },
+        {
+            "name": "Rodrigo",
+            "arima": 31.90760832386948,
+            "lstm": 28.582423526455678,
+            "actual_points": 45
+        },
+        {
+            "name": "Haaland",
+            "arima": 80.21739130434783,
+            "lstm": 77.44816380712008,
+            "actual_points": 60
+        },
+        {
+            "name": "Bernardo",
+            "arima": 39.58333333333336,
+            "lstm": 39.77782712902139,
+            "actual_points": 24
+        },
+        {
+            "name": "J.Alvarez",
+            "arima": 38.99999999999999,
+            "lstm": 37.10047815911461,
+            "actual_points": 31
+        },
+        {
+            "name": "Rúben",
+            "arima": 28.50000000000001,
+            "lstm": 10.63132525702069,
+            "actual_points": 34
+        },
+        {
+            "name": "Akanji",
+            "arima": 31.226588962936514,
+            "lstm": 29.00917045156835,
+            "actual_points": 43
+        },
+        {
+            "name": "Kovačić",
+            "arima": 20.128087113200635,
+            "lstm": 18.513783104652624,
+            "actual_points": 24
+        }
+    ],
+    "MUN": [
+        {
+            "name": "Rashford",
+            "arima": 46.02905724443988,
+            "lstm": 43.54406969479182,
+            "actual_points": 32
+        },
+        {
+            "name": "McTominay",
+            "arima": 25.68345323741006,
+            "lstm": 21.802885633417834,
+            "actual_points": 25
+        },
+        {
+            "name": "B.Fernandes",
+            "arima": 41.111111111111114,
+            "lstm": 52.459758498435846,
+            "actual_points": 76
+        },
+        {
+            "name": "Dalot",
+            "arima": 35.1111111111111,
+            "lstm": 31.778882207778302,
+            "actual_points": 25
+        },
+        {
+            "name": "Garnacho",
+            "arima": 57.649447382238186,
+            "lstm": 22.91036249219171,
+            "actual_points": 46
+        },
+        {
+            "name": "Onana",
+            "arima": 36.08695652173913,
+            "lstm": 32.0927109030084,
+            "actual_points": 32
+        },
+        {
+            "name": "Højlund",
+            "arima": 19.999999999999996,
+            "lstm": 17.242839456637565,
+            "actual_points": 63
+        }
+    ],
+    "NEW": [
+        {
+            "name": "Trippier",
+            "arima": 47.7630866836881,
+            "lstm": 40.3683109231865,
+            "actual_points": 25
+        },
+        {
+            "name": "Schär",
+            "arima": 33.77341929825874,
+            "lstm": 34.9212323484391,
+            "actual_points": 47
+        },
+        {
+            "name": "Longstaff",
+            "arima": 31.825645691604358,
+            "lstm": 20.817802481633024,
+            "actual_points": 21
+        },
+        {
+            "name": "Burn",
+            "arima": 31.272401585302784,
+            "lstm": 30.038834234868588,
+            "actual_points": 31
+        },
+        {
+            "name": "Gordon",
+            "arima": 42.195919374102225,
+            "lstm": 21.035345229342756,
+            "actual_points": 54
+        },
+        {
+            "name": "Bruno G.",
+            "arima": 32.87878787878788,
+            "lstm": 38.76319141186944,
+            "actual_points": 53
+        },
+        {
+            "name": "Isak",
+            "arima": 47.142857142857146,
+            "lstm": 46.247609281815535,
+            "actual_points": 62
+        }
+    ],
+    "NFO": [
+        {
+            "name": "Wood",
+            "arima": 38.7883978589576,
+            "lstm": 36.61073998900693,
+            "actual_points": 48
+        },
+        {
+            "name": "Gibbs-White",
+            "arima": 34.65687333638748,
+            "lstm": 24.0992058189051,
+            "actual_points": 48
+        },
+        {
+            "name": "Hudson-Odoi",
+            "arima": 29.925195237530367,
+            "lstm": 20.956374155666897,
+            "actual_points": 32
+        },
+        {
+            "name": "Elanga",
+            "arima": 27.543859649122822,
+            "lstm": 22.913123550130617,
+            "actual_points": 30
+        },
+        {
+            "name": "Danilo",
+            "arima": 24.791289091985806,
+            "lstm": 34.19545290987518,
+            "actual_points": 26
+        },
+        {
+            "name": "Dominguez",
+            "arima": 30.714285714285722,
+            "lstm": 38.80312952722345,
+            "actual_points": 23
+        }
+    ],
+    "SHU": [
+        {
+            "name": "Bogle",
+            "arima": 20.57142857142857,
+            "lstm": 8.789552545442817,
+            "actual_points": 26
+        },
+        {
+            "name": "Archer",
+            "arima": 21.250000000000004,
+            "lstm": 24.20777653035905,
+            "actual_points": 31
+        },
+        {
+            "name": "Vini Souza",
+            "arima": 18.095238075373942,
+            "lstm": 16.90194494914134,
+            "actual_points": 28
+        },
+        {
+            "name": "Foderingham",
+            "arima": 25.625000000000004,
+            "lstm": 21.133848636796763,
+            "actual_points": 20
+        },
+        {
+            "name": "Hamer",
+            "arima": 27.619047619047606,
+            "lstm": 28.126810143716444,
+            "actual_points": 31
+        }
+    ],
+    "TOT": [
+        {
+            "name": "Maddison",
+            "arima": 44.7032361172314,
+            "lstm": 41.8047737701349,
+            "actual_points": 31
+        },
+        {
+            "name": "Richarlison",
+            "arima": 31.866815930313436,
+            "lstm": 34.54776691761585,
+            "actual_points": 46
+        },
+        {
+            "name": "Romero",
+            "arima": 30.47619047619047,
+            "lstm": 29.2755622790815,
+            "actual_points": 27
+        },
+        {
+            "name": "Kulusevski",
+            "arima": 37.5332607958981,
+            "lstm": 49.094542932996305,
+            "actual_points": 26
+        },
+        {
+            "name": "Johnson",
+            "arima": 31.60714285714286,
+            "lstm": 30.1032761055981,
+            "actual_points": 48
+        },
+        {
+            "name": "Son",
+            "arima": 51.29629629629627,
+            "lstm": 44.05494909474665,
+            "actual_points": 59
+        },
+        {
+            "name": "Sarr",
+            "arima": 23.10344827586206,
+            "lstm": 24.725974701564287,
+            "actual_points": 24
+        },
+        {
+            "name": "Pedro Porro",
+            "arima": 39.99999999999999,
+            "lstm": 38.70442342890663,
+            "actual_points": 33
+        },
+        {
+            "name": "Udogie",
+            "arima": 24.73151973448236,
+            "lstm": 38.55585418921713,
+            "actual_points": 31
+        },
+        {
+            "name": "Vicario",
+            "arima": 26.16849466473123,
+            "lstm": 22.94595176686127,
+            "actual_points": 25
+        }
+    ],
+    "WHU": [
+        {
+            "name": "Ward-Prowse",
+            "arima": 38.772043412968884,
+            "lstm": 36.507241725705036,
+            "actual_points": 29
+        },
+        {
+            "name": "Zouma",
+            "arima": 31.053304709204824,
+            "lstm": 35.84763111003666,
+            "actual_points": 24
+        },
+        {
+            "name": "Emerson",
+            "arima": 19.556642944032653,
+            "lstm": 18.090133876033498,
+            "actual_points": 22
+        },
+        {
+            "name": "Bowen",
+            "arima": 44.859154929577464,
+            "lstm": 43.074447596244894,
+            "actual_points": 51
+        },
+        {
+            "name": "Areola",
+            "arima": 35.37129461828271,
+            "lstm": 28.095985896481793,
+            "actual_points": 32
+        },
+        {
+            "name": "L.Paquetá",
+            "arima": 36.046511627906995,
+            "lstm": 39.69019578458705,
+            "actual_points": 31
+        },
+        {
+            "name": "Coufal",
+            "arima": 25.286586582205942,
+            "lstm": 12.22539158245493,
+            "actual_points": 21
+        },
+        {
+            "name": "Souček",
+            "arima": 34.64495778233341,
+            "lstm": 28.12215553269134,
+            "actual_points": 21
+        },
+        {
+            "name": "Álvarez",
+            "arima": 20.555555555555546,
+            "lstm": 19.859393567521956,
+            "actual_points": 22
+        },
+        {
+            "name": "Kudus",
+            "arima": 44.2105263157895,
+            "lstm": 47.027991622330916,
+            "actual_points": 34
+        }
+    ],
+    "WOL": [
+        {
+            "name": "Dawson",
+            "arima": 26.59845034332355,
+            "lstm": 28.972835862628127,
+            "actual_points": 41
+        },
+        {
+            "name": "José Sá",
+            "arima": 39.00759766255737,
+            "lstm": 45.16941490513354,
+            "actual_points": 33
+        },
+        {
+            "name": "Toti",
+            "arima": 24.146341463414632,
+            "lstm": 23.126851193060467,
+            "actual_points": 20
+        },
+        {
+            "name": "Hee Chan",
+            "arima": 34.62799169034111,
+            "lstm": 25.27851260076918,
+            "actual_points": 44
+        },
+        {
+            "name": "Aït-Nouri",
+            "arima": 17.6923076923077,
+            "lstm": 17.316549981851498,
+            "actual_points": 44
+        },
+        {
+            "name": "Cunha",
+            "arima": 44.15766472017084,
+            "lstm": 28.336238741797455,
+            "actual_points": 53
+        },
+        {
+            "name": "Sarabia",
+            "arima": 50.57751197797692,
+            "lstm": 26.62885835937879,
+            "actual_points": 39
+        },
+        {
+            "name": "João Gomes",
+            "arima": 17.682904993105147,
+            "lstm": 17.180253208021995,
+            "actual_points": 32
+        }
+    ]
+}
