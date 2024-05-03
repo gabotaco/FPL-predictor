@@ -4,9 +4,10 @@ import os
 
 from game_information import TEAMS, get_team_info, PREVIOUS_SEASON, CURRENT_SEASON, POSITIONS, CURRENT_GAME_WEEK
 
-STARTING_SEASON = "2018-19"
-
+USE_UNDERSTAT = True
 NO_NEW_PLAYERS = False
+
+STARTING_SEASON = "2019-20" if USE_UNDERSTAT else "2018-19"
 
 PIDs = {}
 teams = {}
@@ -14,6 +15,101 @@ points_data_set = {}
 master_data_set = [
     ["First Name", "Surname", "Web Name", "Position", "GKP", "DEF", "MID", "FWD", "Team", *TEAMS, "Cost", "ID", "ARIMA",
      "LSTM", "PP", "NEXT", "Health", "PREV", "Selected"]]
+
+old_players = ["Adam Armstrong", "Adam Forshaw", "Ainsley Maitland-Niles", "Aleksandar Mitrovic", "Alex McCarthy",
+               "Alex Oxlade-Chamberlain", "Andrew Moran", "Andrey Santos", "André Ayew",
+               "Armel Bella Kotchap", "Asmir Begovic", "Ayoze Pérez", "Boubakary Soumare", "Brandon Aguilera",
+               "Brenden Aaronson", "Cafú", "Caglar Söyüncü", "Carlos Alcaraz", "Carlos Vinicius", "Che Adams",
+               "Chem Campbell", "Chimuanya Ugochukwu", "Cody Drameh", "Connor Ronan", "Conor Coady",
+               "Cristiano Ronaldo", "Crysencio Summerville", "Daniel Amartey", "Daniel Iversen", "Daniel James",
+               "Daniel Podence", "Danny Ward", "Darko Gyabi", "David de Gea", "Denis Zakaria", "Dennis Praet",
+               "Dexter Lembikisa", "Diego Costa", "Diego Llorente", "Dominic Ballard", "Duje Caleta-Car",
+               "Edouard Mendy", "Enock Mwepu", "Fabio Carvalho", "Fabio Silva", "Facundo Pellistri", "Fode Toure",
+               "Gavin Bazunu", "George Abbott", "Georginio Rutter", "Harry Souttar", "Harvey White", "Ibrahima Diallo",
+               "Ilkay Gündogan", "Illan Meslier", "Isaac Price", "Jack Colback", "Jack Stacey", "Jack Stephens",
+               "James Bree", "James Justin", "James McArthur", "Jamie Vardy", "Jan Bednarek", "Jesse Lingard",
+               "Joe Ayodele-Aribo", "Joe Gelhardt", "Joel Robles", "Jordan Zemura", "Joseph Hodge", "Joseph Whitworth",
+               "Josh Onomah", "João Félix", "João Moutinho", "Juan Larios", "Junior Stanislas", "Júnior Firpo",
+               "Kalidou Koulibaly", "Kamaldeen Sulemana", "Kamari Doyle", "Kelechi Iheanacho", "Keylor Navas",
+               "Kiernan Dewsbury-Hall", "Kyle Walker-Peters", "Layvin Kurzawa", "Lewis Brunt", "Liam Cooper",
+               "Louis Beyer", "Lucas Moura", "Ludwig Augustinsson", "Luka Milivojevic", "Luke Ayling", "Lyanco",
+               "Manuel Lanzini", "Marc Albrighton", "Marc Guehi", "Marc Roca", "Marcel Sabitzer", "Mateo Joseph",
+               "Mateusz Klich", "Matias Viña", "Matthew Craig", "Maximilian Wöber", "Mislav Orsic",
+               "Mohamed Elyounoussi", "Mohammed Salisu", "Moussa Djenepo", "N'Golo Kanté", "Naby Keita",
+               "Nampalys Mendy", "Nathaniel Chalobah", "Neeskens Kebano", "Omari Hutchinson", "Oriol Romeu",
+               "Owen Bevan", "Pascal Struijk", "Patrick Bamford", "Patson Daka", "Paul Onuachu", "Pontus Jansson",
+               "Rasmus Kristensen", "Renan Lodi", "Ricardo Pereira", "Roberto Firmino", "Robin Koch", "Romain Perraud",
+               "Ruben Loftus-Cheek", "Rúben Neves", "Rúben Vinagre", "Salomón Rondón", "Sam Greenwood",
+               "Samuel Amo-Ameyaw", "Samuel Edozie", "Shane Duffy", "Stuart Armstrong", "Sékou Mara", "Theo Walcott",
+               "Victor Kristiansen", "Weston McKennie", "Wilfred Ndidi", "Wilfried Gnonto", "Wilfried Zaha",
+               "Wout Faes", "Yan Valery", "Yerry Mina"]
+understat_name_map = {"Amad Diallo Traore": "Amad Diallo",
+                      "Ameen Al Dakhil": "Ameen Al-Dakhil", "Andreas Pereira": "Andreas Hoelgebaum Pereira",
+                      "André Gomes": "André Tavares Gomes", "Anel Ahmedhodzic": "Anel Ahmedhodžić",
+                      "Anis Ben Slimane": "Anis Slimane", "Anssumane Fati": "Anssumane Fati Vieira",
+                      "Antony": "Antony Matheus dos Santos", "Ben Brereton Díaz": "Ben Brereton",
+                      "Ben White": "Benjamin White", "Benoit Badiashile Mukinayi": "Benoît Badiashile",
+                      "Benson Manuel": "Manuel Benson Hedilazio", "Bernardo Silva": "Bernardo Veiga de Carvalho e Silva",
+                      "Beto": "Norberto Bercique Gomes Betuncal", "Bobby Reid": "Bobby De Cordova-Reid",
+                      "Boubacar Traore": "Boubacar Traoré", "Bruno Fernandes": "Bruno Borges Fernandes",
+                      "Bruno Guimarães": "Bruno Guimarães Rodriguez Moura", "Casemiro": "Carlos Henrique Casimiro",
+                      "Cheick Oumar Doucoure": "Cheick Doucouré", "Clement Lenglet": "Clément Lenglet",
+                      "Cédric Soares": "Cédric Alves Soares",
+                      "Danilo": "Danilo dos Santos de Oliveira",
+                      "Darwin Núñez": "Darwin Núñez Ribeiro", "David Raya": "David Raya Martin",
+                      "Deivid Washington": "Deivid Washington de Souza Eugênio",
+                      "Diego Carlos": "Diego Carlos Santos Silva", "Diogo Dalot": "Diogo Dalot Teixeira",
+                      "Diogo Jota": "Diogo Teixeira da Silva", "Djordje Petrovic": "Đorđe Petrović",
+                      "Douglas Luiz": "Douglas Luiz Soares de Paulo", "Ederson": "Ederson Santana de Moraes",
+                      "Edson Álvarez": "Edson Álvarez Velázquez", "Emerson": "Emerson Palmieri dos Santos",
+                      "Emile Smith-Rowe": "Emile Smith Rowe", "Emiliano Buendía": "Emiliano Buendía Stati",
+                      "Emiliano Martinez": "Emiliano Martínez Romero", "Estupiñán": "Pervis Estupiñán",
+                      "Fabinho": "Fabio Henrique Tavares", "Felipe": "Felipe Augusto de Almeida Monteiro",
+                      "Fred": "Frederico Rodrigues de Paula Santos", "Fábio Vieira": "Fábio Ferreira Vieira",
+                      "Gabriel": "Gabriel dos Santos Magalhães", "Gabriel Jesus": "Gabriel Fernando de Jesus",
+                      "Gabriel Martinelli": "Gabriel Martinelli Silva",
+                      "Gonçalo Guedes": "Gonçalo Manuel Ganchinho Guedes",
+                      "Gustavo Scarpa": "Gustavo Henrique Furtado Scarpa", "Halil Dervisoglu": "Halil Dervişoğlu",
+                      "Hamed Junior Traore": "Hamed Traorè", "Hee-Chan Hwang": "Hwang Hee-chan",
+                      "Hugo Bueno": "Hugo Bueno López", "Ibrahim Sangare": "Ibrahim Sangaré",
+                      "Igor Julio": "Igor Julio dos Santos de Paulo", "Ionut Radu": "Ionuț Radu",
+                      "Issa Kabore": "Issa Kaboré", "Ivan Perisic": "Ivan Perišić",
+                      "Iyenoma Destiny Udogie": "Destiny Udogie", "Javier Manquillo": "Javier Manquillo Gaitán",
+                      "Jefferson Lerma": "Jefferson Lerma Solís", "Jeremy Sarmiento": "Jeremy Sarmiento Morante",
+                      "Joelinton": "Joelinton Cássio Apolinário de Lira",
+                      "Johann Berg Gudmundsson": "Jóhann Berg Gudmundsson", "Jonny": "Jonny Evans",
+                      "Jorginho": "Jorge Luiz Frello Filho", "Joseph Gomez": "Joe Gomez",
+                      "Josko Gvardiol": "Joško Gvardiol", "José Sá": "José Malheiro de Sá",
+                      "João Gomes": "João Victor Gomes da Silva", "João Palhinha": "João Palhinha Gonçalves",
+                      "João Pedro": "João Pedro Junqueira de Jesus", "Jéremy Doku": "Jérémy Doku",
+                      "Kaine Hayden": "Kaine Kesler-Hayden", "Kepa": "Kepa Arrizabalaga",
+                      "Lucas Paquetá": "Lucas Tolentino Coelho de Lima", "Mads Andersen": "Mads Juel Andersen",
+                      "Mads Roerslev": "Mads Roerslev Rasmussen", "Marc Cucurella": "Marc Cucurella Saseta",
+                      "Marquinhos": "Marcus Oliveira Alencar", "Martin Odegaard": "Martin Ødegaard",
+                      "Mateo Kovacic": "Mateo Kovačić", "Matheus Cunha": "Matheus Santos Carneiro Da Cunha",
+                      "Matheus França": "Matheus França de Oliveira", "Matheus Nunes": "Matheus Luiz Nunes",
+                      "Matthew Cash": "Matty Cash", "Maxime Estève": "Maxime Esteve",
+                      "Miguel Almirón": "Miguel Almirón Rejala", "Moisés Caicedo": "Moisés Caicedo Corozo",
+                      "Moussa Niakhate": "Moussa Niakhaté", "Murillo": "Murillo Santiago Costa dos Santos",
+                      "Naif Aguerd": "Nayef Aguerd", "Neto": "Norberto Murara Neto", "Nicolo Zaniolo": "Nicolò Zaniolo",
+                      "Nuno Tavares": "Nuno Varela Tavares", "Nélson Semedo": "Nélson Cabral Semedo",
+                      "Odisseas Vlachodimos": "Odysseas Vlachodimos", "Ola Aina": "Olu Aina",
+                      "Pablo Fornals": "Pablo Fornals Malla", "Pape Sarr": "Pape Matar Sarr",
+                      "Pedro Neto": "Pedro Lomba Neto", "Philippe Coutinho": "Philippe Coutinho Correia",
+                      "Raphael Varane": "Raphaël Varane", "Rayan Ait Nouri": "Rayan Aït-Nouri",
+                      "Richarlison": "Richarlison de Andrade", "Rodri": 'Rodrigo Hernandez',
+                      "Rodrigo": "Rodrigo Bentancur", "Rodrigo Muniz": "Rodrigo Muniz Carvalho",
+                      "Rodrigo Ribeiro": "Rodrigo Duarte Ribeiro", "Romeo Lavia": "Roméo Lavia",
+                      "Ryan John Giles": "Ryan Giles", "Rúben Dias": "Rúben Gato Alves Dias",
+                      "Said Benrahma": "Saïd Benrahma", "Sasa Lukic": "Saša Lukić", "Sergi Canos": "Sergi Canós Tenés",
+                      "Son Heung-Min": "Son Heung-min", "Tetê": "Kenny Tete",
+                      "Thiago Alcántara": "Thiago Alcántara do Nascimento", "Thiago Silva": "Thiago Emiliano da Silva",
+                      "Tomas Soucek": "Tomáš Souček", "Toti": "Toti António Gomes",
+                      "Valentino Livramento": "Tino Livramento", "Vinicius Souza": "Vini de Souza Costa",
+                      "Vitinho": "Victor da Silva", "Vladimir Coufal": "Vladimír Coufal",
+                      "Willian": "Willian Borges da Silva", "Yehor Yarmolyuk": "Yegor Yarmoliuk",
+                      "Youssef Chermiti": "Youssef Ramalho Chermiti", "Zanka": "Mathias Jorgensen",
+                      "Álex Moreno": "Alexandre Moreno Lopera", "Alisson": "Alisson Ramses Becker"}
 
 
 def get_teams():
@@ -70,6 +166,37 @@ def get_current_players(previous_players):
                                      'last_name': row['second_name'], 'team': teams[int(row['team'])]['short_name'],
                                      'position': player_position}
                 master_data_set.append(player)
+
+    if USE_UNDERSTAT:
+        load_understat()
+    else:
+        get_points(STARTING_SEASON)
+
+
+def load_understat():
+    global PIDs
+    understat_players = os.listdir(f"../Fantasy-Premier-League/data/{CURRENT_SEASON}/understat")
+    understat_players = [player for player in understat_players if not player.startswith("understat")]
+
+    for i, understat_player in enumerate(understat_players):
+        name = ' '.join(understat_player.split("_")[:-1]).replace('&#039;', '\'')
+
+        if name in old_players:
+            continue
+
+        if name in understat_name_map:
+            name = understat_name_map[name]
+
+        if name not in PIDs:
+            raise Exception(f"Didn't find a player with the name {name}")
+
+        PIDs[name]['understat'] = {}
+
+        with open(f"../Fantasy-Premier-League/data/{CURRENT_SEASON}/understat/{understat_player}") as understat_file:
+            understat_reader = csv.DictReader(understat_file)
+
+            for player_element in understat_reader:
+                PIDs[name]['understat'][player_element['date']] = player_element
 
     get_points(STARTING_SEASON)
 
@@ -140,6 +267,10 @@ def get_points(year):
 
                 element_object = elements_to_use[name]
 
+                if USE_UNDERSTAT and 'understat' not in element_object:
+                    print(f"No understats found for {name}")
+                    continue
+
                 if element_object['id'] not in points_data_set:
                     points_data_set[element_object['id']] = {'first_name': element_object['first_name'],
                                                              'last_name': element_object['last_name'],
@@ -149,6 +280,11 @@ def get_points(year):
 
                 diff = fixture_to_difficulty[int(gw_element['fixture'])][
                     'h' if gw_element['was_home'] == 'True' else 'a']
+
+                fixture_date = gw_element['kickoff_time'].split('T')[0]
+                if USE_UNDERSTAT and fixture_date not in element_object['understat']:
+                    print(f"No understats for {name} for {fixture_date}")
+                    continue
 
                 points_data_set[element_object['id']][f"GW{game_round}"] = {'diff': diff,
                                                                             'points': int(gw_element['total_points'])}
