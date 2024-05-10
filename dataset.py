@@ -4,7 +4,7 @@ import os
 
 from game_information import TEAMS, get_team_info, PREVIOUS_SEASON, CURRENT_SEASON, POSITIONS, CURRENT_GAME_WEEK
 
-USE_UNDERSTAT = True
+USE_UNDERSTAT = False
 NO_NEW_PLAYERS = False
 
 STARTING_SEASON = "2019-20" if USE_UNDERSTAT else "2018-19"
