@@ -4,7 +4,7 @@ import os
 from xlsxwriter.workbook import Workbook
 from tqdm import tqdm
 
-from ai import do_arima, do_lstm, MAX_DIFF
+from ai import do_arima, do_lstm, do_forest, MAX_DIFF
 from dataset import get_dataset
 from game_information import TEAMS, CURRENT_SEASON_BEGINNING_ROUND, CURRENT_GAME_WEEK, SEASON_LENGTH, MIN_GAMES, \
     MIN_SEASON_PPG, MIN_SEASON_GAME_PERCENTAGE, CURRENT_SEASON
@@ -14,8 +14,8 @@ CALIBRATE_BY = 10
 
 BUGGED_PLAYERS = []
 
-HEADERS = ["Name", "ARIMAPP", "LSTMPP", "PP", "AP", "DIFF"]
-HIDDEN_COLUMNS = ["ARIMAPP", "LSTMPP"]
+HEADERS = ["Name", "ARIMAPP", "LSTMPP", "FORESTPP", "PP", "AP", "DIFF"]
+HIDDEN_COLUMNS = ["ARIMAPP", "LSTMPP", "FORESTPP"]
 ALPHABET = [*"ABCDEFGHIJKLMNOPQRSTUVWXYZ"]
 
 PROCESS_ALL_PLAYERS = False
@@ -86,15 +86,15 @@ def get_player_predictions():
                     SEASON_LENGTH if CURRENT_GAME_WEEK == 1 else CURRENT_GAME_WEEK - 1) * MIN_SEASON_GAME_PERCENTAGE):
                 continue
 
-            pred_by = {'games': [], 'next': 0}
-            training_player_data = {'position': player_data['position']}
+            pred_by = []
+            training_player_data = {'id': player_data['id'], 'position': player_data['position'], 'first_name': player_data['first_name'], 'last_name': player_data['last_name'], 'name': player_data['name'], 'team': player_data['team']}
 
             for gw_num in range(0, len(gws) - CALIBRATE_BY + 1):
                 training_player_data[f"GW{gw_num + 1}"] = gws[gw_num]
 
             actual_points = 0
             for gw in gws[gw_num:]:
-                pred_by['games'].append(gw['diff'])
+                pred_by.append(gw['diff'])
                 actual_points += gw['points']
 
             if actual_points < CALIBRATE_BY * MIN_SEASON_PPG:
@@ -103,23 +103,28 @@ def get_player_predictions():
             if actual_points <= 0 or len(gws[:-CALIBRATE_BY]) <= CALIBRATE_BY:
                 arima = 0
                 lstm = 0
+                forest = 0
             else:
                 try:
-                    arima, _ = do_arima(list(map(lambda x: x['points'], gws[:-CALIBRATE_BY])), pred_by)
-                    lstm, _ = do_lstm(training_player_data, pred_by)
+                    arima = sum(do_arima(list(map(lambda x: x['points'], gws[:-CALIBRATE_BY])), pred_by))
+                    lstm = sum(do_lstm(training_player_data, pred_by))
+                    forest = sum(do_forest(training_player_data, pred_by))
                 except:
+                    print('AN ERROR HAPPENED')
                     arima = 0
                     lstm = 0
+                    forest = 0
 
                 if arima != 0 and lstm != 0 and (arima / lstm > MAX_DIFF or lstm / arima > MAX_DIFF):
                     arima = 0
                     lstm = 0
+                    forest = 0
 
-            players[team][index] = {'name': player_data['name'], 'arima': arima, 'lstm': lstm,
+            players[team][index] = {'name': player_data['name'], 'arima': arima, 'lstm': lstm, 'forest': forest,
                                     'actual_points': actual_points}
 
         players[team] = [player for player in players[team] if
-                         'arima' in player and 'lstm' in player and 'name' in player and 'actual_points' in player]
+                         'arima' in player and 'lstm' in player and 'forest' in player and 'name' in player and 'actual_points' in player]
 
     with open(filename, 'w') as dataset_file:
         json.dump(players, dataset_file, ensure_ascii=False, indent=4)
@@ -132,7 +137,7 @@ def create_calibration_file():
     workbook = Workbook(f"./Calibrations/{CURRENT_SEASON}/Week {CURRENT_GAME_WEEK}.xlsx")
 
     for team in TEAMS:
-        players[team] = [player for player in players[team] if player['arima'] > 0 and player['lstm'] > 0]
+        players[team] = [player for player in players[team] if player['arima'] > 0 and player['lstm'] > 0 and player['forest'] > 0]
 
         if len(players[team]) == 0:
             print(f"Could not find any players for {team}")
@@ -140,17 +145,18 @@ def create_calibration_file():
 
         sheet = workbook.add_worksheet(team)
 
-        arima, lstm = make_calibration(players[team])
+        arima, lstm, forest = make_calibration(players[team])
 
-        sheet.write_row('H2', ["ARIMA", arima])
-        sheet.write_row('H3', ["LSTM", lstm])
-        sheet.write_row('H5', ["OFF", f"=SUM(ABS(Table{team}[PP]-Table{team}[AP]))"])
-        sheet.write_row('H7', ["AVG", f"=AVERAGE(Table{team}[DIFF])/{CALIBRATE_BY}"])
+        sheet.write_row('I2', ["ARIMA", arima])
+        sheet.write_row('I3', ["LSTM", lstm])
+        sheet.write_row('I4', ["FOREST", forest])
+        sheet.write_row('I6', ["OFF", f"=SUM(ABS(Table{team}[PP]-Table{team}[AP]))"])
+        sheet.write_row('I7', ["AVG", f"=AVERAGE(Table{team}[DIFF])/{CALIBRATE_BY}"])
 
         columns = list(map(lambda x: {'header': x}, HEADERS))
         columns[HEADERS.index('PP')] = {
             'header': 'PP',
-            'formula': "=[@ARIMAPP]*$I$2+[@LSTMPP]*$I$3"
+            'formula': "=[@ARIMAPP]*$J$2+[@LSTMPP]*$J$3+[@FORESTPP]*$J$4"
         }
         columns[HEADERS.index('DIFF')] = {
             'header': 'DIFF',
@@ -158,13 +164,13 @@ def create_calibration_file():
         }
 
         data = list(
-            map(lambda player: [player['name'], player['arima'], player['lstm'], "=[@ARIMAPP]*$I$2+[@LSTMPP]*$I$3",
+            map(lambda player: [player['name'], player['arima'], player['lstm'], player['forest'], "=[@ARIMAPP]*$I$2+[@LSTMPP]*$I$3+[@FORESTPP]*$I$4",
                                 player['actual_points'], "=ABS([@PP]-[@AP])"], players[team]))
 
         sheet.add_table(f"A1:{ALPHABET[len(HEADERS) - 1]}{len(data) + 1}", {'data': data, 'columns': columns,
                                                                             'name': f"Table{team}"})
 
-        sheet.conditional_format('I7', {"type": "3_color_scale", "min_color": "#00FF00", "mid_color": "#FFFF00",
+        sheet.conditional_format('J7', {"type": "3_color_scale", "min_color": "#00FF00", "mid_color": "#FFFF00",
                                         "max_color": "#FF0000", "min_value": 0, "mid_value": 1, "max_value": 2,
                                         "min_type": "num", "mid_type": "num", "max_type": "num"})
 

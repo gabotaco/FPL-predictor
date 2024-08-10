@@ -14,35 +14,9 @@ teams = {}
 points_data_set = {}
 master_data_set = [
     ["First Name", "Surname", "Web Name", "Position", "GKP", "DEF", "MID", "FWD", "Team", *TEAMS, "Cost", "ID", "ARIMA",
-     "LSTM", "PP", "NEXT", "Health", "PREV", "Selected"]]
+     "LSTM", "FOREST", "PP", "NEXT", "Health", "PREV", "Selected"]]
 
-old_players = ["Adam Armstrong", "Adam Forshaw", "Ainsley Maitland-Niles", "Aleksandar Mitrovic", "Alex McCarthy",
-               "Alex Oxlade-Chamberlain", "Andrew Moran", "Andrey Santos", "André Ayew",
-               "Armel Bella Kotchap", "Asmir Begovic", "Ayoze Pérez", "Boubakary Soumare", "Brandon Aguilera",
-               "Brenden Aaronson", "Cafú", "Caglar Söyüncü", "Carlos Alcaraz", "Carlos Vinicius", "Che Adams",
-               "Chem Campbell", "Chimuanya Ugochukwu", "Cody Drameh", "Connor Ronan", "Conor Coady",
-               "Cristiano Ronaldo", "Crysencio Summerville", "Daniel Amartey", "Daniel Iversen", "Daniel James",
-               "Daniel Podence", "Danny Ward", "Darko Gyabi", "David de Gea", "Denis Zakaria", "Dennis Praet",
-               "Dexter Lembikisa", "Diego Costa", "Diego Llorente", "Dominic Ballard", "Duje Caleta-Car",
-               "Edouard Mendy", "Enock Mwepu", "Fabio Carvalho", "Fabio Silva", "Facundo Pellistri", "Fode Toure",
-               "Gavin Bazunu", "George Abbott", "Georginio Rutter", "Harry Souttar", "Harvey White", "Ibrahima Diallo",
-               "Ilkay Gündogan", "Illan Meslier", "Isaac Price", "Jack Colback", "Jack Stacey", "Jack Stephens",
-               "James Bree", "James Justin", "James McArthur", "Jamie Vardy", "Jan Bednarek", "Jesse Lingard",
-               "Joe Ayodele-Aribo", "Joe Gelhardt", "Joel Robles", "Jordan Zemura", "Joseph Hodge", "Joseph Whitworth",
-               "Josh Onomah", "João Félix", "João Moutinho", "Juan Larios", "Junior Stanislas", "Júnior Firpo",
-               "Kalidou Koulibaly", "Kamaldeen Sulemana", "Kamari Doyle", "Kelechi Iheanacho", "Keylor Navas",
-               "Kiernan Dewsbury-Hall", "Kyle Walker-Peters", "Layvin Kurzawa", "Lewis Brunt", "Liam Cooper",
-               "Louis Beyer", "Lucas Moura", "Ludwig Augustinsson", "Luka Milivojevic", "Luke Ayling", "Lyanco",
-               "Manuel Lanzini", "Marc Albrighton", "Marc Guehi", "Marc Roca", "Marcel Sabitzer", "Mateo Joseph",
-               "Mateusz Klich", "Matias Viña", "Matthew Craig", "Maximilian Wöber", "Mislav Orsic",
-               "Mohamed Elyounoussi", "Mohammed Salisu", "Moussa Djenepo", "N'Golo Kanté", "Naby Keita",
-               "Nampalys Mendy", "Nathaniel Chalobah", "Neeskens Kebano", "Omari Hutchinson", "Oriol Romeu",
-               "Owen Bevan", "Pascal Struijk", "Patrick Bamford", "Patson Daka", "Paul Onuachu", "Pontus Jansson",
-               "Rasmus Kristensen", "Renan Lodi", "Ricardo Pereira", "Roberto Firmino", "Robin Koch", "Romain Perraud",
-               "Ruben Loftus-Cheek", "Rúben Neves", "Rúben Vinagre", "Salomón Rondón", "Sam Greenwood",
-               "Samuel Amo-Ameyaw", "Samuel Edozie", "Shane Duffy", "Stuart Armstrong", "Sékou Mara", "Theo Walcott",
-               "Victor Kristiansen", "Weston McKennie", "Wilfred Ndidi", "Wilfried Gnonto", "Wilfried Zaha",
-               "Wout Faes", "Yan Valery", "Yerry Mina"]
+old_players = []
 understat_name_map = {"Amad Diallo Traore": "Amad Diallo",
                       "Ameen Al Dakhil": "Ameen Al-Dakhil", "Andreas Pereira": "Andreas Hoelgebaum Pereira",
                       "André Gomes": "André Tavares Gomes", "Anel Ahmedhodzic": "Anel Ahmedhodžić",
@@ -159,7 +133,7 @@ def get_current_players(previous_players):
 
             player_name = f"{row['first_name']} {row['second_name']}"
             if player_name in PIDs:
-                raise Exception("2 players with the same name!")
+                raise Exception("2 players with the same name! " + player_name)
 
             if previous_players is None or player_name in previous_players:
                 PIDs[player_name] = {'id': i, 'web_name': row['web_name'], 'first_name': row['first_name'],
@@ -219,10 +193,13 @@ def get_points(year):
         fixture_reader = csv.DictReader(fixture_file)
 
         fixture_to_difficulty = {}
+        fixture_to_team = {}
 
         for fixture in fixture_reader:
             fixture_to_difficulty[int(fixture['id'])] = {'h': int(fixture['team_h_difficulty']),
                                                          'a': int(fixture['team_a_difficulty'])}
+            fixture_to_team[int(fixture['id'])] = {'h': teams[int(fixture['team_h'])]['short_name'],
+                                                   'a': teams[int(fixture['team_a'])]['short_name']}
 
     gws = os.listdir(f"../Fantasy-Premier-League/data/{year}/gws")
     gws = [gw for gw in gws if gw.startswith("gw")]
@@ -246,6 +223,8 @@ def get_points(year):
             game_round = 238
         case "2023-24":
             game_round = 276
+        case "2024-25":
+            game_round = 309
 
     for gw in gws:
         with open(f"../Fantasy-Premier-League/data/{year}/gws/{gw}", encoding="latin-1") as gw_file:
@@ -280,6 +259,7 @@ def get_points(year):
 
                 diff = fixture_to_difficulty[int(gw_element['fixture'])][
                     'h' if gw_element['was_home'] == 'True' else 'a']
+                opp_team = fixture_to_team[int(gw_element['fixture'])]['a' if gw_element['was_home'] == 'True' else 'h']
 
                 fixture_date = gw_element['kickoff_time'].split('T')[0]
                 if USE_UNDERSTAT and fixture_date not in element_object['understat']:
@@ -287,7 +267,8 @@ def get_points(year):
                     continue
 
                 points_data_set[element_object['id']][f"GW{game_round}"] = {'diff': diff,
-                                                                            'points': int(gw_element['total_points'])}
+                                                                            'points': int(gw_element['total_points']),
+                                                                            'team': opp_team}
 
         game_round += 1
 
@@ -307,6 +288,8 @@ def get_points(year):
         case "2022-23":
             get_points("2023-24")
         case "2023-24":
+            get_points("2024-25")
+        case "2024-25":
             write_points_data()
 
 
@@ -317,6 +300,12 @@ def write_points_data():
 
 
 def get_dataset():
-    global points_data_set, master_data_set
+    global points_data_set, master_data_set, PIDs, teams
+    PIDs = {}
+    teams = {}
+    points_data_set = {}
+    master_data_set = [
+    ["First Name", "Surname", "Web Name", "Position", "GKP", "DEF", "MID", "FWD", "Team", *TEAMS, "Cost", "ID", "ARIMA",
+     "LSTM", "FOREST", "PP", "NEXT", "Health", "PREV", "Selected"]]
     get_teams()
     return points_data_set, master_data_set

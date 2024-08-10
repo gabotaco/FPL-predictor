@@ -1,7 +1,7 @@
 import time
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import LSTM, Dense, Dropout, Masking
+from tensorflow.keras.layers import LSTM, Dense, Dropout, Masking, Input
 from tensorflow.keras.regularizers import l2
 from tensorflow.keras.callbacks import Callback
 
@@ -10,7 +10,7 @@ tf.keras.backend.set_floatx('float64')
 
 def make_model(time_steps, amount_of_features, n_neurons=64, dropout_rate=0.5, n_hidden_layers=1,
                n_neurons_last_layer=128):
-    layers = [Masking(mask_value=0, input_shape=(time_steps, amount_of_features), dtype='float32')]
+    layers = [Input((time_steps, amount_of_features))]
     for _ in range(0, n_hidden_layers):
         layers.append(LSTM(n_neurons, return_sequences=True, kernel_regularizer=l2(0.001), bias_regularizer=l2(0.001)))
         # layers.append(ConditionalRecurrent(LSTM(n_neurons, return_sequences=True, kernel_regularizer=l2(0.001), bias_regularizer=l2(0.001))))
