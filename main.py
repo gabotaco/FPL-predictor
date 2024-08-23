@@ -10,7 +10,8 @@ from dataset import get_dataset, master_data_set as header
 from game_information import TEAMS, get_team_info, CURRENT_SEASON, CURRENT_GAME_WEEK, CURRENT_SEASON_BEGINNING_ROUND, \
     SEASON_LENGTH, MIN_GAMES, MIN_SEASON_PPG, MIN_SEASON_GAME_PERCENTAGE, TEAM_WORTH, FREE_TRANSFERS, \
     PREDICT_BY_WEEKS, TRANSFER_COST
-from solver import make_team
+from solver import make_team, calibrate_player
+from calibrate import CALIBRATE_BY, process_player_data
 
 CURRENT_TEAM = {
     "André Onana Onana",
@@ -24,7 +25,7 @@ CURRENT_TEAM = {
 
     "Cole Palmer Palmer",
     "Phil Foden Foden",
-    "Eberechi Eze Eze",
+    "Bruno Guimarães Rodriguez Moura Bruno G.",
     "Morgan Gibbs-White Gibbs-White",
     "Callum Hudson-Odoi Hudson-Odoi",
 
@@ -33,29 +34,9 @@ CURRENT_TEAM = {
     "Nicolas Jackson N.Jackson",
 }
 
-INJURIES = {}
-
-RATIOS = {  # Last calibrated 8/10/24
-    'ARS': {'ARIMA': 0, 'LSTM': 0.73704296512, 'FOREST': 0.26062185169},
-    'AVL': {'ARIMA': 0, 'LSTM': 0.91789835397, 'FOREST': 0.16086406265},
-    'BOU': {'ARIMA': 0.93457825874, 'LSTM': 0, 'FOREST': 0.16250476072},
-    'BRE': {'ARIMA': 1.1627637572, 'LSTM': 0, 'FOREST': 0.0099934913334},
-    'BHA': {'ARIMA': 0.49786162094, 'LSTM': 0.14656872407, 'FOREST': 0.080263819216},
-    'CHE': {'ARIMA': 1.1712179546, 'LSTM': 0, 'FOREST': 0.21863589838},
-    'CRY': {'ARIMA': 1.2370669284, 'LSTM': 0, 'FOREST': 0.081754557167},
-    'EVE': {'ARIMA': 0, 'LSTM': 1.2104431383, 'FOREST': 0},
-    'FUL': {'ARIMA': 0.097467448781, 'LSTM': 0.86045175007, 'FOREST': 0.087260135703},
-    'IPS': {'ARIMA': 0, 'LSTM': 0, 'FOREST': 0},
-    'LEI': {'ARIMA': 0, 'LSTM': 0, 'FOREST': 0},
-    'LIV': {'ARIMA': 0.42069227531, 'LSTM': 0, 'FOREST': 0.38314486145},
-    'MCI': {'ARIMA': 0.84500921112, 'LSTM': 0, 'FOREST': 0.25293775015},
-    'MUN': {'ARIMA': 0, 'LSTM': 0.99551988156, 'FOREST': 0.05691605379},
-    'NEW': {'ARIMA': 0, 'LSTM': 0.55596020482, 'FOREST': 0.65229287228},
-    'NFO': {'ARIMA': 0, 'LSTM': 0.74186403909, 'FOREST': 0.53040146977},
-    'SOU': {'ARIMA': 0, 'LSTM': 0, 'FOREST': 0},
-    'TOT': {'ARIMA': 0.63733747058, 'LSTM': 0.25945397964, 'FOREST': 0.081050519303},
-    'WHU': {'ARIMA': 0.22304113351, 'LSTM': 0.38625307366, 'FOREST': 0.3595802853},
-    'WOL': {'ARIMA': 0, 'LSTM': 0.60515038751, 'FOREST': 0.26426496301}}
+INJURIES = {
+    "Pedro Porro Pedro Porro": 0.75
+}
 
 PROCESS_ALL_PLAYERS = False
 BUGGED_PLAYERS = []
@@ -166,7 +147,7 @@ def make_training_set():
 
             round_num = int(dataset.replace("GW", ""))
             beginning_round = CURRENT_SEASON_BEGINNING_ROUND
-            if CURRENT_GAME_WEEK == 1:
+            if CURRENT_GAME_WEEK <= CALIBRATE_BY:
                 beginning_round = CURRENT_SEASON_BEGINNING_ROUND - SEASON_LENGTH - CURRENT_GAME_WEEK
 
             if round_num >= beginning_round:
@@ -174,15 +155,16 @@ def make_training_set():
                 num_games += 1
 
         if not PROCESS_ALL_PLAYERS and (
-                total_games < MIN_GAMES or season_sum < MIN_SEASON_PPG * num_games or num_games < (
-                SEASON_LENGTH if CURRENT_GAME_WEEK == 1 else CURRENT_GAME_WEEK - 1) * MIN_SEASON_GAME_PERCENTAGE or len(
-            predict_by[player_data['team']][
-                'games']) < 1 or total_games < 2 or sum(ts[-PREDICT_BY_WEEKS:]) < PREDICT_BY_WEEKS * MIN_SEASON_PPG) and player_name not in CURRENT_TEAM:
+                total_games - CALIBRATE_BY < MIN_GAMES or season_sum < MIN_SEASON_PPG * num_games or num_games < (
+                SEASON_LENGTH if CURRENT_GAME_WEEK <= CALIBRATE_BY else CURRENT_GAME_WEEK - 1) * MIN_SEASON_GAME_PERCENTAGE or
+                len(predict_by[player_data['team']]['games']) < 1 or total_games < 2 or
+                sum(ts[-PREDICT_BY_WEEKS:]) < PREDICT_BY_WEEKS * MIN_SEASON_PPG) and player_name not in CURRENT_TEAM:
             continue
 
-        arima_ratio = RATIOS[player_data['team']]['ARIMA']
-        lstm_ratio = RATIOS[player_data['team']]['LSTM']
-        forest_ratio = RATIOS[player_data['team']]['FOREST']
+        c_arima, c_lstm, c_forest, c_actual = process_player_data(player_data)
+        if c_actual < 0:
+            continue
+        arima_ratio, lstm_ratio, forest_ratio = calibrate_player(c_arima, c_lstm, c_forest, c_actual)
 
         if season_sum <= 0 or len(predict_by[player_data['team']]['games']) == 0:
             arima_overall, arima_next = 0, 0
@@ -215,8 +197,8 @@ def make_training_set():
                 BUGGED_PLAYERS.append(player_data['id'])
                 continue
 
-        if arima_overall != 0 and lstm_overall != 0 and forest_overall != 0 and (arima_overall / lstm_overall > MAX_DIFF or
-                                                         lstm_overall / arima_overall > MAX_DIFF):
+        if min(arima_overall, lstm_overall, forest_overall) > 0 and (max(arima_overall, lstm_overall, forest_overall) /
+                                                                     min(arima_overall, lstm_overall, forest_overall)) > MAX_DIFF:
             BUGGED_PLAYERS.append(player_data['id'])
             continue
 
@@ -224,8 +206,8 @@ def make_training_set():
             p = 0
             next_p = 0
         else:
-            p = (arima_overall * arima_ratio) + (lstm_overall * lstm_ratio) + (forest_overall * forest_ratio)
-            next_p = (arima_next * arima_ratio) + (lstm_next * lstm_ratio) + (forest_next * forest_ratio)
+            p = (arima_overall * arima_ratio) + (lstm_overall * lstm_ratio) + (forest_overall * forest_ratio) / 3
+            next_p = (arima_next * arima_ratio) + (lstm_next * lstm_ratio) + (forest_next * forest_ratio) / 3
 
         found = False
         for master in master_data_set:

@@ -69,3 +69,16 @@ def make_calibration(players):
     m.solve(disp=False)
 
     return arima.value[0], lstm.value[0], forest.value[0]
+
+
+def calibrate_player(arima, lstm, forest, actual_points):
+    m = GEKKO(remote=False)
+    arima_v = m.Var(value=0, lb=0)
+    lstm_v = m.Var(value=0, lb=0)
+    forest_v = m.Var(value=0, lb=0)
+
+    m.Minimize((((arima * arima_v) + (lstm * lstm_v) + (forest * forest_v)) - actual_points) ** 2)
+
+    m.solve(disp=False)
+
+    return arima_v.value[0], lstm_v.value[0], forest_v.value[0]
