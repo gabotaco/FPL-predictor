@@ -1670,9 +1670,9 @@
             "team": "CRY"
         },
         "GW309": {
-            "diff": 4,
-            "points": 3,
-            "team": "LEI"
+            "diff": 2,
+            "points": 2,
+            "team": "BHA"
         },
         "GW310": {
             "diff": 2,
@@ -2239,8 +2239,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 6,
-            "team": "WOL"
+            "points": 2,
+            "team": "NFO"
         },
         "GW310": {
             "diff": 2,
@@ -2789,6 +2789,11 @@
             "diff": 4,
             "points": 1,
             "team": "LIV"
+        },
+        "GW309": {
+            "diff": 4,
+            "points": 2,
+            "team": "NEW"
         }
     },
     "338": {
@@ -3730,8 +3735,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 2,
-            "team": "FUL"
+            "points": 7,
+            "team": "IPS"
         },
         "GW310": {
             "diff": 3,
@@ -4678,8 +4683,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 1,
-            "team": "FUL"
+            "points": 6,
+            "team": "IPS"
         },
         "GW310": {
             "diff": 3,
@@ -6221,6 +6226,11 @@
             "diff": 3,
             "points": 1,
             "team": "WHU"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 1,
+            "team": "CRY"
         }
     },
     "452": {
@@ -9231,8 +9241,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 2,
-            "team": "FUL"
+            "points": 9,
+            "team": "BOU"
         },
         "GW310": {
             "diff": 5,
@@ -10946,9 +10956,9 @@
             "team": "IPS"
         },
         "GW309": {
-            "diff": 2,
+            "diff": 3,
             "points": 1,
-            "team": "EVE"
+            "team": "AVL"
         },
         "GW311": {
             "diff": 3,
@@ -12510,9 +12520,9 @@
             "team": "AVL"
         },
         "GW309": {
-            "diff": 3,
-            "points": 9,
-            "team": "CRY"
+            "diff": 2,
+            "points": 3,
+            "team": "WOL"
         },
         "GW310": {
             "diff": 4,
@@ -13528,9 +13538,9 @@
             "team": "LIV"
         },
         "GW309": {
-            "diff": 3,
-            "points": 7,
-            "team": "BHA"
+            "diff": 4,
+            "points": 8,
+            "team": "CHE"
         },
         "GW310": {
             "diff": 2,
@@ -14366,9 +14376,9 @@
             "team": "AVL"
         },
         "GW309": {
-            "diff": 3,
-            "points": 1,
-            "team": "CRY"
+            "diff": 2,
+            "points": 0,
+            "team": "WOL"
         },
         "GW311": {
             "diff": 2,
@@ -15220,8 +15230,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 12,
-            "team": "SOU"
+            "points": 5,
+            "team": "FUL"
         },
         "GW310": {
             "diff": 2,
@@ -15657,9 +15667,9 @@
             "team": "NEW"
         },
         "GW309": {
-            "diff": 4,
-            "points": 3,
-            "team": "LEI"
+            "diff": 2,
+            "points": 2,
+            "team": "BHA"
         },
         "GW310": {
             "diff": 2,
@@ -16163,6 +16173,11 @@
             "diff": 2,
             "points": 0,
             "team": "WHU"
+        },
+        "GW309": {
+            "diff": 4,
+            "points": 1,
+            "team": "NEW"
         }
     },
     "438": {
@@ -17714,6 +17729,11 @@
             "diff": 2,
             "points": 6,
             "team": "SOU"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 5,
+            "team": "LEI"
         }
     },
     "139": {
@@ -18447,6 +18467,11 @@
             "diff": 2,
             "points": 1,
             "team": "LIV"
+        },
+        "GW309": {
+            "diff": 3,
+            "points": 2,
+            "team": "EVE"
         }
     },
     "247": {
@@ -19487,9 +19512,9 @@
             "team": "CRY"
         },
         "GW309": {
-            "diff": 4,
-            "points": 7,
-            "team": "LEI"
+            "diff": 2,
+            "points": 0,
+            "team": "BHA"
         },
         "GW310": {
             "diff": 2,
@@ -20318,6 +20343,11 @@
             "diff": 2,
             "points": 1,
             "team": "WHU"
+        },
+        "GW309": {
+            "diff": 3,
+            "points": 8,
+            "team": "TOT"
         }
     },
     "332": {
@@ -20721,6 +20751,11 @@
             "diff": 3,
             "points": 1,
             "team": "WHU"
+        },
+        "GW309": {
+            "diff": 3,
+            "points": 2,
+            "team": "TOT"
         }
     },
     "225": {
@@ -23142,9 +23177,9 @@
             "team": "CRY"
         },
         "GW309": {
-            "diff": 4,
-            "points": 10,
-            "team": "LEI"
+            "diff": 2,
+            "points": 1,
+            "team": "BHA"
         },
         "GW310": {
             "diff": 2,
@@ -25311,9 +25346,9 @@
             "team": "LIV"
         },
         "GW309": {
-            "diff": 3,
-            "points": 9,
-            "team": "BHA"
+            "diff": 4,
+            "points": 3,
+            "team": "CHE"
         },
         "GW310": {
             "diff": 2,
@@ -27057,9 +27092,9 @@
             "team": "CHE"
         },
         "GW309": {
-            "diff": 5,
-            "points": 0,
-            "team": "MCI"
+            "diff": 3,
+            "points": 6,
+            "team": "EVE"
         },
         "GW310": {
             "diff": 2,
@@ -27982,7 +28017,7 @@
         "GW309": {
             "diff": 2,
             "points": 2,
-            "team": "BOU"
+            "team": "WHU"
         },
         "GW310": {
             "diff": 3,
@@ -29619,6 +29654,11 @@
             "diff": 3,
             "points": 1,
             "team": "BHA"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 3,
+            "team": "FUL"
         }
     },
     "606": {
@@ -30099,9 +30139,9 @@
             "team": "NFO"
         },
         "GW309": {
-            "diff": 2,
+            "diff": 5,
             "points": 2,
-            "team": "BOU"
+            "team": "ARS"
         },
         "GW310": {
             "diff": 2,
@@ -30597,9 +30637,9 @@
             "team": "BRE"
         },
         "GW309": {
-            "diff": 4,
-            "points": -1,
-            "team": "MUN"
+            "diff": 2,
+            "points": 1,
+            "team": "BHA"
         },
         "GW310": {
             "diff": 4,
@@ -31643,9 +31683,9 @@
             "team": "NFO"
         },
         "GW309": {
-            "diff": 2,
-            "points": 0,
-            "team": "BOU"
+            "diff": 5,
+            "points": 1,
+            "team": "ARS"
         },
         "GW310": {
             "diff": 2,
@@ -32404,6 +32444,11 @@
             "diff": 2,
             "points": 1,
             "team": "BRE"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 1,
+            "team": "BHA"
         }
     },
     "557": {
@@ -33259,9 +33304,9 @@
             "team": "IPS"
         },
         "GW309": {
-            "diff": 2,
-            "points": 5,
-            "team": "EVE"
+            "diff": 3,
+            "points": 2,
+            "team": "AVL"
         },
         "GW310": {
             "diff": 4,
@@ -34283,8 +34328,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 2,
-            "team": "FUL"
+            "points": 14,
+            "team": "IPS"
         },
         "GW310": {
             "diff": 3,
@@ -34882,7 +34927,7 @@
         "GW309": {
             "diff": 2,
             "points": 2,
-            "team": "FUL"
+            "team": "BOU"
         },
         "GW310": {
             "diff": 5,
@@ -37154,9 +37199,9 @@
             "team": "LIV"
         },
         "GW309": {
-            "diff": 4,
+            "diff": 2,
             "points": 1,
-            "team": "AVL"
+            "team": "NFO"
         },
         "GW311": {
             "diff": 5,
@@ -38853,6 +38898,11 @@
             "diff": 2,
             "points": 13,
             "team": "LIV"
+        },
+        "GW309": {
+            "diff": 3,
+            "points": 1,
+            "team": "MUN"
         }
     },
     "538": {
@@ -39760,6 +39810,11 @@
         "GW311": {
             "diff": 5,
             "points": 9,
+            "team": "LEI"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 1,
             "team": "LEI"
         }
     },
@@ -42007,7 +42062,7 @@
         "GW309": {
             "diff": 2,
             "points": 1,
-            "team": "SOU"
+            "team": "FUL"
         },
         "GW310": {
             "diff": 2,
@@ -42533,9 +42588,9 @@
             "team": "NEW"
         },
         "GW309": {
-            "diff": 4,
-            "points": 1,
-            "team": "LEI"
+            "diff": 3,
+            "points": 0,
+            "team": "MUN"
         },
         "GW310": {
             "diff": 2,
@@ -43497,8 +43552,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 1,
-            "team": "FUL"
+            "points": 8,
+            "team": "IPS"
         },
         "GW310": {
             "diff": 3,
@@ -45148,8 +45203,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 0,
-            "team": "FUL"
+            "points": 6,
+            "team": "IPS"
         },
         "GW310": {
             "diff": 3,
@@ -45868,6 +45923,11 @@
             "diff": 4,
             "points": 3,
             "team": "NEW"
+        },
+        "GW309": {
+            "diff": 3,
+            "points": 2,
+            "team": "TOT"
         }
     },
     "458": {
@@ -46461,6 +46521,11 @@
             "diff": 2,
             "points": 2,
             "team": "CHE"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 2,
+            "team": "BOU"
         }
     },
     "214": {
@@ -47106,9 +47171,9 @@
             "team": "LEI"
         },
         "GW309": {
-            "diff": 3,
-            "points": 8,
-            "team": "NEW"
+            "diff": 2,
+            "points": 2,
+            "team": "BRE"
         },
         "GW310": {
             "diff": 3,
@@ -48602,9 +48667,9 @@
             "team": "WHU"
         },
         "GW309": {
-            "diff": 4,
-            "points": 1,
-            "team": "LEI"
+            "diff": 3,
+            "points": 3,
+            "team": "MUN"
         },
         "GW311": {
             "diff": 2,
@@ -50138,9 +50203,9 @@
             "team": "WHU"
         },
         "GW309": {
-            "diff": 4,
+            "diff": 3,
             "points": 2,
-            "team": "LEI"
+            "team": "MUN"
         },
         "GW310": {
             "diff": 2,
@@ -50751,9 +50816,9 @@
             "team": "CRY"
         },
         "GW309": {
-            "diff": 4,
-            "points": 1,
-            "team": "LEI"
+            "diff": 2,
+            "points": -2,
+            "team": "BHA"
         },
         "GW310": {
             "diff": 2,
@@ -51584,9 +51649,9 @@
             "team": "CHE"
         },
         "GW309": {
-            "diff": 4,
-            "points": 6,
-            "team": "LEI"
+            "diff": 2,
+            "points": 2,
+            "team": "BHA"
         },
         "GW311": {
             "diff": 2,
@@ -52065,6 +52130,11 @@
             "diff": 2,
             "points": 1,
             "team": "NEW"
+        },
+        "GW309": {
+            "diff": 3,
+            "points": 2,
+            "team": "TOT"
         }
     },
     "431": {
@@ -53119,8 +53189,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 2,
-            "team": "EVE"
+            "points": 1,
+            "team": "SOU"
         },
         "GW310": {
             "diff": 2,
@@ -54156,9 +54226,9 @@
             "team": "IPS"
         },
         "GW309": {
-            "diff": 2,
-            "points": 2,
-            "team": "EVE"
+            "diff": 3,
+            "points": 1,
+            "team": "AVL"
         },
         "GW310": {
             "diff": 4,
@@ -55605,6 +55675,11 @@
             "diff": 3,
             "points": 1,
             "team": "BHA"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 1,
+            "team": "FUL"
         }
     },
     "449": {
@@ -56569,8 +56644,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 3,
-            "team": "WOL"
+            "points": 1,
+            "team": "NFO"
         },
         "GW310": {
             "diff": 2,
@@ -57326,9 +57401,9 @@
             "team": "AVL"
         },
         "GW309": {
-            "diff": 3,
-            "points": 16,
-            "team": "BHA"
+            "diff": 4,
+            "points": 1,
+            "team": "CHE"
         },
         "GW311": {
             "diff": 2,
@@ -57954,9 +58029,9 @@
             "team": "CHE"
         },
         "GW309": {
-            "diff": 5,
-            "points": 2,
-            "team": "MCI"
+            "diff": 3,
+            "points": 12,
+            "team": "EVE"
         },
         "GW310": {
             "diff": 2,
@@ -58748,8 +58823,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 1,
-            "team": "EVE"
+            "points": -2,
+            "team": "SOU"
         },
         "GW310": {
             "diff": 2,
@@ -59453,6 +59528,11 @@
             "diff": 5,
             "points": -3,
             "team": "MCI"
+        },
+        "GW309": {
+            "diff": 3,
+            "points": 2,
+            "team": "MUN"
         }
     },
     "576": {
@@ -63055,9 +63135,9 @@
             "team": "CRY"
         },
         "GW309": {
-            "diff": 4,
-            "points": 6,
-            "team": "LEI"
+            "diff": 2,
+            "points": 2,
+            "team": "BHA"
         },
         "GW310": {
             "diff": 2,
@@ -64008,9 +64088,9 @@
             "team": "LEI"
         },
         "GW309": {
-            "diff": 3,
-            "points": 5,
-            "team": "NEW"
+            "diff": 2,
+            "points": 0,
+            "team": "BRE"
         },
         "GW310": {
             "diff": 3,
@@ -65392,6 +65472,11 @@
             "diff": 4,
             "points": 0,
             "team": "LIV"
+        },
+        "GW309": {
+            "diff": 4,
+            "points": 2,
+            "team": "NEW"
         }
     },
     "213": {
@@ -66610,9 +66695,9 @@
             "team": "WHU"
         },
         "GW309": {
-            "diff": 4,
-            "points": 2,
-            "team": "LEI"
+            "diff": 3,
+            "points": 3,
+            "team": "MUN"
         },
         "GW310": {
             "diff": 2,
@@ -67208,9 +67293,9 @@
             "team": "AVL"
         },
         "GW309": {
-            "diff": 3,
-            "points": 1,
-            "team": "CRY"
+            "diff": 2,
+            "points": 6,
+            "team": "WOL"
         },
         "GW313": {
             "diff": 2,
@@ -70016,6 +70101,11 @@
             "diff": 4,
             "points": 0,
             "team": "LIV"
+        },
+        "GW309": {
+            "diff": 4,
+            "points": 2,
+            "team": "NEW"
         }
     },
     "207": {
@@ -71138,8 +71228,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 2,
-            "team": "FUL"
+            "points": 3,
+            "team": "BOU"
         },
         "GW310": {
             "diff": 5,
@@ -71565,9 +71655,9 @@
             "team": "IPS"
         },
         "GW309": {
-            "diff": 2,
-            "points": -2,
-            "team": "EVE"
+            "diff": 3,
+            "points": 1,
+            "team": "AVL"
         },
         "GW310": {
             "diff": 4,
@@ -72289,8 +72379,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 1,
-            "team": "EVE"
+            "points": 3,
+            "team": "SOU"
         },
         "GW310": {
             "diff": 2,
@@ -73309,9 +73399,9 @@
             "team": "AVL"
         },
         "GW309": {
-            "diff": 3,
-            "points": 6,
-            "team": "CRY"
+            "diff": 2,
+            "points": 12,
+            "team": "WOL"
         },
         "GW310": {
             "diff": 4,
@@ -74103,8 +74193,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 2,
-            "team": "EVE"
+            "points": 1,
+            "team": "SOU"
         },
         "GW310": {
             "diff": 2,
@@ -74556,6 +74646,11 @@
             "diff": 5,
             "points": 1,
             "team": "MCI"
+        },
+        "GW309": {
+            "diff": 3,
+            "points": 1,
+            "team": "AVL"
         }
     },
     "56": {
@@ -75442,8 +75537,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 2,
-            "team": "BOU"
+            "points": 7,
+            "team": "WHU"
         },
         "GW310": {
             "diff": 3,
@@ -75804,9 +75899,9 @@
             "team": "IPS"
         },
         "GW309": {
-            "diff": 2,
-            "points": 1,
-            "team": "EVE"
+            "diff": 4,
+            "points": 0,
+            "team": "LIV"
         }
     },
     "235": {
@@ -77397,9 +77492,9 @@
             "team": "NFO"
         },
         "GW309": {
-            "diff": 2,
-            "points": 2,
-            "team": "BOU"
+            "diff": 3,
+            "points": 1,
+            "team": "AVL"
         },
         "GW310": {
             "diff": 2,
@@ -78826,6 +78921,11 @@
             "diff": 4,
             "points": 1,
             "team": "NEW"
+        },
+        "GW309": {
+            "diff": 5,
+            "points": 1,
+            "team": "ARS"
         }
     },
     "426": {
@@ -79582,8 +79682,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 1,
-            "team": "EVE"
+            "points": 5,
+            "team": "SOU"
         },
         "GW310": {
             "diff": 2,
@@ -79999,9 +80099,9 @@
             "team": "LEI"
         },
         "GW309": {
-            "diff": 3,
-            "points": 6,
-            "team": "NEW"
+            "diff": 2,
+            "points": 2,
+            "team": "BRE"
         },
         "GW310": {
             "diff": 3,
@@ -81746,6 +81846,11 @@
             "diff": 2,
             "points": 1,
             "team": "BRE"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 11,
+            "team": "SOU"
         }
     },
     "47": {
@@ -82543,7 +82648,7 @@
         "GW309": {
             "diff": 2,
             "points": 2,
-            "team": "BOU"
+            "team": "WHU"
         },
         "GW310": {
             "diff": 3,
@@ -83262,6 +83367,11 @@
             "diff": 2,
             "points": 2,
             "team": "EVE"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 2,
+            "team": "FUL"
         }
     },
     "241": {
@@ -84788,6 +84898,11 @@
             "diff": 2,
             "points": 1,
             "team": "BRE"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 9,
+            "team": "SOU"
         }
     },
     "9": {
@@ -85347,8 +85462,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 1,
-            "team": "EVE"
+            "points": 6,
+            "team": "SOU"
         },
         "GW310": {
             "diff": 2,
@@ -86202,9 +86317,9 @@
             "team": "WHU"
         },
         "GW309": {
-            "diff": 4,
+            "diff": 3,
             "points": 1,
-            "team": "LEI"
+            "team": "MUN"
         },
         "GW310": {
             "diff": 2,
@@ -87035,9 +87150,9 @@
             "team": "AVL"
         },
         "GW309": {
-            "diff": 3,
-            "points": 7,
-            "team": "CRY"
+            "diff": 2,
+            "points": 1,
+            "team": "WOL"
         },
         "GW310": {
             "diff": 4,
@@ -87601,6 +87716,11 @@
             "diff": 5,
             "points": 1,
             "team": "LEI"
+        },
+        "GW309": {
+            "diff": 5,
+            "points": 1,
+            "team": "MCI"
         }
     },
     "228": {
@@ -87749,6 +87869,11 @@
             "diff": 4,
             "points": 7,
             "team": "ARS"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 1,
+            "team": "BRE"
         }
     },
     "152": {
@@ -88352,6 +88477,11 @@
             "diff": 3,
             "points": 1,
             "team": "MUN"
+        },
+        "GW309": {
+            "diff": 3,
+            "points": 1,
+            "team": "EVE"
         }
     },
     "129": {
@@ -88725,6 +88855,11 @@
             "diff": 3,
             "points": 0,
             "team": "MUN"
+        },
+        "GW309": {
+            "diff": 3,
+            "points": 1,
+            "team": "EVE"
         }
     },
     "302": {
@@ -88848,6 +88983,11 @@
             "diff": 2,
             "points": 1,
             "team": "NEW"
+        },
+        "GW309": {
+            "diff": 4,
+            "points": 1,
+            "team": "LIV"
         }
     },
     "43": {
@@ -89620,7 +89760,7 @@
         "GW309": {
             "diff": 2,
             "points": 2,
-            "team": "BOU"
+            "team": "WHU"
         },
         "GW310": {
             "diff": 3,
@@ -90925,6 +91065,11 @@
             "diff": 2,
             "points": 7,
             "team": "EVE"
+        },
+        "GW309": {
+            "diff": 3,
+            "points": 2,
+            "team": "TOT"
         }
     },
     "351": {
@@ -91736,6 +91881,11 @@
             "diff": 2,
             "points": 1,
             "team": "FUL"
+        },
+        "GW309": {
+            "diff": 3,
+            "points": 3,
+            "team": "MUN"
         }
     },
     "39": {
@@ -92863,8 +93013,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 1,
-            "team": "EVE"
+            "points": 3,
+            "team": "SOU"
         },
         "GW310": {
             "diff": 2,
@@ -93328,6 +93478,11 @@
             "diff": 2,
             "points": 3,
             "team": "EVE"
+        },
+        "GW309": {
+            "diff": 5,
+            "points": 1,
+            "team": "ARS"
         }
     },
     "559": {
@@ -94111,6 +94266,11 @@
             "diff": 2,
             "points": 2,
             "team": "LIV"
+        },
+        "GW309": {
+            "diff": 3,
+            "points": 2,
+            "team": "AVL"
         }
     },
     "165": {
@@ -95025,8 +95185,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 2,
-            "team": "FUL"
+            "points": 3,
+            "team": "IPS"
         },
         "GW310": {
             "diff": 3,
@@ -95299,7 +95459,7 @@
         "GW309": {
             "diff": 2,
             "points": 1,
-            "team": "WOL"
+            "team": "SOU"
         },
         "GW310": {
             "diff": 2,
@@ -95662,7 +95822,7 @@
         "GW309": {
             "diff": 2,
             "points": 1,
-            "team": "FUL"
+            "team": "BOU"
         },
         "GW310": {
             "diff": 5,
@@ -95958,9 +96118,9 @@
             "team": "CHE"
         },
         "GW309": {
-            "diff": 5,
+            "diff": 3,
             "points": 2,
-            "team": "MCI"
+            "team": "EVE"
         },
         "GW310": {
             "diff": 2,
@@ -96596,9 +96756,9 @@
             "team": "LEI"
         },
         "GW309": {
-            "diff": 3,
-            "points": 6,
-            "team": "NEW"
+            "diff": 2,
+            "points": 1,
+            "team": "BRE"
         },
         "GW310": {
             "diff": 3,
@@ -97866,9 +98026,9 @@
             "team": "LEI"
         },
         "GW309": {
-            "diff": 3,
-            "points": 3,
-            "team": "NEW"
+            "diff": 2,
+            "points": 2,
+            "team": "BRE"
         },
         "GW311": {
             "diff": 3,
@@ -98342,6 +98502,11 @@
             "diff": 2,
             "points": 4,
             "team": "LIV"
+        },
+        "GW309": {
+            "diff": 3,
+            "points": 1,
+            "team": "MUN"
         }
     },
     "236": {
@@ -98982,9 +99147,9 @@
             "team": "CRY"
         },
         "GW309": {
-            "diff": 4,
-            "points": 3,
-            "team": "LEI"
+            "diff": 2,
+            "points": 2,
+            "team": "BHA"
         },
         "GW310": {
             "diff": 2,
@@ -99590,9 +99755,9 @@
             "team": "AVL"
         },
         "GW309": {
-            "diff": 3,
-            "points": 14,
-            "team": "CRY"
+            "diff": 2,
+            "points": 12,
+            "team": "WOL"
         },
         "GW310": {
             "diff": 4,
@@ -101240,6 +101405,11 @@
             "diff": 5,
             "points": 1,
             "team": "ARS"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 1,
+            "team": "LEI"
         }
     },
     "558": {
@@ -101598,6 +101768,11 @@
             "diff": 5,
             "points": 4,
             "team": "MCI"
+        },
+        "GW309": {
+            "diff": 3,
+            "points": 1,
+            "team": "AVL"
         }
     },
     "273": {
@@ -101926,6 +102101,11 @@
             "diff": 2,
             "points": 1,
             "team": "LIV"
+        },
+        "GW309": {
+            "diff": 3,
+            "points": 2,
+            "team": "MUN"
         }
     },
     "57": {
@@ -102612,8 +102792,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 9,
-            "team": "BOU"
+            "points": 2,
+            "team": "WHU"
         },
         "GW310": {
             "diff": 3,
@@ -103275,6 +103455,11 @@
             "diff": 2,
             "points": 1,
             "team": "LIV"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 4,
+            "team": "WHU"
         }
     },
     "601": {
@@ -103396,6 +103581,11 @@
             "diff": 2,
             "points": 1,
             "team": "NEW"
+        },
+        "GW309": {
+            "diff": 4,
+            "points": 2,
+            "team": "LIV"
         }
     },
     "608": {
@@ -104514,9 +104704,9 @@
             "team": "WHU"
         },
         "GW309": {
-            "diff": 4,
-            "points": 1,
-            "team": "LEI"
+            "diff": 3,
+            "points": 2,
+            "team": "MUN"
         },
         "GW310": {
             "diff": 2,
@@ -105092,9 +105282,9 @@
             "team": "CHE"
         },
         "GW309": {
-            "diff": 5,
-            "points": -1,
-            "team": "MCI"
+            "diff": 3,
+            "points": 8,
+            "team": "EVE"
         },
         "GW310": {
             "diff": 2,
@@ -105128,6 +105318,11 @@
             "diff": 4,
             "points": 1,
             "team": "MCI"
+        },
+        "GW309": {
+            "diff": 4,
+            "points": 1,
+            "team": "LIV"
         }
     },
     "455": {
@@ -105276,6 +105471,11 @@
             "diff": 2,
             "points": 1,
             "team": "NFO"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 1,
+            "team": "BOU"
         }
     },
     "537": {
@@ -106742,9 +106942,9 @@
             "team": "LIV"
         },
         "GW309": {
-            "diff": 3,
+            "diff": 2,
             "points": 3,
-            "team": "CRY"
+            "team": "WOL"
         },
         "GW310": {
             "diff": 4,
@@ -107386,6 +107586,11 @@
             "diff": 3,
             "points": 1,
             "team": "NEW"
+        },
+        "GW309": {
+            "diff": 5,
+            "points": 1,
+            "team": "MCI"
         }
     },
     "359": {
@@ -108202,9 +108407,9 @@
             "team": "LEI"
         },
         "GW309": {
-            "diff": 3,
-            "points": 7,
-            "team": "NEW"
+            "diff": 2,
+            "points": 0,
+            "team": "BRE"
         },
         "GW310": {
             "diff": 3,
@@ -108728,6 +108933,11 @@
             "diff": 2,
             "points": 3,
             "team": "FUL"
+        },
+        "GW309": {
+            "diff": 5,
+            "points": 2,
+            "team": "MCI"
         }
     },
     "352": {
@@ -109051,7 +109261,7 @@
         "GW309": {
             "diff": 2,
             "points": 1,
-            "team": "EVE"
+            "team": "BOU"
         },
         "GW310": {
             "diff": 2,
@@ -109632,9 +109842,9 @@
             "team": "AVL"
         },
         "GW309": {
-            "diff": 3,
-            "points": 11,
-            "team": "CRY"
+            "diff": 2,
+            "points": 3,
+            "team": "WOL"
         },
         "GW310": {
             "diff": 4,
@@ -110085,9 +110295,9 @@
             "team": "LEI"
         },
         "GW309": {
-            "diff": 3,
-            "points": 13,
-            "team": "NEW"
+            "diff": 2,
+            "points": 1,
+            "team": "BRE"
         },
         "GW310": {
             "diff": 3,
@@ -110345,7 +110555,7 @@
         "GW309": {
             "diff": 2,
             "points": 1,
-            "team": "FUL"
+            "team": "IPS"
         }
     },
     "541": {
@@ -110680,6 +110890,11 @@
             "diff": 4,
             "points": 1,
             "team": "FUL"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 1,
+            "team": "BHA"
         }
     },
     "282": {
@@ -110734,8 +110949,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 1,
-            "team": "SOU"
+            "points": 3,
+            "team": "FUL"
         },
         "GW310": {
             "diff": 2,
@@ -111098,7 +111313,7 @@
         "GW309": {
             "diff": 2,
             "points": 1,
-            "team": "FUL"
+            "team": "BOU"
         },
         "GW310": {
             "diff": 5,
@@ -111152,6 +111367,11 @@
             "diff": 3,
             "points": 1,
             "team": "TOT"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 1,
+            "team": "NFO"
         }
     },
     "371": {
@@ -111624,6 +111844,11 @@
             "diff": 2,
             "points": 2,
             "team": "WHU"
+        },
+        "GW309": {
+            "diff": 3,
+            "points": 1,
+            "team": "TOT"
         }
     },
     "463": {
@@ -112278,8 +112503,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 1,
-            "team": "LIV"
+            "points": 2,
+            "team": "CRY"
         },
         "GW310": {
             "diff": 2,
@@ -113056,6 +113281,11 @@
             "diff": 3,
             "points": 6,
             "team": "AVL"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 0,
+            "team": "BRE"
         }
     },
     "96": {
@@ -113822,6 +114052,11 @@
             "diff": 2,
             "points": 6,
             "team": "SOU"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 2,
+            "team": "LEI"
         }
     },
     "61": {
@@ -114511,8 +114746,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 7,
-            "team": "LIV"
+            "points": 0,
+            "team": "CRY"
         },
         "GW310": {
             "diff": 2,
@@ -115019,8 +115254,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 5,
-            "team": "LIV"
+            "points": 2,
+            "team": "CRY"
         },
         "GW310": {
             "diff": 2,
@@ -115503,7 +115738,7 @@
         "GW309": {
             "diff": 2,
             "points": 9,
-            "team": "LIV"
+            "team": "CRY"
         },
         "GW310": {
             "diff": 2,
@@ -116150,6 +116385,11 @@
             "diff": 4,
             "points": 5,
             "team": "LIV"
+        },
+        "GW309": {
+            "diff": 4,
+            "points": 2,
+            "team": "NEW"
         }
     },
     "603": {
@@ -116655,9 +116895,9 @@
             "team": "NFO"
         },
         "GW309": {
-            "diff": 2,
-            "points": 3,
-            "team": "BOU"
+            "diff": 5,
+            "points": 2,
+            "team": "ARS"
         },
         "GW310": {
             "diff": 2,
@@ -117006,6 +117246,11 @@
             "diff": 2,
             "points": 1,
             "team": "IPS"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 1,
+            "team": "CRY"
         }
     },
     "440": {
@@ -117284,6 +117529,11 @@
             "diff": 2,
             "points": 2,
             "team": "BHA"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 7,
+            "team": "SOU"
         }
     },
     "112": {
@@ -118021,8 +118271,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 6,
-            "team": "LIV"
+            "points": 2,
+            "team": "CRY"
         },
         "GW310": {
             "diff": 2,
@@ -118478,9 +118728,9 @@
             "team": "AVL"
         },
         "GW309": {
-            "diff": 3,
-            "points": 6,
-            "team": "CRY"
+            "diff": 2,
+            "points": 8,
+            "team": "WOL"
         },
         "GW310": {
             "diff": 4,
@@ -118917,8 +119167,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 13,
-            "team": "BOU"
+            "points": 1,
+            "team": "WHU"
         },
         "GW310": {
             "diff": 3,
@@ -119678,8 +119928,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 13,
-            "team": "LIV"
+            "points": 11,
+            "team": "CRY"
         },
         "GW310": {
             "diff": 2,
@@ -120216,6 +120466,11 @@
             "diff": 2,
             "points": 6,
             "team": "BOU"
+        },
+        "GW309": {
+            "diff": 5,
+            "points": 2,
+            "team": "MCI"
         }
     },
     "175": {
@@ -120499,6 +120754,11 @@
             "diff": 2,
             "points": 3,
             "team": "WHU"
+        },
+        "GW309": {
+            "diff": 5,
+            "points": 1,
+            "team": "MCI"
         }
     },
     "99": {
@@ -120965,8 +121225,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 3,
-            "team": "LIV"
+            "points": 2,
+            "team": "CRY"
         },
         "GW310": {
             "diff": 2,
@@ -121552,7 +121812,7 @@
         "GW309": {
             "diff": 2,
             "points": 1,
-            "team": "WHU"
+            "team": "BRE"
         },
         "GW310": {
             "diff": 3,
@@ -121919,8 +122179,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 1,
-            "team": "LIV"
+            "points": 2,
+            "team": "CRY"
         },
         "GW310": {
             "diff": 2,
@@ -122509,7 +122769,7 @@
         "GW309": {
             "diff": 2,
             "points": 1,
-            "team": "FUL"
+            "team": "IPS"
         }
     },
     "578": {
@@ -122678,6 +122938,11 @@
             "diff": 3,
             "points": 0,
             "team": "WHU"
+        },
+        "GW309": {
+            "diff": 3,
+            "points": 1,
+            "team": "AVL"
         }
     },
     "485": {
@@ -122854,8 +123119,8 @@
         },
         "GW309": {
             "diff": 4,
-            "points": 2,
-            "team": "MUN"
+            "points": 1,
+            "team": "NEW"
         },
         "GW310": {
             "diff": 4,
@@ -123325,8 +123590,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 2,
-            "team": "LIV"
+            "points": 6,
+            "team": "CRY"
         },
         "GW310": {
             "diff": 2,
@@ -123716,9 +123981,9 @@
             "team": "IPS"
         },
         "GW309": {
-            "diff": 5,
-            "points": 0,
-            "team": "MCI"
+            "diff": 3,
+            "points": 7,
+            "team": "EVE"
         },
         "GW313": {
             "diff": 3,
@@ -123737,6 +124002,11 @@
             "diff": 2,
             "points": 1,
             "team": "MUN"
+        },
+        "GW309": {
+            "diff": 3,
+            "points": 1,
+            "team": "TOT"
         }
     },
     "615": {
@@ -123997,9 +124267,9 @@
             "team": "NFO"
         },
         "GW309": {
-            "diff": 2,
-            "points": 2,
-            "team": "BOU"
+            "diff": 5,
+            "points": 0,
+            "team": "ARS"
         },
         "GW310": {
             "diff": 2,
@@ -124375,9 +124645,9 @@
             "team": "CRY"
         },
         "GW309": {
-            "diff": 4,
+            "diff": 2,
             "points": 1,
-            "team": "LEI"
+            "team": "BHA"
         }
     },
     "589": {
@@ -124804,6 +125074,11 @@
             "diff": 2,
             "points": 16,
             "team": "SOU"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 1,
+            "team": "LEI"
         }
     },
     "425": {
@@ -125190,8 +125465,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 2,
-            "team": "EVE"
+            "points": 3,
+            "team": "SOU"
         },
         "GW310": {
             "diff": 2,
@@ -125503,8 +125778,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 1,
-            "team": "FUL"
+            "points": 3,
+            "team": "IPS"
         },
         "GW310": {
             "diff": 3,
@@ -125563,6 +125838,11 @@
             "diff": 2,
             "points": 1,
             "team": "NEW"
+        },
+        "GW309": {
+            "diff": 5,
+            "points": 1,
+            "team": "ARS"
         }
     },
     "521": {
@@ -125836,6 +126116,11 @@
             "diff": 2,
             "points": 3,
             "team": "SOU"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 1,
+            "team": "LEI"
         }
     },
     "128": {
@@ -126132,6 +126417,11 @@
             "diff": 2,
             "points": 1,
             "team": "EVE"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 2,
+            "team": "BHA"
         }
     },
     "532": {
@@ -126490,6 +126780,11 @@
             "diff": 2,
             "points": 6,
             "team": "SOU"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 2,
+            "team": "LEI"
         }
     },
     "204": {
@@ -126718,6 +127013,11 @@
             "diff": 2,
             "points": 1,
             "team": "LIV"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 1,
+            "team": "BRE"
         }
     },
     "451": {
@@ -127089,6 +127389,11 @@
             "diff": 2,
             "points": 1,
             "team": "EVE"
+        },
+        "GW309": {
+            "diff": 5,
+            "points": 2,
+            "team": "MCI"
         }
     },
     "378": {
@@ -127397,6 +127702,11 @@
             "diff": 2,
             "points": 2,
             "team": "WHU"
+        },
+        "GW309": {
+            "diff": 4,
+            "points": 7,
+            "team": "CHE"
         }
     },
     "102": {
@@ -127583,8 +127893,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 8,
-            "team": "LIV"
+            "points": 1,
+            "team": "CRY"
         },
         "GW310": {
             "diff": 2,
@@ -128084,8 +128394,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 18,
-            "team": "SOU"
+            "points": 3,
+            "team": "FUL"
         },
         "GW310": {
             "diff": 2,
@@ -128477,6 +128787,11 @@
             "diff": 2,
             "points": 1,
             "team": "CHE"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 1,
+            "team": "BOU"
         }
     },
     "171": {
@@ -128680,6 +128995,11 @@
             "diff": 2,
             "points": 1,
             "team": "BRE"
+        },
+        "GW309": {
+            "diff": 5,
+            "points": 1,
+            "team": "MCI"
         }
     },
     "65": {
@@ -128996,8 +129316,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 3,
-            "team": "WOL"
+            "points": 1,
+            "team": "NFO"
         },
         "GW310": {
             "diff": 2,
@@ -129289,8 +129609,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 1,
-            "team": "BOU"
+            "points": 2,
+            "team": "WHU"
         },
         "GW310": {
             "diff": 3,
@@ -129596,9 +129916,9 @@
             "team": "EVE"
         },
         "GW309": {
-            "diff": 3,
+            "diff": 4,
             "points": 6,
-            "team": "BHA"
+            "team": "CHE"
         },
         "GW310": {
             "diff": 2,
@@ -130949,9 +131269,9 @@
             "team": "AVL"
         },
         "GW309": {
-            "diff": 3,
+            "diff": 2,
             "points": 6,
-            "team": "CRY"
+            "team": "WOL"
         },
         "GW310": {
             "diff": 4,
@@ -131320,6 +131640,11 @@
             "diff": 2,
             "points": 7,
             "team": "SOU"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 2,
+            "team": "LEI"
         }
     },
     "477": {
@@ -131533,6 +131858,11 @@
             "diff": 2,
             "points": 2,
             "team": "CHE"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 1,
+            "team": "BOU"
         }
     },
     "217": {
@@ -131861,6 +132191,11 @@
             "diff": 3,
             "points": 1,
             "team": "AVL"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 1,
+            "team": "BRE"
         }
     },
     "468": {
@@ -132518,6 +132853,11 @@
             "diff": 3,
             "points": 1,
             "team": "BHA"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 7,
+            "team": "FUL"
         }
     },
     "543": {
@@ -133169,9 +133509,9 @@
             "team": "WHU"
         },
         "GW309": {
-            "diff": 4,
-            "points": 2,
-            "team": "LEI"
+            "diff": 3,
+            "points": 1,
+            "team": "MUN"
         },
         "GW310": {
             "diff": 2,
@@ -133455,6 +133795,11 @@
             "diff": 2,
             "points": 2,
             "team": "WHU"
+        },
+        "GW309": {
+            "diff": 4,
+            "points": 6,
+            "team": "CHE"
         }
     },
     "528": {
@@ -133894,8 +134239,8 @@
         },
         "GW309": {
             "diff": 5,
-            "points": -1,
-            "team": "ARS"
+            "points": 2,
+            "team": "MCI"
         },
         "GW310": {
             "diff": 3,
@@ -134464,9 +134809,9 @@
             "team": "AVL"
         },
         "GW309": {
-            "diff": 3,
-            "points": 20,
-            "team": "CRY"
+            "diff": 2,
+            "points": 6,
+            "team": "WOL"
         },
         "GW310": {
             "diff": 4,
@@ -134595,6 +134940,11 @@
             "diff": 3,
             "points": 2,
             "team": "IPS"
+        },
+        "GW309": {
+            "diff": 4,
+            "points": 2,
+            "team": "NEW"
         }
     },
     "599": {
@@ -134855,9 +135205,9 @@
             "team": "NFO"
         },
         "GW309": {
-            "diff": 2,
+            "diff": 5,
             "points": 2,
-            "team": "BOU"
+            "team": "ARS"
         },
         "GW310": {
             "diff": 2,
@@ -135128,9 +135478,9 @@
             "team": "WHU"
         },
         "GW309": {
-            "diff": 2,
+            "diff": 5,
             "points": 1,
-            "team": "BOU"
+            "team": "ARS"
         },
         "GW310": {
             "diff": 2,
@@ -135549,9 +135899,9 @@
             "team": "AVL"
         },
         "GW309": {
-            "diff": 3,
-            "points": 1,
-            "team": "CRY"
+            "diff": 2,
+            "points": 3,
+            "team": "WOL"
         },
         "GW310": {
             "diff": 4,
@@ -135883,8 +136233,8 @@
         },
         "GW309": {
             "diff": 5,
-            "points": 2,
-            "team": "ARS"
+            "points": 1,
+            "team": "MCI"
         },
         "GW310": {
             "diff": 3,
@@ -136247,7 +136597,7 @@
         "GW309": {
             "diff": 2,
             "points": 3,
-            "team": "BOU"
+            "team": "WHU"
         },
         "GW310": {
             "diff": 3,
@@ -136539,8 +136889,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 1,
-            "team": "SOU"
+            "points": 7,
+            "team": "FUL"
         },
         "GW310": {
             "diff": 2,
@@ -136802,8 +137152,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 5,
-            "team": "SOU"
+            "points": 4,
+            "team": "FUL"
         },
         "GW310": {
             "diff": 2,
@@ -138057,6 +138407,11 @@
             "diff": 3,
             "points": 1,
             "team": "CRY"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 2,
+            "team": "NFO"
         }
     },
     "422": {
@@ -138561,6 +138916,11 @@
             "diff": 3,
             "points": 1,
             "team": "IPS"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 1,
+            "team": "CRY"
         }
     },
     "315": {
@@ -138881,9 +139241,9 @@
             "team": "WHU"
         },
         "GW309": {
-            "diff": 4,
+            "diff": 3,
             "points": 2,
-            "team": "LEI"
+            "team": "TOT"
         },
         "GW310": {
             "diff": 2,
@@ -139244,9 +139604,9 @@
             "team": "AVL"
         },
         "GW309": {
-            "diff": 3,
+            "diff": 2,
             "points": 6,
-            "team": "CRY"
+            "team": "WOL"
         },
         "GW310": {
             "diff": 4,
@@ -139422,9 +139782,9 @@
             "team": "NFO"
         },
         "GW309": {
-            "diff": 3,
-            "points": 5,
-            "team": "NEW"
+            "diff": 2,
+            "points": 0,
+            "team": "BRE"
         },
         "GW310": {
             "diff": 3,
@@ -139981,9 +140341,9 @@
             "team": "CRY"
         },
         "GW309": {
-            "diff": 4,
-            "points": 1,
-            "team": "LEI"
+            "diff": 2,
+            "points": 10,
+            "team": "WHU"
         },
         "GW310": {
             "diff": 2,
@@ -140149,9 +140509,9 @@
             "team": "LIV"
         },
         "GW309": {
-            "diff": 3,
-            "points": 1,
-            "team": "BHA"
+            "diff": 4,
+            "points": 6,
+            "team": "CHE"
         },
         "GW312": {
             "diff": 3,
@@ -140218,6 +140578,11 @@
             "diff": 4,
             "points": 1,
             "team": "ARS"
+        },
+        "GW309": {
+            "diff": 3,
+            "points": 1,
+            "team": "MUN"
         }
     },
     "81": {
@@ -141584,8 +141949,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 0,
-            "team": "FUL"
+            "points": 7,
+            "team": "BOU"
         },
         "GW310": {
             "diff": 5,
@@ -141860,8 +142225,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 2,
-            "team": "LIV"
+            "points": 1,
+            "team": "CRY"
         },
         "GW310": {
             "diff": 2,
@@ -141910,6 +142275,11 @@
             "diff": 2,
             "points": 1,
             "team": "AVL"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 1,
+            "team": "LEI"
         }
     },
     "149": {
@@ -142090,9 +142460,9 @@
             "team": "CHE"
         },
         "GW309": {
-            "diff": 5,
-            "points": 0,
-            "team": "MCI"
+            "diff": 3,
+            "points": 6,
+            "team": "EVE"
         }
     },
     "396": {
@@ -142324,8 +142694,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 2,
-            "team": "SOU"
+            "points": 3,
+            "team": "FUL"
         },
         "GW310": {
             "diff": 2,
@@ -142616,9 +142986,9 @@
             "team": "IPS"
         },
         "GW309": {
-            "diff": 2,
-            "points": 2,
-            "team": "EVE"
+            "diff": 3,
+            "points": 6,
+            "team": "AVL"
         },
         "GW310": {
             "diff": 4,
@@ -142870,8 +143240,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 2,
-            "team": "EVE"
+            "points": 5,
+            "team": "SOU"
         },
         "GW310": {
             "diff": 2,
@@ -143177,9 +143547,9 @@
             "team": "MUN"
         },
         "GW309": {
-            "diff": 4,
-            "points": 1,
-            "team": "AVL"
+            "diff": 2,
+            "points": 4,
+            "team": "NFO"
         },
         "GW313": {
             "diff": 3,
@@ -143390,8 +143760,8 @@
             "team": "EVE"
         },
         "GW309": {
-            "diff": 3,
-            "points": 12,
+            "diff": 2,
+            "points": 8,
             "team": "IPS"
         }
     },
@@ -143912,6 +144282,11 @@
             "diff": 2,
             "points": 1,
             "team": "NFO"
+        },
+        "GW309": {
+            "diff": 4,
+            "points": 0,
+            "team": "NEW"
         }
     },
     "274": {
@@ -144329,6 +144704,11 @@
             "diff": 2,
             "points": 10,
             "team": "WHU"
+        },
+        "GW309": {
+            "diff": 3,
+            "points": 1,
+            "team": "TOT"
         }
     },
     "583": {
@@ -144757,9 +145137,9 @@
             "team": "LIV"
         },
         "GW309": {
-            "diff": 3,
+            "diff": 4,
             "points": 6,
-            "team": "BHA"
+            "team": "CHE"
         },
         "GW310": {
             "diff": 2,
@@ -145079,6 +145459,11 @@
             "diff": 2,
             "points": 1,
             "team": "CRY"
+        },
+        "GW309": {
+            "diff": 3,
+            "points": 1,
+            "team": "EVE"
         }
     },
     "126": {
@@ -145328,8 +145713,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 1,
-            "team": "EVE"
+            "points": 5,
+            "team": "SOU"
         },
         "GW310": {
             "diff": 2,
@@ -145794,6 +146179,11 @@
             "diff": 2,
             "points": 3,
             "team": "SOU"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 2,
+            "team": "LEI"
         }
     },
     "157": {
@@ -146037,9 +146427,9 @@
             "team": "NFO"
         },
         "GW309": {
-            "diff": 2,
-            "points": 0,
-            "team": "BOU"
+            "diff": 5,
+            "points": 1,
+            "team": "ARS"
         },
         "GW310": {
             "diff": 2,
@@ -146329,8 +146719,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 6,
-            "team": "LIV"
+            "points": 2,
+            "team": "CRY"
         },
         "GW310": {
             "diff": 2,
@@ -146596,8 +146986,8 @@
             "team": "EVE"
         },
         "GW309": {
-            "diff": 3,
-            "points": 5,
+            "diff": 2,
+            "points": 0,
             "team": "IPS"
         },
         "GW310": {
@@ -146868,8 +147258,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 2,
-            "team": "FUL"
+            "points": 1,
+            "team": "BOU"
         },
         "GW310": {
             "diff": 5,
@@ -147085,9 +147475,9 @@
             "team": "NFO"
         },
         "GW309": {
-            "diff": 2,
-            "points": 2,
-            "team": "BOU"
+            "diff": 5,
+            "points": 1,
+            "team": "ARS"
         },
         "GW310": {
             "diff": 2,
@@ -147537,8 +147927,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 1,
-            "team": "WOL"
+            "points": 2,
+            "team": "NFO"
         },
         "GW310": {
             "diff": 2,
@@ -147786,7 +148176,7 @@
         "GW309": {
             "diff": 5,
             "points": 2,
-            "team": "ARS"
+            "team": "MCI"
         }
     },
     "499": {
@@ -148174,6 +148564,11 @@
             "diff": 2,
             "points": 0,
             "team": "FUL"
+        },
+        "GW309": {
+            "diff": 3,
+            "points": 2,
+            "team": "TOT"
         }
     },
     "507": {
@@ -148423,8 +148818,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 9,
-            "team": "WOL"
+            "points": 8,
+            "team": "NFO"
         },
         "GW310": {
             "diff": 2,
@@ -148817,6 +149212,11 @@
             "diff": 3,
             "points": 2,
             "team": "CRY"
+        },
+        "GW309": {
+            "diff": 3,
+            "points": 2,
+            "team": "TOT"
         }
     },
     "201": {
@@ -149121,8 +149521,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 1,
-            "team": "BOU"
+            "points": 6,
+            "team": "WHU"
         },
         "GW310": {
             "diff": 3,
@@ -149474,9 +149874,9 @@
             "team": "NFO"
         },
         "GW309": {
-            "diff": 2,
-            "points": 2,
-            "team": "BOU"
+            "diff": 5,
+            "points": 1,
+            "team": "ARS"
         },
         "GW310": {
             "diff": 2,
@@ -149745,6 +150145,11 @@
             "diff": 2,
             "points": 14,
             "team": "SOU"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 9,
+            "team": "LEI"
         }
     },
     "406": {
@@ -149851,8 +150256,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 5,
-            "team": "SOU"
+            "points": 3,
+            "team": "FUL"
         },
         "GW310": {
             "diff": 2,
@@ -150102,6 +150507,11 @@
             "diff": 2,
             "points": 1,
             "team": "AVL"
+        },
+        "GW309": {
+            "diff": 3,
+            "points": 1,
+            "team": "EVE"
         }
     },
     "86": {
@@ -150293,8 +150703,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 7,
-            "team": "WOL"
+            "points": 2,
+            "team": "NFO"
         },
         "GW311": {
             "diff": 5,
@@ -150488,6 +150898,11 @@
             "diff": 4,
             "points": 1,
             "team": "LIV"
+        },
+        "GW309": {
+            "diff": 4,
+            "points": 1,
+            "team": "NEW"
         }
     },
     "131": {
@@ -150560,6 +150975,11 @@
         "GW298": {
             "diff": 2,
             "points": 7,
+            "team": "EVE"
+        },
+        "GW309": {
+            "diff": 3,
+            "points": 3,
             "team": "EVE"
         }
     },
@@ -150800,8 +151220,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 3,
-            "team": "WOL"
+            "points": 0,
+            "team": "NFO"
         },
         "GW310": {
             "diff": 2,
@@ -151186,9 +151606,9 @@
             "team": "CHE"
         },
         "GW309": {
-            "diff": 5,
-            "points": 1,
-            "team": "MCI"
+            "diff": 3,
+            "points": 6,
+            "team": "EVE"
         },
         "GW310": {
             "diff": 2,
@@ -151357,6 +151777,11 @@
             "diff": 4,
             "points": 0,
             "team": "NEW"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 2,
+            "team": "LEI"
         }
     },
     "95": {
@@ -151523,8 +151948,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 2,
-            "team": "LIV"
+            "points": 4,
+            "team": "CRY"
         },
         "GW310": {
             "diff": 2,
@@ -151691,8 +152116,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 2,
-            "team": "FUL"
+            "points": 7,
+            "team": "IPS"
         },
         "GW310": {
             "diff": 3,
@@ -151879,6 +152304,11 @@
             "diff": 2,
             "points": 6,
             "team": "SOU"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 2,
+            "team": "LEI"
         }
     },
     "561": {
@@ -152044,9 +152474,9 @@
             "team": "IPS"
         },
         "GW309": {
-            "diff": 2,
-            "points": 0,
-            "team": "EVE"
+            "diff": 3,
+            "points": 1,
+            "team": "AVL"
         },
         "GW310": {
             "diff": 4,
@@ -152255,6 +152685,11 @@
             "diff": 2,
             "points": 6,
             "team": "SOU"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 2,
+            "team": "LEI"
         }
     },
     "189": {
@@ -152407,7 +152842,7 @@
         "GW309": {
             "diff": 5,
             "points": 2,
-            "team": "ARS"
+            "team": "MCI"
         },
         "GW310": {
             "diff": 3,
@@ -152549,6 +152984,11 @@
             "diff": 2,
             "points": 1,
             "team": "EVE"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 1,
+            "team": "WHU"
         }
     },
     "381": {
@@ -152679,9 +153119,9 @@
             "team": "LIV"
         },
         "GW309": {
-            "diff": 3,
-            "points": 3,
-            "team": "BHA"
+            "diff": 4,
+            "points": 11,
+            "team": "CHE"
         },
         "GW310": {
             "diff": 2,
@@ -152873,8 +153313,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 1,
-            "team": "SOU"
+            "points": 6,
+            "team": "FUL"
         },
         "GW310": {
             "diff": 2,
@@ -153033,6 +153473,11 @@
             "diff": 2,
             "points": 0,
             "team": "BOU"
+        },
+        "GW309": {
+            "diff": 5,
+            "points": 1,
+            "team": "MCI"
         }
     },
     "72": {
@@ -153169,8 +153614,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 3,
-            "team": "WOL"
+            "points": 1,
+            "team": "NFO"
         },
         "GW313": {
             "diff": 3,
@@ -153511,7 +153956,7 @@
         "GW309": {
             "diff": 2,
             "points": 2,
-            "team": "BOU"
+            "team": "WHU"
         },
         "GW310": {
             "diff": 3,
@@ -153697,9 +154142,9 @@
             "team": "IPS"
         },
         "GW309": {
-            "diff": 2,
-            "points": 3,
-            "team": "EVE"
+            "diff": 3,
+            "points": 5,
+            "team": "AVL"
         },
         "GW310": {
             "diff": 4,
@@ -153840,9 +154285,9 @@
             "team": "LIV"
         },
         "GW309": {
-            "diff": 3,
-            "points": 6,
-            "team": "BHA"
+            "diff": 4,
+            "points": 7,
+            "team": "CHE"
         },
         "GW310": {
             "diff": 2,
@@ -154141,9 +154586,9 @@
             "team": "WHU"
         },
         "GW309": {
-            "diff": 4,
+            "diff": 3,
             "points": 2,
-            "team": "LEI"
+            "team": "MUN"
         },
         "GW310": {
             "diff": 2,
@@ -154220,6 +154665,11 @@
             "diff": 2,
             "points": 0,
             "team": "FUL"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 1,
+            "team": "WOL"
         }
     },
     "566": {
@@ -154922,9 +155372,9 @@
             "team": "WHU"
         },
         "GW309": {
-            "diff": 4,
+            "diff": 3,
             "points": 1,
-            "team": "LEI"
+            "team": "MUN"
         },
         "GW310": {
             "diff": 2,
@@ -155060,9 +155510,9 @@
             "team": "WHU"
         },
         "GW309": {
-            "diff": 4,
-            "points": 5,
-            "team": "LEI"
+            "diff": 3,
+            "points": 2,
+            "team": "MUN"
         },
         "GW310": {
             "diff": 2,
@@ -155150,7 +155600,7 @@
         "GW309": {
             "diff": 2,
             "points": 1,
-            "team": "FUL"
+            "team": "IPS"
         },
         "GW310": {
             "diff": 3,
@@ -155750,7 +156200,7 @@
         "GW309": {
             "diff": 2,
             "points": 1,
-            "team": "NFO"
+            "team": "BHA"
         },
         "GW311": {
             "diff": 2,
@@ -155911,9 +156361,9 @@
             "team": "IPS"
         },
         "GW309": {
-            "diff": 2,
+            "diff": 3,
             "points": 2,
-            "team": "EVE"
+            "team": "AVL"
         },
         "GW310": {
             "diff": 4,
@@ -156054,9 +156504,9 @@
             "team": "LIV"
         },
         "GW309": {
-            "diff": 3,
-            "points": 1,
-            "team": "BHA"
+            "diff": 4,
+            "points": 3,
+            "team": "CHE"
         },
         "GW310": {
             "diff": 2,
@@ -156180,6 +156630,11 @@
             "diff": 3,
             "points": 1,
             "team": "MUN"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 2,
+            "team": "NFO"
         }
     },
     "475": {
@@ -156273,6 +156728,11 @@
             "diff": 2,
             "points": 1,
             "team": "CHE"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 2,
+            "team": "BOU"
         }
     },
     "584": {
@@ -156391,6 +156851,11 @@
             "diff": 5,
             "points": 2,
             "team": "LEI"
+        },
+        "GW309": {
+            "diff": 5,
+            "points": 1,
+            "team": "ARS"
         }
     },
     "350": {
@@ -156501,8 +156966,8 @@
             "team": "SOU"
         },
         "GW309": {
-            "diff": 3,
-            "points": 10,
+            "diff": 2,
+            "points": 3,
             "team": "IPS"
         },
         "GW310": {
@@ -156788,8 +157253,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 2,
-            "team": "FUL"
+            "points": 1,
+            "team": "BOU"
         },
         "GW311": {
             "diff": 2,
@@ -157099,8 +157564,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 0,
-            "team": "FUL"
+            "points": 2,
+            "team": "BOU"
         },
         "GW310": {
             "diff": 5,
@@ -157441,8 +157906,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 3,
-            "team": "WOL"
+            "points": 2,
+            "team": "NFO"
         },
         "GW310": {
             "diff": 2,
@@ -157758,6 +158223,11 @@
             "diff": 2,
             "points": 1,
             "team": "BOU"
+        },
+        "GW309": {
+            "diff": 5,
+            "points": 1,
+            "team": "MCI"
         }
     },
     "179": {
@@ -157922,6 +158392,11 @@
             "diff": 2,
             "points": 1,
             "team": "WOL"
+        },
+        "GW309": {
+            "diff": 2,
+            "points": 1,
+            "team": "IPS"
         }
     },
     "192": {
@@ -158204,9 +158679,9 @@
             "team": "LEI"
         },
         "GW309": {
-            "diff": 3,
+            "diff": 2,
             "points": 2,
-            "team": "NEW"
+            "team": "BRE"
         },
         "GW310": {
             "diff": 3,
@@ -158278,8 +158753,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 7,
-            "team": "BOU"
+            "points": 2,
+            "team": "WHU"
         },
         "GW310": {
             "diff": 3,
@@ -158356,8 +158831,8 @@
         },
         "GW309": {
             "diff": 2,
-            "points": 1,
-            "team": "FUL"
+            "points": 3,
+            "team": "BOU"
         },
         "GW310": {
             "diff": 5,
@@ -158438,9 +158913,9 @@
             "team": "LEI"
         },
         "GW309": {
-            "diff": 3,
-            "points": 6,
-            "team": "NEW"
+            "diff": 2,
+            "points": 4,
+            "team": "BRE"
         },
         "GW310": {
             "diff": 3,
@@ -158804,6 +159279,591 @@
             "diff": 2,
             "points": 1,
             "team": "SOU"
+        }
+    },
+    "516": {
+        "first_name": "Ben",
+        "last_name": "Brereton Díaz",
+        "name": "Brereton Díaz",
+        "team": "SOU",
+        "id": 516,
+        "position": "MID",
+        "GW309": {
+            "diff": 4,
+            "points": 1,
+            "team": "NEW"
+        }
+    },
+    "141": {
+        "first_name": "Mitoma",
+        "last_name": "Kaoru",
+        "name": "Mitoma",
+        "team": "BHA",
+        "id": 141,
+        "position": "MID",
+        "GW309": {
+            "diff": 3,
+            "points": 8,
+            "team": "EVE"
+        }
+    },
+    "284": {
+        "first_name": "Wes",
+        "last_name": "Burns",
+        "name": "Burns",
+        "team": "IPS",
+        "id": 284,
+        "position": "MID",
+        "GW309": {
+            "diff": 4,
+            "points": 0,
+            "team": "LIV"
+        }
+    },
+    "390": {
+        "first_name": "Sávio 'Savinho'",
+        "last_name": "Moreira de Oliveira",
+        "name": "Sávio",
+        "team": "MCI",
+        "id": 390,
+        "position": "MID",
+        "GW309": {
+            "diff": 4,
+            "points": 1,
+            "team": "CHE"
+        }
+    },
+    "498": {
+        "first_name": "Taylor",
+        "last_name": "Harwood-Bellis",
+        "name": "Harwood-Bellis",
+        "team": "SOU",
+        "id": 498,
+        "position": "DEF",
+        "GW309": {
+            "diff": 4,
+            "points": 1,
+            "team": "NEW"
+        }
+    },
+    "522": {
+        "first_name": "Lucas",
+        "last_name": "Bergvall",
+        "name": "Bergvall",
+        "team": "TOT",
+        "id": 522,
+        "position": "MID",
+        "GW309": {
+            "diff": 2,
+            "points": 1,
+            "team": "LEI"
+        }
+    },
+    "318": {
+        "first_name": "Mads",
+        "last_name": "Hermansen",
+        "name": "Hermansen",
+        "team": "LEI",
+        "id": 318,
+        "position": "GKP",
+        "GW309": {
+            "diff": 3,
+            "points": 3,
+            "team": "TOT"
+        }
+    },
+    "290": {
+        "first_name": "Jacob",
+        "last_name": "Greaves",
+        "name": "Greaves",
+        "team": "IPS",
+        "id": 290,
+        "position": "DEF",
+        "GW309": {
+            "diff": 4,
+            "points": 1,
+            "team": "LIV"
+        }
+    },
+    "579": {
+        "first_name": "Guido",
+        "last_name": "Rodríguez",
+        "name": "G.Rodríguez",
+        "team": "WHU",
+        "id": 579,
+        "position": "MID",
+        "GW309": {
+            "diff": 3,
+            "points": 2,
+            "team": "AVL"
+        }
+    },
+    "517": {
+        "first_name": "Tyler",
+        "last_name": "Dibling",
+        "name": "Dibling",
+        "team": "SOU",
+        "id": 517,
+        "position": "MID",
+        "GW309": {
+            "diff": 4,
+            "points": 1,
+            "team": "NEW"
+        }
+    },
+    "511": {
+        "first_name": "Sugawara",
+        "last_name": "Yukinari",
+        "name": "Sugawara",
+        "team": "SOU",
+        "id": 511,
+        "position": "DEF",
+        "GW309": {
+            "diff": 4,
+            "points": 1,
+            "team": "NEW"
+        }
+    },
+    "49": {
+        "first_name": "Kosta",
+        "last_name": "Nedeljković",
+        "name": "Nedeljkovic",
+        "team": "AVL",
+        "id": 49,
+        "position": "DEF",
+        "GW309": {
+            "diff": 2,
+            "points": 1,
+            "team": "WHU"
+        }
+    },
+    "154": {
+        "first_name": "Mats",
+        "last_name": "Wieffer",
+        "name": "Wieffer",
+        "team": "BHA",
+        "id": 154,
+        "position": "MID",
+        "GW309": {
+            "diff": 3,
+            "points": 6,
+            "team": "EVE"
+        }
+    },
+    "297": {
+        "first_name": "Massimo",
+        "last_name": "Luongo",
+        "name": "Luongo",
+        "team": "IPS",
+        "id": 297,
+        "position": "MID",
+        "GW309": {
+            "diff": 4,
+            "points": 2,
+            "team": "LIV"
+        }
+    },
+    "611": {
+        "first_name": "Rodrigo",
+        "last_name": "Martins Gomes",
+        "name": "R.Gomes",
+        "team": "WOL",
+        "id": 611,
+        "position": "MID",
+        "GW309": {
+            "diff": 5,
+            "points": 2,
+            "team": "ARS"
+        }
+    },
+    "419": {
+        "first_name": "Noussair",
+        "last_name": "Mazraoui",
+        "name": "Mazraoui",
+        "team": "MUN",
+        "id": 419,
+        "position": "DEF",
+        "GW309": {
+            "diff": 2,
+            "points": 8,
+            "team": "FUL"
+        }
+    },
+    "518": {
+        "first_name": "Dominic",
+        "last_name": "Solanke-Mitchell",
+        "name": "Solanke",
+        "team": "TOT",
+        "id": 518,
+        "position": "FWD",
+        "GW309": {
+            "diff": 2,
+            "points": 2,
+            "team": "LEI"
+        }
+    },
+    "416": {
+        "first_name": "Joshua",
+        "last_name": "Zirkzee",
+        "name": "Zirkzee",
+        "team": "MUN",
+        "id": 416,
+        "position": "FWD",
+        "GW309": {
+            "diff": 2,
+            "points": 8,
+            "team": "FUL"
+        }
+    },
+    "59": {
+        "first_name": "Jaden",
+        "last_name": "Philogene",
+        "name": "Jaden",
+        "team": "AVL",
+        "id": 59,
+        "position": "MID",
+        "GW309": {
+            "diff": 2,
+            "points": 0,
+            "team": "WHU"
+        }
+    },
+    "323": {
+        "first_name": "Stephy",
+        "last_name": "Mavididi",
+        "name": "Mavididi",
+        "team": "LEI",
+        "id": 323,
+        "position": "MID",
+        "GW309": {
+            "diff": 3,
+            "points": 1,
+            "team": "TOT"
+        }
+    },
+    "614": {
+        "first_name": "Jørgen",
+        "last_name": "Strand Larsen",
+        "name": "Strand Larsen",
+        "team": "WOL",
+        "id": 614,
+        "position": "FWD",
+        "GW309": {
+            "diff": 5,
+            "points": 2,
+            "team": "ARS"
+        }
+    },
+    "489": {
+        "first_name": "Joe",
+        "last_name": "Aribo",
+        "name": "Aribo",
+        "team": "SOU",
+        "id": 489,
+        "position": "MID",
+        "GW309": {
+            "diff": 4,
+            "points": 2,
+            "team": "NEW"
+        }
+    },
+    "303": {
+        "first_name": "Christian",
+        "last_name": "Walton",
+        "name": "Walton",
+        "team": "IPS",
+        "id": 303,
+        "position": "GKP",
+        "GW309": {
+            "diff": 4,
+            "points": 2,
+            "team": "LIV"
+        }
+    },
+    "418": {
+        "first_name": "Matthijs",
+        "last_name": "de Ligt",
+        "name": "De Ligt",
+        "team": "MUN",
+        "id": 418,
+        "position": "DEF",
+        "GW309": {
+            "diff": 2,
+            "points": 1,
+            "team": "FUL"
+        }
+    },
+    "294": {
+        "first_name": "Omari",
+        "last_name": "Giraud-Hutchinson",
+        "name": "Hutchinson",
+        "team": "IPS",
+        "id": 294,
+        "position": "MID",
+        "GW309": {
+            "diff": 4,
+            "points": 1,
+            "team": "LIV"
+        }
+    },
+    "304": {
+        "first_name": "Luke",
+        "last_name": "Woolfenden",
+        "name": "Woolfenden",
+        "team": "IPS",
+        "id": 304,
+        "position": "DEF",
+        "GW309": {
+            "diff": 4,
+            "points": 0,
+            "team": "LIV"
+        }
+    },
+    "607": {
+        "first_name": "Yerson",
+        "last_name": "Mosquera",
+        "name": "Mosquera",
+        "team": "WOL",
+        "id": 607,
+        "position": "DEF",
+        "GW309": {
+            "diff": 5,
+            "points": 1,
+            "team": "ARS"
+        }
+    },
+    "530": {
+        "first_name": "Archie",
+        "last_name": "Gray",
+        "name": "Gray",
+        "team": "TOT",
+        "id": 530,
+        "position": "MID",
+        "GW309": {
+            "diff": 2,
+            "points": 1,
+            "team": "LEI"
+        }
+    },
+    "140": {
+        "first_name": "Yankuba",
+        "last_name": "Minteh",
+        "name": "Minteh",
+        "team": "BHA",
+        "id": 140,
+        "position": "MID",
+        "GW309": {
+            "diff": 3,
+            "points": 4,
+            "team": "EVE"
+        }
+    },
+    "291": {
+        "first_name": "Marcus",
+        "last_name": "Myers-Harness",
+        "name": "Harness",
+        "team": "IPS",
+        "id": 291,
+        "position": "MID",
+        "GW309": {
+            "diff": 4,
+            "points": 1,
+            "team": "LIV"
+        }
+    },
+    "301": {
+        "first_name": "Jack",
+        "last_name": "Taylor",
+        "name": "Taylor",
+        "team": "IPS",
+        "id": 301,
+        "position": "MID",
+        "GW309": {
+            "diff": 4,
+            "points": 1,
+            "team": "LIV"
+        }
+    },
+    "216": {
+        "first_name": "Daichi",
+        "last_name": "Kamada",
+        "name": "Kamada",
+        "team": "CRY",
+        "id": 216,
+        "position": "MID",
+        "GW309": {
+            "diff": 2,
+            "points": 1,
+            "team": "BRE"
+        }
+    },
+    "285": {
+        "first_name": "Conor",
+        "last_name": "Chaplin",
+        "name": "Chaplin",
+        "team": "IPS",
+        "id": 285,
+        "position": "MID",
+        "GW309": {
+            "diff": 4,
+            "points": 2,
+            "team": "LIV"
+        }
+    },
+    "298": {
+        "first_name": "Sam",
+        "last_name": "Morsy",
+        "name": "Morsy",
+        "team": "IPS",
+        "id": 298,
+        "position": "MID",
+        "GW309": {
+            "diff": 4,
+            "points": 2,
+            "team": "LIV"
+        }
+    },
+    "187": {
+        "first_name": "Marc",
+        "last_name": "Guiu Paz",
+        "name": "Marc Guiu",
+        "team": "CHE",
+        "id": 187,
+        "position": "FWD",
+        "GW309": {
+            "diff": 5,
+            "points": 1,
+            "team": "MCI"
+        }
+    },
+    "581": {
+        "first_name": "Jean-Clair",
+        "last_name": "Todibo",
+        "name": "Todibo",
+        "team": "WHU",
+        "id": 581,
+        "position": "DEF",
+        "GW309": {
+            "diff": 3,
+            "points": 1,
+            "team": "AVL"
+        }
+    },
+    "88": {
+        "first_name": "Julián",
+        "last_name": "Araujo Zúñiga",
+        "name": "J.Araujo",
+        "team": "BOU",
+        "id": 88,
+        "position": "DEF",
+        "GW309": {
+            "diff": 2,
+            "points": 1,
+            "team": "NFO"
+        }
+    },
+    "308": {
+        "first_name": "Sam",
+        "last_name": "Szmodics",
+        "name": "Szmodics",
+        "team": "IPS",
+        "id": 308,
+        "position": "MID",
+        "GW309": {
+            "diff": 4,
+            "points": 1,
+            "team": "LIV"
+        }
+    },
+    "87": {
+        "first_name": "Dean",
+        "last_name": "Huijsen",
+        "name": "Huijsen",
+        "team": "BOU",
+        "id": 87,
+        "position": "DEF",
+        "GW309": {
+            "diff": 2,
+            "points": 2,
+            "team": "NFO"
+        }
+    },
+    "335": {
+        "first_name": "Abdul",
+        "last_name": "Fatawu",
+        "name": "A.Fatawu",
+        "team": "LEI",
+        "id": 335,
+        "position": "MID",
+        "GW309": {
+            "diff": 3,
+            "points": 8,
+            "team": "TOT"
+        }
+    },
+    "580": {
+        "first_name": "Niclas",
+        "last_name": "Füllkrug",
+        "name": "Füllkrug",
+        "team": "WHU",
+        "id": 580,
+        "position": "FWD",
+        "GW309": {
+            "diff": 3,
+            "points": 1,
+            "team": "AVL"
+        }
+    },
+    "508": {
+        "first_name": "Will",
+        "last_name": "Smallbone",
+        "name": "Smallbone",
+        "team": "SOU",
+        "id": 508,
+        "position": "MID",
+        "GW309": {
+            "diff": 4,
+            "points": 2,
+            "team": "NEW"
+        }
+    },
+    "193": {
+        "first_name": "Renato",
+        "last_name": "Palma Veiga",
+        "name": "Renato Veiga",
+        "team": "CHE",
+        "id": 193,
+        "position": "MID",
+        "GW309": {
+            "diff": 5,
+            "points": 1,
+            "team": "MCI"
+        }
+    },
+    "280": {
+        "first_name": "Ali",
+        "last_name": "Al-Hamadi",
+        "name": "Al-Hamadi",
+        "team": "IPS",
+        "id": 280,
+        "position": "FWD",
+        "GW309": {
+            "diff": 4,
+            "points": 1,
+            "team": "LIV"
+        }
+    },
+    "487": {
+        "first_name": "Carlos",
+        "last_name": "Alcaraz Durán",
+        "name": "Alcaraz",
+        "team": "SOU",
+        "id": 487,
+        "position": "MID",
+        "GW309": {
+            "diff": 4,
+            "points": 1,
+            "team": "NEW"
         }
     }
 }
