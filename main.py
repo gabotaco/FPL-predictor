@@ -10,7 +10,7 @@ from dataset import get_dataset, master_data_set as header
 from game_information import TEAMS, get_team_info, CURRENT_SEASON, CURRENT_GAME_WEEK, CURRENT_SEASON_BEGINNING_ROUND, \
     SEASON_LENGTH, MIN_GAMES, MIN_SEASON_PPG, MIN_SEASON_GAME_PERCENTAGE, TEAM_WORTH, FREE_TRANSFERS, \
     PREDICT_BY_WEEKS, TRANSFER_COST
-from solver import make_team, calibrate_player
+from solver import make_team, calibrate_player, TOTAL_PLAYERS
 from calibrate import CALIBRATE_BY, process_player_data
 
 CURRENT_TEAM = {
@@ -24,7 +24,7 @@ CURRENT_TEAM = {
     "Pedro Porro Pedro Porro",
 
     "Cole Palmer Palmer",
-    "Phil Foden Foden",
+    "Anthony Gordon Gordon",
     "Bruno Guimarães Rodriguez Moura Bruno G.",
     "Morgan Gibbs-White Gibbs-White",
     "Callum Hudson-Odoi Hudson-Odoi",
@@ -35,7 +35,7 @@ CURRENT_TEAM = {
 }
 
 INJURIES = {
-    "Pedro Porro Pedro Porro": 0.75
+    "Phil Foden Foden": 0.25
 }
 
 PROCESS_ALL_PLAYERS = False
@@ -237,10 +237,10 @@ def make_training_set():
         json.dump(master_data_set, dataset_file, ensure_ascii=False, indent=4)
         print("Wrote Predicted Data")
 
-    if found_previous == 15:
+    if found_previous == TOTAL_PLAYERS:
         print("Found all previous players!")
     else:
-        print(f"Found only {found_previous} out of 15 previous players")
+        print(f"Found only {found_previous} out of {TOTAL_PLAYERS} previous players")
 
     make_prediction_file()
 
@@ -313,10 +313,10 @@ def make_prediction_file():
             player[SELECTED] = 1
             found_selected += 1
 
-    if found_selected == 15:
+    if found_selected == TOTAL_PLAYERS:
         print("Found all selected players!")
     else:
-        print(f"Found only {found_selected} out of 15 selected players")
+        print(f"Found only {found_selected} out of {TOTAL_PLAYERS} selected players")
 
     columns = list(map(lambda x: {'header': x}, master_data_set[0]))
 

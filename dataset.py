@@ -224,7 +224,7 @@ def get_points(year):
         case "2023-24":
             game_round = 276
         case "2024-25":
-            game_round = 309
+            game_round = 314
 
     for gw in gws:
         with open(f"../Fantasy-Premier-League/data/{year}/gws/{gw}", encoding="latin-1") as gw_file:
