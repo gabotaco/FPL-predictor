@@ -9,7 +9,7 @@ from ai import MAX_DIFF, do_arima, do_lstm, do_forest
 from dataset import get_dataset, master_data_set as header
 from game_information import TEAMS, get_team_info, CURRENT_SEASON, CURRENT_GAME_WEEK, CURRENT_SEASON_BEGINNING_ROUND, \
     SEASON_LENGTH, MIN_GAMES, MIN_SEASON_PPG, MIN_SEASON_GAME_PERCENTAGE, TEAM_WORTH, FREE_TRANSFERS, \
-    PREDICT_BY_WEEKS, TRANSFER_COST
+    PREDICT_BY_WEEKS, TRANSFER_COST, CHALLENGE_TEAM
 from solver import make_team, calibrate_player, TOTAL_PLAYERS
 from calibrate import CALIBRATE_BY, process_player_data
 
@@ -35,7 +35,7 @@ CURRENT_TEAM = {
 }
 
 INJURIES = {
-    "Phil Foden Foden": 0.25
+    "Cole Palmer Palmer": 0.75
 }
 
 PROCESS_ALL_PLAYERS = False
@@ -98,7 +98,7 @@ def make_training_set():
 
     found_previous = 0
 
-    filename = f"./predictedData/{CURRENT_SEASON}/predictedData{CURRENT_GAME_WEEK}.json"
+    filename = f"./predictedData/{CURRENT_SEASON}/predictedData{CURRENT_GAME_WEEK}{"Challenge" if CHALLENGE_TEAM else ""}.json"
     if os.path.exists(filename):
         with open(filename, 'r') as file:
             master_data_set = json.load(file)
@@ -248,7 +248,7 @@ def make_training_set():
 def make_prediction_file():
     global points_data_set, master_data_set
 
-    workbook = Workbook(f"./Predictions/{CURRENT_SEASON}/Week {CURRENT_GAME_WEEK}.xlsx")
+    workbook = Workbook(f"./Predictions/{CURRENT_SEASON}/Week {CURRENT_GAME_WEEK}{" Challenge" if CHALLENGE_TEAM else ""}.xlsx")
     sheet = workbook.add_worksheet()
 
     column_index = len(master_data_set[0]) + 1
@@ -302,7 +302,10 @@ def make_prediction_file():
 
     data = [player for player in master_data_set[1:] if len(player) == len(master_data_set[0])]
 
-    best_team = make_team(data)
+    if not CHALLENGE_TEAM:
+        best_team = make_team(data)
+    else:
+        best_team = []
 
     found_selected = 0
     for player in data:

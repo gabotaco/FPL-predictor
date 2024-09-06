@@ -2,7 +2,7 @@ import csv
 import json
 import os
 
-from game_information import TEAMS, get_team_info, PREVIOUS_SEASON, CURRENT_SEASON, POSITIONS, CURRENT_GAME_WEEK
+from game_information import TEAMS, get_team_info, PREVIOUS_SEASON, CURRENT_SEASON, POSITIONS, CURRENT_GAME_WEEK, CHALLENGE_TEAM
 
 USE_UNDERSTAT = False
 NO_NEW_PLAYERS = False
@@ -295,7 +295,7 @@ def get_points(year):
 
 def write_points_data():
     global points_data_set
-    with open(f"./datasets/{CURRENT_SEASON}/dataset{CURRENT_GAME_WEEK}.json", 'w') as dataset_file:
+    with open(f"./datasets/{CURRENT_SEASON}/dataset{CURRENT_GAME_WEEK}{"Challenge" if CHALLENGE_TEAM else ""}.json", 'w') as dataset_file:
         json.dump(points_data_set, dataset_file, ensure_ascii=False, indent=4)
 
 
