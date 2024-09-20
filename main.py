@@ -26,7 +26,7 @@ CURRENT_TEAM = {
     "Cole Palmer Palmer",
     "Anthony Gordon Gordon",
     "Bruno Guimarães Rodriguez Moura Bruno G.",
-    "Morgan Gibbs-White Gibbs-White",
+    "Bukayo Saka Saka",
     "Callum Hudson-Odoi Hudson-Odoi",
 
     "Jean-Philippe Mateta Mateta",
@@ -35,7 +35,8 @@ CURRENT_TEAM = {
 }
 
 INJURIES = {
-    "Cole Palmer Palmer": 0.75
+    "Alexander Isak Isak": 0.75,
+    "Vitalii Mykolenko Mykolenko": 0.75
 }
 
 PROCESS_ALL_PLAYERS = False
