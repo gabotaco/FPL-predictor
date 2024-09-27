@@ -9,9 +9,9 @@ from ai import MAX_DIFF, do_arima, do_lstm, do_forest
 from dataset import get_dataset, master_data_set as header
 from game_information import TEAMS, get_team_info, CURRENT_SEASON, CURRENT_GAME_WEEK, CURRENT_SEASON_BEGINNING_ROUND, \
     SEASON_LENGTH, MIN_GAMES, MIN_SEASON_PPG, MIN_SEASON_GAME_PERCENTAGE, TEAM_WORTH, FREE_TRANSFERS, \
-    PREDICT_BY_WEEKS, TRANSFER_COST, CHALLENGE_TEAM
+    PREDICT_BY_WEEKS, TRANSFER_COST, CHALLENGE_TEAM, CALIBRATE_BY, BUGGED_PLAYERS, PROCESS_ALL_PLAYERS
 from solver import make_team, calibrate_player, TOTAL_PLAYERS
-from calibrate import CALIBRATE_BY, process_player_data
+from calibrate import process_player_data
 
 CURRENT_TEAM = {
     "André Onana Onana",
@@ -36,11 +36,9 @@ CURRENT_TEAM = {
 
 INJURIES = {
     "Alexander Isak Isak": 0.75,
-    "Vitalii Mykolenko Mykolenko": 0.75
+    "Yoane Wissa Wissa": 0
 }
 
-PROCESS_ALL_PLAYERS = False
-BUGGED_PLAYERS = []
 HIDDEN_COLUMNS = ['GKP', 'DEF', 'MID', 'FWD', *TEAMS, 'ID', 'ARIMA', 'LSTM', 'FOREST']
 ALPHABET = [*"ABCDEFGHIJKLMNOPQRSTUVWXYZ"]
 ID = header[0].index('ID')
@@ -155,6 +153,9 @@ def make_training_set():
                 season_sum += data['points']
                 num_games += 1
 
+        if total_games < MIN_GAMES:
+            continue
+
         if not PROCESS_ALL_PLAYERS and (
                 total_games - CALIBRATE_BY < MIN_GAMES or season_sum < MIN_SEASON_PPG * num_games or num_games < (
                 SEASON_LENGTH if CURRENT_GAME_WEEK <= CALIBRATE_BY else CURRENT_GAME_WEEK - 1) * MIN_SEASON_GAME_PERCENTAGE or
@@ -162,10 +163,15 @@ def make_training_set():
                 sum(ts[-PREDICT_BY_WEEKS:]) < PREDICT_BY_WEEKS * MIN_SEASON_PPG) and player_name not in CURRENT_TEAM:
             continue
 
+        arima_ratio = 1/3
+        lstm_ratio = 1/3
+        forest_ratio = 1/3
+
         c_arima, c_lstm, c_forest, c_actual = process_player_data(player_data)
-        if c_actual < 0:
+        if c_actual <= 0 and not PROCESS_ALL_PLAYERS:
             continue
-        arima_ratio, lstm_ratio, forest_ratio = calibrate_player(c_arima, c_lstm, c_forest, c_actual)
+        elif c_actual > 0:
+            arima_ratio, lstm_ratio, forest_ratio = calibrate_player(c_arima, c_lstm, c_forest, c_actual)
 
         if season_sum <= 0 or len(predict_by[player_data['team']]['games']) == 0:
             arima_overall, arima_next = 0, 0
