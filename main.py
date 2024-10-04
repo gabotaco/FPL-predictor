@@ -15,28 +15,29 @@ from calibrate import process_player_data
 
 CURRENT_TEAM = {
     "André Onana Onana",
-    "Jordan Pickford Pickford",
+    "David Raya Martin Raya",
 
-    "Vitalii Mykolenko Mykolenko",
-    "Joško Gvardiol Gvardiol",
+    "Gabriel dos Santos Magalhães Gabriel",
+    "Andrew Robertson Robertson",
     "Diogo Dalot Teixeira Dalot",
-    "Joachim Andersen Andersen",
+    "William Saliba Saliba",
     "Pedro Porro Pedro Porro",
 
-    "Cole Palmer Palmer",
-    "Anthony Gordon Gordon",
-    "Bruno Guimarães Rodriguez Moura Bruno G.",
-    "Bukayo Saka Saka",
-    "Callum Hudson-Odoi Hudson-Odoi",
+    "Mohamed Salah M.Salah",
+    "Luis Díaz Luis Díaz",
+    "Noni Madueke Madueke",
+    "Bryan Mbeumo Mbeumo",
+    "Harvey Barnes Barnes",
 
-    "Jean-Philippe Mateta Mateta",
-    "Alexander Isak Isak",
-    "Nicolas Jackson N.Jackson",
+    "Jhon Durán Duran",
+    "Raúl Jiménez Raúl",
+    "Chris Wood Wood",
 }
 
 INJURIES = {
-    "Alexander Isak Isak": 0.75,
-    "Yoane Wissa Wissa": 0
+    "Alexander Isak Isak": 0,
+    "Yoane Wissa Wissa": 0,
+    "Jarrad Branthwaite Branthwaite": 0.75,
 }
 
 HIDDEN_COLUMNS = ['GKP', 'DEF', 'MID', 'FWD', *TEAMS, 'ID', 'ARIMA', 'LSTM', 'FOREST']
@@ -200,12 +201,13 @@ def make_training_set():
                 else:
                     forest_overall, forest_next = 0, 0
             except:
-                print('ERROR')
+                print('ERROR', player_data['id'])
                 BUGGED_PLAYERS.append(player_data['id'])
                 continue
 
         if min(arima_overall, lstm_overall, forest_overall) > 0 and (max(arima_overall, lstm_overall, forest_overall) /
                                                                      min(arima_overall, lstm_overall, forest_overall)) > MAX_DIFF:
+            print('max diff', player_data['id'])
             BUGGED_PLAYERS.append(player_data['id'])
             continue
 
