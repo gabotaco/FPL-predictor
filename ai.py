@@ -16,7 +16,7 @@ from lstm_utils import split_df_to_train_test, make_model
 MAX_POINTS = 50
 RETRY_POINT = 20
 MAX_RETRIES = 5
-MAX_DIFF = 4
+MAX_DIFF = 5
 
 arima_counter = 0
 lstm_counter = 0

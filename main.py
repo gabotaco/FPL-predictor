@@ -35,7 +35,7 @@ CURRENT_TEAM = {
 }
 
 INJURIES = {
-    "Alexander Isak Isak": 0,
+    "Alexander Isak Isak": 0.5,
     "Yoane Wissa Wissa": 0,
     "Jarrad Branthwaite Branthwaite": 0.75,
 }
@@ -207,7 +207,8 @@ def make_training_set():
 
         if min(arima_overall, lstm_overall, forest_overall) > 0 and (max(arima_overall, lstm_overall, forest_overall) /
                                                                      min(arima_overall, lstm_overall, forest_overall)) > MAX_DIFF:
-            print('max diff', player_data['id'])
+            print(player_data['id'], 'max diff', max(arima_overall, lstm_overall, forest_overall) /
+                                                                     min(arima_overall, lstm_overall, forest_overall), arima_overall, lstm_overall, forest_overall)
             BUGGED_PLAYERS.append(player_data['id'])
             continue
 
