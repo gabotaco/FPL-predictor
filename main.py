@@ -23,7 +23,7 @@ CURRENT_TEAM = {
     "William Saliba Saliba",
     "Pedro Porro Pedro Porro",
 
-    "Mohamed Salah M.Salah",
+    "Cole Palmer Palmer",
     "Luis Díaz Luis Díaz",
     "Noni Madueke Madueke",
     "Bryan Mbeumo Mbeumo",
@@ -35,9 +35,8 @@ CURRENT_TEAM = {
 }
 
 INJURIES = {
-    "Alexander Isak Isak": 0.5,
-    "Yoane Wissa Wissa": 0,
-    "Jarrad Branthwaite Branthwaite": 0.75,
+    "William Saliba Saliba": 0,
+    "Danny Welbeck Welbeck": 0.75,
 }
 
 HIDDEN_COLUMNS = ['GKP', 'DEF', 'MID', 'FWD', *TEAMS, 'ID', 'ARIMA', 'LSTM', 'FOREST']
@@ -55,6 +54,7 @@ WEB_NAME = header[0].index('Web Name')
 master_data_set = []
 deleted_members = []
 to_retry = []
+to_ignore_max_warning = []
 points_data_set = {}
 predict_by = {}
 
@@ -205,8 +205,8 @@ def make_training_set():
                 BUGGED_PLAYERS.append(player_data['id'])
                 continue
 
-        if min(arima_overall, lstm_overall, forest_overall) > 0 and (max(arima_overall, lstm_overall, forest_overall) /
-                                                                     min(arima_overall, lstm_overall, forest_overall)) > MAX_DIFF:
+        if (player_data['id'] not in to_ignore_max_warning and min(arima_overall, lstm_overall, forest_overall) > 0 and
+                (max(arima_overall, lstm_overall, forest_overall) / min(arima_overall, lstm_overall, forest_overall)) > MAX_DIFF):
             print(player_data['id'], 'max diff', max(arima_overall, lstm_overall, forest_overall) /
                                                                      min(arima_overall, lstm_overall, forest_overall), arima_overall, lstm_overall, forest_overall)
             BUGGED_PLAYERS.append(player_data['id'])
