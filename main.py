@@ -20,23 +20,24 @@ CURRENT_TEAM = {
     "Gabriel dos Santos Magalhães Gabriel",
     "Andrew Robertson Robertson",
     "Diogo Dalot Teixeira Dalot",
-    "William Saliba Saliba",
+    "Trent Alexander-Arnold Alexander-Arnold",
     "Pedro Porro Pedro Porro",
 
     "Cole Palmer Palmer",
     "Luis Díaz Luis Díaz",
-    "Noni Madueke Madueke",
-    "Bryan Mbeumo Mbeumo",
     "Harvey Barnes Barnes",
+    "Bryan Mbeumo Mbeumo",
+    "Mateo Kovačić Kovačić",
 
-    "Jhon Durán Duran",
+    "Danny Welbeck Welbeck",
     "Raúl Jiménez Raúl",
     "Chris Wood Wood",
 }
 
 INJURIES = {
-    "William Saliba Saliba": 0,
-    "Danny Welbeck Welbeck": 0.75,
+    "Gabriel dos Santos Magalhães Gabriel": 0.75,
+    "Chris Wood Wood": 0.75,
+    "Alisson Ramses Becker A.Becker": 0
 }
 
 HIDDEN_COLUMNS = ['GKP', 'DEF', 'MID', 'FWD', *TEAMS, 'ID', 'ARIMA', 'LSTM', 'FOREST']
