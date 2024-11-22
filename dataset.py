@@ -109,9 +109,9 @@ understat_name_map = {"Amad Diallo Traore": "Amad Diallo", "Takehiro Tomiyasu": 
                       "Tomas Soucek": "Tomáš Souček", "Toti": "Toti António Gomes",
                       "Valentino Livramento": "Tino Livramento",
                       "Vladimir Coufal": "Vladimír Coufal",
-                      "Yehor Yarmolyuk": "Yehor Yarmoliuk",
+                      "Yehor Yarmolyuk": "Yehor Yarmoliuk", "Ricardo Pereira": "Ricardo Barbosa Pereira",
                       "Youssef Chermiti": "Youssef Ramalho Chermiti", "Zanka": "Mathias Jorgensen",
-                      "Alisson": "Alisson Ramses Becker",
+                      "Alisson": "Alisson Ramses Becker", "Jorge Cuenca": "Jorge Cuenca Barreno",
                       "Omari Hutchinson": "Omari Giraud-Hutchinson", "Joe Ayodele-Aribo": "Joe Aribo",
                       "Julián Araujo": "Julián Araujo Zúñiga", "Seamus Coleman": "Séamus Coleman",
                       "André": "André Trindade da Costa Neto"}

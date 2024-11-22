@@ -56,7 +56,8 @@ def process_player_data(player_data):
             arima = sum(do_arima(list(map(lambda x: x['points'], gws[:-CALIBRATE_BY])), pred_by))
             lstm = sum(do_lstm(training_player_data, pred_by))
             forest = sum(do_forest(training_player_data, pred_by))
-        except:
+        except Exception as e:
+            print(e)
             print('AN ERROR HAPPENED')
             arima = 0
             lstm = 0

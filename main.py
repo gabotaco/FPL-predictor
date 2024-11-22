@@ -15,13 +15,13 @@ from calibrate import process_player_data
 
 CURRENT_TEAM = {
     "André Onana Onana",
-    "David Raya Martin Raya",
+    "Matz Sels Sels",
 
     "Gabriel dos Santos Magalhães Gabriel",
     "Andrew Robertson Robertson",
     "Diogo Dalot Teixeira Dalot",
     "Trent Alexander-Arnold Alexander-Arnold",
-    "Pedro Porro Pedro Porro",
+    "Ola Aina Aina",
 
     "Cole Palmer Palmer",
     "Luis Díaz Luis Díaz",
@@ -30,13 +30,12 @@ CURRENT_TEAM = {
     "Mateo Kovačić Kovačić",
 
     "Danny Welbeck Welbeck",
-    "Raúl Jiménez Raúl",
+    "Yoane Wissa Wissa",
     "Chris Wood Wood",
 }
 
 INJURIES = {
-    "Gabriel dos Santos Magalhães Gabriel": 0.75,
-    "Chris Wood Wood": 0.75,
+    "Cole Palmer Palmer": 0.75,
     "Alisson Ramses Becker A.Becker": 0
 }
 

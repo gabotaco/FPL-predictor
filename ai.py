@@ -52,7 +52,8 @@ def do_arima(ts, pred_by):
     try:
         arima = auto_arima(ts, seasonal=False, error_action="ignore")
         pred = arima.predict(len(pred_by))
-    except:
+    except Exception as e:
+        print(e)
         arima_counter += 1
         return do_arima(ts, pred_by)
 
