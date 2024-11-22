@@ -27,15 +27,21 @@ CURRENT_TEAM = {
     "Luis Díaz Luis Díaz",
     "Harvey Barnes Barnes",
     "Bryan Mbeumo Mbeumo",
-    "Mateo Kovačić Kovačić",
+    "Morgan Rogers Rogers",
 
-    "Danny Welbeck Welbeck",
+    "Matheus Santos Carneiro Da Cunha Cunha",
     "Yoane Wissa Wissa",
     "Chris Wood Wood",
 }
 
 INJURIES = {
+    "Ola Aina Aina": 0.75,
+    "Trent Alexander-Arnold Alexander-Arnold": 0.25,
     "Cole Palmer Palmer": 0.75,
+    "Bryan Mbeumo Mbeumo": 0.75,
+    "Mateo Kovačić Kovačić": 0,
+    "Micky van de Ven Van de Ven": 0,
+    "Yoane Wissa Wissa": 0.75,
     "Alisson Ramses Becker A.Becker": 0
 }
 
