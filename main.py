@@ -24,8 +24,8 @@ CURRENT_TEAM = {
     "Ola Aina Aina",
 
     "Cole Palmer Palmer",
-    "Luis Díaz Luis Díaz",
-    "Harvey Barnes Barnes",
+    "Georginio Rutter Georginio",
+    "James Maddison Maddison",
     "Bryan Mbeumo Mbeumo",
     "Morgan Rogers Rogers",
 
@@ -35,14 +35,10 @@ CURRENT_TEAM = {
 }
 
 INJURIES = {
-    "Ola Aina Aina": 0.75,
-    "Trent Alexander-Arnold Alexander-Arnold": 0.25,
-    "Cole Palmer Palmer": 0.75,
-    "Bryan Mbeumo Mbeumo": 0.75,
     "Mateo Kovačić Kovačić": 0,
     "Micky van de Ven Van de Ven": 0,
-    "Yoane Wissa Wissa": 0.75,
-    "Alisson Ramses Becker A.Becker": 0
+    "Alisson Ramses Becker A.Becker": 0.5,
+    "Gabriel dos Santos Magalhães Gabriel": 0.75,
 }
 
 HIDDEN_COLUMNS = ['GKP', 'DEF', 'MID', 'FWD', *TEAMS, 'ID', 'ARIMA', 'LSTM', 'FOREST']
