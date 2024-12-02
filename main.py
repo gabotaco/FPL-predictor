@@ -17,7 +17,7 @@ CURRENT_TEAM = {
     "André Onana Onana",
     "Matz Sels Sels",
 
-    "Gabriel dos Santos Magalhães Gabriel",
+    "Ashley Young Young",
     "Andrew Robertson Robertson",
     "Diogo Dalot Teixeira Dalot",
     "Trent Alexander-Arnold Alexander-Arnold",
@@ -26,7 +26,7 @@ CURRENT_TEAM = {
     "Cole Palmer Palmer",
     "Georginio Rutter Georginio",
     "James Maddison Maddison",
-    "Bryan Mbeumo Mbeumo",
+    "Bukayo Saka Saka",
     "Morgan Rogers Rogers",
 
     "Matheus Santos Carneiro Da Cunha Cunha",
