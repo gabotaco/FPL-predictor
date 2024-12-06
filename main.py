@@ -27,7 +27,7 @@ CURRENT_TEAM = {
     "Georginio Rutter Georginio",
     "James Maddison Maddison",
     "Bukayo Saka Saka",
-    "Morgan Rogers Rogers",
+    "Brennan Johnson Johnson",
 
     "Matheus Santos Carneiro Da Cunha Cunha",
     "Yoane Wissa Wissa",
