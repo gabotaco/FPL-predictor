@@ -19,15 +19,15 @@ CURRENT_TEAM = {
 
     "Ashley Young Young",
     "Andrew Robertson Robertson",
-    "Diogo Dalot Teixeira Dalot",
+    "Milos Kerkez Kerkez",
     "Trent Alexander-Arnold Alexander-Arnold",
     "Ola Aina Aina",
 
     "Cole Palmer Palmer",
     "Georginio Rutter Georginio",
-    "James Maddison Maddison",
+    "Mikkel Damsgaard Damsgaard",
     "Bukayo Saka Saka",
-    "Brennan Johnson Johnson",
+    "Bruno Borges Fernandes B.Fernandes",
 
     "Matheus Santos Carneiro Da Cunha Cunha",
     "Yoane Wissa Wissa",
@@ -35,9 +35,7 @@ CURRENT_TEAM = {
 }
 
 INJURIES = {
-    "Mateo Kovačić Kovačić": 0,
     "Micky van de Ven Van de Ven": 0,
-    "Alisson Ramses Becker A.Becker": 0.5,
     "Gabriel dos Santos Magalhães Gabriel": 0.75,
 }
 
@@ -172,6 +170,7 @@ def make_training_set():
 
         c_arima, c_lstm, c_forest, c_actual = process_player_data(player_data)
         if c_actual <= 0 and not PROCESS_ALL_PLAYERS:
+            print('HELLO')
             continue
         elif c_actual > 0:
             arima_ratio, lstm_ratio, forest_ratio = calibrate_player(c_arima, c_lstm, c_forest, c_actual)
