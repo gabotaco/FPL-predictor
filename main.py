@@ -14,16 +14,16 @@ from solver import make_team, calibrate_player, TOTAL_PLAYERS
 from calibrate import process_player_data
 
 CURRENT_TEAM = {
-    "André Onana Onana",
+    "Jordan Pickford Pickford",
     "Matz Sels Sels",
 
     "Ashley Young Young",
-    "Andrew Robertson Robertson",
+    "Vitalii Mykolenko Mykolenko",
     "Milos Kerkez Kerkez",
     "Trent Alexander-Arnold Alexander-Arnold",
     "Ola Aina Aina",
 
-    "Cole Palmer Palmer",
+    "Mohamed Salah M.Salah",
     "Georginio Rutter Georginio",
     "Mikkel Damsgaard Damsgaard",
     "Bukayo Saka Saka",
@@ -36,7 +36,6 @@ CURRENT_TEAM = {
 
 INJURIES = {
     "Micky van de Ven Van de Ven": 0,
-    "Gabriel dos Santos Magalhães Gabriel": 0.75,
 }
 
 HIDDEN_COLUMNS = ['GKP', 'DEF', 'MID', 'FWD', *TEAMS, 'ID', 'ARIMA', 'LSTM', 'FOREST']
