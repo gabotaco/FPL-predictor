@@ -9,7 +9,7 @@ from ai import MAX_DIFF, do_arima, do_lstm, do_forest
 from dataset import get_dataset, master_data_set as header
 from game_information import TEAMS, get_team_info, CURRENT_SEASON, CURRENT_GAME_WEEK, CURRENT_SEASON_BEGINNING_ROUND, \
     SEASON_LENGTH, MIN_GAMES, MIN_SEASON_PPG, MIN_SEASON_GAME_PERCENTAGE, TEAM_WORTH, FREE_TRANSFERS, \
-    PREDICT_BY_WEEKS, TRANSFER_COST, CHALLENGE_TEAM, CALIBRATE_BY, BUGGED_PLAYERS, PROCESS_ALL_PLAYERS
+    PREDICT_BY_WEEKS, TRANSFER_COST, CHALLENGE_TEAM, CALIBRATE_BY, BUGGED_PLAYERS, PROCESS_ALL_PLAYERS, USE_AVERAGE
 from solver import make_team, calibrate_player, TOTAL_PLAYERS
 from calibrate import process_player_data
 
@@ -17,25 +17,27 @@ CURRENT_TEAM = {
     "Jordan Pickford Pickford",
     "Matz Sels Sels",
 
-    "Ashley Young Young",
+    "James Tarkowski Tarkowski",
     "Vitalii Mykolenko Mykolenko",
     "Milos Kerkez Kerkez",
-    "Trent Alexander-Arnold Alexander-Arnold",
+    "Lewis Hall Hall",
     "Ola Aina Aina",
 
     "Mohamed Salah M.Salah",
-    "Georginio Rutter Georginio",
-    "Mikkel Damsgaard Damsgaard",
-    "Bukayo Saka Saka",
+    "Jacob Murphy J.Murphy",
+    "Amad Diallo Amad",
+    "Son Heung-min Son",
     "Bruno Borges Fernandes B.Fernandes",
 
     "Matheus Santos Carneiro Da Cunha Cunha",
     "Yoane Wissa Wissa",
-    "Chris Wood Wood",
+    "Alexander Isak Isak",
 }
 
 INJURIES = {
     "Micky van de Ven Van de Ven": 0,
+    "Ashley Young Young": 0,
+    "Bukayo Saka Saka": 0,
 }
 
 HIDDEN_COLUMNS = ['GKP', 'DEF', 'MID', 'FWD', *TEAMS, 'ID', 'ARIMA', 'LSTM', 'FOREST']
@@ -167,9 +169,8 @@ def make_training_set():
         lstm_ratio = 1/3
         forest_ratio = 1/3
 
-        c_arima, c_lstm, c_forest, c_actual = process_player_data(player_data)
+        c_arima, c_lstm, c_forest, c_actual, average_points = process_player_data(player_data)
         if c_actual <= 0 and not PROCESS_ALL_PLAYERS:
-            print('HELLO')
             continue
         elif c_actual > 0:
             arima_ratio, lstm_ratio, forest_ratio = calibrate_player(c_arima, c_lstm, c_forest, c_actual)
@@ -179,24 +180,26 @@ def make_training_set():
             lstm_overall, lstm_next = 0, 0
             forest_overall, forest_next = 0, 0
         else:
+            pred_by = predict_by[player_data['team']]['games'][:predict_by[player_data['team']]['next']] if USE_AVERAGE else predict_by[player_data['team']]['games']
+            average_overall = average_points * len(predict_by[player_data['team']]['games'])
             try:
                 if arima_ratio > 0:
-                    arima_pred = do_arima(ts, predict_by[player_data['team']]['games'])
-                    arima_overall = sum(arima_pred)
+                    arima_pred = do_arima(ts, pred_by)
+                    arima_overall = average_overall if USE_AVERAGE else sum(arima_pred)
                     arima_next = sum(arima_pred[:predict_by[player_data['team']]['next']])
                 else:
                     arima_overall, arima_next = 0, 0
 
                 if lstm_ratio > 0:
-                    lstm_pred = do_lstm(player_data, predict_by[player_data['team']]['games'])
-                    lstm_overall = sum(lstm_pred)
+                    lstm_pred = do_lstm(player_data, pred_by)
+                    lstm_overall = average_overall if USE_AVERAGE else sum(lstm_pred)
                     lstm_next = sum(lstm_pred[:predict_by[player_data['team']]['next']])
                 else:
                     lstm_overall, lstm_next = 0, 0
 
                 if forest_ratio > 0:
-                    forest_pred = do_forest(player_data, predict_by[player_data['team']]['games'])
-                    forest_overall = sum(forest_pred)
+                    forest_pred = do_forest(player_data, pred_by)
+                    forest_overall = average_overall if USE_AVERAGE else sum(forest_pred)
                     forest_next = sum(forest_pred[:predict_by[player_data['team']]['next']])
                 else:
                     forest_overall, forest_next = 0, 0
