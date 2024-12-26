@@ -1,23 +1,15 @@
 import csv
-import json
 import os
 
-from game_information import TEAMS, get_team_info, PREVIOUS_SEASON, CURRENT_SEASON, POSITIONS, CURRENT_GAME_WEEK, CHALLENGE_TEAM
+from game_information import get_team_info, POSITIONS, get_game_round, get_team_names, get_next_year
 
 USE_UNDERSTAT = False
 NO_NEW_PLAYERS = False
 
 STARTING_SEASON = "2019-20" if USE_UNDERSTAT else "2018-19"
 
-PIDs = {}
-teams = {}
-points_data_set = {}
-master_data_set = [
-    ["First Name", "Surname", "Web Name", "Position", "GKP", "DEF", "MID", "FWD", "Team", *TEAMS, "Cost", "ID", "ARIMA",
-     "LSTM", "FOREST", "PP", "NEXT", "Health", "PREV", "Selected"]]
-
 # Check Sasa Kalajdzic and Martin Dubravka and Josh Acheampong
-old_players = ["Gonzalo Montiel", "Auston Trusty", "Willian", "Said Benrahma", "Sergio Gómez", "Ivo Grbic",
+OLD_PLAYERS = ["Gonzalo Montiel", "Auston Trusty", "Willian", "Said Benrahma", "Sergio Gómez", "Ivo Grbic",
                "Michael Olise", "Jayden Danns", "Finley Munroe", "Donny van de Beek", "Marc Guehi", "Nuno Tavares",
                "Mason Burstow", "Tom Davies", "Andrey Santos", "Serge Aurier", "James Tomkins", "Bertrand Traoré",
                "Ivan Perisic", "Aaron Ramsey", "Vitinho", "Albert Sambi Lokonga", "Mads Andersen", "John Fleck",
@@ -47,7 +39,7 @@ old_players = ["Gonzalo Montiel", "Auston Trusty", "Willian", "Said Benrahma", "
                "Álex Moreno", "Jamie Donley", "Thomas Kaminski", "Michael Obafemi", "Gustavo Hamer", "Yasser Larouci",
                "Matt Ritchie", "Jayden Bogle", "Alex Matos", "James Trafford", "Rodri", "Thilo Kehrer", "Tyler Onyango",
                "Jack Robinson", "Josh Acheampong", "Paul Dummett"]
-understat_name_map = {"Amad Diallo Traore": "Amad Diallo", "Takehiro Tomiyasu": "Tomiyasu Takehiro",
+UNDERSTAT_NAME_MAP = {"Amad Diallo Traore": "Amad Diallo", "Takehiro Tomiyasu": "Tomiyasu Takehiro",
                       "Andreas Pereira": "Andreas Hoelgebaum Pereira", "Sammie Szmodics": "Sam Szmodics",
                       "Lukasz Fabianski": "Łukasz Fabiański", "Jota Silva": "João Pedro Ferreira Silva",
                       "Antony": "Antony Matheus dos Santos", "Yukinari Sugawara": "Sugawara Yukinari",
@@ -98,14 +90,14 @@ understat_name_map = {"Amad Diallo Traore": "Amad Diallo", "Takehiro Tomiyasu": 
                       "Naif Aguerd": "Nayef Aguerd", "Neto": "Norberto Murara Neto",
                       "Nélson Semedo": "Nélson Cabral Semedo", "William Smallbone": "Will Smallbone",
                       "Odisseas Vlachodimos": "Odysseas Vlachodimos",
-                      "Pape Sarr": "Pape Matar Sarr",  "Mateus Fernandes": "Mateus Gonçalo Espanha Fernandes",
+                      "Pape Sarr": "Pape Matar Sarr", "Mateus Fernandes": "Mateus Gonçalo Espanha Fernandes",
                       "Pedro Neto": "Pedro Lomba Neto", "Evanilson": "Francisco Evanilson de Lima Barbosa",
                       "Rayan Ait Nouri": "Rayan Aït-Nouri",
                       "Richarlison": "Richarlison de Andrade",
                       "Rodrigo": "Rodrigo Bentancur", "Rodrigo Muniz": "Rodrigo Muniz Carvalho",
                       "Romeo Lavia": "Roméo Lavia",
-                      "Rúben Dias": "Rúben Gato Alves Dias", "Sasa Lukic": "Saša Lukić", "Sergi Canos": "Sergi Canós Tenés",
-                      "Son Heung-Min": "Son Heung-min", "Tetê": "Kenny Tete",
+                      "Rúben Dias": "Rúben Gato Alves Dias", "Sasa Lukic": "Saša Lukić",
+                      "Sergi Canos": "Sergi Canós Tenés", "Son Heung-Min": "Son Heung-min", "Tetê": "Kenny Tete",
                       "Tomas Soucek": "Tomáš Souček", "Toti": "Toti António Gomes",
                       "Valentino Livramento": "Tino Livramento",
                       "Vladimir Coufal": "Vladimír Coufal",
@@ -117,33 +109,26 @@ understat_name_map = {"Amad Diallo Traore": "Amad Diallo", "Takehiro Tomiyasu": 
                       "André": "André Trindade da Costa Neto"}
 
 
-def get_teams():
-    global teams
-    teams = get_team_info()
+def get_previous_players(previous_season):
+    previous_players = set()
 
-    if NO_NEW_PLAYERS:
-        get_previous_players_then_current_players()
-    else:
-        get_current_players(None)
-
-
-def get_previous_players_then_current_players():
-    with open(f"../Fantasy-Premier-League/data/{PREVIOUS_SEASON}/players_raw.csv", 'r') as data_file:
+    with open(f"../Fantasy-Premier-League/data/{previous_season}/players_raw.csv", 'r') as data_file:
         csv_reader = csv.DictReader(data_file)
 
-        previous_players = set()
         for row in csv_reader:
             player_name = f"{row['first_name']} {row['second_name']}"
             if player_name in previous_players:
                 raise Exception("2 players have the same name")
             previous_players.add(player_name)
 
-    get_current_players(previous_players)
+    return previous_players
 
 
-def get_current_players(previous_players):
-    global master_data_set, PIDs, teams
-    with open(f"../Fantasy-Premier-League/data/{CURRENT_SEASON}/players_raw.csv") as data_file:
+def get_pids_and_master_data_set(previous_players, team_info, team_names, current_season, header):
+    pids = {}
+    master_data_set = [header]
+
+    with open(f"../Fantasy-Premier-League/data/{current_season}/players_raw.csv") as data_file:
         csv_reader = csv.DictReader(data_file)
 
         for i, row in enumerate(csv_reader):
@@ -151,10 +136,10 @@ def get_current_players(previous_players):
             player = [row['first_name'], row['second_name'], row['web_name'], player_position,
                       1 if player_position == 'GKP' else 0, 1 if player_position == 'DEF' else 0,
                       1 if player_position == 'MID' else 0, 1 if player_position == 'FWD' else 0,
-                      teams[int(row['team'])]['short_name']]
+                      team_info[int(row['team'])]['short_name']]
 
-            for team_name in TEAMS:
-                if teams[int(row['team'])]['short_name'] == team_name:
+            for team_name in team_names:
+                if team_info[int(row['team'])]['short_name'] == team_name:
                     player.append(1)
                 else:
                     player.append(0)
@@ -163,99 +148,84 @@ def get_current_players(previous_players):
             player.append(i)
 
             player_name = f"{row['first_name']} {row['second_name']}"
-            if player_name in PIDs:
+            if player_name in pids:
                 raise Exception("2 players with the same name! " + player_name)
 
             if previous_players is None or player_name in previous_players:
-                PIDs[player_name] = {'id': i, 'web_name': row['web_name'], 'first_name': row['first_name'],
-                                     'last_name': row['second_name'], 'team': teams[int(row['team'])]['short_name'],
+                pids[player_name] = {'id': i, 'web_name': row['web_name'], 'first_name': row['first_name'],
+                                     'last_name': row['second_name'], 'team': team_info[int(row['team'])]['short_name'],
                                      'position': player_position}
                 master_data_set.append(player)
 
-    if USE_UNDERSTAT:
-        load_understat()
-    else:
-        get_points(STARTING_SEASON)
+    return pids, master_data_set
 
 
-def load_understat():
-    global PIDs
-    understat_players = os.listdir(f"../Fantasy-Premier-League/data/{CURRENT_SEASON}/understat")
+def load_understat(current_season, pids):
+    understat_players = os.listdir(f"../Fantasy-Premier-League/data/{current_season}/understat")
     understat_players = [player for player in understat_players if not player.startswith("understat")]
 
     for i, understat_player in enumerate(understat_players):
         name = ' '.join(understat_player.split("_")[:-1]).replace('&#039;', '\'')
 
-        if name in old_players:
+        if name in OLD_PLAYERS:
             continue
 
-        if name in understat_name_map:
-            name = understat_name_map[name]
+        if name in UNDERSTAT_NAME_MAP:
+            name = UNDERSTAT_NAME_MAP[name]
 
-        if name not in PIDs:
+        if name not in pids:
             raise Exception(f"Didn't find a player with the name {name}")
 
-        PIDs[name]['understat'] = {}
+        pids[name]['understat'] = {}
 
-        with open(f"../Fantasy-Premier-League/data/{CURRENT_SEASON}/understat/{understat_player}") as understat_file:
+        with open(f"../Fantasy-Premier-League/data/{current_season}/understat/{understat_player}") as understat_file:
             understat_reader = csv.DictReader(understat_file)
 
             for player_element in understat_reader:
-                PIDs[name]['understat'][player_element['date']] = player_element
-
-    get_points(STARTING_SEASON)
+                pids[name]['understat'][player_element['date']] = player_element
 
 
-def get_points(year):
-    global PIDs, points_data_set
+def get_elements_to_use(year, pids):
+    elements_to_use = {}
+
     with open(f"../Fantasy-Premier-League/data/{year}/player_idlist.csv") as player_file:
         csv_reader = csv.DictReader(player_file)
 
-        elements_to_use = {}
-        used_players = set()
+        for player_id in csv_reader:
+            player_name = f"{player_id['first_name']} {player_id['second_name']}"
+            if player_name in pids:
+                elements_to_use[player_name] = pids[player_name]
 
-        for playerId in csv_reader:
-            player_name = f"{playerId['first_name']} {playerId['second_name']}"
-            if player_name in PIDs:
-                elements_to_use[player_name] = PIDs[player_name]
-                used_players.add(PIDs[player_name]['id'])
+    return elements_to_use
+
+
+def get_fixture_maps(year, team_info):
+    fixture_to_difficulty = {}
+    fixture_to_team = {}
 
     with open(f"../Fantasy-Premier-League/data/{year}/fixtures.csv") as fixture_file:
         fixture_reader = csv.DictReader(fixture_file)
 
-        fixture_to_difficulty = {}
-        fixture_to_team = {}
-
         for fixture in fixture_reader:
             fixture_to_difficulty[int(fixture['id'])] = {'h': int(fixture['team_h_difficulty']),
                                                          'a': int(fixture['team_a_difficulty'])}
-            fixture_to_team[int(fixture['id'])] = {'h': teams[int(fixture['team_h'])]['short_name'],
-                                                   'a': teams[int(fixture['team_a'])]['short_name']}
+            fixture_to_team[int(fixture['id'])] = {'h': team_info[int(fixture['team_h'])]['short_name'],
+                                                   'a': team_info[int(fixture['team_a'])]['short_name']}
+
+    return fixture_to_difficulty, fixture_to_team
+
+
+def get_points(year, team_info, pids, points_data_set=None):
+    if points_data_set is None:
+        points_data_set = {}
+
+    elements_to_use = get_elements_to_use(year, pids)
+    fixture_to_difficulty, fixture_to_team = get_fixture_maps(year, team_info)
+    game_round = get_game_round(year)
 
     gws = os.listdir(f"../Fantasy-Premier-League/data/{year}/gws")
     gws = [gw for gw in gws if gw.startswith("gw")]
-
     gws.sort(key=lambda a: int(a.replace("gw", "").replace(".csv", "")))
-
-    game_round = 1
-
-    match year:
-        case "2017-18":
-            game_round = 39
-        case "2018-19":
-            game_round = 77
-        case "2019-20":
-            game_round = 115
-        case "2020-21":
-            game_round = 162
-        case "2021-22":
-            game_round = 200
-        case "2022-23":
-            game_round = 238
-        case "2023-24":
-            game_round = 276
-        case "2024-25":
-            game_round = 314
 
     for gw in gws:
         with open(f"../Fantasy-Premier-League/data/{year}/gws/{gw}", encoding="latin-1") as gw_file:
@@ -300,35 +270,31 @@ def get_points(year):
                 points_data_set[element_object['id']][f"GW{game_round}"] = {'diff': diff,
                                                                             'points': int(gw_element['total_points']),
                                                                             'team': opp_team}
-
         game_round += 1
 
-    match year:
-        case "2016-17":
-            get_points("2017-18")
-        case "2017-18":
-            get_points("2018-19")
-        case "2018-19":
-            get_points("2019-20")
-        case "2019-20":
-            get_points("2020-21")
-        case "2020-21":
-            get_points("2021-22")
-        case "2021-22":
-            get_points("2022-23")
-        case "2022-23":
-            get_points("2023-24")
-        case "2023-24":
-            get_points("2024-25")
+    next_year = get_next_year(year)
+    if next_year is not None:
+        return get_points(next_year, team_info, pids, points_data_set)
+
+    return points_data_set
 
 
-def get_dataset():
-    global points_data_set, master_data_set, PIDs, teams
-    PIDs = {}
-    teams = {}
-    points_data_set = {}
-    master_data_set = [
-    ["First Name", "Surname", "Web Name", "Position", "GKP", "DEF", "MID", "FWD", "Team", *TEAMS, "Cost", "ID", "ARIMA",
-     "LSTM", "FOREST", "PP", "NEXT", "Health", "PREV", "Selected"]]
-    get_teams()
+def get_header(team_names):
+    return ["First Name", "Surname", "Web Name", "Position", "GKP", "DEF", "MID", "FWD", "Team",
+            *team_names, "Cost", "ID", "ARIMA", "LSTM", "FOREST", "PP", "NEXT", "Health", "PREV",
+            "Selected"]
+
+
+def get_dataset(current_season, previous_season):
+    team_names = get_team_names(current_season)
+    team_info = get_team_info(current_season)
+
+    previous_players = get_previous_players(previous_season) if NO_NEW_PLAYERS else None
+    pids, master_data_set = get_pids_and_master_data_set(previous_players, team_info, team_names, current_season,
+                                                         get_header(team_names))
+    if USE_UNDERSTAT:
+        load_understat(current_season, pids)
+
+    points_data_set = get_points(STARTING_SEASON, team_info, pids)
+
     return points_data_set, master_data_set

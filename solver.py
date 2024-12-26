@@ -1,30 +1,37 @@
 from gekko import GEKKO
 
-from game_information import TEAM_WORTH, FREE_TRANSFERS, PREDICT_BY_WEEKS, TRANSFER_COST, TEAMS
 
-from dataset import master_data_set as header
+def make_team_list(list_data, team_names, header, predict_by_weeks, transfer_cost, free_transfers, team_worth,  gkps,
+                   defs, mids, fwds, total_players, max_per_team):
+    def convert_player_data(player):
+        player_data = {
+            "first_name": player[header.index('First Name')],
+            "last_name": player[header.index('Surname')],
+            "pp": player[header.index("PP")],
+            "next": player[header.index("NEXT")],
+            "health": player[header.index("Health")],
+            "prev": player[header.index("PREV")],
+            "cost": player[header.index("Cost")],
+            "gkp": player[header.index("GKP")],
+            "def": player[header.index("DEF")],
+            "mid": player[header.index("MID")],
+            "fwd": player[header.index("FWD")],
+        }
 
-MAX_GKP = 2
-MAX_DEF = 5
-MAX_MID = 5
-MAX_FWD = 3
-TOTAL_PLAYERS = MAX_GKP + MAX_DEF + MAX_MID + MAX_FWD
+        for team in team_names:
+            team_index = header.index(team)
+            player_data[team] = player[team_index]
 
-MAX_PER_TEAM = 3
+        return player_data
 
-COST = header[0].index("Cost")
-PP = header[0].index("PP")
-PREV = header[0].index("PREV")
-GKP = header[0].index("GKP")
-DEF = header[0].index("DEF")
-MID = header[0].index("MID")
-FWD = header[0].index("FWD")
-HEALTH = header[0].index("Health")
+    return make_team(list(map(convert_player_data, list_data)), predict_by_weeks, transfer_cost, free_transfers,
+                     team_worth, team_names, gkps, defs, mids, fwds, total_players, max_per_team)
 
 
-def make_team(data):
+def make_team(data, predict_by_weeks, transfer_cost, free_transfers, max_cost, team_names, gkps, defs, mids, fwds,
+              total_players, max_per_team):
     def apply_player_health(player):
-        player[PP] *= player[HEALTH]
+        player['pp'] *= player['health']
         return player
 
     players = list(map(apply_player_health, data))
@@ -34,42 +41,54 @@ def make_team(data):
 
     x = [m.Var(lb=0, ub=1, integer=True) for _ in players]
 
-    m.Maximize(sum(x[i] * players[i][PP] for i in range(len(players)))
-               - (PREDICT_BY_WEEKS * TRANSFER_COST * m.max2(0,
-                                                            sum(x[i] * (1 - players[i][PREV])
-                                                                for i in range(len(players)))
-                                                            - FREE_TRANSFERS)))
+    points_column = 'pp' if predict_by_weeks > 1 else 'next'
+    if transfer_cost == 0 or transfer_cost is None or free_transfers >= total_players or free_transfers is None:
+        m.Maximize(sum(x[i] * players[i][points_column] for i in range(len(players))))
+    else:
+        m.Maximize(sum(x[i] * players[i][points_column] for i in range(len(players)))
+                   - (predict_by_weeks * transfer_cost * m.max2(0,
+                                                                sum(x[i] * (1 - players[i]['prev'])
+                                                                    for i in range(len(players)))
+                                                                - free_transfers)))
 
-    m.Equation(sum(x[i] * players[i][COST] for i in range(len(players))) <= TEAM_WORTH)
+    if max_cost is not None:
+        m.Equation(sum(x[i] * players[i]['cost'] for i in range(len(players))) <= max_cost)
 
-    m.Equation(sum(x[i] * players[i][GKP] for i in range(len(players))) == MAX_GKP)
-    m.Equation(sum(x[i] * players[i][DEF] for i in range(len(players))) == MAX_DEF)
-    m.Equation(sum(x[i] * players[i][MID] for i in range(len(players))) == MAX_MID)
-    m.Equation(sum(x[i] * players[i][FWD] for i in range(len(players))) == MAX_FWD)
+    min_gkp, max_gkp = gkps
+    if min_gkp == max_gkp:
+        m.Equation(sum(x[i] * players[i]['gkp'] for i in range(len(players))) == max_gkp)
+    else:
+        m.Equation(sum(x[i] * players[i]['gkp'] for i in range(len(players))) >= min_gkp)
+        m.Equation(sum(x[i] * players[i]['gkp'] for i in range(len(players))) <= max_gkp)
+    min_def, max_def = defs
+    if min_def == max_def:
+        m.Equation(sum(x[i] * players[i]['def'] for i in range(len(players))) == max_def)
+    else:
+        m.Equation(sum(x[i] * players[i]['def'] for i in range(len(players))) >= min_def)
+        m.Equation(sum(x[i] * players[i]['def'] for i in range(len(players))) <= max_def)
+    min_mid, max_mid = mids
+    if min_mid == max_mid:
+        m.Equation(sum(x[i] * players[i]['mid'] for i in range(len(players))) == max_mid)
+    else:
+        m.Equation(sum(x[i] * players[i]['mid'] for i in range(len(players))) >= min_mid)
+        m.Equation(sum(x[i] * players[i]['mid'] for i in range(len(players))) <= max_mid)
+    min_fwd, max_fwd = fwds
+    if min_fwd == max_fwd:
+        m.Equation(sum(x[i] * players[i]['fwd'] for i in range(len(players))) == max_fwd)
+    else:
+        m.Equation(sum(x[i] * players[i]['fwd'] for i in range(len(players))) >= min_fwd)
+        m.Equation(sum(x[i] * players[i]['fwd'] for i in range(len(players))) <= max_fwd)
 
-    for team in TEAMS:
-        team_index = header[0].index(team)
-        m.Equation(sum(x[i] * players[i][team_index] for i in range(len(players))) <= MAX_PER_TEAM)
+    m.Equation(sum(x[i] for i in range(len(players))) == total_players)
+
+    if max_per_team is not None and max_per_team < total_players:
+        for team in team_names:
+            m.Equation(sum(x[i] * players[i][team] if team in players[i] else 0 for i in range(len(players))) <=
+                       max_per_team)
 
     m.solve(disp=False)
 
-    return [players[i] for i in range(len(players)) if x[i].value[0] == 1]
-
-
-def make_calibration(players):
-    m = GEKKO(remote=False)
-    arima = m.Var(value=0, lb=0)
-    lstm = m.Var(value=0, lb=0)
-    forest = m.Var(value=0, lb=0)
-
-    m.Minimize(sum((((players[i]['arima'] * arima)
-                    + (players[i]['lstm'] * lstm)
-                    + (players[i]['forest'] * forest))
-                    - players[i]['actual_points']) ** 2 for i in range(len(players))))
-
-    m.solve(disp=False)
-
-    return arima.value[0], lstm.value[0], forest.value[0]
+    return [f"{players[i]['first_name']} {players[i]['last_name']}" for i in range(len(players)) if x[i].value[0] == 1]
 
 
 def calibrate_player(arima, lstm, forest, actual_points):

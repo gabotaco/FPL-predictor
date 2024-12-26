@@ -1,10 +1,9 @@
 from ai import do_arima, do_lstm, do_forest, MAX_DIFF
-from game_information import CURRENT_SEASON_BEGINNING_ROUND, CURRENT_GAME_WEEK, SEASON_LENGTH, MIN_GAMES, \
-    MIN_SEASON_PPG, MIN_SEASON_GAME_PERCENTAGE, CALIBRATE_BY, BUGGED_PLAYERS, PROCESS_ALL_PLAYERS
 
 
-def process_player_data(player_data):
-    if player_data['id'] in BUGGED_PLAYERS:
+def process_player_data(player_data, current_season_beginning_round, current_game_week, season_length, min_games,
+                        min_season_ppg, min_season_game_percentage, calibrate_by, bugged_players, process_all_players):
+    if player_data['id'] in bugged_players:
         return -1, -1, -1, -1, 0
 
     points_sum = 0
@@ -21,17 +20,18 @@ def process_player_data(player_data):
         gws.append(data)
 
         round_num = int(dataset.replace('GW', ''))
-        beginning_round = CURRENT_SEASON_BEGINNING_ROUND
-        if CURRENT_GAME_WEEK <= CALIBRATE_BY:
-            beginning_round = CURRENT_SEASON_BEGINNING_ROUND - SEASON_LENGTH - 1
+        beginning_round = current_season_beginning_round
+        if current_game_week <= calibrate_by:
+            beginning_round = current_season_beginning_round - season_length - 1
 
         if round_num >= beginning_round:
             points_sum += data['points']
             num_games += 1
 
-    if not PROCESS_ALL_PLAYERS and (
-            total_games - CALIBRATE_BY < MIN_GAMES or points_sum < MIN_SEASON_PPG * num_games or num_games < (
-            SEASON_LENGTH if CURRENT_GAME_WEEK <= CALIBRATE_BY else CURRENT_GAME_WEEK - 1) * MIN_SEASON_GAME_PERCENTAGE):
+    if not process_all_players and (
+            total_games - calibrate_by < min_games or points_sum < min_season_ppg * num_games or num_games < (
+            season_length if current_game_week <= calibrate_by else current_game_week - 1) *
+            min_season_game_percentage):
         return -1, -1, -1, -1, 0
 
     pred_by = []
@@ -39,21 +39,21 @@ def process_player_data(player_data):
                             'first_name': player_data['first_name'], 'last_name': player_data['last_name'],
                             'name': player_data['name'], 'team': player_data['team']}
 
-    for gw_num in range(0, len(gws) - CALIBRATE_BY + 1):
+    for gw_num in range(0, len(gws) - calibrate_by + 1):
         training_player_data[f"GW{gw_num + 1}"] = gws[gw_num]
 
     actual_points = 0
-    for gw in gws[len(gws) - CALIBRATE_BY + 1:]:
+    for gw in gws[len(gws) - calibrate_by + 1:]:
         pred_by.append(gw['diff'])
         actual_points += gw['points']
 
-    if actual_points <= 0 or len(gws[:-CALIBRATE_BY]) <= CALIBRATE_BY:
+    if actual_points <= 0 or len(gws[:-calibrate_by]) <= calibrate_by:
         arima = 0
         lstm = 0
         forest = 0
     else:
         try:
-            arima = sum(do_arima(list(map(lambda x: x['points'], gws[:-CALIBRATE_BY])), pred_by))
+            arima = sum(do_arima(list(map(lambda x: x['points'], gws[:-calibrate_by])), pred_by))
             lstm = sum(do_lstm(training_player_data, pred_by))
             forest = sum(do_forest(training_player_data, pred_by))
         except Exception as e:
