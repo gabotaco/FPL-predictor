@@ -320,14 +320,6 @@ def get_points(year):
             get_points("2023-24")
         case "2023-24":
             get_points("2024-25")
-        case "2024-25":
-            write_points_data()
-
-
-def write_points_data():
-    global points_data_set
-    with open(f"./datasets/{CURRENT_SEASON}/dataset{CURRENT_GAME_WEEK}{"Challenge" if CHALLENGE_TEAM else ""}.json", 'w') as dataset_file:
-        json.dump(points_data_set, dataset_file, ensure_ascii=False, indent=4)
 
 
 def get_dataset():
