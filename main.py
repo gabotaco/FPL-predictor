@@ -1,3 +1,4 @@
+import copy
 import csv
 import json
 import os
@@ -53,12 +54,16 @@ def init(current_season, current_game_week, predict_by_weeks, challenge_team,
          total_players, gkps, defs, mids, fwds, max_per_team):
     team_names = get_team_names(current_season)
     team_info = get_team_info(current_season)
+
     predict_by = get_predict_by(current_season, current_game_week, predict_by_weeks, team_info, team_names)
     points_data_set, incomplete_master_data_set = get_dataset(current_season)
-    master_data_set, found_previous = make_predictions(current_season, current_game_week, challenge_team,
+
+    filename = (f"./predictedData/{current_season}/predictedData{current_game_week}"
+                f"{"Challenge" if challenge_team else ""}.json")
+    master_data_set, found_previous = make_predictions(current_season, current_game_week, not challenge_team,
                                                        points_data_set, incomplete_master_data_set,
                                                        calibrate_by, season_length, min_games, process_all_players,
-                                                       min_season_ppg, predict_by, predict_by_weeks,
+                                                       min_season_ppg, predict_by, predict_by_weeks, filename,
                                                        min_season_game_percentage, bugged_players, use_average)
     if not challenge_team:
         if found_previous == total_players:
@@ -142,10 +147,13 @@ def make_player_ts(player_data, current_season_beginning_round, current_game_wee
         if not dataset.startswith('GW'):
             continue
 
+        round_num = int(dataset.replace("GW", ""))
+        if round_num >= current_season_beginning_round + current_game_week - 1:
+            continue
+
         total_games += 1
         ts.append(data['points'])
 
-        round_num = int(dataset.replace("GW", ""))
         beginning_round = current_season_beginning_round
         if current_game_week <= calibrate_by:
             beginning_round = current_season_beginning_round - season_length - current_game_week
@@ -169,11 +177,9 @@ def make_player_ts(player_data, current_season_beginning_round, current_game_wee
     return ts
 
 
-def make_predictions(current_season, current_game_week, challenge_team, points_data_set, incomplete_master_data_set,
+def make_predictions(current_season, current_game_week, track_previous, points_data_set, incomplete_master_data_set,
                      calibrate_by, season_length, min_games, process_all_players, min_season_ppg, predict_by,
-                     predict_by_weeks, min_season_game_percentage, bugged_players, use_average):
-    filename = (f"./predictedData/{current_season}/predictedData{current_game_week}"
-                f"{"Challenge" if challenge_team else ""}.json")
+                     predict_by_weeks, filename, min_season_game_percentage, bugged_players, use_average):
     header = incomplete_master_data_set[0]
     current_season_beginning_round = get_game_round(current_season)
 
@@ -181,6 +187,7 @@ def make_predictions(current_season, current_game_week, challenge_team, points_d
         return load_prediction_file(filename, header)
 
     found_previous = 0
+    master_data_set = copy.deepcopy(incomplete_master_data_set)
     id_index = header.index('ID')
 
     for _, player_data in tqdm(points_data_set.items()):
@@ -260,7 +267,7 @@ def make_predictions(current_season, current_game_week, challenge_team, points_d
             next_p = (arima_next * arima_ratio) + (lstm_next * lstm_ratio) + (forest_next * forest_ratio) / 3
 
         found = False
-        for master in incomplete_master_data_set:
+        for master in master_data_set:
             if master[id_index] == player_data['id']:
                 master.append(arima_overall)
                 master.append(lstm_overall)
@@ -271,7 +278,7 @@ def make_predictions(current_season, current_game_week, challenge_team, points_d
                     master.append(INJURIES[player_name])
                 else:
                     master.append(1)
-                if player_name in CURRENT_TEAM and not challenge_team:
+                if track_previous and player_name in CURRENT_TEAM:
                     master.append(1)
                     found_previous += 1
                 else:
@@ -284,10 +291,10 @@ def make_predictions(current_season, current_game_week, challenge_team, points_d
             raise Exception(f"Couldn't find {player_data.id}")
 
     with open(filename, 'w') as dataset_file:
-        json.dump(incomplete_master_data_set, dataset_file, ensure_ascii=False, indent=4)
+        json.dump(master_data_set, dataset_file, ensure_ascii=False, indent=4)
         print("Wrote Predicted Data")
 
-    return incomplete_master_data_set, found_previous
+    return master_data_set, found_previous
 
 
 def make_prediction_file(current_season, current_game_week, challenge_team, master_data_set, team_worth,

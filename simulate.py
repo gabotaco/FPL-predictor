@@ -4,9 +4,15 @@ import json
 from dataset import get_dataset
 from solver import make_team
 from game_information import (get_team_names, PREDICT_BY_WEEKS, TRANSFER_COST, GKPs, DEFs, MIDs, FWDs, TOTAL_PLAYERS,
-                              MAX_PER_TEAM)
+                              MAX_PER_TEAM, get_game_round, SEASON_LENGTH, get_team_info, CALIBRATE_BY, MIN_GAMES,
+                              PROCESS_ALL_PLAYERS, MIN_SEASON_PPG, MIN_SEASON_GAME_PERCENTAGE, BUGGED_PLAYERS,
+                              USE_AVERAGE)
+from main import make_predictions, get_predict_by
 
-PREDICTION_DATA_YEAR = "2023-24"
+DATA_YEAR = "2024-25"
+DATA_WEEK_RANGE = (15, 15)
+MAKE_PREDICTIONS = True
+PREDICTION_TAG = "main"
 
 game = {
     "bank": 100,
@@ -18,10 +24,19 @@ game = {
 }
 
 
-def init(predict_by_weeks, transfer_cost, gkps, defs, mids, fwds, total_players, max_per_team):
-    points_data_set, _ = get_dataset(PREDICTION_DATA_YEAR)
-    team_names = get_team_names(PREDICTION_DATA_YEAR)
-    gw_predictions = read_prediction_data(PREDICTION_DATA_YEAR, team_names)
+def init(predict_by_weeks, transfer_cost, gkps, defs, mids, fwds, total_players, max_per_team, calibrate_by,
+         season_length, min_games, process_all_players, min_season_ppg, min_season_game_percentage, bugged_players,
+         use_average):
+    first_round_num = get_game_round(DATA_YEAR)
+    points_data_set, master_data_set = get_dataset(DATA_YEAR)
+    team_names = get_team_names(DATA_YEAR)
+    team_info = get_team_info(DATA_YEAR)
+
+    gw_predictions = simulate_predictions(DATA_YEAR, DATA_WEEK_RANGE, predict_by_weeks, team_info, team_names,
+                                          points_data_set, master_data_set, calibrate_by, season_length, min_games,
+                                          process_all_players, min_season_ppg, min_season_game_percentage,
+                                          bugged_players, use_average) if MAKE_PREDICTIONS \
+        else read_prediction_data(DATA_YEAR, DATA_WEEK_RANGE, team_names)
 
     points_map = points_data_set_to_map(points_data_set)
 
@@ -31,8 +46,8 @@ def init(predict_by_weeks, transfer_cost, gkps, defs, mids, fwds, total_players,
             prediction['players'] = [player for player in prediction['players']
                                      if f"{player['first_name']} {player['last_name']}" in points_map]
 
-    current_gw = 1
     for prediction in gw_predictions:
+        current_gw = prediction['round'] - first_round_num + 1
         print(f"===================== GW {current_gw} =========================== ")
 
         def set_prev(player):
@@ -49,8 +64,8 @@ def init(predict_by_weeks, transfer_cost, gkps, defs, mids, fwds, total_players,
         score = score_team(prediction['round'], prediction['players'], num_paid_transfers, points_map)
         game['score'] += score
         print(f"Scored {score} points!")
-        current_gw += 1
 
+    print("===================== THE END =========================== ")
     print(f"At the end of the season you scored {game['score']} points!")
     print(f"You paid for {game['paid_for_transfers']} transfers.")
 
@@ -188,80 +203,99 @@ def points_data_set_to_map(points_data_set):
     return points_map
 
 
-def read_prediction_data(year, teams):
-    game_round = 1
-    match year:
-        case "2017-18":
-            game_round = 39
-        case "2018-19":
-            game_round = 77
-        case "2019-20":
-            game_round = 115
-        case "2020-21":
-            game_round = 162
-        case "2021-22":
-            game_round = 200
-        case "2022-23":
-            game_round = 238
-        case "2023-24":
-            game_round = 276
-        case "2024-25":
-            game_round = 314
+def simulate_predictions(year, gw_range, predict_by_weeks, team_info, team_names, points_data_set, master_data_set,
+                     calibrate_by, season_length, min_games, process_all_players, min_season_ppg,
+                     min_season_game_percentage, bugged_players, use_average):
+    first_game_round = get_game_round(year)
+    min_gw, max_gw = gw_range
+    gw_predictions = []
+
+    os.makedirs(f"./simulationData/{year}/{PREDICTION_TAG}", exist_ok=True)
+
+    for gw in range(min_gw, max_gw + 1):
+        predict_by = get_predict_by(year, gw, predict_by_weeks, team_info, team_names)
+        filename = f"./simulationData/{year}/{PREDICTION_TAG}/{gw}.json"
+        master_data_set, _ = make_predictions(year, gw, False, points_data_set, master_data_set, calibrate_by,
+                                              season_length, min_games, process_all_players, min_season_ppg, predict_by,
+                                              predict_by_weeks, filename, min_season_game_percentage, bugged_players,
+                                              use_average)
+        gw_predictions.append({"round": first_game_round + gw - 1,
+                               "players": process_master_data(master_data_set, team_names)})
+
+    return gw_predictions
+
+
+def read_prediction_data(year, gw_range, team_names):
+    first_game_round = get_game_round(year)
 
     # Filter file's to exclude Challenge files. Then sent from low to high GW.
+    first_gw, last_gw = gw_range
     predicted_data_files = os.listdir(f"./predictedData/{year}")
     predicted_data_files = [predicted_file_name for predicted_file_name in predicted_data_files
                             if "Challenge" not in predicted_file_name]
+    predicted_data_files = [predicted_file_name for predicted_file_name in predicted_data_files
+                            if first_gw <= int(predicted_file_name.replace("predictedData", "")
+                                               .replace(".json", "")) <= last_gw]
     predicted_data_files.sort(key=lambda a: int(a.replace("predictedData", "").replace(".json", "")))
 
     # Read all predictions for this GW.
     gw_predictions = []
     for predicted_file_name in predicted_data_files:
-        current_gw_prediction = {"round": game_round, "players": []}
+        gw = int(predicted_file_name.replace("predictedData", "").replace(".json", ""))
+        current_gw_prediction = {"round": first_game_round + gw - 1, "players": []}
         with open(f"./predictedData/{year}/{predicted_file_name}", 'r') as predicted_file:
             prediction_file = json.load(predicted_file)
-            # Gather indexes.
-            first_name_index = prediction_file[0].index("First Name")
-            last_name_index = prediction_file[0].index("Surname")
-            web_name_index = prediction_file[0].index('Web Name')
-            position_index = prediction_file[0].index('Position')
-            team_index = prediction_file[0].index('Team')
-            cost_index = prediction_file[0].index('Cost')
-            pp_index = prediction_file[0].index('PPG') if 'PPG' in prediction_file[0] else prediction_file[0].index(
-                'PP')
-            next_index = prediction_file[0].index('NEXT')
-            for prediction in prediction_file:
-                # Skip header
-                if prediction[0] == 'First Name':
-                    continue
-                # Skip player who doesn't have a prediction.
-                if len(prediction) <= next_index:
-                    continue
+            current_gw_prediction['players'] = process_master_data(prediction_file, team_names)
 
-                player_data = {
-                    "first_name": prediction[first_name_index],
-                    "last_name": prediction[last_name_index],
-                    "name": prediction[web_name_index],
-                    "pp": prediction[pp_index],
-                    "next": prediction[next_index],
-                    "position": prediction[position_index],
-                    "team": prediction[team_index],
-                    "cost": prediction[cost_index],
-                    "gkp": 1 if prediction[position_index] == "GKP" else 0,
-                    "def": 1 if prediction[position_index] == "DEF" else 0,
-                    "mid": 1 if prediction[position_index] == "MID" else 0,
-                    "fwd": 1 if prediction[position_index] == "FWD" else 0,
-                    "health": 1,
-                }
-                for team in teams:
-                    player_data[team] = 1 if player_data['team'] == team else 0
-
-                current_gw_prediction['players'].append(player_data)
         gw_predictions.append(current_gw_prediction)
-        game_round += 1
 
     return gw_predictions
 
 
+def process_master_data(master_data_set, team_names):
+    players = []
+    # Gather indexes.
+    first_name_index = master_data_set[0].index("First Name")
+    last_name_index = master_data_set[0].index("Surname")
+    web_name_index = master_data_set[0].index('Web Name')
+    position_index = master_data_set[0].index('Position')
+    team_index = master_data_set[0].index('Team')
+    cost_index = master_data_set[0].index('Cost')
+    pp_index = master_data_set[0].index('PPG') if 'PPG' in master_data_set[0] else master_data_set[0].index(
+        'PP')
+    next_index = master_data_set[0].index('NEXT')
+    for prediction in master_data_set:
+        # Skip header
+        if prediction[0] == 'First Name':
+            continue
+        # Skip player who doesn't have a prediction.
+        if len(prediction) <= next_index:
+            continue
+
+        player_data = {
+            "first_name": prediction[first_name_index],
+            "last_name": prediction[last_name_index],
+            "name": prediction[web_name_index],
+            "pp": prediction[pp_index],
+            "next": prediction[next_index],
+            "position": prediction[position_index],
+            "team": prediction[team_index],
+            "cost": prediction[cost_index],
+            "gkp": 1 if prediction[position_index] == "GKP" else 0,
+            "def": 1 if prediction[position_index] == "DEF" else 0,
+            "mid": 1 if prediction[position_index] == "MID" else 0,
+            "fwd": 1 if prediction[position_index] == "FWD" else 0,
+            "health": 1,
+        }
+        for team in team_names:
+            player_data[team] = 1 if player_data['team'] == team else 0
+
+        players.append(player_data)
+
+    return players
+
+
 if __name__ == "__main__":
-    init(PREDICT_BY_WEEKS, TRANSFER_COST, GKPs, DEFs, MIDs, FWDs, TOTAL_PLAYERS, MAX_PER_TEAM)
+    init(PREDICT_BY_WEEKS, TRANSFER_COST, GKPs, DEFs, MIDs, FWDs, TOTAL_PLAYERS, MAX_PER_TEAM, CALIBRATE_BY,
+         SEASON_LENGTH, MIN_GAMES, PROCESS_ALL_PLAYERS, MIN_SEASON_PPG, MIN_SEASON_GAME_PERCENTAGE, BUGGED_PLAYERS,
+         USE_AVERAGE)

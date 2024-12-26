@@ -16,10 +16,13 @@ def process_player_data(player_data, current_season_beginning_round, current_gam
         if not dataset.startswith('GW'):
             continue
 
+        round_num = int(dataset.replace("GW", ""))
+        if round_num >= current_season_beginning_round + current_game_week - 1:
+            continue
+
         total_games += 1
         gws.append(data)
 
-        round_num = int(dataset.replace('GW', ''))
         beginning_round = current_season_beginning_round
         if current_game_week <= calibrate_by:
             beginning_round = current_season_beginning_round - season_length - 1
