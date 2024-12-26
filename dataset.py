@@ -1,7 +1,7 @@
 import csv
 import os
 
-from game_information import get_team_info, POSITIONS, get_game_round, get_team_names, get_next_year
+from game_information import get_team_info, POSITIONS, get_game_round, get_team_names, get_next_year, get_previous_year
 
 USE_UNDERSTAT = False
 NO_NEW_PLAYERS = False
@@ -109,10 +109,10 @@ UNDERSTAT_NAME_MAP = {"Amad Diallo Traore": "Amad Diallo", "Takehiro Tomiyasu": 
                       "André": "André Trindade da Costa Neto"}
 
 
-def get_previous_players(previous_season):
+def get_previous_players(current_season):
     previous_players = set()
 
-    with open(f"../Fantasy-Premier-League/data/{previous_season}/players_raw.csv", 'r') as data_file:
+    with open(f"../Fantasy-Premier-League/data/{get_previous_year(current_season)}/players_raw.csv", 'r') as data_file:
         csv_reader = csv.DictReader(data_file)
 
         for row in csv_reader:
@@ -285,11 +285,11 @@ def get_header(team_names):
             "Selected"]
 
 
-def get_dataset(current_season, previous_season):
+def get_dataset(current_season):
     team_names = get_team_names(current_season)
     team_info = get_team_info(current_season)
 
-    previous_players = get_previous_players(previous_season) if NO_NEW_PLAYERS else None
+    previous_players = get_previous_players(current_season) if NO_NEW_PLAYERS else None
     pids, master_data_set = get_pids_and_master_data_set(previous_players, team_info, team_names, current_season,
                                                          get_header(team_names))
     if USE_UNDERSTAT:

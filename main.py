@@ -10,7 +10,7 @@ from dataset import get_dataset
 from game_information import (get_team_info, get_game_round, get_team_names, CURRENT_SEASON, CURRENT_GAME_WEEK,
                               SEASON_LENGTH, MIN_GAMES, MIN_SEASON_PPG, MIN_SEASON_GAME_PERCENTAGE, TEAM_WORTH,
                               FREE_TRANSFERS, PREDICT_BY_WEEKS, TRANSFER_COST, CHALLENGE_TEAM, CALIBRATE_BY,
-                              BUGGED_PLAYERS, PROCESS_ALL_PLAYERS, USE_AVERAGE, PREVIOUS_SEASON, TOTAL_PLAYERS, GKPs,
+                              BUGGED_PLAYERS, PROCESS_ALL_PLAYERS, USE_AVERAGE, TOTAL_PLAYERS, GKPs,
                               DEFs, MIDs, FWDs, MAX_PER_TEAM)
 from solver import make_team_list, calibrate_player
 from calibrate import process_player_data
@@ -47,14 +47,14 @@ ALPHABET = [*"ABCDEFGHIJKLMNOPQRSTUVWXYZ", "AA", "AB", "AC", "AD", "AE", "AF", "
             "AN", "AO", "AP", "AQ", "AR", "AS", "AT", "AU", "AV", "AW", "AX", "AY", "AZ"]
 
 
-def init(current_season, previous_season, current_game_week, predict_by_weeks, challenge_team,
+def init(current_season, current_game_week, predict_by_weeks, challenge_team,
          calibrate_by, season_length, min_games, process_all_players, min_season_ppg,
          min_season_game_percentage, bugged_players, use_average, team_worth, free_transfers, transfer_cost,
          total_players, gkps, defs, mids, fwds, max_per_team):
     team_names = get_team_names(current_season)
     team_info = get_team_info(current_season)
     predict_by = get_predict_by(current_season, current_game_week, predict_by_weeks, team_info, team_names)
-    points_data_set, incomplete_master_data_set = get_dataset(current_season, previous_season)
+    points_data_set, incomplete_master_data_set = get_dataset(current_season)
     master_data_set, found_previous = make_predictions(current_season, current_game_week, challenge_team,
                                                        points_data_set, incomplete_master_data_set,
                                                        calibrate_by, season_length, min_games, process_all_players,
@@ -417,6 +417,6 @@ def make_prediction_file(current_season, current_game_week, challenge_team, mast
 
 
 if __name__ == "__main__":
-    init(CURRENT_SEASON, PREVIOUS_SEASON, CURRENT_GAME_WEEK, PREDICT_BY_WEEKS, CHALLENGE_TEAM, CALIBRATE_BY,
+    init(CURRENT_SEASON, CURRENT_GAME_WEEK, PREDICT_BY_WEEKS, CHALLENGE_TEAM, CALIBRATE_BY,
          SEASON_LENGTH, MIN_GAMES, PROCESS_ALL_PLAYERS, MIN_SEASON_PPG, MIN_SEASON_GAME_PERCENTAGE, BUGGED_PLAYERS,
          USE_AVERAGE, TEAM_WORTH, FREE_TRANSFERS, TRANSFER_COST, TOTAL_PLAYERS, GKPs, DEFs, MIDs, FWDs, MAX_PER_TEAM)

@@ -6,8 +6,7 @@ from solver import make_team
 from game_information import (get_team_names, PREDICT_BY_WEEKS, TRANSFER_COST, GKPs, DEFs, MIDs, FWDs, TOTAL_PLAYERS,
                               MAX_PER_TEAM)
 
-PREDICTION_DATA_START_YEAR = "2023-24"
-PREDICTION_DATA_PREVIOUS_YEAR = "2022-23"
+PREDICTION_DATA_YEAR = "2023-24"
 
 game = {
     "bank": 100,
@@ -20,9 +19,9 @@ game = {
 
 
 def init(predict_by_weeks, transfer_cost, gkps, defs, mids, fwds, total_players, max_per_team):
-    points_data_set, _ = get_dataset(PREDICTION_DATA_START_YEAR, PREDICTION_DATA_PREVIOUS_YEAR)
-    team_names = get_team_names(PREDICTION_DATA_START_YEAR)
-    gw_predictions = read_prediction_data(PREDICTION_DATA_START_YEAR, team_names)
+    points_data_set, _ = get_dataset(PREDICTION_DATA_YEAR)
+    team_names = get_team_names(PREDICTION_DATA_YEAR)
+    gw_predictions = read_prediction_data(PREDICTION_DATA_YEAR, team_names)
 
     points_map = points_data_set_to_map(points_data_set)
 

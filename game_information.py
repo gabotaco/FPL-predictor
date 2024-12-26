@@ -20,7 +20,6 @@ USE_AVERAGE = False
 PREDICT_BY_WEEKS = 5
 
 CURRENT_SEASON = "2024-25"
-PREVIOUS_SEASON = "2023-24"
 SEASON_LENGTH = 38
 
 MIN_GAMES = 3
@@ -92,5 +91,27 @@ def get_next_year(year):
             return "2023-24"
         case "2023-24":
             return "2024-25"
+
+    return None
+
+
+def get_previous_year(year):
+    match year:
+        case "2017-18":
+            return "2016-17"
+        case "2018-19":
+            return "2017-18"
+        case "2019-20":
+            return "2018-19"
+        case "2020-21":
+            return "2019-20"
+        case "2021-22":
+            return "2020-21"
+        case "2022-23":
+            return "2021-22"
+        case "2023-24":
+            return "2022-23"
+        case "2024-25":
+            return "2023-24"
 
     return None
