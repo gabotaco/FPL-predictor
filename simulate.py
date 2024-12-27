@@ -1,5 +1,6 @@
 import os
 import json
+from datetime import datetime, timedelta
 
 from dataset import get_dataset
 from solver import make_team
@@ -7,12 +8,13 @@ from game_information import (get_team_names, PREDICT_BY_WEEKS, TRANSFER_COST, G
                               MAX_PER_TEAM, get_game_round, SEASON_LENGTH, get_team_info, CALIBRATE_BY, MIN_GAMES,
                               PROCESS_ALL_PLAYERS, MIN_SEASON_PPG, MIN_SEASON_GAME_PERCENTAGE, BUGGED_PLAYERS,
                               USE_AVERAGE)
+from ai import MAX_DIFF
 from main import make_predictions, get_predict_by
 
 DATA_YEAR = "2024-25"
-DATA_WEEK_RANGE = (15, 15)
+DATA_WEEK_RANGE = (1, 18)
 MAKE_PREDICTIONS = True
-PREDICTION_TAG = "main"
+PREDICTION_TAG = "season_no"
 
 game = {
     "bank": 100,
@@ -26,7 +28,7 @@ game = {
 
 def init(predict_by_weeks, transfer_cost, gkps, defs, mids, fwds, total_players, max_per_team, calibrate_by,
          season_length, min_games, process_all_players, min_season_ppg, min_season_game_percentage, bugged_players,
-         use_average):
+         use_average, max_diff):
     first_round_num = get_game_round(DATA_YEAR)
     points_data_set, master_data_set = get_dataset(DATA_YEAR)
     team_names = get_team_names(DATA_YEAR)
@@ -35,7 +37,7 @@ def init(predict_by_weeks, transfer_cost, gkps, defs, mids, fwds, total_players,
     gw_predictions = simulate_predictions(DATA_YEAR, DATA_WEEK_RANGE, predict_by_weeks, team_info, team_names,
                                           points_data_set, master_data_set, calibrate_by, season_length, min_games,
                                           process_all_players, min_season_ppg, min_season_game_percentage,
-                                          bugged_players, use_average) if MAKE_PREDICTIONS \
+                                          bugged_players, use_average, max_diff) if MAKE_PREDICTIONS \
         else read_prediction_data(DATA_YEAR, DATA_WEEK_RANGE, team_names)
 
     points_map = points_data_set_to_map(points_data_set)
@@ -205,7 +207,7 @@ def points_data_set_to_map(points_data_set):
 
 def simulate_predictions(year, gw_range, predict_by_weeks, team_info, team_names, points_data_set, master_data_set,
                      calibrate_by, season_length, min_games, process_all_players, min_season_ppg,
-                     min_season_game_percentage, bugged_players, use_average):
+                     min_season_game_percentage, bugged_players, use_average, max_diff):
     first_game_round = get_game_round(year)
     min_gw, max_gw = gw_range
     gw_predictions = []
@@ -213,12 +215,14 @@ def simulate_predictions(year, gw_range, predict_by_weeks, team_info, team_names
     os.makedirs(f"./simulationData/{year}/{PREDICTION_TAG}", exist_ok=True)
 
     for gw in range(min_gw, max_gw + 1):
+        eta = datetime.now() + timedelta(minutes=8, seconds=30)
+        print(f"Getting predictions for gw {gw}. ETA {eta.strftime("%I:%M%p")}")
         predict_by = get_predict_by(year, gw, predict_by_weeks, team_info, team_names)
         filename = f"./simulationData/{year}/{PREDICTION_TAG}/{gw}.json"
         master_data_set, _ = make_predictions(year, gw, False, points_data_set, master_data_set, calibrate_by,
                                               season_length, min_games, process_all_players, min_season_ppg, predict_by,
                                               predict_by_weeks, filename, min_season_game_percentage, bugged_players,
-                                              use_average)
+                                              use_average, max_diff)
         gw_predictions.append({"round": first_game_round + gw - 1,
                                "players": process_master_data(master_data_set, team_names)})
 
@@ -298,4 +302,4 @@ def process_master_data(master_data_set, team_names):
 if __name__ == "__main__":
     init(PREDICT_BY_WEEKS, TRANSFER_COST, GKPs, DEFs, MIDs, FWDs, TOTAL_PLAYERS, MAX_PER_TEAM, CALIBRATE_BY,
          SEASON_LENGTH, MIN_GAMES, PROCESS_ALL_PLAYERS, MIN_SEASON_PPG, MIN_SEASON_GAME_PERCENTAGE, BUGGED_PLAYERS,
-         USE_AVERAGE)
+         USE_AVERAGE, MAX_DIFF)

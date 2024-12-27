@@ -30,7 +30,7 @@ POSITIONS = {1: 'GKP', 2: 'DEF', 3: 'MID', 4: 'FWD'}
 
 
 def get_team_info(season):
-    with open(f"../Fantasy-Premier-League/data/{season}/teams.csv", 'r') as data_file:
+    with open(f"./Fantasy-Premier-League/data/{season}/teams.csv", 'r') as data_file:
         csv_reader = csv.DictReader(data_file)
 
         teams = {}

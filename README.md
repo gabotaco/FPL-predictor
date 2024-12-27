@@ -1,6 +1,6 @@
 This repo uses data from https://github.com/vaastav/Fantasy-Premier-League
 
-Simply clone both repos with the same parent directory.
+Simply clone the data repo as a child of this repo. FPL-predictor/Fantasy-Premier-League/
 
 Methodology adapted from: https://arxiv.org/abs/1909.12938
 

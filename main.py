@@ -51,7 +51,7 @@ ALPHABET = [*"ABCDEFGHIJKLMNOPQRSTUVWXYZ", "AA", "AB", "AC", "AD", "AE", "AF", "
 def init(current_season, current_game_week, predict_by_weeks, challenge_team,
          calibrate_by, season_length, min_games, process_all_players, min_season_ppg,
          min_season_game_percentage, bugged_players, use_average, team_worth, free_transfers, transfer_cost,
-         total_players, gkps, defs, mids, fwds, max_per_team):
+         total_players, gkps, defs, mids, fwds, max_per_team, max_diff):
     team_names = get_team_names(current_season)
     team_info = get_team_info(current_season)
 
@@ -64,7 +64,8 @@ def init(current_season, current_game_week, predict_by_weeks, challenge_team,
                                                        points_data_set, incomplete_master_data_set,
                                                        calibrate_by, season_length, min_games, process_all_players,
                                                        min_season_ppg, predict_by, predict_by_weeks, filename,
-                                                       min_season_game_percentage, bugged_players, use_average)
+                                                       min_season_game_percentage, bugged_players, use_average,
+                                                       max_diff)
     if not challenge_team:
         if found_previous == total_players:
             print("Found all previous players!")
@@ -81,7 +82,7 @@ def get_predict_by(current_season, current_game_week, predict_by_weeks, team_inf
     for team in team_names:
         predict_by[team] = {'games': [], 'next': 0}
 
-    with open(f"../Fantasy-Premier-League/data/{current_season}/fixtures.csv") as fixtures_file:
+    with open(f"./Fantasy-Premier-League/data/{current_season}/fixtures.csv") as fixtures_file:
         fixture_reader = csv.DictReader(fixtures_file)
 
         fixture_reader = [fixture for fixture in fixture_reader if
@@ -179,7 +180,7 @@ def make_player_ts(player_data, current_season_beginning_round, current_game_wee
 
 def make_predictions(current_season, current_game_week, track_previous, points_data_set, incomplete_master_data_set,
                      calibrate_by, season_length, min_games, process_all_players, min_season_ppg, predict_by,
-                     predict_by_weeks, filename, min_season_game_percentage, bugged_players, use_average):
+                     predict_by_weeks, filename, min_season_game_percentage, bugged_players, use_average, max_diff):
     header = incomplete_master_data_set[0]
     current_season_beginning_round = get_game_round(current_season)
 
@@ -192,7 +193,7 @@ def make_predictions(current_season, current_game_week, track_previous, points_d
 
     to_check = [(player_data, current_season_beginning_round, current_game_week, season_length, min_games,
                  process_all_players, min_season_ppg, min_season_game_percentage, calibrate_by, bugged_players,
-                 predict_by, use_average, predict_by_weeks) for _, player_data in points_data_set.items()
+                 predict_by, use_average, predict_by_weeks, max_diff) for _, player_data in points_data_set.items()
                 if (len(TO_RETRY) == 0 or player_data['id'] in TO_RETRY) and player_data['id'] not in bugged_players]
 
     with Pool() as pool:
@@ -235,7 +236,7 @@ def make_predictions(current_season, current_game_week, track_previous, points_d
 
 def predict_player(player_data, current_season_beginning_round, current_game_week, season_length, min_games,
                    process_all_players, min_season_ppg, min_season_game_percentage, calibrate_by, bugged_players,
-                   predict_by, use_average, predict_by_weeks):
+                   predict_by, use_average, predict_by_weeks, max_diff):
     ts = make_player_ts(player_data, current_season_beginning_round, current_game_week, calibrate_by, season_length,
                         min_games, process_all_players, min_season_ppg, min_season_game_percentage, predict_by,
                         predict_by_weeks)
@@ -291,7 +292,7 @@ def predict_player(player_data, current_season_beginning_round, current_game_wee
 
     if (player_data['id'] not in TO_IGNORE_MAX_WARNING and min(arima_overall, lstm_overall, forest_overall) > 0 and
             (max(arima_overall, lstm_overall, forest_overall) / min(arima_overall, lstm_overall,
-                                                                    forest_overall)) > MAX_DIFF):
+                                                                    forest_overall)) > max_diff):
         print(player_data['id'], 'max diff', max(arima_overall, lstm_overall, forest_overall) /
               min(arima_overall, lstm_overall, forest_overall), arima_overall, lstm_overall, forest_overall)
         bugged_players.append(player_data['id'])
@@ -435,4 +436,5 @@ def make_prediction_file(current_season, current_game_week, challenge_team, mast
 if __name__ == "__main__":
     init(CURRENT_SEASON, CURRENT_GAME_WEEK, PREDICT_BY_WEEKS, CHALLENGE_TEAM, CALIBRATE_BY,
          SEASON_LENGTH, MIN_GAMES, PROCESS_ALL_PLAYERS, MIN_SEASON_PPG, MIN_SEASON_GAME_PERCENTAGE, BUGGED_PLAYERS,
-         USE_AVERAGE, TEAM_WORTH, FREE_TRANSFERS, TRANSFER_COST, TOTAL_PLAYERS, GKPs, DEFs, MIDs, FWDs, MAX_PER_TEAM)
+         USE_AVERAGE, TEAM_WORTH, FREE_TRANSFERS, TRANSFER_COST, TOTAL_PLAYERS, GKPs, DEFs, MIDs, FWDs, MAX_PER_TEAM,
+         MAX_DIFF)

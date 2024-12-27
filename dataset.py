@@ -112,7 +112,7 @@ UNDERSTAT_NAME_MAP = {"Amad Diallo Traore": "Amad Diallo", "Takehiro Tomiyasu": 
 def get_previous_players(current_season):
     previous_players = set()
 
-    with open(f"../Fantasy-Premier-League/data/{get_previous_year(current_season)}/players_raw.csv", 'r') as data_file:
+    with open(f"./Fantasy-Premier-League/data/{get_previous_year(current_season)}/players_raw.csv", 'r') as data_file:
         csv_reader = csv.DictReader(data_file)
 
         for row in csv_reader:
@@ -128,7 +128,7 @@ def get_pids_and_master_data_set(previous_players, team_info, team_names, curren
     pids = {}
     master_data_set = [header]
 
-    with open(f"../Fantasy-Premier-League/data/{current_season}/players_raw.csv") as data_file:
+    with open(f"./Fantasy-Premier-League/data/{current_season}/players_raw.csv") as data_file:
         csv_reader = csv.DictReader(data_file)
 
         for i, row in enumerate(csv_reader):
@@ -161,7 +161,7 @@ def get_pids_and_master_data_set(previous_players, team_info, team_names, curren
 
 
 def load_understat(current_season, pids):
-    understat_players = os.listdir(f"../Fantasy-Premier-League/data/{current_season}/understat")
+    understat_players = os.listdir(f"./Fantasy-Premier-League/data/{current_season}/understat")
     understat_players = [player for player in understat_players if not player.startswith("understat")]
 
     for i, understat_player in enumerate(understat_players):
@@ -178,7 +178,7 @@ def load_understat(current_season, pids):
 
         pids[name]['understat'] = {}
 
-        with open(f"../Fantasy-Premier-League/data/{current_season}/understat/{understat_player}") as understat_file:
+        with open(f"./Fantasy-Premier-League/data/{current_season}/understat/{understat_player}") as understat_file:
             understat_reader = csv.DictReader(understat_file)
 
             for player_element in understat_reader:
@@ -188,7 +188,7 @@ def load_understat(current_season, pids):
 def get_elements_to_use(year, pids):
     elements_to_use = {}
 
-    with open(f"../Fantasy-Premier-League/data/{year}/player_idlist.csv") as player_file:
+    with open(f"./Fantasy-Premier-League/data/{year}/player_idlist.csv") as player_file:
         csv_reader = csv.DictReader(player_file)
 
         for player_id in csv_reader:
@@ -203,7 +203,7 @@ def get_fixture_maps(year, team_info):
     fixture_to_difficulty = {}
     fixture_to_team = {}
 
-    with open(f"../Fantasy-Premier-League/data/{year}/fixtures.csv") as fixture_file:
+    with open(f"./Fantasy-Premier-League/data/{year}/fixtures.csv") as fixture_file:
         fixture_reader = csv.DictReader(fixture_file)
 
         for fixture in fixture_reader:
@@ -223,12 +223,12 @@ def get_points(year, team_info, pids, points_data_set=None):
     fixture_to_difficulty, fixture_to_team = get_fixture_maps(year, team_info)
     game_round = get_game_round(year)
 
-    gws = os.listdir(f"../Fantasy-Premier-League/data/{year}/gws")
+    gws = os.listdir(f"./Fantasy-Premier-League/data/{year}/gws")
     gws = [gw for gw in gws if gw.startswith("gw")]
     gws.sort(key=lambda a: int(a.replace("gw", "").replace(".csv", "")))
 
     for gw in gws:
-        with open(f"../Fantasy-Premier-League/data/{year}/gws/{gw}", encoding="latin-1") as gw_file:
+        with open(f"./Fantasy-Premier-League/data/{year}/gws/{gw}", encoding="latin-1") as gw_file:
             gw_reader = csv.DictReader(gw_file)
 
             for gw_element in gw_reader:
