@@ -171,8 +171,8 @@ def do_forest(player_data, pred_by, forest_counter=0):
 
     grid = {'max_depth': np.arange(1, 25, 4), 'n_estimators': np.arange(25, 100, 5)}
 
-    rfr = RandomForestRegressor(max_features=1 / 3)
-    rfr_cv = GridSearchCV(estimator=rfr, param_grid=grid, n_jobs=-1)
+    rfr = RandomForestRegressor(max_features=1 / 3, n_jobs=1)
+    rfr_cv = GridSearchCV(estimator=rfr, param_grid=grid, n_jobs=1)
     best_estimator = None
     pred = []
 
