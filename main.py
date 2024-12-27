@@ -2,8 +2,8 @@ import copy
 import csv
 import json
 import os
+from multiprocessing import Pool
 
-from tqdm import tqdm
 from xlsxwriter.workbook import Workbook
 
 from ai import MAX_DIFF, do_arima, do_lstm, do_forest
@@ -190,82 +190,18 @@ def make_predictions(current_season, current_game_week, track_previous, points_d
     master_data_set = copy.deepcopy(incomplete_master_data_set)
     id_index = header.index('ID')
 
-    for _, player_data in tqdm(points_data_set.items()):
-        if len(TO_RETRY) > 0 and player_data['id'] not in TO_RETRY:
-            continue
+    to_check = [(player_data, current_season_beginning_round, current_game_week, season_length, min_games,
+                 process_all_players, min_season_ppg, min_season_game_percentage, calibrate_by, bugged_players,
+                 predict_by, use_average, predict_by_weeks) for _, player_data in points_data_set.items()
+                if (len(TO_RETRY) == 0 or player_data['id'] in TO_RETRY) and player_data['id'] not in bugged_players]
 
-        if player_data['id'] in bugged_players:
-            continue
+    with Pool() as pool:
+        results = pool.starmap(predict_player, to_check)
 
+    results = [r for r in results if r is not None]
+
+    for player_data, arima_overall, lstm_overall, forest_overall, p, next_p in results:
         player_name = f"{player_data['first_name']} {player_data['last_name']} {player_data['name']}"
-        ts = make_player_ts(player_data, current_season_beginning_round, current_game_week, calibrate_by, season_length,
-                            min_games, process_all_players, min_season_ppg, min_season_game_percentage, predict_by,
-                            predict_by_weeks)
-        if ts is None:
-            continue
-
-        arima_ratio = 1 / 3
-        lstm_ratio = 1 / 3
-        forest_ratio = 1 / 3
-
-        c_arima, c_lstm, c_forest, c_actual, average_points = process_player_data(player_data,
-                                                                                  current_season_beginning_round,
-                                                                                  current_game_week, season_length,
-                                                                                  min_games, min_season_ppg,
-                                                                                  min_season_game_percentage,
-                                                                                  calibrate_by, bugged_players,
-                                                                                  process_all_players)
-        if c_actual <= 0 and not process_all_players:
-            continue
-        elif c_actual > 0:
-            arima_ratio, lstm_ratio, forest_ratio = calibrate_player(c_arima, c_lstm, c_forest, c_actual)
-
-        pred_by = predict_by[player_data['team']]['games'][
-                  :predict_by[player_data['team']]['next']] if use_average else predict_by[player_data['team']][
-            'games']
-        average_overall = average_points * len(predict_by[player_data['team']]['games'])
-        try:
-            if arima_ratio > 0:
-                arima_pred = do_arima(ts, pred_by)
-                arima_overall = average_overall if use_average else sum(arima_pred)
-                arima_next = sum(arima_pred[:predict_by[player_data['team']]['next']])
-            else:
-                arima_overall, arima_next = 0, 0
-
-            if lstm_ratio > 0:
-                lstm_pred = do_lstm(player_data, pred_by)
-                lstm_overall = average_overall if use_average else sum(lstm_pred)
-                lstm_next = sum(lstm_pred[:predict_by[player_data['team']]['next']])
-            else:
-                lstm_overall, lstm_next = 0, 0
-
-            if forest_ratio > 0:
-                forest_pred = do_forest(player_data, pred_by)
-                forest_overall = average_overall if use_average else sum(forest_pred)
-                forest_next = sum(forest_pred[:predict_by[player_data['team']]['next']])
-            else:
-                forest_overall, forest_next = 0, 0
-        except Exception as e:
-            print('ERROR', player_data['id'])
-            print(e)
-            bugged_players.append(player_data['id'])
-            continue
-
-        if (player_data['id'] not in TO_IGNORE_MAX_WARNING and min(arima_overall, lstm_overall, forest_overall) > 0 and
-                (max(arima_overall, lstm_overall, forest_overall) / min(arima_overall, lstm_overall,
-                                                                        forest_overall)) > MAX_DIFF):
-            print(player_data['id'], 'max diff', max(arima_overall, lstm_overall, forest_overall) /
-                  min(arima_overall, lstm_overall, forest_overall), arima_overall, lstm_overall, forest_overall)
-            bugged_players.append(player_data['id'])
-            continue
-
-        if len(predict_by[player_data['team']]['games']) == 0:
-            p = 0
-            next_p = 0
-        else:
-            p = (arima_overall * arima_ratio) + (lstm_overall * lstm_ratio) + (forest_overall * forest_ratio) / 3
-            next_p = (arima_next * arima_ratio) + (lstm_next * lstm_ratio) + (forest_next * forest_ratio) / 3
-
         found = False
         for master in master_data_set:
             if master[id_index] == player_data['id']:
@@ -295,6 +231,80 @@ def make_predictions(current_season, current_game_week, track_previous, points_d
         print("Wrote Predicted Data")
 
     return master_data_set, found_previous
+
+
+def predict_player(player_data, current_season_beginning_round, current_game_week, season_length, min_games,
+                   process_all_players, min_season_ppg, min_season_game_percentage, calibrate_by, bugged_players,
+                   predict_by, use_average, predict_by_weeks):
+    ts = make_player_ts(player_data, current_season_beginning_round, current_game_week, calibrate_by, season_length,
+                        min_games, process_all_players, min_season_ppg, min_season_game_percentage, predict_by,
+                        predict_by_weeks)
+    if ts is None:
+        return None
+
+    arima_ratio = 1 / 3
+    lstm_ratio = 1 / 3
+    forest_ratio = 1 / 3
+
+    c_arima, c_lstm, c_forest, c_actual, average_points = process_player_data(player_data,
+                                                                              current_season_beginning_round,
+                                                                              current_game_week, season_length,
+                                                                              min_games, min_season_ppg,
+                                                                              min_season_game_percentage,
+                                                                              calibrate_by, bugged_players,
+                                                                              process_all_players)
+    if c_actual <= 0 and not process_all_players:
+        return None
+    elif c_actual > 0:
+        arima_ratio, lstm_ratio, forest_ratio = calibrate_player(c_arima, c_lstm, c_forest, c_actual)
+
+    pred_by = predict_by[player_data['team']]['games'][
+              :predict_by[player_data['team']]['next']] if use_average else predict_by[player_data['team']][
+        'games']
+    average_overall = average_points * len(predict_by[player_data['team']]['games'])
+    try:
+        if arima_ratio > 0:
+            arima_pred = do_arima(ts, pred_by)
+            arima_overall = average_overall if use_average else sum(arima_pred)
+            arima_next = sum(arima_pred[:predict_by[player_data['team']]['next']])
+        else:
+            arima_overall, arima_next = 0, 0
+
+        if lstm_ratio > 0:
+            lstm_pred = do_lstm(player_data, pred_by)
+            lstm_overall = average_overall if use_average else sum(lstm_pred)
+            lstm_next = sum(lstm_pred[:predict_by[player_data['team']]['next']])
+        else:
+            lstm_overall, lstm_next = 0, 0
+
+        if forest_ratio > 0:
+            forest_pred = do_forest(player_data, pred_by)
+            forest_overall = average_overall if use_average else sum(forest_pred)
+            forest_next = sum(forest_pred[:predict_by[player_data['team']]['next']])
+        else:
+            forest_overall, forest_next = 0, 0
+    except Exception as e:
+        print('ERROR', player_data['id'])
+        print(e)
+        bugged_players.append(player_data['id'])
+        return None
+
+    if (player_data['id'] not in TO_IGNORE_MAX_WARNING and min(arima_overall, lstm_overall, forest_overall) > 0 and
+            (max(arima_overall, lstm_overall, forest_overall) / min(arima_overall, lstm_overall,
+                                                                    forest_overall)) > MAX_DIFF):
+        print(player_data['id'], 'max diff', max(arima_overall, lstm_overall, forest_overall) /
+              min(arima_overall, lstm_overall, forest_overall), arima_overall, lstm_overall, forest_overall)
+        bugged_players.append(player_data['id'])
+        return None
+
+    if len(predict_by[player_data['team']]['games']) == 0:
+        p = 0
+        next_p = 0
+    else:
+        p = (arima_overall * arima_ratio) + (lstm_overall * lstm_ratio) + (forest_overall * forest_ratio) / 3
+        next_p = (arima_next * arima_ratio) + (lstm_next * lstm_ratio) + (forest_next * forest_ratio) / 3
+
+    return player_data, arima_overall, lstm_overall, forest_overall, p, next_p
 
 
 def make_prediction_file(current_season, current_game_week, challenge_team, master_data_set, team_worth,
@@ -359,7 +369,6 @@ def make_prediction_file(current_season, current_game_week, challenge_team, mast
     row_index += 2
 
     if transfer_cost != 0 and transfer_cost is not None:
-
         sheet.write_row(row_index, column_index, ["Transfers", "=SUMPRODUCT(Table1[Selected], -- (Table1[PREV] = 0))"])
 
         row_index += 1
