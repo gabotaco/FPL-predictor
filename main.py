@@ -30,7 +30,7 @@ CURRENT_TEAM = {
     "Jacob Murphy J.Murphy",
     "Amad Diallo Amad",
     "Son Heung-min Son",
-    "Bruno Borges Fernandes B.Fernandes",
+    "Ismaïla Sarr I.Sarr",
 
     "Matheus Santos Carneiro Da Cunha Cunha",
     "Yoane Wissa Wissa",
@@ -38,8 +38,9 @@ CURRENT_TEAM = {
 }
 INJURIES = {
     "Micky van de Ven Van de Ven": 0,
-    "Ashley Young Young": 0,
+    "Bruno Borges Fernandes B.Fernandes": 0,
     "Bukayo Saka Saka": 0,
+    "Jamie Vardy Vardy": 0.75
 }
 TO_RETRY = []
 TO_IGNORE_MAX_WARNING = []
