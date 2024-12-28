@@ -14,7 +14,7 @@ from main import make_predictions, get_predict_by
 DATA_YEAR = "2024-25"
 DATA_WEEK_RANGE = (1, 18)
 MAKE_PREDICTIONS = True
-PREDICTION_TAG = "season_no"
+PREDICTION_TAG = "season_yes"
 
 game = {
     "bank": 100,
@@ -206,8 +206,8 @@ def points_data_set_to_map(points_data_set):
 
 
 def simulate_predictions(year, gw_range, predict_by_weeks, team_info, team_names, points_data_set, master_data_set,
-                     calibrate_by, season_length, min_games, process_all_players, min_season_ppg,
-                     min_season_game_percentage, bugged_players, use_average, max_diff):
+                         calibrate_by, season_length, min_games, process_all_players, min_season_ppg,
+                         min_season_game_percentage, bugged_players, use_average, max_diff):
     first_game_round = get_game_round(year)
     min_gw, max_gw = gw_range
     gw_predictions = []
