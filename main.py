@@ -217,12 +217,6 @@ def predict_player(player_data, current_season_beginning_round, current_game_wee
                    process_all_players, min_season_ppg, min_season_game_percentage, calibrate_by, bugged_players,
                    predict_by, use_average, predict_by_weeks, max_diff, current_team, retry_count=0):
     player_name = f"{player_data['first_name']} {player_data['last_name']} {player_data['name']}"
-    if retry_count >= MAX_RETRIES:
-        bugged_players.append(player_data['id'])
-        print(f"Giving up on {player_name}...")
-        if player_name in current_team:
-            print(f"MISSED A PLAYER IN THE CURRENT TEAM")
-        return player_data, 0, 0, 0, 0, 0
 
     ts = make_player_ts(player_data, current_season_beginning_round, current_game_week, calibrate_by, season_length,
                         min_games, process_all_players, min_season_ppg, min_season_game_percentage, predict_by,
@@ -244,6 +238,18 @@ def predict_player(player_data, current_season_beginning_round, current_game_wee
                                                                               min_season_game_percentage,
                                                                               calibrate_by, bugged_players,
                                                                               process_all_players, max_diff)
+    pred_by = predict_by[player_data['team']]['games'][
+              :predict_by[player_data['team']]['next']] if use_average else predict_by[player_data['team']][
+        'games']
+    average_overall = average_points * len(predict_by[player_data['team']]['games'])
+
+    if retry_count >= MAX_RETRIES:
+        bugged_players.append(player_data['id'])
+        print(f"Giving up on {player_name}... Using their average points of {average_points} a game.")
+        if player_name in current_team:
+            print(f"MISSED A PLAYER IN THE CURRENT TEAM")
+        return player_data, average_overall, average_overall, average_overall, average_overall, average_points
+
     if c_actual <= 0 and not process_all_players:
         if player_name in current_team:
             print(f"{player_name} has a negative score")
@@ -251,10 +257,6 @@ def predict_player(player_data, current_season_beginning_round, current_game_wee
     elif c_actual > 0:
         arima_ratio, lstm_ratio, forest_ratio = calibrate_player(c_arima, c_lstm, c_forest, c_actual)
 
-    pred_by = predict_by[player_data['team']]['games'][
-              :predict_by[player_data['team']]['next']] if use_average else predict_by[player_data['team']][
-        'games']
-    average_overall = average_points * len(predict_by[player_data['team']]['games'])
     try:
         if arima_ratio > 0:
             arima_pred = do_arima(ts, pred_by)
@@ -285,23 +287,26 @@ def predict_player(player_data, current_season_beginning_round, current_game_wee
                               bugged_players, predict_by, use_average, predict_by_weeks, max_diff, current_team,
                               retry_count + 1)
 
-    if (player_data['id'] not in TO_IGNORE_MAX_WARNING and min(arima_overall, lstm_overall, forest_overall) > 0 and
-            (max(arima_overall, lstm_overall, forest_overall) / min(arima_overall, lstm_overall,
-                                                                    forest_overall)) > max_diff):
-        print(player_data['id'], player_name, 'max diff', max(arima_overall, lstm_overall, forest_overall) /
-              min(arima_overall, lstm_overall, forest_overall), arima_overall, lstm_overall, forest_overall)
-        print('Retrying...')
-        return predict_player(player_data, current_season_beginning_round, current_game_week, season_length, min_games,
-                              process_all_players, min_season_ppg, min_season_game_percentage, calibrate_by,
-                              bugged_players, predict_by, use_average, predict_by_weeks, max_diff, current_team,
-                              retry_count + 1)
-
     if len(predict_by[player_data['team']]['games']) == 0:
         p = 0
         next_p = 0
     else:
         p = (arima_overall * arima_ratio) + (lstm_overall * lstm_ratio) + (forest_overall * forest_ratio) / 3
         next_p = (arima_next * arima_ratio) + (lstm_next * lstm_ratio) + (forest_next * forest_ratio) / 3
+
+    if (player_data['id'] not in TO_IGNORE_MAX_WARNING and min(arima_overall, lstm_overall, forest_overall) > 0 and
+            (max(arima_overall, lstm_overall, forest_overall) / min(arima_overall, lstm_overall,
+                                                                    forest_overall)) > max_diff):
+        print(player_data['id'], player_name, 'max diff', max(arima_overall, lstm_overall, forest_overall) /
+              min(arima_overall, lstm_overall, forest_overall), arima_overall, lstm_overall, forest_overall, next_p)
+        if retry_count >= 1 and next_p <= average_points:
+            print("Using the predicted value")
+            return player_data, arima_overall, lstm_overall, forest_overall, p, next_p
+        print('Retrying...')
+        return predict_player(player_data, current_season_beginning_round, current_game_week, season_length, min_games,
+                              process_all_players, min_season_ppg, min_season_game_percentage, calibrate_by,
+                              bugged_players, predict_by, use_average, predict_by_weeks, max_diff, current_team,
+                              retry_count + 1)
 
     return player_data, arima_overall, lstm_overall, forest_overall, p, next_p
 
