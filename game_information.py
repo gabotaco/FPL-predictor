@@ -4,6 +4,33 @@ CURRENT_GAME_WEEK = 19
 TEAM_WORTH = 95.2+4.7
 FREE_TRANSFERS = 1
 CHALLENGE_TEAM = False
+CURRENT_TEAM = {
+    "Jordan Pickford Pickford",
+    "Matz Sels Sels",
+
+    "James Tarkowski Tarkowski",
+    "Vitalii Mykolenko Mykolenko",
+    "Milos Kerkez Kerkez",
+    "Lewis Hall Hall",
+    "Ola Aina Aina",
+
+    "Mohamed Salah M.Salah",
+    "Jacob Murphy J.Murphy",
+    "Amad Diallo Amad",
+    "Son Heung-min Son",
+    "Ismaïla Sarr I.Sarr",
+
+    "Matheus Santos Carneiro Da Cunha Cunha",
+    "Yoane Wissa Wissa",
+    "Alexander Isak Isak",
+}
+INJURIES = {
+    "Micky van de Ven Van de Ven": 0,
+    "Bruno Borges Fernandes B.Fernandes": 0,
+    "Bukayo Saka Saka": 0,
+    "Jamie Vardy Vardy": 0.75
+}
+
 BUGGED_PLAYERS = []
 
 TRANSFER_COST = 4

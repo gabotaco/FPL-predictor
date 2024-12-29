@@ -4,17 +4,20 @@ from datetime import datetime, timedelta
 
 from dataset import get_dataset
 from solver import make_team
-from game_information import (get_team_names, PREDICT_BY_WEEKS, TRANSFER_COST, GKPs, DEFs, MIDs, FWDs, TOTAL_PLAYERS,
-                              MAX_PER_TEAM, get_game_round, SEASON_LENGTH, get_team_info, CALIBRATE_BY, MIN_GAMES,
-                              PROCESS_ALL_PLAYERS, MIN_SEASON_PPG, MIN_SEASON_GAME_PERCENTAGE, BUGGED_PLAYERS,
-                              USE_AVERAGE)
-from ai import MAX_DIFF
+from game_information import (get_team_names, TRANSFER_COST, GKPs, DEFs, MIDs, FWDs, TOTAL_PLAYERS,
+                              MAX_PER_TEAM, get_game_round, SEASON_LENGTH, get_team_info, MIN_GAMES,
+                              PROCESS_ALL_PLAYERS, MIN_SEASON_PPG, MIN_SEASON_GAME_PERCENTAGE, BUGGED_PLAYERS)
 from main import make_predictions, get_predict_by
 
 DATA_YEAR = "2024-25"
 DATA_WEEK_RANGE = (1, 18)
 MAKE_PREDICTIONS = True
-PREDICTION_TAG = "season_yes"
+PREDICTION_TAG = "cal10/pred20"
+
+MAX_DIFF = 10
+PREDICT_BY_WEEKS = 20
+CALIBRATE_BY = 10
+USE_AVERAGE = False
 
 game = {
     "bank": 100,
@@ -222,7 +225,7 @@ def simulate_predictions(year, gw_range, predict_by_weeks, team_info, team_names
         master_data_set, _ = make_predictions(year, gw, False, points_data_set, master_data_set, calibrate_by,
                                               season_length, min_games, process_all_players, min_season_ppg, predict_by,
                                               predict_by_weeks, filename, min_season_game_percentage, bugged_players,
-                                              use_average, max_diff)
+                                              use_average, max_diff, game['team'], [])
         gw_predictions.append({"round": first_game_round + gw - 1,
                                "players": process_master_data(master_data_set, team_names)})
 

@@ -13,10 +13,8 @@ warnings.filterwarnings("ignore", message="numpy.dtype size changed")
 warnings.filterwarnings("ignore", message="numpy.ufunc size changed")
 warnings.filterwarnings("ignore", message="RuntimeWarning: invalid value encountered in cast")
 
-MAX_POINTS = 50
 RETRY_POINT = 20
 MAX_RETRIES = 5
-MAX_DIFF = 10
 
 
 def do_arima(ts, pred_by, arima_counter=0):

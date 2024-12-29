@@ -6,44 +6,20 @@ from multiprocessing import Pool
 
 from xlsxwriter.workbook import Workbook
 
-from ai import MAX_DIFF, do_arima, do_lstm, do_forest
+from ai import do_arima, do_lstm, do_forest
 from dataset import get_dataset
 from game_information import (get_team_info, get_game_round, get_team_names, CURRENT_SEASON, CURRENT_GAME_WEEK,
                               SEASON_LENGTH, MIN_GAMES, MIN_SEASON_PPG, MIN_SEASON_GAME_PERCENTAGE, TEAM_WORTH,
                               FREE_TRANSFERS, PREDICT_BY_WEEKS, TRANSFER_COST, CHALLENGE_TEAM, CALIBRATE_BY,
                               BUGGED_PLAYERS, PROCESS_ALL_PLAYERS, USE_AVERAGE, TOTAL_PLAYERS, GKPs,
-                              DEFs, MIDs, FWDs, MAX_PER_TEAM)
+                              DEFs, MIDs, FWDs, MAX_PER_TEAM, CURRENT_TEAM, INJURIES)
 from solver import make_team_list, calibrate_player
 from calibrate import process_player_data
 
-CURRENT_TEAM = {
-    "Jordan Pickford Pickford",
-    "Matz Sels Sels",
-
-    "James Tarkowski Tarkowski",
-    "Vitalii Mykolenko Mykolenko",
-    "Milos Kerkez Kerkez",
-    "Lewis Hall Hall",
-    "Ola Aina Aina",
-
-    "Mohamed Salah M.Salah",
-    "Jacob Murphy J.Murphy",
-    "Amad Diallo Amad",
-    "Son Heung-min Son",
-    "Ismaïla Sarr I.Sarr",
-
-    "Matheus Santos Carneiro Da Cunha Cunha",
-    "Yoane Wissa Wissa",
-    "Alexander Isak Isak",
-}
-INJURIES = {
-    "Micky van de Ven Van de Ven": 0,
-    "Bruno Borges Fernandes B.Fernandes": 0,
-    "Bukayo Saka Saka": 0,
-    "Jamie Vardy Vardy": 0.75
-}
 TO_RETRY = []
 TO_IGNORE_MAX_WARNING = []
+
+MAX_DIFF = 10
 
 ALPHABET = [*"ABCDEFGHIJKLMNOPQRSTUVWXYZ", "AA", "AB", "AC", "AD", "AE", "AF", "AG", "AH", "AI", "AJ", "AK", "AL", "AM",
             "AN", "AO", "AP", "AQ", "AR", "AS", "AT", "AU", "AV", "AW", "AX", "AY", "AZ"]
@@ -52,7 +28,7 @@ ALPHABET = [*"ABCDEFGHIJKLMNOPQRSTUVWXYZ", "AA", "AB", "AC", "AD", "AE", "AF", "
 def init(current_season, current_game_week, predict_by_weeks, challenge_team,
          calibrate_by, season_length, min_games, process_all_players, min_season_ppg,
          min_season_game_percentage, bugged_players, use_average, team_worth, free_transfers, transfer_cost,
-         total_players, gkps, defs, mids, fwds, max_per_team, max_diff):
+         total_players, gkps, defs, mids, fwds, max_per_team, max_diff, current_team, injuries):
     team_names = get_team_names(current_season)
     team_info = get_team_info(current_season)
 
@@ -66,7 +42,7 @@ def init(current_season, current_game_week, predict_by_weeks, challenge_team,
                                                        calibrate_by, season_length, min_games, process_all_players,
                                                        min_season_ppg, predict_by, predict_by_weeks, filename,
                                                        min_season_game_percentage, bugged_players, use_average,
-                                                       max_diff)
+                                                       max_diff, current_team, injuries)
     if not challenge_team:
         if found_previous == total_players:
             print("Found all previous players!")
@@ -103,7 +79,7 @@ def get_predict_by(current_season, current_game_week, predict_by_weeks, team_inf
     return predict_by
 
 
-def load_prediction_file(filename, header):
+def load_prediction_file(filename, header, current_team, injuries):
     found_previous = 0
     health_index = header.index('Health')
     prev_index = header.index('PREV')
@@ -121,12 +97,12 @@ def load_prediction_file(filename, header):
             continue
 
         player_name = f"{master[first_name_index]} {master[surname_index]} {master[web_name_index]}"
-        if player_name in INJURIES:
-            master[health_index] = INJURIES[player_name]
+        if player_name in injuries:
+            master[health_index] = injuries[player_name]
         else:
             master[health_index] = 1
 
-        if player_name in CURRENT_TEAM:
+        if player_name in current_team:
             master[prev_index] = 1
             found_previous += 1
         else:
@@ -138,7 +114,7 @@ def load_prediction_file(filename, header):
 
 def make_player_ts(player_data, current_season_beginning_round, current_game_week, calibrate_by, season_length,
                    min_games, process_all_players, min_season_ppg, min_season_game_percentage, predict_by,
-                   predict_by_weeks):
+                   predict_by_weeks, current_team):
     player_name = f"{player_data['first_name']} {player_data['last_name']} {player_data['name']}"
     ts = []
     season_sum = 0
@@ -171,7 +147,7 @@ def make_player_ts(player_data, current_season_beginning_round, current_game_wee
             total_games - calibrate_by < min_games or season_sum < min_season_ppg * num_games or num_games < (
             season_length if current_game_week <= calibrate_by else current_game_week - 1) *
             min_season_game_percentage or len(predict_by[player_data['team']]['games']) < 1 or total_games < 2 or
-            sum(ts[-predict_by_weeks:]) < predict_by_weeks * min_season_ppg) and player_name not in CURRENT_TEAM:
+            sum(ts[-predict_by_weeks:]) < predict_by_weeks * min_season_ppg) and player_name not in current_team:
         return None
     if season_sum <= 0 or len(predict_by[player_data['team']]['games']) == 0:
         return None
@@ -181,12 +157,13 @@ def make_player_ts(player_data, current_season_beginning_round, current_game_wee
 
 def make_predictions(current_season, current_game_week, track_previous, points_data_set, incomplete_master_data_set,
                      calibrate_by, season_length, min_games, process_all_players, min_season_ppg, predict_by,
-                     predict_by_weeks, filename, min_season_game_percentage, bugged_players, use_average, max_diff):
+                     predict_by_weeks, filename, min_season_game_percentage, bugged_players, use_average, max_diff,
+                     current_team, injuries):
     header = incomplete_master_data_set[0]
     current_season_beginning_round = get_game_round(current_season)
 
     if os.path.exists(filename):
-        return load_prediction_file(filename, header)
+        return load_prediction_file(filename, header, current_team, injuries)
 
     found_previous = 0
     master_data_set = copy.deepcopy(incomplete_master_data_set)
@@ -212,11 +189,11 @@ def make_predictions(current_season, current_game_week, track_previous, points_d
                 master.append(forest_overall)
                 master.append(p)
                 master.append(next_p)
-                if player_name in INJURIES:
-                    master.append(INJURIES[player_name])
+                if player_name in injuries:
+                    master.append(injuries[player_name])
                 else:
                     master.append(1)
-                if track_previous and player_name in CURRENT_TEAM:
+                if track_previous and player_name in current_team:
                     master.append(1)
                     found_previous += 1
                 else:
@@ -237,10 +214,10 @@ def make_predictions(current_season, current_game_week, track_previous, points_d
 
 def predict_player(player_data, current_season_beginning_round, current_game_week, season_length, min_games,
                    process_all_players, min_season_ppg, min_season_game_percentage, calibrate_by, bugged_players,
-                   predict_by, use_average, predict_by_weeks, max_diff):
+                   predict_by, use_average, predict_by_weeks, max_diff, current_team):
     ts = make_player_ts(player_data, current_season_beginning_round, current_game_week, calibrate_by, season_length,
                         min_games, process_all_players, min_season_ppg, min_season_game_percentage, predict_by,
-                        predict_by_weeks)
+                        predict_by_weeks, current_team)
     if ts is None:
         return None
 
@@ -254,7 +231,7 @@ def predict_player(player_data, current_season_beginning_round, current_game_wee
                                                                               min_games, min_season_ppg,
                                                                               min_season_game_percentage,
                                                                               calibrate_by, bugged_players,
-                                                                              process_all_players)
+                                                                              process_all_players, max_diff)
     if c_actual <= 0 and not process_all_players:
         return None
     elif c_actual > 0:
@@ -438,4 +415,4 @@ if __name__ == "__main__":
     init(CURRENT_SEASON, CURRENT_GAME_WEEK, PREDICT_BY_WEEKS, CHALLENGE_TEAM, CALIBRATE_BY,
          SEASON_LENGTH, MIN_GAMES, PROCESS_ALL_PLAYERS, MIN_SEASON_PPG, MIN_SEASON_GAME_PERCENTAGE, BUGGED_PLAYERS,
          USE_AVERAGE, TEAM_WORTH, FREE_TRANSFERS, TRANSFER_COST, TOTAL_PLAYERS, GKPs, DEFs, MIDs, FWDs, MAX_PER_TEAM,
-         MAX_DIFF)
+         MAX_DIFF, CURRENT_TEAM, INJURIES)

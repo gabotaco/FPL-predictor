@@ -1,8 +1,9 @@
-from ai import do_arima, do_lstm, do_forest, MAX_DIFF
+from ai import do_arima, do_lstm, do_forest
 
 
 def process_player_data(player_data, current_season_beginning_round, current_game_week, season_length, min_games,
-                        min_season_ppg, min_season_game_percentage, calibrate_by, bugged_players, process_all_players):
+                        min_season_ppg, min_season_game_percentage, calibrate_by, bugged_players, process_all_players,
+                        max_diff):
     if player_data['id'] in bugged_players:
         return -1, -1, -1, -1, 0
 
@@ -66,7 +67,7 @@ def process_player_data(player_data, current_season_beginning_round, current_gam
             lstm = 0
             forest = 0
 
-        if arima != 0 and lstm != 0 and (arima / lstm > MAX_DIFF or lstm / arima > MAX_DIFF):
+        if arima != 0 and lstm != 0 and (arima / lstm > max_diff or lstm / arima > max_diff):
             arima = 0
             lstm = 0
             forest = 0
