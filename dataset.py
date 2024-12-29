@@ -215,7 +215,7 @@ def get_fixture_maps(year, team_info):
     return fixture_to_difficulty, fixture_to_team
 
 
-def get_points(year, team_info, pids, points_data_set=None):
+def get_points(year, team_info, pids, current_game_week, current_season, points_data_set=None):
     if points_data_set is None:
         points_data_set = {}
 
@@ -227,7 +227,13 @@ def get_points(year, team_info, pids, points_data_set=None):
     gws = [gw for gw in gws if gw.startswith("gw")]
     gws.sort(key=lambda a: int(a.replace("gw", "").replace(".csv", "")))
 
+    found_previous_game_week = False
+
     for gw in gws:
+        gw_number = int(gw.replace("gw", "").replace(".csv", ""))
+        if gw_number == current_game_week - 1:
+            found_previous_game_week = True
+
         with open(f"./Fantasy-Premier-League/data/{year}/gws/{gw}", encoding="latin-1") as gw_file:
             gw_reader = csv.DictReader(gw_file)
 
@@ -272,9 +278,12 @@ def get_points(year, team_info, pids, points_data_set=None):
                                                                             'team': opp_team}
         game_round += 1
 
+    if current_season == year and not found_previous_game_week:
+        raise "Didn't find data for the previous GW. Did you pull the new data?"
+
     next_year = get_next_year(year)
     if next_year is not None:
-        return get_points(next_year, team_info, pids, points_data_set)
+        return get_points(next_year, team_info, pids, current_game_week, current_season, points_data_set)
 
     return points_data_set
 
@@ -285,7 +294,7 @@ def get_header(team_names):
             "Selected"]
 
 
-def get_dataset(current_season):
+def get_dataset(current_season, current_game_week):
     team_names = get_team_names(current_season)
     team_info = get_team_info(current_season)
 
@@ -295,6 +304,6 @@ def get_dataset(current_season):
     if USE_UNDERSTAT:
         load_understat(current_season, pids)
 
-    points_data_set = get_points(STARTING_SEASON, team_info, pids)
+    points_data_set = get_points(STARTING_SEASON, team_info, pids, current_game_week, current_season)
 
     return points_data_set, master_data_set

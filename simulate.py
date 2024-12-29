@@ -33,7 +33,8 @@ def init(predict_by_weeks, transfer_cost, gkps, defs, mids, fwds, total_players,
          season_length, min_games, process_all_players, min_season_ppg, min_season_game_percentage, bugged_players,
          use_average, max_diff):
     first_round_num = get_game_round(DATA_YEAR)
-    points_data_set, master_data_set = get_dataset(DATA_YEAR)
+    _, last_gw = DATA_WEEK_RANGE
+    points_data_set, master_data_set = get_dataset(DATA_YEAR, last_gw)
     team_names = get_team_names(DATA_YEAR)
     team_info = get_team_info(DATA_YEAR)
 

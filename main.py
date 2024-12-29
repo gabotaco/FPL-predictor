@@ -34,7 +34,7 @@ def init(current_season, current_game_week, predict_by_weeks, challenge_team,
     team_info = get_team_info(current_season)
 
     predict_by = get_predict_by(current_season, current_game_week, predict_by_weeks, team_info, team_names)
-    points_data_set, incomplete_master_data_set = get_dataset(current_season)
+    points_data_set, incomplete_master_data_set = get_dataset(current_season, current_game_week)
 
     filename = (f"./predictedData/{current_season}/predictedData{current_game_week}"
                 f"{"Challenge" if challenge_team else ""}.json")
