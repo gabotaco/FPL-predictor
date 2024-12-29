@@ -20,6 +20,7 @@ TO_RETRY = []
 TO_IGNORE_MAX_WARNING = []
 
 MAX_DIFF = 10
+MAX_RETRIES = 5
 
 ALPHABET = [*"ABCDEFGHIJKLMNOPQRSTUVWXYZ", "AA", "AB", "AC", "AD", "AE", "AF", "AG", "AH", "AI", "AJ", "AK", "AL", "AM",
             "AN", "AO", "AP", "AQ", "AR", "AS", "AT", "AU", "AV", "AW", "AX", "AY", "AZ"]
@@ -140,7 +141,7 @@ def make_player_ts(player_data, current_season_beginning_round, current_game_wee
             season_sum += data['points']
             num_games += 1
 
-    if total_games < min_games:
+    if total_games < min_games and player_name not in current_team:
         return None
 
     if not process_all_players and (
@@ -149,7 +150,7 @@ def make_player_ts(player_data, current_season_beginning_round, current_game_wee
             min_season_game_percentage or len(predict_by[player_data['team']]['games']) < 1 or total_games < 2 or
             sum(ts[-predict_by_weeks:]) < predict_by_weeks * min_season_ppg) and player_name not in current_team:
         return None
-    if season_sum <= 0 or len(predict_by[player_data['team']]['games']) == 0:
+    if season_sum <= 0 or len(predict_by[player_data['team']]['games']) == 0 and player_name not in current_team:
         return None
 
     return ts
@@ -214,12 +215,23 @@ def make_predictions(current_season, current_game_week, track_previous, points_d
 
 def predict_player(player_data, current_season_beginning_round, current_game_week, season_length, min_games,
                    process_all_players, min_season_ppg, min_season_game_percentage, calibrate_by, bugged_players,
-                   predict_by, use_average, predict_by_weeks, max_diff, current_team):
+                   predict_by, use_average, predict_by_weeks, max_diff, current_team, retry_count=0):
+    player_name = f"{player_data['first_name']} {player_data['last_name']} {player_data['name']}"
+    if retry_count >= MAX_RETRIES:
+        bugged_players.append(player_data['id'])
+        print(f"Giving up on {player_name}...")
+        if player_name in current_team:
+            print(f"MISSED A PLAYER IN THE CURRENT TEAM")
+        return player_data, 0, 0, 0, 0, 0
+
     ts = make_player_ts(player_data, current_season_beginning_round, current_game_week, calibrate_by, season_length,
                         min_games, process_all_players, min_season_ppg, min_season_game_percentage, predict_by,
                         predict_by_weeks, current_team)
     if ts is None:
-        return None
+        if player_name in current_team:
+            print(f"{player_name} does not meet minimum requirements")
+
+        return player_data, 0, 0, 0, 0, 0
 
     arima_ratio = 1 / 3
     lstm_ratio = 1 / 3
@@ -233,7 +245,9 @@ def predict_player(player_data, current_season_beginning_round, current_game_wee
                                                                               calibrate_by, bugged_players,
                                                                               process_all_players, max_diff)
     if c_actual <= 0 and not process_all_players:
-        return None
+        if player_name in current_team:
+            print(f"{player_name} has a negative score")
+        return player_data, 0, 0, 0, 0, 0
     elif c_actual > 0:
         arima_ratio, lstm_ratio, forest_ratio = calibrate_player(c_arima, c_lstm, c_forest, c_actual)
 
@@ -263,18 +277,24 @@ def predict_player(player_data, current_season_beginning_round, current_game_wee
         else:
             forest_overall, forest_next = 0, 0
     except Exception as e:
-        print('ERROR', player_data['id'])
+        print('ERROR', player_data['id'], player_name)
         print(e)
-        bugged_players.append(player_data['id'])
-        return None
+        print('Retrying...')
+        return predict_player(player_data, current_season_beginning_round, current_game_week, season_length, min_games,
+                              process_all_players, min_season_ppg, min_season_game_percentage, calibrate_by,
+                              bugged_players, predict_by, use_average, predict_by_weeks, max_diff, current_team,
+                              retry_count + 1)
 
     if (player_data['id'] not in TO_IGNORE_MAX_WARNING and min(arima_overall, lstm_overall, forest_overall) > 0 and
             (max(arima_overall, lstm_overall, forest_overall) / min(arima_overall, lstm_overall,
                                                                     forest_overall)) > max_diff):
         print(player_data['id'], 'max diff', max(arima_overall, lstm_overall, forest_overall) /
               min(arima_overall, lstm_overall, forest_overall), arima_overall, lstm_overall, forest_overall)
-        bugged_players.append(player_data['id'])
-        return None
+        print('Retrying...')
+        return predict_player(player_data, current_season_beginning_round, current_game_week, season_length, min_games,
+                              process_all_players, min_season_ppg, min_season_game_percentage, calibrate_by,
+                              bugged_players, predict_by, use_average, predict_by_weeks, max_diff, current_team,
+                              retry_count + 1)
 
     if len(predict_by[player_data['team']]['games']) == 0:
         p = 0

@@ -222,7 +222,7 @@ def simulate_predictions(year, gw_range, predict_by_weeks, team_info, team_names
         print(f"Getting predictions for gw {gw}. ETA {eta.strftime("%I:%M%p")}")
         predict_by = get_predict_by(year, gw, predict_by_weeks, team_info, team_names)
         filename = f"./simulationData/{year}/{PREDICTION_TAG}/{gw}.json"
-        master_data_set, _ = make_predictions(year, gw, False, points_data_set, master_data_set, calibrate_by,
+        master_data_set, _ = make_predictions(year, gw, True, points_data_set, master_data_set, calibrate_by,
                                               season_length, min_games, process_all_players, min_season_ppg, predict_by,
                                               predict_by_weeks, filename, min_season_game_percentage, bugged_players,
                                               use_average, max_diff, game['team'], [])
