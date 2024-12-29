@@ -12,10 +12,10 @@ from main import make_predictions, get_predict_by
 DATA_YEAR = "2024-25"
 DATA_WEEK_RANGE = (1, 18)
 MAKE_PREDICTIONS = True
-PREDICTION_TAG = "cal10/pred20"
+PREDICTION_TAG = "cal10/pred38"
 
 MAX_DIFF = 10
-PREDICT_BY_WEEKS = 20
+PREDICT_BY_WEEKS = 38
 CALIBRATE_BY = 10
 USE_AVERAGE = False
 
@@ -225,8 +225,8 @@ def simulate_predictions(year, gw_range, predict_by_weeks, team_info, team_names
         filename = f"./simulationData/{year}/{PREDICTION_TAG}/{gw}.json"
         master_data_set, _ = make_predictions(year, gw, True, points_data_set, master_data_set, calibrate_by,
                                               season_length, min_games, process_all_players, min_season_ppg, predict_by,
-                                              predict_by_weeks, filename, min_season_game_percentage, bugged_players,
-                                              use_average, max_diff, game['team'], [])
+                                              predict_by_weeks, filename, min_season_game_percentage,
+                                              bugged_players.copy(), use_average, max_diff, game['team'], [])
         gw_predictions.append({"round": first_game_round + gw - 1,
                                "players": process_master_data(master_data_set, team_names)})
 
