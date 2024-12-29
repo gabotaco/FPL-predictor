@@ -288,7 +288,7 @@ def predict_player(player_data, current_season_beginning_round, current_game_wee
     if (player_data['id'] not in TO_IGNORE_MAX_WARNING and min(arima_overall, lstm_overall, forest_overall) > 0 and
             (max(arima_overall, lstm_overall, forest_overall) / min(arima_overall, lstm_overall,
                                                                     forest_overall)) > max_diff):
-        print(player_data['id'], 'max diff', max(arima_overall, lstm_overall, forest_overall) /
+        print(player_data['id'], player_name, 'max diff', max(arima_overall, lstm_overall, forest_overall) /
               min(arima_overall, lstm_overall, forest_overall), arima_overall, lstm_overall, forest_overall)
         print('Retrying...')
         return predict_player(player_data, current_season_beginning_round, current_game_week, season_length, min_games,

@@ -270,7 +270,7 @@ def get_points(year, team_info, pids, current_game_week, current_season, points_
 
                 fixture_date = gw_element['kickoff_time'].split('T')[0]
                 if USE_UNDERSTAT and fixture_date not in element_object['understat']:
-                    print(f"No understats for {name} for {fixture_date}")
+                    print(f"No understats found for {name} for {fixture_date}")
                     continue
 
                 points_data_set[element_object['id']][f"GW{game_round}"] = {'diff': diff,
