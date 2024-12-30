@@ -224,8 +224,9 @@ def predict_player(player_data, current_season_beginning_round, current_game_wee
     if ts is None:
         if player_name in current_team:
             print(f"{player_name} does not meet minimum requirements")
+            return player_data, 0, 0, 0, 0, 0
 
-        return player_data, 0, 0, 0, 0, 0
+        return None
 
     arima_ratio = 1 / 3
     lstm_ratio = 1 / 3
@@ -247,13 +248,14 @@ def predict_player(player_data, current_season_beginning_round, current_game_wee
         bugged_players.append(player_data['id'])
         print(f"Giving up on {player_name}... Using their average points of {average_points} a game.")
         if player_name in current_team:
-            print(f"MISSED A PLAYER IN THE CURRENT TEAM")
+            print(f"They are in our current team :(")
         return player_data, average_overall, average_overall, average_overall, average_overall, average_points
 
     if c_actual <= 0 and not process_all_players:
         if player_name in current_team:
             print(f"{player_name} has a negative score")
-        return player_data, 0, 0, 0, 0, 0
+            return player_data, 0, 0, 0, 0, 0
+        return None
     elif c_actual > 0:
         arima_ratio, lstm_ratio, forest_ratio = calibrate_player(c_arima, c_lstm, c_forest, c_actual)
 
