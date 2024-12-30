@@ -12,10 +12,10 @@ from main import make_predictions, get_predict_by
 DATA_YEAR = "2024-25"
 DATA_WEEK_RANGE = (1, 18)
 MAKE_PREDICTIONS = True
-PREDICTION_TAG = "cal10/pred38"
+PREDICTION_TAG = "cal10/pred19"
 
 MAX_DIFF = 10
-PREDICT_BY_WEEKS = 38
+PREDICT_BY_WEEKS = 19
 CALIBRATE_BY = 10
 USE_AVERAGE = False
 
