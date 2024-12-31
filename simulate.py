@@ -13,10 +13,9 @@ from main import make_predictions, get_predict_by
 DATA_YEAR = "2023-24"
 DATA_WEEK_RANGE = (19, 38)
 MAKE_PREDICTIONS = True
-PREDICTION_TAG = "cal10/pred25"
+PREDICTION_TAG = "cal10/predRemaining"
 
 MAX_DIFF = 10
-PREDICT_BY_WEEKS = 25
 CALIBRATE_BY = 10
 USE_AVERAGE = False
 
@@ -30,9 +29,8 @@ game = {
 }
 
 
-def init(predict_by_weeks, transfer_cost, gkps, defs, mids, fwds, total_players, max_per_team, calibrate_by,
-         season_length, min_games, process_all_players, min_season_ppg, min_season_game_percentage, bugged_players,
-         use_average, max_diff):
+def init(transfer_cost, gkps, defs, mids, fwds, total_players, max_per_team, calibrate_by, season_length, min_games,
+         process_all_players, min_season_ppg, min_season_game_percentage, bugged_players, use_average, max_diff):
     first_game_round = get_game_round(DATA_YEAR)
     min_gw, max_gw = DATA_WEEK_RANGE
     points_data_set, master_data_set = get_dataset(DATA_YEAR, max_gw)
@@ -43,6 +41,7 @@ def init(predict_by_weeks, transfer_cost, gkps, defs, mids, fwds, total_players,
     os.makedirs(f"./simulationData/{DATA_YEAR}/{PREDICTION_TAG}", exist_ok=True)
 
     for gw in range(min_gw, max_gw + 1):
+        predict_by_weeks = max_gw + 1 - gw
         prediction = simulate_prediction(DATA_YEAR, gw, predict_by_weeks, team_info, team_names, points_data_set,
                                          master_data_set, calibrate_by, season_length, min_games, process_all_players,
                                          min_season_ppg, min_season_game_percentage, bugged_players, use_average,
@@ -276,6 +275,5 @@ def process_master_data(master_data_set, team_names):
 
 
 if __name__ == "__main__":
-    init(PREDICT_BY_WEEKS, TRANSFER_COST, GKPs, DEFs, MIDs, FWDs, TOTAL_PLAYERS, MAX_PER_TEAM, CALIBRATE_BY,
-         SEASON_LENGTH, MIN_GAMES, PROCESS_ALL_PLAYERS, MIN_SEASON_PPG, MIN_SEASON_GAME_PERCENTAGE, BUGGED_PLAYERS,
-         USE_AVERAGE, MAX_DIFF)
+    init(TRANSFER_COST, GKPs, DEFs, MIDs, FWDs, TOTAL_PLAYERS, MAX_PER_TEAM, CALIBRATE_BY, SEASON_LENGTH, MIN_GAMES,
+         PROCESS_ALL_PLAYERS, MIN_SEASON_PPG, MIN_SEASON_GAME_PERCENTAGE, BUGGED_PLAYERS, USE_AVERAGE, MAX_DIFF)
