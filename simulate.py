@@ -13,10 +13,9 @@ from main import make_predictions, get_predict_by
 DATA_YEAR = "2023-24"
 DATA_WEEK_RANGE = (19, 38)
 MAKE_PREDICTIONS = True
-PREDICTION_TAG = "predRemaining/cal10"
+PREDICTION_TAG = "predRemaining/calPrevious"
 
 MAX_DIFF = 10
-CALIBRATE_BY = 10
 USE_AVERAGE = False
 
 game = {
@@ -29,7 +28,7 @@ game = {
 }
 
 
-def init(transfer_cost, gkps, defs, mids, fwds, total_players, max_per_team, calibrate_by, season_length, min_games,
+def init(transfer_cost, gkps, defs, mids, fwds, total_players, max_per_team, season_length, min_games,
          process_all_players, min_season_ppg, min_season_game_percentage, bugged_players, use_average, max_diff):
     first_game_round = get_game_round(DATA_YEAR)
     min_gw, max_gw = DATA_WEEK_RANGE
@@ -42,6 +41,7 @@ def init(transfer_cost, gkps, defs, mids, fwds, total_players, max_per_team, cal
 
     for gw in range(min_gw, max_gw + 1):
         predict_by_weeks = max_gw + 1 - gw
+        calibrate_by = gw - 1
         prediction = simulate_prediction(DATA_YEAR, gw, predict_by_weeks, team_info, team_names, points_data_set,
                                          master_data_set, calibrate_by, season_length, min_games, process_all_players,
                                          min_season_ppg, min_season_game_percentage, bugged_players, use_average,
@@ -275,5 +275,5 @@ def process_master_data(master_data_set, team_names):
 
 
 if __name__ == "__main__":
-    init(TRANSFER_COST, GKPs, DEFs, MIDs, FWDs, TOTAL_PLAYERS, MAX_PER_TEAM, CALIBRATE_BY, SEASON_LENGTH, MIN_GAMES,
+    init(TRANSFER_COST, GKPs, DEFs, MIDs, FWDs, TOTAL_PLAYERS, MAX_PER_TEAM, SEASON_LENGTH, MIN_GAMES,
          PROCESS_ALL_PLAYERS, MIN_SEASON_PPG, MIN_SEASON_GAME_PERCENTAGE, BUGGED_PLAYERS, USE_AVERAGE, MAX_DIFF)
