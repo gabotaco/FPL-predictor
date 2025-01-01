@@ -5,9 +5,8 @@ from pytz import timezone
 
 from dataset import get_dataset
 from solver import make_team
-from game_information import (get_team_names, TRANSFER_COST, GKPs, DEFs, MIDs, FWDs, TOTAL_PLAYERS,
-                              MAX_PER_TEAM, get_game_round, SEASON_LENGTH, get_team_info, MIN_GAMES,
-                              PROCESS_ALL_PLAYERS, MIN_SEASON_PPG, MIN_SEASON_GAME_PERCENTAGE, BUGGED_PLAYERS)
+from game_information import (get_team_names, TRANSFER_COST, GKPs, DEFs, MIDs, FWDs, TOTAL_PLAYERS, MAX_PER_TEAM,
+                              get_game_round, SEASON_LENGTH, get_team_info, PROCESS_ALL_PLAYERS, BUGGED_PLAYERS)
 from main import make_predictions, get_predict_by
 
 DATA_YEAR = "2023-24"
@@ -16,6 +15,9 @@ MAKE_PREDICTIONS = True
 PREDICTION_TAG = "predRemaining/calPrevious"
 
 MAX_DIFF = 10
+MIN_GAMES = 3
+MIN_SEASON_PPG = 2
+MIN_SEASON_GAME_PERCENTAGE = 0.7
 USE_AVERAGE = False
 
 game = {
