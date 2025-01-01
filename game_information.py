@@ -34,7 +34,6 @@ INJURIES = {
 BUGGED_PLAYERS = []
 
 TRANSFER_COST = 4
-CALIBRATE_BY = 10
 GKPs = (2, 2)
 DEFs = (5, 5)
 MIDs = (5, 5)
