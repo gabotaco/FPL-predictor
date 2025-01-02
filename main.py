@@ -255,7 +255,7 @@ def predict_player(player_data, current_season_beginning_round, current_game_wee
             print(f"{player_name} has a negative score")
             return player_data, 0, 0, 0, 0, 0
         return None
-    elif c_actual > 0:
+    elif c_actual > 0 and not use_average:
         arima_ratio, lstm_ratio, forest_ratio = calibrate_player(c_arima, c_lstm, c_forest, c_actual)
 
     try:
