@@ -12,11 +12,11 @@ from main import make_predictions, get_predict_by
 DATA_YEAR = "2023-24"
 DATA_WEEK_RANGE = (19, 38)
 MAKE_PREDICTIONS = True
-PREDICTION_TAG = "predRemaining/calPrevious"
+PREDICTION_TAG = "maxCalAndPred/minPpg1"
 
 MAX_DIFF = 10
 MIN_GAMES = 3
-MIN_SEASON_PPG = 2
+MIN_SEASON_PPG = 1
 MIN_SEASON_GAME_PERCENTAGE = 0.7
 USE_AVERAGE = False
 
