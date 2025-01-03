@@ -1,11 +1,8 @@
 import warnings
-import pandas as pd
 
 import numpy as np
 from pmdarima.arima import auto_arima
 from tensorflow.keras.callbacks import EarlyStopping
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.model_selection import GridSearchCV
 
 from lstm_utils import split_df_to_train_test, make_model
 
@@ -141,57 +138,3 @@ def do_lstm(player_data, pred_by, lstm_counter=0):
         return do_lstm(player_data, pred_by, lstm_counter + 1)
 
     return predictions
-
-
-def do_forest(player_data, pred_by, forest_counter=0):
-    if forest_counter == MAX_RETRIES:
-        raise Exception("Too many random forest calls")
-
-    filtered_data = player_data.copy()
-    for key, value in filtered_data.items():
-        if not key.startswith("GW"):
-            continue
-
-        filtered_data[key] = value['points']
-
-    df = pd.DataFrame(filtered_data, index=[0])
-    df = df.drop(columns=['first_name', 'last_name', 'name', 'team', 'position'])
-
-    gw_columns = [col for col in df.columns if col.startswith("GW")]
-    df = df.melt(id_vars=['id'],
-                 value_vars=gw_columns,
-                 var_name='GW',
-                 value_name='points')
-    df.dropna(subset=['points'], inplace=True)
-    df['GW'] = df['GW'].str.replace('GW', '').astype(int)
-    df = df.sort_values(by=['id', 'GW'])
-    df = df.drop(columns=['GW', 'id'])
-
-    grid = {'max_depth': np.arange(1, 25, 4), 'n_estimators': np.arange(25, 100, 5)}
-
-    rfr = RandomForestRegressor(max_features=1 / 3, n_jobs=1)
-    rfr_cv = GridSearchCV(estimator=rfr, param_grid=grid, n_jobs=1)
-    best_estimator = None
-    pred = []
-
-    for _ in pred_by:
-        df['RecentFormAvg'] = df['points'].rolling(window=3, min_periods=1).mean().reset_index(0, drop=True)
-        df['HistoricalPerformanceAvg'] = df['points'].expanding().mean().reset_index(0, drop=True)
-
-        last_row = df.iloc[-1]
-        x = df[:-1].drop(columns=['points'])
-        y = df[:-1]['points']
-
-        if best_estimator is None:
-            rfr_cv.fit(x.to_numpy(), y)
-            best_estimator = rfr_cv.best_estimator_
-
-        pred.append(best_estimator.predict([last_row.drop('points')])[0])
-        df.loc[len(df)] = {'points': pred[-1], 'RecentFormAvg': 0, 'HistoricalPerformanceAvg': 0}
-
-    overall = sum(pred)
-
-    if overall / len(pred_by) >= RETRY_POINT or overall / len(pred_by) <= -RETRY_POINT:
-        return do_forest(player_data, pred_by, forest_counter + 1)
-
-    return pred

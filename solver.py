@@ -91,14 +91,13 @@ def make_team(data, predict_by_weeks, transfer_cost, free_transfers, max_cost, t
     return [f"{players[i]['first_name']} {players[i]['last_name']}" for i in range(len(players)) if x[i].value[0] == 1]
 
 
-def calibrate_player(arima, lstm, forest, actual_points):
+def calibrate_player(arima, lstm, actual_points):
     m = GEKKO(remote=False)
     arima_v = m.Var(value=0, lb=0)
     lstm_v = m.Var(value=0, lb=0)
-    forest_v = m.Var(value=0, lb=0)
 
-    m.Minimize((((arima * arima_v) + (lstm * lstm_v) + (forest * forest_v)) - actual_points) ** 2)
+    m.Minimize((((arima * arima_v) + (lstm * lstm_v)) - actual_points) ** 2)
 
     m.solve(disp=False)
 
-    return arima_v.value[0], lstm_v.value[0], forest_v.value[0]
+    return arima_v.value[0], lstm_v.value[0]
