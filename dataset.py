@@ -290,7 +290,7 @@ def get_points(year, team_info, pids, current_game_week, current_season, points_
 
 def get_header(team_names):
     return ["First Name", "Surname", "Web Name", "Position", "GKP", "DEF", "MID", "FWD", "Team",
-            *team_names, "Cost", "ID", "ARIMA", "LSTM", "FOREST", "PP", "NEXT", "Health", "PREV",
+            *team_names, "Cost", "ID", "ARIMA", "LSTM", "PP", "NEXT", "Health", "PREV",
             "Selected"]
 
 

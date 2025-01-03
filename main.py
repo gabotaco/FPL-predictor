@@ -6,7 +6,7 @@ from multiprocessing import Pool
 
 from xlsxwriter.workbook import Workbook
 
-from ai import do_arima, do_lstm, do_forest
+from ai import do_arima, do_lstm
 from dataset import get_dataset
 from game_information import (get_team_info, get_game_round, get_team_names, CURRENT_SEASON, CURRENT_GAME_WEEK,
                               SEASON_LENGTH, MIN_GAMES, MIN_SEASON_PPG, MIN_SEASON_GAME_PERCENTAGE, TEAM_WORTH,
@@ -179,14 +179,13 @@ def make_predictions(current_season, current_game_week, track_previous, points_d
 
     results = [r for r in results if r is not None]
 
-    for player_data, arima_overall, lstm_overall, forest_overall, p, next_p in results:
+    for player_data, arima_overall, lstm_overall, p, next_p in results:
         player_name = f"{player_data['first_name']} {player_data['last_name']} {player_data['name']}"
         found = False
         for master in master_data_set:
             if master[id_index] == player_data['id']:
                 master.append(arima_overall)
                 master.append(lstm_overall)
-                master.append(forest_overall)
                 master.append(p)
                 master.append(next_p)
                 if player_name in injuries:
@@ -223,15 +222,14 @@ def predict_player(player_data, current_season_beginning_round, current_game_wee
     if ts is None:
         if player_name in current_team:
             print(f"{player_name} does not meet minimum requirements")
-            return player_data, 0, 0, 0, 0, 0
+            return player_data, 0, 0, 0, 0
 
         return None
 
     arima_ratio = 1 / 3
     lstm_ratio = 1 / 3
-    forest_ratio = 1 / 3
 
-    c_arima, c_lstm, c_forest, c_actual, average_points = process_player_data(player_data,
+    c_arima, c_lstm, c_actual, average_points = process_player_data(player_data,
                                                                               current_season_beginning_round,
                                                                               current_game_week, season_length,
                                                                               min_games, min_season_ppg,
@@ -248,15 +246,15 @@ def predict_player(player_data, current_season_beginning_round, current_game_wee
         print(f"Giving up on {player_name}... Using their average points of {average_points} a game.")
         if player_name in current_team:
             print(f"They are in our current team :(")
-        return player_data, average_overall, average_overall, average_overall, average_overall, average_points
+        return player_data, average_overall, average_overall, average_overall, average_points
 
     if c_actual <= 0 and not process_all_players:
         if player_name in current_team:
             print(f"{player_name} has a negative score")
-            return player_data, 0, 0, 0, 0, 0
+            return player_data, 0, 0, 0, 0
         return None
     elif c_actual > 0 and not use_average:
-        arima_ratio, lstm_ratio, forest_ratio = calibrate_player(c_arima, c_lstm, c_forest, c_actual)
+        arima_ratio, lstm_ratio = calibrate_player(c_arima, c_lstm, c_actual)
 
     try:
         if arima_ratio > 0:
@@ -272,13 +270,6 @@ def predict_player(player_data, current_season_beginning_round, current_game_wee
             lstm_next = sum(lstm_pred[:predict_by[player_data['team']]['next']])
         else:
             lstm_overall, lstm_next = 0, 0
-
-        if forest_ratio > 0:
-            forest_pred = do_forest(player_data, pred_by)
-            forest_overall = average_overall if use_average else sum(forest_pred)
-            forest_next = sum(forest_pred[:predict_by[player_data['team']]['next']])
-        else:
-            forest_overall, forest_next = 0, 0
     except Exception as e:
         print('ERROR', player_data['id'], player_name)
         print(e)
@@ -292,30 +283,29 @@ def predict_player(player_data, current_season_beginning_round, current_game_wee
         p = 0
         next_p = 0
     else:
-        p = (arima_overall * arima_ratio) + (lstm_overall * lstm_ratio) + (forest_overall * forest_ratio) / 3
-        next_p = (arima_next * arima_ratio) + (lstm_next * lstm_ratio) + (forest_next * forest_ratio) / 3
+        p = (arima_overall * arima_ratio) + (lstm_overall * lstm_ratio) / 3
+        next_p = (arima_next * arima_ratio) + (lstm_next * lstm_ratio) / 3
 
-    if (player_data['id'] not in TO_IGNORE_MAX_WARNING and min(arima_overall, lstm_overall, forest_overall) > 0 and
-            (max(arima_overall, lstm_overall, forest_overall) / min(arima_overall, lstm_overall,
-                                                                    forest_overall)) > max_diff):
-        print(player_data['id'], player_name, 'max diff', max(arima_overall, lstm_overall, forest_overall) /
-              min(arima_overall, lstm_overall, forest_overall), arima_overall, lstm_overall, forest_overall, next_p)
+    if (player_data['id'] not in TO_IGNORE_MAX_WARNING and min(arima_overall, lstm_overall) > 0 and
+            (max(arima_overall, lstm_overall) / min(arima_overall, lstm_overall)) > max_diff):
+        print(player_data['id'], player_name, 'max diff', max(arima_overall, lstm_overall) /
+              min(arima_overall, lstm_overall), arima_overall, lstm_overall, next_p)
         if retry_count >= 1 and next_p <= average_points:
             print("Using the predicted value")
-            return player_data, arima_overall, lstm_overall, forest_overall, p, next_p
+            return player_data, arima_overall, lstm_overall, p, next_p
         print('Retrying...')
         return predict_player(player_data, current_season_beginning_round, current_game_week, season_length, min_games,
                               process_all_players, min_season_ppg, min_season_game_percentage, calibrate_by,
                               bugged_players, predict_by, use_average, predict_by_weeks, max_diff, current_team,
                               retry_count + 1)
 
-    return player_data, arima_overall, lstm_overall, forest_overall, p, next_p
+    return player_data, arima_overall, lstm_overall, p, next_p
 
 
 def make_prediction_file(current_season, current_game_week, challenge_team, master_data_set, team_worth,
                          free_transfers, transfer_cost, predict_by_weeks, team_names, points_data_set, total_players,
                          bugged_players, gkps, defs, mids, fwds, max_per_team):
-    hidden_columns = ['GKP', 'DEF', 'MID', 'FWD', *team_names, 'ID', 'ARIMA', 'LSTM', 'FOREST']
+    hidden_columns = ['GKP', 'DEF', 'MID', 'FWD', *team_names, 'ID', 'ARIMA', 'LSTM']
     if challenge_team:
         hidden_columns.append("PREV")
     header = master_data_set[0]
