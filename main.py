@@ -171,8 +171,7 @@ def make_predictions(current_season, current_game_week, track_previous, points_d
 
     to_check = [(player_data, current_season_beginning_round, current_game_week, season_length, min_games,
                  process_all_players, min_season_ppg, min_season_game_percentage, calibrate_by, bugged_players,
-                 predict_by, use_average, predict_by_weeks, max_diff, current_team) for _, player_data in
-                points_data_set.items()
+                 predict_by, use_average, predict_by_weeks, max_diff, current_team) for _, player_data in points_data_set.items()
                 if (len(TO_RETRY) == 0 or player_data['id'] in TO_RETRY) and player_data['id'] not in bugged_players]
 
     with Pool() as pool:
@@ -230,13 +229,13 @@ def predict_player(player_data, current_season_beginning_round, current_game_wee
     arima_ratio = 1 / 3
     lstm_ratio = 1 / 3
 
-    c_arima, c_lstm, c_actual, average_points = process_player_data(player_data,
-                                                                    current_season_beginning_round,
-                                                                    current_game_week, season_length,
-                                                                    min_games, min_season_ppg,
-                                                                    min_season_game_percentage,
-                                                                    calibrate_by, bugged_players,
-                                                                    process_all_players, max_diff)
+    c_arima, c_lstm, c_forest, c_actual, average_points = process_player_data(player_data,
+                                                                              current_season_beginning_round,
+                                                                              current_game_week, season_length,
+                                                                              min_games, min_season_ppg,
+                                                                              min_season_game_percentage,
+                                                                              calibrate_by, bugged_players,
+                                                                              process_all_players, max_diff)
     pred_by = predict_by[player_data['team']]['games'][
               :predict_by[player_data['team']]['next']] if use_average else predict_by[player_data['team']][
         'games']
