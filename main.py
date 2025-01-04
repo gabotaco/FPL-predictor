@@ -229,7 +229,7 @@ def predict_player(player_data, current_season_beginning_round, current_game_wee
     arima_ratio = 1 / 3
     lstm_ratio = 1 / 3
 
-    c_arima, c_lstm, c_forest, c_actual, average_points = process_player_data(player_data,
+    c_arima, c_lstm, c_actual, average_points = process_player_data(player_data,
                                                                               current_season_beginning_round,
                                                                               current_game_week, season_length,
                                                                               min_games, min_season_ppg,
@@ -381,7 +381,7 @@ def make_prediction_file(current_season, current_game_week, challenge_team, mast
         row_index += 2
 
         sheet.write_row(row_index, column_index, ["Profit",
-                                                  f"={ALPHABET[column_index + 1]}{row_index - 13}-"
+                                                  f"={ALPHABET[column_index + 1]}{row_index - 14}-"
                                                   f"{ALPHABET[column_index + 1]}{row_index - 1}*{predict_by_weeks}"])
 
         row_index += 2
