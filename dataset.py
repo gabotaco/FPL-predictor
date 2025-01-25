@@ -133,6 +133,9 @@ def get_pids_and_master_data_set(previous_players, team_info, team_names, curren
 
         for i, row in enumerate(csv_reader):
             player_position = POSITIONS[int(row['element_type'])]
+            if player_position == 'MNG':
+                continue
+
             player = [row['first_name'], row['second_name'], row['web_name'], player_position,
                       1 if player_position == 'GKP' else 0, 1 if player_position == 'DEF' else 0,
                       1 if player_position == 'MID' else 0, 1 if player_position == 'FWD' else 0,

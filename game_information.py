@@ -1,7 +1,7 @@
 import csv
 
-CURRENT_GAME_WEEK = 22
-TEAM_WORTH = 99.4 + 2.0
+CURRENT_GAME_WEEK = 23
+TEAM_WORTH = 98.7 + 2.8
 FREE_TRANSFERS = 1
 CHALLENGE_TEAM = False
 CURRENT_TEAM = {
@@ -17,7 +17,7 @@ CURRENT_TEAM = {
     "Mohamed Salah M.Salah",
     "Jacob Murphy J.Murphy",
     "Bryan Mbeumo Mbeumo",
-    "Son Heung-min Son",
+    "Justin Kluivert Kluivert",
     "Mikkel Damsgaard Damsgaard",
 
     "Matheus Santos Carneiro Da Cunha Cunha",
@@ -25,8 +25,8 @@ CURRENT_TEAM = {
     "Alexander Isak Isak",
 }
 INJURIES = {
-    "Micky van de Ven Van de Ven": 16/17,  # 26 Jan
-    "Bukayo Saka Saka": 11/17,  # 08 March
+    "Micky van de Ven Van de Ven": 14/16,  # 16 Feb
+    "Bukayo Saka Saka": 11/16,  # 08 March
 }
 
 BUGGED_PLAYERS = []
@@ -48,7 +48,7 @@ MIN_GAMES = 3
 MIN_SEASON_PPG = 1
 MIN_SEASON_GAME_PERCENTAGE = 0.7
 
-POSITIONS = {1: 'GKP', 2: 'DEF', 3: 'MID', 4: 'FWD'}
+POSITIONS = {1: 'GKP', 2: 'DEF', 3: 'MID', 4: 'FWD', 5: 'MNG'}
 
 
 def get_team_info(season):
