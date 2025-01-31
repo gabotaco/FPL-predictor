@@ -1,12 +1,12 @@
 import csv
 
-CURRENT_GAME_WEEK = 23
-TEAM_WORTH = 98.7 + 2.8
+CURRENT_GAME_WEEK = 24
+TEAM_WORTH = 95.0 + 7.0
 FREE_TRANSFERS = 1
 CHALLENGE_TEAM = False
 CURRENT_TEAM = {
     "Jordan Pickford Pickford",
-    "Matz Sels Sels",
+    "André Onana Onana",
 
     "James Tarkowski Tarkowski",
     "Murillo Santiago Costa dos Santos Murillo",
@@ -25,8 +25,7 @@ CURRENT_TEAM = {
     "Alexander Isak Isak",
 }
 INJURIES = {
-    "Micky van de Ven Van de Ven": 14/16,  # 16 Feb
-    "Bukayo Saka Saka": 11/16,  # 08 March
+    "Bukayo Saka Saka": 11/15,  # 08 March
 }
 
 BUGGED_PLAYERS = []
