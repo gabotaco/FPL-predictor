@@ -1,7 +1,7 @@
 import csv
 
-CURRENT_GAME_WEEK = 34
-TEAM_WORTH = 99.5 + 1.7
+CURRENT_GAME_WEEK = 35
+TEAM_WORTH = 100.1 + 1.1
 FREE_TRANSFERS = 1
 CHALLENGE_TEAM = False
 CURRENT_TEAM = {
@@ -11,7 +11,7 @@ CURRENT_TEAM = {
     "Marc Cucurella Saseta Cucurella",
     "Neco Williams N.Williams",
     "Trent Alexander-Arnold Alexander-Arnold",
-    "Antonee Robinson Robinson",
+    "Rayan Aït-Nouri Aït-Nouri",
     "William Saliba Saliba",
 
     "Mohamed Salah M.Salah",
