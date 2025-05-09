@@ -1,12 +1,12 @@
 import csv
 
-CURRENT_GAME_WEEK = 35
-TEAM_WORTH = 100.1 + 1.1
+CURRENT_GAME_WEEK = 36
+TEAM_WORTH = 100.4 + 0.9
 FREE_TRANSFERS = 1
 CHALLENGE_TEAM = False
 CURRENT_TEAM = {
     "Jordan Pickford Pickford",
-    "André Onana Onana",
+    "David Raya Martin Raya",
 
     "Marc Cucurella Saseta Cucurella",
     "Neco Williams N.Williams",
@@ -27,6 +27,7 @@ CURRENT_TEAM = {
 INJURIES = {
     "Gabriel dos Santos Magalhães Gabriel": 0,  # Unknown
     "James Tarkowski Tarkowski": 0,
+    "Dango Ouattara O.Dango": 2.75/3,
 }
 
 BUGGED_PLAYERS = []
