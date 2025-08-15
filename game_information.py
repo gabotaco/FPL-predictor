@@ -25,7 +25,9 @@ CURRENT_TEAM = {
     "Yoane Wissa Wissa",
 }
 INJURIES = {
-    "Emiliano Martínez Romero Martinez": 37 / 38
+    "Emiliano Martínez Romero Martinez": 37 / 38,
+    "Yoane Wissa Wissa": 0,
+    "Nicolas Jackson N.Jackson": 37/38,
 }
 
 BUGGED_PLAYERS = []
@@ -39,7 +41,7 @@ TOTAL_PLAYERS = 15
 MAX_PER_TEAM = 3
 
 PROCESS_ALL_PLAYERS = False
-USE_AVERAGE = False
+USE_AVERAGE = True
 CURRENT_SEASON = "2025-26"
 SEASON_LENGTH = 38
 

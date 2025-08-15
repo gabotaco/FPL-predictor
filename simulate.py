@@ -10,9 +10,9 @@ from game_information import (get_team_names, TRANSFER_COST, GKPs, DEFs, MIDs, F
 from main import make_predictions, get_predict_by, MIN_CALIBRATE_BY
 
 DATA_YEAR = "2024-25"
-DATA_WEEK_RANGE = (1, 16)
+DATA_WEEK_RANGE = (1, 1)
 MAKE_PREDICTIONS = True
-PREDICTION_TAG = "averageHalfCalibrateBy"
+PREDICTION_TAG = "useAverageNoCalibrateTest"
 
 MAX_DIFF = 10
 MIN_GAMES = 3
@@ -22,7 +22,7 @@ USE_AVERAGE = True
 
 
 def get_calibrate_by(gw):
-    return 19
+    return SEASON_LENGTH
 
 
 def get_predict_by_weeks(gw):
