@@ -76,8 +76,8 @@ def get_game_round(year):
     raise "Invalid game round year"
 
 
-def get_next_year(year):
-    if year == CURRENT_SEASON:
+def get_next_year(year, current_season):
+    if year == current_season:
         return None
 
     match year:

@@ -7,18 +7,27 @@ from dataset import get_dataset
 from solver import make_team
 from game_information import (get_team_names, TRANSFER_COST, GKPs, DEFs, MIDs, FWDs, TOTAL_PLAYERS, MAX_PER_TEAM,
                               get_game_round, SEASON_LENGTH, get_team_info, PROCESS_ALL_PLAYERS, BUGGED_PLAYERS)
-from main import make_predictions, get_predict_by
+from main import make_predictions, get_predict_by, MIN_CALIBRATE_BY
 
 DATA_YEAR = "2024-25"
-DATA_WEEK_RANGE = (1, 19)
+DATA_WEEK_RANGE = (1, 16)
 MAKE_PREDICTIONS = True
-PREDICTION_TAG = "stepWiseArima"
+PREDICTION_TAG = "averageHalfCalibrateBy"
 
 MAX_DIFF = 10
 MIN_GAMES = 3
 MIN_SEASON_PPG = 1
 MIN_SEASON_GAME_PERCENTAGE = 0.8
-USE_AVERAGE = False
+USE_AVERAGE = True
+
+
+def get_calibrate_by(gw):
+    return 19
+
+
+def get_predict_by_weeks(gw):
+    return SEASON_LENGTH + 1 - gw
+
 
 game = {
     "bank": 100,
@@ -34,7 +43,7 @@ def init(transfer_cost, gkps, defs, mids, fwds, total_players, max_per_team, sea
          process_all_players, min_season_ppg, min_season_game_percentage, bugged_players, use_average, max_diff):
     first_game_round = get_game_round(DATA_YEAR)
     min_gw, max_gw = DATA_WEEK_RANGE
-    points_data_set, master_data_set = get_dataset(DATA_YEAR, max_gw)
+    points_data_set, master_data_set = get_dataset(DATA_YEAR, max_gw, True)
     team_names = get_team_names(DATA_YEAR)
     team_info = get_team_info(DATA_YEAR)
     points_map = points_data_set_to_map(points_data_set)
@@ -42,8 +51,8 @@ def init(transfer_cost, gkps, defs, mids, fwds, total_players, max_per_team, sea
     os.makedirs(f"./simulationData/{DATA_YEAR}/{PREDICTION_TAG}", exist_ok=True)
 
     for gw in range(min_gw, max_gw + 1):
-        predict_by_weeks = max_gw + 1 - gw
-        calibrate_by = gw - 1
+        predict_by_weeks = get_predict_by_weeks(gw)
+        calibrate_by = get_calibrate_by(gw)
         prediction = simulate_prediction(DATA_YEAR, gw, predict_by_weeks, team_info, team_names, points_data_set,
                                          master_data_set, calibrate_by, season_length, min_games, process_all_players,
                                          min_season_ppg, min_season_game_percentage, bugged_players, use_average,
@@ -211,7 +220,7 @@ def points_data_set_to_map(points_data_set):
 def simulate_prediction(year, gw, predict_by_weeks, team_info, team_names, points_data_set,
                         unfinished_master_data_set, calibrate_by, season_length, min_games, process_all_players,
                         min_season_ppg, min_season_game_percentage, bugged_players, use_average, max_diff):
-    eta = datetime.now(timezone('EST')) + timedelta(minutes=8, seconds=30)
+    eta = datetime.now(timezone('US/Eastern')) + timedelta(minutes=8, seconds=30)
     print(f"Getting prediction for GW{gw}. ETA {eta.strftime("%I:%M%p")}")
     predict_by = get_predict_by(year, gw, predict_by_weeks, team_info, team_names)
     filename = f"./simulationData/{year}/{PREDICTION_TAG}/{gw}.json"

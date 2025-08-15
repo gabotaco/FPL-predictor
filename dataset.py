@@ -121,7 +121,7 @@ def get_fixture_maps(year, team_info):
     return fixture_to_difficulty, fixture_to_team
 
 
-def get_points(year, team_info, pids, current_game_week, current_season, points_data_set=None):
+def get_points(year, team_info, pids, current_game_week, current_season, is_simulation, points_data_set=None):
     if points_data_set is None:
         points_data_set = {}
 
@@ -129,7 +129,7 @@ def get_points(year, team_info, pids, current_game_week, current_season, points_
     fixture_to_difficulty, fixture_to_team = get_fixture_maps(year, team_info)
     game_round = get_game_round(year)
 
-    gws = os.listdir(f"./Fantasy-Premier-League/data/{year}/gws") if year != current_season or current_game_week > 1 \
+    gws = os.listdir(f"./Fantasy-Premier-League/data/{year}/gws") if is_simulation or year != current_season or current_game_week > 1 \
         else []
     gws = [gw for gw in gws if gw.startswith("gw")]
     gws.sort(key=lambda a: int(a.replace("gw", "").replace(".csv", "")))
@@ -188,9 +188,9 @@ def get_points(year, team_info, pids, current_game_week, current_season, points_
     if current_season == year and current_game_week > 1 and not found_previous_game_week:
         raise "Didn't find data for the previous GW. Did you pull the new data?"
 
-    next_year = get_next_year(year)
+    next_year = get_next_year(year, current_season)
     if next_year is not None:
-        return get_points(next_year, team_info, pids, current_game_week, current_season, points_data_set)
+        return get_points(next_year, team_info, pids, current_game_week, current_season, is_simulation, points_data_set)
 
     return points_data_set
 
@@ -201,7 +201,7 @@ def get_header(team_names):
             "Selected"]
 
 
-def get_dataset(current_season, current_game_week):
+def get_dataset(current_season, current_game_week, is_simulation=False):
     team_names = get_team_names(current_season)
     team_info = get_team_info(current_season)
 
@@ -211,6 +211,6 @@ def get_dataset(current_season, current_game_week):
     if USE_UNDERSTAT:
         load_understat(current_season, pids)
 
-    points_data_set = get_points(STARTING_SEASON, team_info, pids, current_game_week, current_season)
+    points_data_set = get_points(STARTING_SEASON, team_info, pids, current_game_week, current_season, is_simulation)
 
     return points_data_set, master_data_set
