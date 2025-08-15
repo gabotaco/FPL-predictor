@@ -8,105 +8,8 @@ NO_NEW_PLAYERS = False
 
 STARTING_SEASON = "2019-20" if USE_UNDERSTAT else "2018-19"
 
-# Check Sasa Kalajdzic and Martin Dubravka and Josh Acheampong
-OLD_PLAYERS = ["Gonzalo Montiel", "Auston Trusty", "Willian", "Said Benrahma", "Sergio Gómez", "Ivo Grbic",
-               "Michael Olise", "Jayden Danns", "Finley Munroe", "Donny van de Beek", "Marc Guehi", "Nuno Tavares",
-               "Mason Burstow", "Tom Davies", "Andrey Santos", "Serge Aurier", "James Tomkins", "Bertrand Traoré",
-               "Ivan Perisic", "Aaron Ramsey", "Vitinho", "Albert Sambi Lokonga", "Mads Andersen", "John Fleck",
-               "Chris Basham", "Divock Origi", "Oliver Arblaster", "Antwoine Hackford", "Maxime Estève", "Bénie Traoré",
-               "Cauley Woodrow", "Alfie Doughty", "Reece Burke", "Zeki Amdouni", "Han-Noah Massengo", "Sofyan Amrabat",
-               "Kaide Gordon", "Jordan Clark", "Jacob Bruun Larsen", "Mike Trésor", "Dominic Sadi", "Benson Manuel",
-               "Yunus Konak", "Marcus Harness", "Chiquinho", "Thomas Cannon", "Aymeric Laporte", "Jacob Brown",
-               "André Gomes", "Eric Dier", "Angelo Ogbonna", "Pelly Ruddock Mpanzu", "Facundo Pellistri",
-               "Andros Townsend", "Saman Ghoddos", "Thiago Silva", "Josh Brownhill", "Hannes Delcroix",
-               "Michael Ndiweni", "Sam Curtis", "Ben Osborn", "Daniel Gore", "Teden Mengi", "Jairo Riedewald",
-               "Lyle Foster", "Brandon Aguilera", "Amari'i Bell", "Zack Nelson", "Anel Ahmedhodzic",
-               "Pablo Fornals", "Ben Parkinson", "Sydie Peck", "Nicolo Zaniolo", "Luca Koleosho", "Martin Dubravka",
-               "Anis Ben Slimane", "Connor Roberts", "Fabio Silva", "Anssumane Fati", "Loris Karius",
-               "Aleksandar Mitrovic", "Rhian Brewster", "Hjalmar Ekdal", "Ryan Oné", "Chimuanya Ugochukwu",
-               "Marvelous Nakamba", "Oliver Norwood", "Ameen Al Dakhil", "Jack Cork", "Cheikhou Kouyaté",
-               "Joe Rothwell", "Max Lowe", "Davinson Sánchez", "Elijah Adebayo", "Sávio", "Rhys Norrington-Davies",
-               "Carlton Morris", "Cédric Soares", "Gabriel Osho", "Willy Kambwala", "Michael Olakigbe", "Omari Forson",
-               "Scott McKenna", "Ionut Radu", "Josh Cullen", "Stefan Bajcetic", "Calum Chambers", "Thomas Strakosha",
-               "Anass Zaroury", "Johann Berg Gudmundsson", "Joseph Johnson", "Vinicius Souza", "Ben Godfrey",
-               "Giovanni Reyna", "Sasa Kalajdzic", "Felipe", "Daniel Podence", "Fred Onyedinma", "Jimi Tauriainen",
-               "Rodrigo Ribeiro", "John Egan", "Louis Beyer", "Andre Brooks", "George Baldock", "Jay Rodriguez",
-               "Arnaut Danjuma Groeneveld", "João Palhinha", "Mohamed Elneny", "Tahith Chong", "Luke Berry",
-               "Joel Matip", "Tom Lockyer", "Ryan John Giles", "Lewis Warrington", "Kieffer Moore", "Raphael Varane",
-               "Philippe Coutinho", "Owen Beck", "Douglas Luiz", "Nathan Redmond", "Lorenz Assignon", "Moussa Niakhate",
-               "Daiki Hashioka", "Divin Mubama", "Amadou Diallo", "Clement Lenglet", "Carlos Alcaraz",
-               "Oliver McBurnie", "Anthony Martial", "Thiago Alcántara", "James Shea", "Shandon Baptiste", "Fode Toure",
-               "Álex Moreno", "Jamie Donley", "Thomas Kaminski", "Michael Obafemi", "Gustavo Hamer", "Yasser Larouci",
-               "Matt Ritchie", "Jayden Bogle", "Alex Matos", "James Trafford", "Rodri", "Thilo Kehrer", "Tyler Onyango",
-               "Jack Robinson", "Josh Acheampong", "Paul Dummett"]
-UNDERSTAT_NAME_MAP = {"Amad Diallo Traore": "Amad Diallo", "Takehiro Tomiyasu": "Tomiyasu Takehiro",
-                      "Andreas Pereira": "Andreas Hoelgebaum Pereira", "Sammie Szmodics": "Sam Szmodics",
-                      "Lukasz Fabianski": "Łukasz Fabiański", "Jota Silva": "João Pedro Ferreira Silva",
-                      "Antony": "Antony Matheus dos Santos", "Yukinari Sugawara": "Sugawara Yukinari",
-                      "Ben White": "Benjamin White", "Benoit Badiashile Mukinayi": "Benoît Badiashile",
-                      "Bernardo Silva": "Bernardo Veiga de Carvalho e Silva", "Nikola Milenkovic": "Nikola Milenković",
-                      "Beto": "Norberto Bercique Gomes Betuncal", "Bobby Reid": "Bobby De Cordova-Reid",
-                      "Boubacar Traore": "Boubacar Traoré", "Bruno Fernandes": "Bruno Borges Fernandes",
-                      "Bruno Guimarães": "Bruno Guimarães Rodriguez Moura", "Casemiro": "Carlos Henrique Casimiro",
-                      "Carlos Forbs": "Carlos Roberto Forbs Borges", "João Félix": "João Félix Sequeira",
-                      "Cheick Oumar Doucoure": "Cheick Doucouré", "Kosta Nedeljkovic": "Kosta Nedeljković",
-                      "Dominic Solanke": "Dominic Solanke-Mitchell", "Radu Dragusin": "Radu Drăgușin",
-                      "Danilo": "Danilo dos Santos de Oliveira", "Fabio Carvalho": "Fábio Freitas Gouveia Carvalho",
-                      "Darwin Núñez": "Darwin Núñez Ribeiro", "David Raya": "David Raya Martin",
-                      "Deivid Washington": "Deivid Washington de Souza Eugênio", "Marc Guiu": "Marc Guiu Paz",
-                      "Diego Carlos": "Diego Carlos Santos Silva", "Diogo Dalot": "Diogo Dalot Teixeira",
-                      "Diogo Jota": "Diogo Teixeira da Silva", "Djordje Petrovic": "Đorđe Petrović",
-                      "Ederson": "Ederson Santana de Moraes", "Luis Guilherme": "Luis Guilherme Lira dos Santos",
-                      "Edson Álvarez": "Edson Álvarez Velázquez", "Emerson": "Emerson Palmieri dos Santos",
-                      "Emile Smith-Rowe": "Emile Smith Rowe", "Emiliano Buendía": "Emiliano Buendía Stati",
-                      "Emiliano Martinez": "Emiliano Martínez Romero", "Estupiñán": "Pervis Estupiñán",
-                      "Fabinho": "Fabio Henrique Tavares", "Jaden Philogene-Bidace": "Jaden Philogene",
-                      "Fred": "Frederico Rodrigues de Paula Santos", "Fábio Vieira": "Fábio Ferreira Vieira",
-                      "Gabriel": "Gabriel dos Santos Magalhães", "Gabriel Jesus": "Gabriel Fernando de Jesus",
-                      "Gabriel Martinelli": "Gabriel Martinelli Silva", "Chadi Riad": "Chadi Riad Dnanou",
-                      "Gonçalo Guedes": "Gonçalo Manuel Ganchinho Guedes", "Renato Veiga": "Renato Palma Veiga",
-                      "Gustavo Scarpa": "Gustavo Henrique Furtado Scarpa", "Halil Dervisoglu": "Halil Dervişoğlu",
-                      "Hamed Junior Traore": "Hamed Traorè", "Hee-Chan Hwang": "Hwang Hee-chan",
-                      "Hugo Bueno": "Hugo Bueno López", "Ibrahim Sangare": "Ibrahim Sangaré",
-                      "Igor Julio": "Igor Julio dos Santos de Paulo", "Wataru Endo": "Endo Wataru",
-                      "Issa Kabore": "Issa Kaboré", "Kaoru Mitoma": "Mitoma Kaoru",
-                      "Iyenoma Destiny Udogie": "Destiny Udogie", "Javier Manquillo": "Javier Manquillo Gaitán",
-                      "Jefferson Lerma": "Jefferson Lerma Solís", "Jeremy Sarmiento": "Jeremy Sarmiento Morante",
-                      "Joelinton": "Joelinton Cássio Apolinário de Lira", "Rodrigo Gomes": "Rodrigo Martins Gomes",
-                      "Jonny": "Jonny Evans", "Morato": "Felipe Rodrigues da Silva",
-                      "Jorginho": "Jorge Luiz Frello Filho", "Joseph Gomez": "Joe Gomez",
-                      "Josko Gvardiol": "Joško Gvardiol", "José Sá": "José Malheiro de Sá",
-                      "João Gomes": "João Victor Gomes da Silva", "Jesper Lindstrom": "Jesper Lindstrøm",
-                      "João Pedro": "João Pedro Junqueira de Jesus", "Jéremy Doku": "Jérémy Doku",
-                      "Kaine Hayden": "Kaine Kesler-Hayden", "Kepa": "Kepa Arrizabalaga",
-                      "Lucas Paquetá": "Lucas Tolentino Coelho de Lima", "Boubakary Soumare": "Boubakary Soumaré",
-                      "Mads Roerslev": "Mads Roerslev Rasmussen", "Marc Cucurella": "Marc Cucurella Saseta",
-                      "Marquinhos": "Marcus Oliveira Alencar", "Martin Odegaard": "Martin Ødegaard",
-                      "Mateo Kovacic": "Mateo Kovačić", "Matheus Cunha": "Matheus Santos Carneiro Da Cunha",
-                      "Matheus França": "Matheus França de Oliveira", "Matheus Nunes": "Matheus Luiz Nunes",
-                      "Matthew Cash": "Matty Cash", "Carlos Vinicius": "Carlos Vinícius Alves Morais",
-                      "Miguel Almirón": "Miguel Almirón Rejala", "Moisés Caicedo": "Moisés Caicedo Corozo",
-                      "Murillo": "Murillo Santiago Costa dos Santos", "Ismaila Sarr": "Ismaïla Sarr",
-                      "Naif Aguerd": "Nayef Aguerd", "Neto": "Norberto Murara Neto",
-                      "Nélson Semedo": "Nélson Cabral Semedo", "William Smallbone": "Will Smallbone",
-                      "Odisseas Vlachodimos": "Odysseas Vlachodimos",
-                      "Pape Sarr": "Pape Matar Sarr", "Mateus Fernandes": "Mateus Gonçalo Espanha Fernandes",
-                      "Pedro Neto": "Pedro Lomba Neto", "Evanilson": "Francisco Evanilson de Lima Barbosa",
-                      "Rayan Ait Nouri": "Rayan Aït-Nouri",
-                      "Richarlison": "Richarlison de Andrade",
-                      "Rodrigo": "Rodrigo Bentancur", "Rodrigo Muniz": "Rodrigo Muniz Carvalho",
-                      "Romeo Lavia": "Roméo Lavia",
-                      "Rúben Dias": "Rúben Gato Alves Dias", "Sasa Lukic": "Saša Lukić",
-                      "Sergi Canos": "Sergi Canós Tenés", "Son Heung-Min": "Son Heung-min", "Tetê": "Kenny Tete",
-                      "Tomas Soucek": "Tomáš Souček", "Toti": "Toti António Gomes",
-                      "Valentino Livramento": "Tino Livramento",
-                      "Vladimir Coufal": "Vladimír Coufal",
-                      "Yehor Yarmolyuk": "Yehor Yarmoliuk", "Ricardo Pereira": "Ricardo Barbosa Pereira",
-                      "Youssef Chermiti": "Youssef Ramalho Chermiti", "Zanka": "Mathias Jorgensen",
-                      "Alisson": "Alisson Ramses Becker", "Jorge Cuenca": "Jorge Cuenca Barreno",
-                      "Omari Hutchinson": "Omari Giraud-Hutchinson", "Joe Ayodele-Aribo": "Joe Aribo",
-                      "Julián Araujo": "Julián Araujo Zúñiga", "Seamus Coleman": "Séamus Coleman",
-                      "André": "André Trindade da Costa Neto"}
+OLD_PLAYERS = []
+UNDERSTAT_NAME_MAP = {}
 
 
 def get_previous_players(current_season):
@@ -226,7 +129,8 @@ def get_points(year, team_info, pids, current_game_week, current_season, points_
     fixture_to_difficulty, fixture_to_team = get_fixture_maps(year, team_info)
     game_round = get_game_round(year)
 
-    gws = os.listdir(f"./Fantasy-Premier-League/data/{year}/gws")
+    gws = os.listdir(f"./Fantasy-Premier-League/data/{year}/gws") if year != current_season or current_game_week > 1 \
+        else []
     gws = [gw for gw in gws if gw.startswith("gw")]
     gws.sort(key=lambda a: int(a.replace("gw", "").replace(".csv", "")))
 
@@ -281,7 +185,7 @@ def get_points(year, team_info, pids, current_game_week, current_season, points_
                                                                             'team': opp_team}
         game_round += 1
 
-    if current_season == year and not found_previous_game_week:
+    if current_season == year and current_game_week > 1 and not found_previous_game_week:
         raise "Didn't find data for the previous GW. Did you pull the new data?"
 
     next_year = get_next_year(year)

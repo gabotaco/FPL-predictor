@@ -9,8 +9,8 @@ from game_information import (get_team_names, TRANSFER_COST, GKPs, DEFs, MIDs, F
                               get_game_round, SEASON_LENGTH, get_team_info, PROCESS_ALL_PLAYERS, BUGGED_PLAYERS)
 from main import make_predictions, get_predict_by
 
-DATA_YEAR = "2023-24"
-DATA_WEEK_RANGE = (19, 38)
+DATA_YEAR = "2024-25"
+DATA_WEEK_RANGE = (1, 19)
 MAKE_PREDICTIONS = True
 PREDICTION_TAG = "stepWiseArima"
 

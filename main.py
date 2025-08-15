@@ -20,6 +20,7 @@ TO_IGNORE_MAX_WARNING = []
 
 MAX_DIFF = 10
 MAX_RETRIES = 5
+MIN_CALIBRATE_BY = 10
 
 ALPHABET = [*"ABCDEFGHIJKLMNOPQRSTUVWXYZ", "AA", "AB", "AC", "AD", "AE", "AF", "AG", "AH", "AI", "AJ", "AK", "AL", "AM",
             "AN", "AO", "AP", "AQ", "AR", "AS", "AT", "AU", "AV", "AW", "AX", "AY", "AZ"]
@@ -46,7 +47,7 @@ def init(current_season, current_game_week, predict_by_weeks, challenge_team,
     if not challenge_team:
         if found_previous == total_players:
             print("Found all previous players!")
-        else:
+        elif CURRENT_GAME_WEEK != 1:
             print(f"Found only {found_previous} out of {total_players} previous players")
 
     make_prediction_file(current_season, current_game_week, challenge_team, master_data_set, team_worth, free_transfers,
@@ -149,7 +150,8 @@ def make_player_ts(player_data, current_season_beginning_round, current_game_wee
             min_season_game_percentage or len(predict_by[player_data['team']]['games']) < 1 or total_games < 2 or
             sum(ts[-predict_by_weeks:]) < predict_by_weeks * min_season_ppg) and player_name not in current_team:
         return None
-    if season_sum <= 0 or len(predict_by[player_data['team']]['games']) == 0 and player_name not in current_team:
+    if (season_sum <= 0 and current_game_week > 1) or len(
+            predict_by[player_data['team']]['games']) == 0 and player_name not in current_team:
         return None
 
     return ts
@@ -171,7 +173,8 @@ def make_predictions(current_season, current_game_week, track_previous, points_d
 
     to_check = [(player_data, current_season_beginning_round, current_game_week, season_length, min_games,
                  process_all_players, min_season_ppg, min_season_game_percentage, calibrate_by, bugged_players,
-                 predict_by, use_average, predict_by_weeks, max_diff, current_team) for _, player_data in points_data_set.items()
+                 predict_by, use_average, predict_by_weeks, max_diff, current_team) for _, player_data in
+                points_data_set.items()
                 if (len(TO_RETRY) == 0 or player_data['id'] in TO_RETRY) and player_data['id'] not in bugged_players]
 
     with Pool() as pool:
@@ -204,6 +207,9 @@ def make_predictions(current_season, current_game_week, track_previous, points_d
         if not found:
             raise Exception(f"Couldn't find {player_data.id}")
 
+    output_directory = os.path.dirname(filename)
+    os.makedirs(output_directory, exist_ok=True)
+
     with open(filename, 'w') as dataset_file:
         json.dump(master_data_set, dataset_file, ensure_ascii=False, indent=4)
         print("Wrote Predicted Data")
@@ -230,12 +236,12 @@ def predict_player(player_data, current_season_beginning_round, current_game_wee
     lstm_ratio = 1 / 3
 
     c_arima, c_lstm, c_actual, average_points = process_player_data(player_data,
-                                                                              current_season_beginning_round,
-                                                                              current_game_week, season_length,
-                                                                              min_games, min_season_ppg,
-                                                                              min_season_game_percentage,
-                                                                              calibrate_by, bugged_players,
-                                                                              process_all_players, max_diff)
+                                                                    current_season_beginning_round,
+                                                                    current_game_week, season_length,
+                                                                    min_games, min_season_ppg,
+                                                                    min_season_game_percentage,
+                                                                    calibrate_by, bugged_players,
+                                                                    process_all_players, max_diff)
     pred_by = predict_by[player_data['team']]['games'][
               :predict_by[player_data['team']]['next']] if use_average else predict_by[player_data['team']][
         'games']
@@ -316,8 +322,12 @@ def make_prediction_file(current_season, current_game_week, challenge_team, mast
     surname_index = header.index("Surname")
     selected_index = header.index("Selected")
 
-    workbook = Workbook(
-        f"./Predictions/{current_season}/Week {current_game_week}{" Challenge" if challenge_team else ""}.xlsx")
+    filename = f"./Predictions/{current_season}/Week {current_game_week}{" Challenge" if challenge_team else ""}.xlsx"
+
+    output_directory = os.path.dirname(filename)
+    os.makedirs(output_directory, exist_ok=True)
+
+    workbook = Workbook(filename)
     sheet = workbook.add_worksheet()
 
     column_index = len(header) + 1
@@ -429,6 +439,7 @@ def make_prediction_file(current_season, current_game_week, challenge_team, mast
 
 if __name__ == "__main__":
     init(CURRENT_SEASON, CURRENT_GAME_WEEK, SEASON_LENGTH + 1 - CURRENT_GAME_WEEK, CHALLENGE_TEAM,
-         CURRENT_GAME_WEEK - 1, SEASON_LENGTH, MIN_GAMES, PROCESS_ALL_PLAYERS, MIN_SEASON_PPG,
+         MIN_CALIBRATE_BY if CURRENT_GAME_WEEK <= MIN_CALIBRATE_BY else CURRENT_GAME_WEEK - 1, SEASON_LENGTH, MIN_GAMES,
+         PROCESS_ALL_PLAYERS, MIN_SEASON_PPG,
          MIN_SEASON_GAME_PERCENTAGE, BUGGED_PLAYERS, USE_AVERAGE, TEAM_WORTH, FREE_TRANSFERS, TRANSFER_COST,
          TOTAL_PLAYERS, GKPs, DEFs, MIDs, FWDs, MAX_PER_TEAM, MAX_DIFF, CURRENT_TEAM, INJURIES)
