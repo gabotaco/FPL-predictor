@@ -10,15 +10,15 @@ from game_information import (get_team_names, TRANSFER_COST, GKPs, DEFs, MIDs, F
 from main import make_predictions, get_predict_by, MIN_CALIBRATE_BY
 
 DATA_YEAR = "2024-25"
-DATA_WEEK_RANGE = (1, 1)
+DATA_WEEK_RANGE = (2, 10)
 MAKE_PREDICTIONS = True
-PREDICTION_TAG = "useAverageNoCalibrateTest"
+PREDICTION_TAG = "early/noAverage/predictMaxCalibrate38"
 
 MAX_DIFF = 10
 MIN_GAMES = 3
 MIN_SEASON_PPG = 1
 MIN_SEASON_GAME_PERCENTAGE = 0.8
-USE_AVERAGE = True
+USE_AVERAGE = False
 
 
 def get_calibrate_by(gw):
@@ -30,13 +30,124 @@ def get_predict_by_weeks(gw):
 
 
 game = {
-    "bank": 100,
-    "free_transfers": 15,
-    "team": [],
-    "team_worth": {},
-    "score": 0,
-    "paid_for_transfers": 0,
-}
+    'bank': 0,
+    'free_transfers': 1,
+    'team': [
+        'Kai Havertz',
+        'David Raya Martin',
+        'Benjamin White',
+        'Ollie Watkins',
+        'Cole Palmer',
+        'Abdoulaye Doucouré',
+        'Jordan Pickford',
+        'Joachim Andersen',
+        'Timothy Castagne',
+        'Phil Foden',
+        'Julián Álvarez',
+        'Kyle Walker',
+        'Anthony Gordon',
+        'Pedro Porro',
+        'Jarrod Bowen'
+    ],
+    'team_worth': {
+        'Gabriel dos Santos Magalhães': 6.1,
+        'Kai Havertz': 7.7,
+        'Gabriel Martinelli Silva': 6.5,
+        'Martin Ødegaard': 8.2,
+        'David Raya Martin': 5.6,
+        'Declan Rice': 6.3,
+        'Bukayo Saka': 10.4,
+        'William Saliba': 6.4,
+        'Leandro Trossard': 6.7,
+        'Benjamin White': 6.2,
+        'Norberto Murara Neto': 4.1,
+        'Raheem Sterling': 6.7,
+        'Leon Bailey': 6.2,
+        'Lucas Digne': 4.4,
+        'Ezri Konsa Ngoyo': 4.5,
+        'Emiliano Martínez Romero': 5.0,
+        'John McGinn': 5.2,
+        'Youri Tielemans': 5.5,
+        'Ollie Watkins': 9.2,
+        'Amadou Onana': 4.8,
+        'Marcus Rashford': 6.6,
+        'Ryan Christie': 4.8,
+        'Lewis Cook': 5.0,
+        'Antoine Semenyo': 5.7,
+        'Marcos Senesi': 4.6,
+        'Nathan Collins': 4.6,
+        'Vitaly Janelt': 4.8,
+        'Mathias Jensen': 5.3,
+        'Mads Roerslev Rasmussen': 4.3,
+        'Yoane Wissa': 6.9,
+        'Lewis Dunk': 4.2,
+        'Pascal Groß': 6.5,
+        'João Pedro Junqueira de Jesus': 5.5,
+        'Moisés Caicedo Corozo': 4.9,
+        'Conor Gallagher': 5.9,
+        'Cole Palmer': 10.5,
+        'Jean-Philippe Mateta': 7.5,
+        'Tyrick Mitchell': 4.8,
+        'Abdoulaye Doucouré': 5.1,
+        'Jarrad Branthwaite': 4.9,
+        'Dominic Calvert-Lewin': 5.4,
+        'James Garner': 4.9,
+        'Dwight McNeil': 5.1,
+        'Jordan Pickford': 5.2,
+        'James Tarkowski': 4.7,
+        'Joachim Andersen': 4.2,
+        'Andreas Hoelgebaum Pereira': 4.9,
+        'Tom Cairney': 4.8,
+        'Timothy Castagne': 4.2,
+        'Alex Iwobi': 5.4,
+        'Bernd Leno': 5.0,
+        'Antonee Robinson': 4.7,
+        'Harry Wilson': 5.2,
+        'Sander Berge': 5.0,
+        'Willian Borges da Silva': 5.0,
+        "Dara O'Shea": 3.8,
+        'Jordan Ayew': 5.1,
+        'Odsonne Edouard': 5.1,
+        'Bobby De Cordova-Reid': 5.2,
+        'Darwin Núñez Ribeiro': 7.0,
+        'Harvey Elliott': 5.2,
+        'Cody Gakpo': 7.2,
+        'Luis Díaz': 7.5,
+        'Mohamed Salah': 13.6,
+        'Alexis Mac Allister': 6.2,
+        'Virgil van Dijk': 6.7,
+        'Bernardo Veiga de Carvalho e Silva': 6.1,
+        'Ederson Santana de Moraes': 5.3,
+        'Phil Foden': 9.1,
+        'Julián Álvarez': 7.0,
+        'Kyle Walker': 5.1,
+        'Bruno Borges Fernandes': 8.4,
+        'Diogo Dalot Teixeira': 5.0,
+        'Alejandro Garnacho': 5.9,
+        'Scott McTominay': 4.9,
+        'Miguel Almirón Rejala': 5.4,
+        'Bruno Guimarães Rodriguez Moura': 6.2,
+        'Dan Burn': 4.6,
+        'Anthony Gordon': 7.4,
+        'Sean Longstaff': 4.4,
+        'Fabian Schär': 5.5,
+        'Anthony Elanga': 5.5,
+        'Morgan Gibbs-White': 6.5,
+        'Chris Wood': 7.2,
+        'Ryan Yates': 4.8,
+        'Pierre-Emile Højbjerg': 5.0,
+        'Brennan Johnson': 6.2,
+        'Dejan Kulusevski': 6.2,
+        'Pedro Porro': 5.2,
+        'Cristian Romero': 4.9,
+        'Pape Matar Sarr': 4.7,
+        'Son Heung-min': 9.7,
+        'Alphonse Areola': 4.2, 'Jarrod Bowen': 7.9, 'Emerson Palmieri dos Santos': 4.4, 'Max Kilman': 4.3,
+        'Lucas Tolentino Coelho de Lima': 5.7, 'James Ward-Prowse': 6.1, 'Kurt Zouma': 4.4, 'Rayan Aït-Nouri': 5.1,
+        'Matheus Santos Carneiro Da Cunha': 7.0, 'João Victor Gomes da Silva': 4.9, 'José Malheiro de Sá': 4.4,
+        'Mario Lemina': 4.8, 'Nélson Cabral Semedo': 4.5, 'Toti António Gomes': 4.3},
+    'score': 48,
+    'paid_for_transfers': 0}
 
 
 def init(transfer_cost, gkps, defs, mids, fwds, total_players, max_per_team, season_length, min_games,
