@@ -12,10 +12,10 @@ from main import make_predictions, get_predict_by, MIN_CALIBRATE_BY
 DATA_YEAR = "2024-25"
 DATA_WEEK_RANGE = (2, 10)
 MAKE_PREDICTIONS = True
-PREDICTION_TAG = "first10/average/minGames3"
+PREDICTION_TAG = "first10/average/minGames1"
 
 MAX_DIFF = 10
-MIN_GAMES = 3
+MIN_GAMES = 1
 MIN_SEASON_PPG = 1
 MIN_SEASON_GAME_PERCENTAGE = 0.8
 USE_AVERAGE = True
