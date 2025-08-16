@@ -12,7 +12,7 @@ from main import make_predictions, get_predict_by, MIN_CALIBRATE_BY
 DATA_YEAR = "2024-25"
 DATA_WEEK_RANGE = (2, 10)
 MAKE_PREDICTIONS = True
-PREDICTION_TAG = "early/average/predictMaxCalibrateGw"
+PREDICTION_TAG = "early/average/predictMaxCalibrate38"
 
 MAX_DIFF = 10
 MIN_GAMES = 3
@@ -22,7 +22,7 @@ USE_AVERAGE = True
 
 
 def get_calibrate_by(gw):
-    return gw
+    return SEASON_LENGTH
 
 
 def get_predict_by_weeks(gw):
