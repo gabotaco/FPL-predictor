@@ -1,33 +1,31 @@
 import csv
 
-CURRENT_GAME_WEEK = 1
-TEAM_WORTH = 100.0 + 0.0
-FREE_TRANSFERS = 15
+CURRENT_GAME_WEEK = 2
+TEAM_WORTH = 100.1 + 0.0
+FREE_TRANSFERS = 1
 CHALLENGE_TEAM = False
 CURRENT_TEAM = {
-    "Emiliano Martínez Romero Martinez",
-    "Jordan Pickford Pickford",
+    "Nick Pope Pope",
+    "Matz Sels Sels",
 
-    "Ian Maatsen Maatsen",
-    "Fabian Schär Schär",
-    "Ezri Konsa Ngoyo Konsa",
-    "Jurriën Timber J.Timber",
-    "Rayan Aït-Nouri Aït-Nouri",
+    "Trevoh Chalobah Chalobah",
+    "Marc Guéhi Guéhi",
+    "Diogo Dalot Teixeira Dalot",
+    "Ola Aina Aina",
+    "Aaron Wan-Bissaka Wan-Bissaka",
 
     "Antoine Semenyo Semenyo",
-    "Yasin Ayari Ayari",
+    "Eberechi Eze Eze",
+    "Mohamed Salah M.Salah",
     "Bryan Mbeumo Mbeumo",
     "Jacob Murphy J.Murphy",
-    "Sandro Tonali Tonali",
 
-    "Jørgen Strand Larsen Strand Larsen",
+    "Nicolas Jackson N.Jackson",
+    "Chris Wood Wood",
     "Jarrod Bowen Bowen",
-    "Yoane Wissa Wissa",
 }
 INJURIES = {
-    "Emiliano Martínez Romero Martinez": 37 / 38,
     "Yoane Wissa Wissa": 0,
-    "Nicolas Jackson N.Jackson": 37/38,
 }
 
 BUGGED_PLAYERS = []
