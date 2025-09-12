@@ -1,7 +1,7 @@
 import csv
 
-CURRENT_GAME_WEEK = 3
-TEAM_WORTH = 99.1 + 1.0
+CURRENT_GAME_WEEK = 4
+TEAM_WORTH = 99.3 + 1.1
 FREE_TRANSFERS = 1
 CHALLENGE_TEAM = False
 CURRENT_TEAM = {
@@ -10,7 +10,7 @@ CURRENT_TEAM = {
 
     "Trevoh Chalobah Chalobah",
     "Marc Guéhi Guéhi",
-    "Diogo Dalot Teixeira Dalot",
+    "Chris Richards Richards",
     "Ola Aina Aina",
     "Aaron Wan-Bissaka Wan-Bissaka",
 
@@ -27,6 +27,8 @@ CURRENT_TEAM = {
 INJURIES = {
     "Yoane Wissa Wissa": 0,
     "Nicolas Jackson N.Jackson": 0,
+    "Ola Aina Aina": 0.25,
+    "Diogo Dalot Teixeira Dalot": 0
 }
 
 BUGGED_PLAYERS = []
