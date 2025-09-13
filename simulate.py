@@ -7,12 +7,12 @@ from dataset import get_dataset
 from solver import make_team
 from game_information import (get_team_names, TRANSFER_COST, GKPs, DEFs, MIDs, FWDs, TOTAL_PLAYERS, MAX_PER_TEAM,
                               get_game_round, SEASON_LENGTH, get_team_info, PROCESS_ALL_PLAYERS, BUGGED_PLAYERS)
-from main import make_predictions, get_predict_by, MIN_CALIBRATE_BY
+from main import make_predictions, get_predict_by
 
 DATA_YEAR = "2024-25"
 DATA_WEEK_RANGE = (1, 15)
 MAKE_PREDICTIONS = True
-PREDICTION_TAG = "whenSwitch/10"
+PREDICTION_TAG = "whenSwitch/15"
 
 MAX_DIFF = 10
 MIN_GAMES = 10
@@ -29,7 +29,7 @@ def get_predict_by_weeks(gw):
 
 
 def get_use_average(gw):
-    return gw <= 10
+    return gw <= 13
 
 
 game = {
