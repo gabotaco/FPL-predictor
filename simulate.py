@@ -12,7 +12,7 @@ from main import make_predictions, get_predict_by, MIN_CALIBRATE_BY
 DATA_YEAR = "2024-25"
 DATA_WEEK_RANGE = (1, 15)
 MAKE_PREDICTIONS = True
-PREDICTION_TAG = "whenSwitch/5"
+PREDICTION_TAG = "whenSwitch/10"
 
 MAX_DIFF = 10
 MIN_GAMES = 10
@@ -29,7 +29,7 @@ def get_predict_by_weeks(gw):
 
 
 def get_use_average(gw):
-    return gw <= 5
+    return gw <= 10
 
 
 game = {
