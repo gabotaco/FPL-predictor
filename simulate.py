@@ -29,7 +29,7 @@ def get_predict_by_weeks(gw):
 
 
 def get_use_average(gw):
-    return gw <= 13
+    return gw <= 15
 
 
 game = {
