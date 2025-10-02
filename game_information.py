@@ -1,7 +1,7 @@
 import csv
 
-CURRENT_GAME_WEEK = 6
-TEAM_WORTH = 100.1 + 0.2
+CURRENT_GAME_WEEK = 7
+TEAM_WORTH = 100.2 + 0.1
 FREE_TRANSFERS = 1
 CHALLENGE_TEAM = False
 CURRENT_TEAM = {
@@ -25,8 +25,9 @@ CURRENT_TEAM = {
     "Jarrod Bowen Bowen",
 }
 INJURIES = {
-    "Yoane Wissa Wissa": 30/32,  # 18 Oct
-    "Ola Aina Aina": 21/32,  # 13 Dec
+    "Yoane Wissa Wissa": 30/31,  # 18 Oct
+    "Ola Aina Aina": 21/31,  # 13 Dec
+    "Trevoh Chalobah Chalobah": 30/31,  # 18 Oct
     "Aaron Wan-Bissaka Wan-Bissaka": 0,
 }
 
