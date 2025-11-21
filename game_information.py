@@ -1,7 +1,7 @@
 import csv
 
-CURRENT_GAME_WEEK = 10
-TEAM_WORTH = 100.4 + 0.2
+CURRENT_GAME_WEEK = 12
+TEAM_WORTH = 101.3 + 0.0
 FREE_TRANSFERS = 1
 CHALLENGE_TEAM = False
 CURRENT_TEAM = {
@@ -12,7 +12,7 @@ CURRENT_TEAM = {
     "Marc Guéhi Guéhi",
     "Chris Richards Richards",
     "Marc Cucurella Saseta Cucurella",
-    "Dan Burn Burn",
+    "Aaron Wan-Bissaka Wan-Bissaka",
 
     "Antoine Semenyo Semenyo",
     "Bryan Mbeumo Mbeumo",
@@ -27,6 +27,10 @@ CURRENT_TEAM = {
 INJURIES = {
     "Chris Wood Wood": 0,
     "Yoane Wissa Wissa": 0,
+    "Dan Burn Burn": 0,
+    "Matty Cash Cash": 0.75,
+    "Antoine Semenyo Semenyo": 0.75,
+    "Ezri Konsa Ngoyo Konsa": 0.75,
     "Ola Aina Aina": 0,  # 13 Dec
     "Nicolas Jackson N.Jackson": 0,  # Left
 }
