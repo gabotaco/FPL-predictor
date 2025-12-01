@@ -1,8 +1,8 @@
 import csv
 
-CURRENT_GAME_WEEK = 13
-TEAM_WORTH = 100.2 + 0.8
-FREE_TRANSFERS = 1
+CURRENT_GAME_WEEK = 14
+TEAM_WORTH = 99.9 + 0.5
+FREE_TRANSFERS = 15
 CHALLENGE_TEAM = False
 CURRENT_TEAM = {
     "Nick Pope Pope",
@@ -25,9 +25,12 @@ CURRENT_TEAM = {
     "Jarrod Bowen Bowen",
 }
 INJURIES = {
+    "Nick Pope Pope": 0.25,
+    "Ismaïla Sarr Sarr": 0.25,
     "Chris Wood Wood": 0,
-    "Yoane Wissa Wissa": 0,
-    "Antoine Semenyo Semenyo": 0.75,
+    "Gabriel dos Santos Magalhães Gabriel": 0,
+    "André Onana Onana": 0,
+    "Yoane Wissa Wissa": 0.25,
     "Ola Aina Aina": 0,  # 13 Dec
     "Nicolas Jackson N.Jackson": 0,  # Left
 }
@@ -43,7 +46,7 @@ TOTAL_PLAYERS = 15
 MAX_PER_TEAM = 3
 
 PROCESS_ALL_PLAYERS = False
-USE_AVERAGE = True
+USE_AVERAGE = False
 CURRENT_SEASON = "2025-26"
 SEASON_LENGTH = 38
 
